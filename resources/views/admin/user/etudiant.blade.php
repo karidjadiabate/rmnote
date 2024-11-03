@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter un Enseignant</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome for icons (if needed) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="{{ asset('frontend/dashboard/js/list.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('frontend/dashboard/css/dash.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/dashboard/html/admin.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/dashboard/css/lists.css') }}">
+    <link rel="icon" href="{{ asset('assets/img/FaviconROMNOTE.png') }}" type="image/png">
+
+
+    <title>etudiant</title>
+
+</head>
+
+
+<body>
+    <!-- header -->
+    @include('admin.include.menu')
+    <!-- accueil -->
+    <div class="container printableArea principal">
+        <h2 class="text-start text-title">Liste des Etudiants</h2>
+
+        <div class="d-flex justify-content-between align-items-center flex-wrap action-buttons mb-3 no-print">
+            <div class="d-flex search-container">
+                <i class="fa fa-search"></i>
+                <input id="searchInput" type="text" id="search" class="form-control search-bar"
+                    placeholder="Rechercher...">
+            </div>
+
+            <div class="d-flex justify-content-end flex-wrap action-buttons">
+                <button class="btn btn-custom btn-imprimer" id="printBtn" onclick="printDiv()"><i
+                        class="fa fa-print"></i> Imprimer</button>
+                <button class="btn btn-custom btn-importer" data-bs-toggle="modal" data-bs-target="#importModal"><i
+                        class="fa fa-upload"></i> Importer</button>
+
+                <!-- Dropdown for Export options -->
+                <div class="btn-group">
+                    <button class="btn btn-custom btn-exporter dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <i class="fa fa-download"></i> Exporter
+                    </button>
+                    <ul class="dropdown-menu" id="menu">
+                        <!-- Assurez-vous que ces liens ont bien l'attribut href="#" et que onclick est correct -->
+                        <li><a class="dropdown-item" id="excel" href="#"
+                                onclick="exportTableToExcel('#etudiantTable')">Excel</a></li>
+                        <li><a class="dropdown-item" id="pdf" href="#"
+                                onclick="exportTableToPDF('#etudiantTable')">PDF</a></li>
+
+                    </ul>
+                </div>
+                <button class="btn btn-custom btn-ajouter" data-bs-toggle="modal" data-bs-target="#etudiant"><i
+                        class="fa fa-plus"></i> Ajouter un etudiant</button>
+                <div class="dropdown" id="filterMenu">
+                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <i class="fa fa-filter"></i> Filtrer par
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <li class="dropdown-submenu">
+                            <a class="dropdown-item dropdown-toggle" href="#" data-bs-toggle="dropdown">Genre</a>
+                            <ul class="dropdown-menu">
+                                @foreach ($etudiants as $etudiant)
+                                    <li>
+                                        <a class="dropdown-item" href="#"
+                                            onclick="applyFilter('Genre', '{{ $etudiant->genre }}')">
+                                            {{ $etudiant->genre }}
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </li>
+                        {{--  --}}
+                        <li class="dropdown-submenu">
+                            <a class="dropdown-item dropdown-toggle" href="#" data-bs-toggle="dropdown">Classe</a>
+                            <ul class="dropdown-menu">
+                                @foreach ($etudiants as $etudiant)
+                                    <li>
+                                        <a class="dropdown-item" href="#"
+                                            onclick="applyFilter('Classe', '{{ $etudiant->nomclasse }}')">
+                                            {{ $etudiant->nomclasse }}
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </li>
+
+                        {{--  --}}
+                        {{-- <li class="dropdown-submenu">
+                            <a class="dropdown-item dropdown-toggle" href="#"
+                                data-bs-toggle="dropdown">Adresse</a>
+                            <ul class="dropdown-menu">
+                                @foreach ($etudiants as $etudiant)
+                                    <li>
+                                        <a class="dropdown-item" href="#"
+                                            onclick="applyFilter('Adresse', '{{ $etudiant->adresse }}')">
+                                            {{ $etudiant->adresse }}
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </li> --}}
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- Table for listing teachers -->
+        <div id="noResults">Aucun résultat trouvé</div>
+        <div class="table-responsive">
+            <table id="etudiantTable" class="table">
+                <thead class="table-aaa">
+                    <tr class="aa">
+                        {{-- <th>Identifiant</th> --}}
+                        <th>Matricule</th>
+                        <th>Nom</th>
+                        <th>Prénoms</th>
+                        <th>Genre</th>
+                        <th>Email</th>
+                        <th>Contact</th>
+                        {{-- <th>Adresse</th> --}}
+                        <th>Date de naissance</th>
+                        <th>Classe</th>
+                        <th class="no-print">Action</th>
+                    </tr>
+                </thead>&nbsp;&nbsp;
+                <tbody id="etudiantTable">
+
+                <tr>
+                            <td data-label="Matricule">14M52</td>
+                            <td data-label="Nom">Kouassi</td>
+                            <td data-label="Prenom">Elvis</td>
+                            <td data-label="Genre">M</td>
+                            <td data-label="Email">kouassi.elvis@gmail.com</td>
+                            <td data-label="Contact">0102444595</td>
+                            <td data-label="Date-naissance">18/08/2000</td>
+                            <td data-label="Classe">DAS</td>
+                            <td data-label="Action" class="action-icons no-print">
+                                <button class="btn  btn-sm solid_distance" data-bs-toggle="modal" data-bs-target="#etudiant">
+                                    <i class="fas fa-pen"></i>
+                                </button>
+                                <button class="btn  btn-sm solid_distances" data-bs-toggle="modal" data-bs-target="#myModaldelete">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+
+
+                    @php
+                        $num = 1;
+                    @endphp
+                    @foreach ($etudiants as $etudiant)
+                        <tr>
+                            {{-- <td data-label="Identifiant">{{ $num++ }}</td> --}}
+                            <td data-label="Matricule">{{ $etudiant->matricule }}</td>
+                            <td data-label="Nom">
+                                @if ($etudiant->image)
+                                    <img src="{{ asset('storage/profile/' . $etudiant->image) }}" alt="User"
+                                        class="rounded-circle profile-image"
+                                        style="width: 40px; height: 35x; margin-top:-5px">
+                                @else
+                                    <img src="{{ Avatar::create($etudiant->nom)->toBase64() }}" alt="User"
+                                        class="rounded-circle profile-image"
+                                        style="width: 40px; height: 35x; margin-top:-5px">
+                                @endif
+
+                                {{ $etudiant->nom }}
+                            </td>
+                            <td data-label="Prenom">{{ $etudiant->prenom }}</td>
+                            <td data-label="Genre">{{ $etudiant->genre }}</td>
+                            <td data-label="Email">{{ $etudiant->email }}</td>
+                            <td data-label="Contact">{{ $etudiant->contact }}</td>
+                            {{-- <td data-label="Adresse">{{ $etudiant->adresse }}</td> --}}
+                            <td data-label="Date-naissance">{{ $etudiant->datenaiss }}</td>
+                            <td data-label="Classe">{{ $etudiant->nomclasse }}</td>
+                            <td data-label="Action" class="action-icons no-print">
+                                <button class="btn  btn-sm" data-bs-toggle="modal"
+                                    data-bs-target="#editEtudiant{{ $etudiant->id }}"
+                                    data-file="{{ $etudiant->image }}" data-id="{{ $etudiant->id }}"
+                                    data-nom="{{ $etudiant->nom }}" data-prenom="{{ $etudiant->prenom }}"
+                                    data-email="{{ $etudiant->email }}" data-datenaiss="{{ $etudiant->datenaiss }}">
+                                    {{-- data-adresse="{{ $etudiant->adresse }}"> --}}
+                                    <i class="fas fa-pen"></i>
+                                </button>
+                                <button class="btn  btn-sm" data-bs-toggle="modal"
+                                    data-bs-target="#deleteEtudiant{{ $etudiant->id }}">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+
+                        <!-- Modal de Modification -->
+                        <div class="modal fade" id="editEtudiant{{ $etudiant->id }}" tabindex="-1"
+                            aria-labelledby="editAdminLabel{{ $etudiant->id }}" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <button type="button" class="custom-close-btn" data-bs-dismiss="modal"
+                                        aria-label="Close">
+                                        <i class="fa-solid fa-xmark"></i> <!-- Font Awesome close icon -->
+                                    </button>
+                                    {{-- <h1 class="text-center">Modifier</h1> --}}
+                                    <form action="{{ route('user.update', $etudiant->id) }}" method="POST"
+                                        enctype="multipart/form-data" class="needs-validation" novalidate>
+                                        @csrf
+                                        @method('PUT')
+                                        <div class="modal-body">
+                                            <div class="row g-3">
+                                                <!-- Fields for editing teacher details -->
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control"
+                                                        id="editNom{{ $etudiant->id }}" name="matricule"
+                                                        placeholder="Matricule" value="{{ $etudiant->matricule }}"
+                                                        required>
+                                                    <div class="invalid-feedback">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control"
+                                                        id="editNom{{ $etudiant->id }}" name="nom"
+                                                        placeholder="Nom" value="{{ $etudiant->nom }}" required>
+                                                    <div class="invalid-feedback">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control"
+                                                        id="editPrenom{{ $etudiant->id }}" name="prenom"
+                                                        placeholder="Prénoms" value="{{ $etudiant->prenom }}"
+                                                        required>
+                                                    <div class="invalid-feedback">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-6">
+                                                    <select class="select2-multiple form-control" name="classe_id"
+                                                        style="width: 100%" id="select2Multiple">
+                                                        @foreach ($classes as $classe)
+                                                            <option value="{{ $classe->id }}"
+                                                                @if ($classe->id == $etudiant->classe_id) selected @endif>
+                                                                {{ $classe->nomclasse }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                    <div class="invalid-feedback">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-6">
+                                                    <input type="email" class="form-control"
+                                                        id="editEmail{{ $etudiant->id }}" name="email"
+                                                        placeholder="Email" value="{{ $etudiant->email }}" required>
+                                                    <div class="invalid-feedback">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-6">
+                                                    <input type="tel" class="form-control"
+                                                        id="editContact{{ $etudiant->id }}" name="contact"
+                                                        placeholder="Contact" value="{{ $etudiant->contact }}"
+                                                        required>
+                                                    <div class="invalid-feedback">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-6">
+                                                    <input type="date" class="form-control"
+                                                        id="editDatenaiss{{ $etudiant->id }}" name="datenaiss"
+                                                        placeholder="datenaiss" value="{{ $etudiant->datenaiss }}"
+                                                        required>
+                                                    <div class="invalid-feedback">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-6">
+                                                    <select class="select2-single form-control" name="genre"
+                                                        id="genre" style="width: 100%">
+                                                        <option value="M"
+                                                            @if (old('genre') == 'M') selected @endif>M
+                                                        </option>
+                                                        <option value="F"
+                                                            @if (old('genre') == 'F') selected @endif>F
+                                                        </option>
+                                                    </select>
+                                                    <div class="invalid-feedback">
+                                                    </div>
+                                                </div>
+
+                                                {{-- <div class="col-sm-6">
+                                                    <input type="text" class="form-control"
+                                                        id="adresse{{ $etudiant->id }}" name="adresse"
+                                                        placeholder="Adresse" value="{{ $etudiant->adresse }}"
+                                                        required>
+                                                    <div class="invalid-feedback">
+                                                    </div>
+                                                </div> --}}
+
+                                                {{-- <div class="col-sm-6">
+                                                    <input type="file" class="form-control"
+                                                        id="adresse{{ $etudiant->id }}" name="file"
+                                                        placeholder="datenaiss" value="{{ $etudiant->image }}"
+                                                        required>
+                                                    <div class="invalid-feedback">
+                                                    </div>
+                                                </div> --}}
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control" id="nomp{{ $etudiant->id }}" name="nomp"
+                                                        placeholder="Parent" value="{{ $etudiant->nom }}" required>
+                                                    <div class="invalid-feedback">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <input type="tel" class="form-control" id="contactp{{ $etudiant->id }}" name="contactp"
+                                                        placeholder="Contact du parent" value="{{ $etudiant->contact }}" required>
+                                                    <div class="invalid-feedback">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <input type="email" class="form-control" id="emailp{{ $etudiant->id }}" name="emailp"
+                                                        placeholder="Email du parent" value="{{ $etudiant->email }}" required>
+                                                    <div class="invalid-feedback">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-around  mt-4">
+                                            <button type="submit" class="btn btn-success">Sauvegarder</button>
+                                            <button type="button" class="btn btn-secondaire"
+                                                data-bs-dismiss="modal">Annuler</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- Modal de Suppression -->
+                        <div class="modal fade" id="deleteEtudiant{{ $etudiant->id }}" tabindex="-1"
+                            aria-labelledby="deleteEtudiantLabel{{ $etudiant->id }}" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-body text-center">
+                                        <img src="{{ asset('frontend/dashboard/images/images.png') }}" width="50"
+                                            height="50" alt=""><br><br>
+                                        <p id="sure">Êtes-vous sûr?</p>
+                                        <p>Supprimer cet etudiant ?</p>
+                                    </div>
+                                    <div class="d-flex justify-content-around">
+                                        <form action="{{ route('user.destroy', $etudiant->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">Supprimer</button>
+                                        </form>
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Annuler</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+
+                </tbody>
+            </table>
+        </div>
+
+        <div class="pagination-container  no-print">
+            <div class="pagination-info">
+                Affiche
+                <select class="classic" id="rowsPerPageSelect" data-table-id="#etudiantTable">
+                    <option value="5" selected>5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+                de
+            </div>
+            <div class="pagination-buttons">
+                <button class="btn prev"><i class="fa-solid fa-chevron-left"></i></button>
+                <button class="btn active">1</button>
+                <button class="btn next me-2"><i class="fa-solid fa-chevron-right"></i></button>
+                <span id="nbr">sur 2</span>
+            </div>
+        </div><br>
+    </div>
+    <!--  -->
+    <!--  -->
+    <!-- Modal -->
+    <div class="modal fade" id="etudiant" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <!-- Modal Header -->
+
+                <!-- Modal Body -->
+                <button type="button" class="custom-close-btn" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i> <!-- Font Awesome close icon -->
+                </button>
+                <div class="modal-body">
+                    <form action="{{ route('user.store') }}" id="quickForm" method="POST">
+                        @csrf
+                        <div class="row g-3">
+                            <!-- Fields for adding teacher details -->
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="matricule" name="matricule"
+                                    placeholder="Matricule" value="" required>
+                                <div class="invalid-feedback">
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="firstName" name="nom"
+                                    placeholder="Nom" value="" required>
+                                <div class="invalid-feedback">
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="lastName" name="prenom"
+                                    placeholder="Prenoms" value="" required>
+                                <div class="invalid-feedback">
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <select name="genre" id="genre" class="form-control">
+                                        <option value="">Genre</option>
+                                        <option value="M">M</option>
+                                        <option value="F">F</option>
+                                    </select>
+
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <select name="classe_id" id="classe_id" class="form-control w-100  rounded-0">
+                                        @foreach ($classes as $classe)
+                                            <option value="{{ $classe->id }}">{{ $classe->nomclasse }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <select name="role_id" id="role_id" class="form-control">
+                                        <option value="1">Filière</option>
+                                    </select>
+                                </div>
+                            </div> 
+
+
+                            <div class="col-sm-6">
+                                <input type="date" class="form-control datenaiss" id="datenaiss" name="datenaiss"
+                                    placeholder="Date de naissance" max="{{ date('Y-m-d') }}" required>
+                                <div class="invalid-feedback">
+                                </div>
+                            </div>
+
+
+                            <div class="col-sm-6">
+                                <input type="tel" class="form-control" id="contact" name="contact"
+                                    placeholder="Contact" value="" required>
+                                <div class="invalid-feedback">
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <input type="email" class="form-control" id="email" name="email"
+                                    placeholder="Email">
+                                <div class="invalid-feedback">
+                                </div>
+                            </div>
+                            {{-- 
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="adresse" name="adresse"
+                                        placeholder="Adresse" value="" required>
+                                </div>
+                            </div> --}}
+
+                            <div class="col-sm-6">
+                                <input type="Adresse" class="form-control" id="adresse" name="adresse"
+                                    placeholder="adresse">
+                                <div class="invalid-feedback">
+                                </div>
+                            </div>
+                            {{-- <div class="col-sm-6" style="display: none">
+                                <input type="password" class="form-control" id="password" name="password"
+                                    value="password" placeholder="Password" value="" required>
+                                <div class="invalid-feedback">
+                                    Valid subject is required.
+                                </div>
+                            </div> --}}
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="nomp" name="nomp"
+                                    placeholder="Parent">
+                                <div class="invalid-feedback">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="tel" class="form-control" id="contactp" name="contactp"
+                                    placeholder="Contact du parent">
+                                <div class="invalid-feedback">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="email" class="form-control" id="emailp" name="emailp"
+                                    placeholder="Email du parent">
+                                <div class="invalid-feedback">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer d-flex justify-content-between  mt-4">
+                            <button type="submit" class="btn btn-success  p-3 border-0">Sauvegarder</button>
+                            <button type="button" class="btn btn-secondaire  p-3 border-0"
+                                data-bs-dismiss="modal">Annuler</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- Modal Footer -->
+
+            </div>
+        </div>
+    </div>
+    <!--  -->
+
+
+    <!-- importer -->
+    <div class="modal fade" id="importModal" tabindex="-1" aria-labelledby="importModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <!-- Modal Body -->
+                <button type="button" class="custom-close-btn" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i> <!-- Font Awesome close icon -->
+                </button>
+                <h1 class="modal-title fs-5 text-center" id="importModalLabel">Importer un fichier</h1>
+
+                <form action="/path/to/your/upload/handler" method="post" enctype="multipart/form-data"
+                    class="needs-validation" novalidate>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="fileInput" class="form-label">Choisissez un fichier à importer</label>
+                            <input type="file" class="form-control" id="fileInput" name="importedFile" required>
+                            <!-- <div class="invalid-feedback">
+                                Veuillez sélectionner un fichier.
+                            </div> -->
+                        </div>
+                </form>
+                <div class="modal-footer d-flex justify-content-between  mt-4 p-0">
+                    <button type="submit" class="btn btn-success p-3 border-0">Importer</button>
+                    <button type="button" class="btn btn-secondaire p-3 border-0"
+                        data-bs-dismiss="modal">Annuler</button>
+                </div>
+
+                <!-- Modal Footer -->
+            </div>
+        </div>
+    </div>
+    </div>
+<!-- Modal Structure -->
+<div id="myModaldelete" class="modal fade">
+                <div class="modal-dialog modal-dialog-centered ">
+                    <div class="modal-content text-center">
+                    <button type="button" class="custom-close-btn" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i></button>
+                        <div  class="modal-body text-center d-flex flex-column" id="">
+                            <i class="fa-solid fa-triangle-exclamation" id="fa-triangle-exclamation"></i>                            
+                            <span>Êtes vous sûres?</span>
+                        </div>
+                        <p>Voulez-vous supprimer l'étudiant <span id="nom_affiche"></span> ?</p>
+                        <div id="button" class="d-flex justify-content-around">
+                            <button type="submit" class="btn btn-success">Oui, je confirme</button>
+                            <button type="cancel"  class="btn btn-secondaire" data-bs-dismiss="modal">Annuler</button>
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+    <!-- Footer -->
+    @include('admin.include.footer')
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Définir la configuration pour ce fichier
+            setTableConfig({
+                'Genre': 4,
+                // 'Adresse': 7,
+                'Classe': 9,
+
+            });
+
+
+            setTableId('#etudiantTable');
+            searchTable('#etudiantTable tbody', 'searchInput', 'noResults');
+            paginateTable('#etudiantTable');
+        });
+    </script>
+
+
+    </script>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- Select2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/additional-methods.min.js"></script>
+
+
+    <script>
+        $(document).ready(function() {
+            $('#role_id').select2({
+                placeholder: "",
+                allowClear: true,
+                width: '100%',
+                minimumResultsForSearch: Infinity
+            });
+
+
+
+
+        });
+    </script>
+
+    <style>
+        .invalid-feedback {
+            display: block;
+            /* Assurez-vous que les messages d'erreur sont visibles */
+            color: #dc3545;
+            /* Typiquement utilisé pour les messages d'erreur */
+        }
+
+        .is-invalid {
+            border: 1px solid red;
+        }
+
+        .is-valid {
+            border: 1px solid green;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $('#quickForm').validate({
+                onkeyup: function(element) {
+                    $(element).valid();
+                },
+                onfocusout: function(element) {
+                    $(element).valid();
+                },
+                rules: {
+                    nom: {
+                        required: true,
+                    },
+
+                    prenom: {
+                        required: true,
+                    },
+
+                    contact: {
+                        required: true,
+                    },
+
+                    matricule: {
+                        required: true,
+                    },
+
+                    datenaiss: {
+                        required: true,
+                    },
+
+                    email: {
+                        email: true,
+                        remote: {
+                            url: "/verify-email",
+                            type: "POST",
+                            data: {
+                                email: function() {
+                                    return $("#email").val();
+                                }
+                            }
+                        }
+                    }
+                },
+                messages: {
+                    nom: {
+                        required: "Veuillez entrer le nom.",
+                    },
+                    prenom: {
+                        required: "Veuillez entrer le prenom.",
+                    },
+
+                    contact: {
+                        required: "Veuillez entrer le contact.",
+                    },
+
+                    datenaiss: {
+                        required: "Veuillez entrer la date de naissance.",
+                    },
+
+                    matricule: {
+                        required: "Veuillez entrer le matricule.",
+                    },
+
+                    email: {
+                        email: "Veuillez entrer une adresse e-mail valide.",
+                        remote: "Cette adresse e-mail existe déjà."
+                    }
+                },
+                errorElement: 'span',
+                errorPlacement: function(error, element) {
+                    // Utiliser la classe invalid-feedback pour placer le message d'erreur
+                    var container = element.siblings('.invalid-feedback');
+                    if (container.length) {
+                        container.append(error);
+                    } else {
+                        element.after(error);
+                    }
+                },
+                highlight: function(element, errorClass, validClass) {
+                    $(element).addClass('is-invalid').removeClass('is-valid');
+                },
+                unhighlight: function(element, errorClass, validClass) {
+                    $(element).addClass('is-valid').removeClass('is-invalid');
+                }
+            });
+            
+        });
+
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const solidDistancesElements = document.querySelectorAll('.solid_distances');
+
+            solidDistancesElements.forEach(function(element) {
+                element.addEventListener('click', function() {
+                    const nomCell = this.closest('tr').querySelector('td[data-label="Nom"]');
+                    const nomCells = this.closest('tr').querySelector('td[data-label="Prenom"]');
+                    
+                    const nomText = nomCell.textContent.trim() + ' ' + nomCells.textContent.trim();
+
+                    const nomAfficheElement = document.querySelector('#nom_affiche');
+                    nomAfficheElement.textContent = nomText;
+                    nomAfficheElement.style.textTransform='capitalize';
+                    nomAfficheElement.style.color='#293d7a';
+                    nomAfficheElement.style.fontWeight='bold';
+                });
+            });
+        });
+
+</script>
+<script>
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const solidDistancesElement = document.querySelectorAll('.solid_distance');
+
+    solidDistancesElement.forEach(function(element) {
+        element.addEventListener('click', function() {
+            const row = this.closest('tr');
+            const nomCells = [
+                row.querySelector('td[data-label="Matricule"]'),
+                row.querySelector('td[data-label="Nom"]'),
+                row.querySelector('td[data-label="Prenom"]'),
+                row.querySelector('td[data-label="Email"]'),
+                row.querySelector('td[data-label="Contact"]'),
+                row.querySelector('td[data-label="Genre"]'),
+                row.querySelector('td[data-label="Date-naissance"]'),
+                row.querySelector('td[data-label="Classe"]') // Vérifiez l'orthographe ici
+            ];
+
+            const nomTexts = nomCells.map(cell => cell ? cell.textContent.trim() : '');
+
+            // Format de la date pour l'input (aaaa-MM-jj)
+            const dateNaissance = nomTexts[6];
+            let formattedDate = '';
+
+            if (dateNaissance) {
+                const parts = dateNaissance.split('/');
+                if (parts.length === 3) {
+                    formattedDate = `${parts[2]}-${parts[1]}-${parts[0]}`; // Formate en aaaa-MM-jj
+                }
+            }
+
+            const displayElements = [
+                document.querySelector('#matricule'),
+                document.querySelector('#firstName'),
+                document.querySelector('#lastName'),
+                document.querySelector('#email'),
+                document.querySelector('#contact'),
+                document.querySelector('#genre'),
+                document.querySelector('#datenaiss'),
+                document.querySelector('#classe_id') // Assurez-vous que cet ID est correct
+            ];
+
+            displayElements.forEach((el, index) => {
+                if (el) {
+                    el.value = nomTexts[index]; // Utiliser 'value' pour les champs d'entrée
+                    el.style.textTransform = 'capitalize';
+                    el.style.color = '#293d7a';
+                    el.style.fontWeight = 'bold';
+
+                    // Mettre la date formatée dans l'input
+                    if (index === 6) {
+                        el.value = formattedDate;
+                    }
+                }
+            });
+
+            // Sélectionner l'option correspondante dans le select pour la classe
+            const classeSelect = document.querySelector('#classe_id');
+            const classeText = nomTexts[7]; // Récupère le texte de la classe
+
+            if (classeSelect) {
+                // Parcourir les options et sélectionner celle qui correspond
+                for (let option of classeSelect.options) {
+                    if (option.text === classeText) {
+                        option.selected = true;
+                        break; // Sortir de la boucle une fois que l'option est trouvée
+                    }
+                }
+            }
+
+            console.log('Date formatée:', formattedDate); // Pour vérifier la date formatée
+        });
+    });
+});
+
+
+</script>
+
+
+</body>
+
+</html>
