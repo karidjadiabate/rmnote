@@ -137,25 +137,6 @@
                 </thead>&nbsp;&nbsp;
                 <tbody id="etudiantTable">
 
-                <tr>
-                            <td data-label="Matricule">14M52</td>
-                            <td data-label="Nom">Kouassi</td>
-                            <td data-label="Prenom">Elvis</td>
-                            <td data-label="Genre">M</td>
-                            <td data-label="Email">kouassi.elvis@gmail.com</td>
-                            <td data-label="Contact">0102444595</td>
-                            <td data-label="Date-naissance">18/08/2000</td>
-                            <td data-label="Classe">DAS</td>
-                            <td data-label="Action" class="action-icons no-print">
-                                <button class="btn  btn-sm solid_distance" data-bs-toggle="modal" data-bs-target="#etudiant">
-                                    <i class="fas fa-pen"></i>
-                                </button>
-                                <button class="btn  btn-sm solid_distances" data-bs-toggle="modal" data-bs-target="#myModaldelete">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </td>
-                        </tr>
-
 
                     @php
                         $num = 1;
@@ -165,16 +146,6 @@
                             {{-- <td data-label="Identifiant">{{ $num++ }}</td> --}}
                             <td data-label="Matricule">{{ $etudiant->matricule }}</td>
                             <td data-label="Nom">
-                                @if ($etudiant->image)
-                                    <img src="{{ asset('storage/profile/' . $etudiant->image) }}" alt="User"
-                                        class="rounded-circle profile-image"
-                                        style="width: 40px; height: 35x; margin-top:-5px">
-                                @else
-                                    <img src="{{ Avatar::create($etudiant->nom)->toBase64() }}" alt="User"
-                                        class="rounded-circle profile-image"
-                                        style="width: 40px; height: 35x; margin-top:-5px">
-                                @endif
-
                                 {{ $etudiant->nom }}
                             </td>
                             <td data-label="Prenom">{{ $etudiant->prenom }}</td>
@@ -314,20 +285,26 @@
                                                     </div>
                                                 </div> --}}
                                                 <div class="col-sm-6">
-                                                    <input type="text" class="form-control" id="nomp{{ $etudiant->id }}" name="nomp"
-                                                        placeholder="Parent" value="{{ $etudiant->nom }}" required>
+                                                    <input type="text" class="form-control"
+                                                        id="nomp{{ $etudiant->id }}" name="nomp"
+                                                        placeholder="Nom Parent" value="{{ $etudiant->nom }}"
+                                                        required>
                                                     <div class="invalid-feedback">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <input type="tel" class="form-control" id="contactp{{ $etudiant->id }}" name="contactp"
-                                                        placeholder="Contact du parent" value="{{ $etudiant->contact }}" required>
+                                                    <input type="tel" class="form-control"
+                                                        id="contactp{{ $etudiant->id }}" name="contactp"
+                                                        placeholder="Contact du parent"
+                                                        value="{{ $etudiant->contact }}" required>
                                                     <div class="invalid-feedback">
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-6">
-                                                    <input type="email" class="form-control" id="emailp{{ $etudiant->id }}" name="emailp"
-                                                        placeholder="Email du parent" value="{{ $etudiant->email }}" required>
+                                                <div class="col-sm-12">
+                                                    <input type="email" class="form-control"
+                                                        id="emailp{{ $etudiant->id }}" name="emailp"
+                                                        placeholder="Email du parent" value="{{ $etudiant->email }}"
+                                                        required>
                                                     <div class="invalid-feedback">
                                                     </div>
                                                 </div>
@@ -461,7 +438,7 @@
                                         <option value="1">Filière</option>
                                     </select>
                                 </div>
-                            </div> 
+                            </div>
 
 
                             <div class="col-sm-6">
@@ -485,7 +462,7 @@
                                 <div class="invalid-feedback">
                                 </div>
                             </div>
-                            {{-- 
+                            {{--
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <input type="text" class="form-control" id="adresse" name="adresse"
@@ -508,7 +485,7 @@
                             </div> --}}
                             <div class="col-sm-6">
                                 <input type="text" class="form-control" id="nomp" name="nomp"
-                                    placeholder="Parent">
+                                    placeholder="Nom Parent">
                                 <div class="invalid-feedback">
                                 </div>
                             </div>
@@ -518,7 +495,7 @@
                                 <div class="invalid-feedback">
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-12">
                                 <input type="email" class="form-control" id="emailp" name="emailp"
                                     placeholder="Email du parent">
                                 <div class="invalid-feedback">
@@ -573,24 +550,24 @@
         </div>
     </div>
     </div>
-<!-- Modal Structure -->
-<div id="myModaldelete" class="modal fade">
-                <div class="modal-dialog modal-dialog-centered ">
-                    <div class="modal-content text-center">
-                    <button type="button" class="custom-close-btn" data-bs-dismiss="modal" aria-label="Close">
+    <!-- Modal Structure -->
+    <div id="myModaldelete" class="modal fade">
+        <div class="modal-dialog modal-dialog-centered ">
+            <div class="modal-content text-center">
+                <button type="button" class="custom-close-btn" data-bs-dismiss="modal" aria-label="Close">
                     <i class="fa-solid fa-xmark"></i></button>
-                        <div  class="modal-body text-center d-flex flex-column" id="">
-                            <i class="fa-solid fa-triangle-exclamation" id="fa-triangle-exclamation"></i>                            
-                            <span>Êtes vous sûres?</span>
-                        </div>
-                        <p>Voulez-vous supprimer l'étudiant <span id="nom_affiche"></span> ?</p>
-                        <div id="button" class="d-flex justify-content-around">
-                            <button type="submit" class="btn btn-success">Oui, je confirme</button>
-                            <button type="cancel"  class="btn btn-secondaire" data-bs-dismiss="modal">Annuler</button>
-                        </div>
-                    </div>
+                <div class="modal-body text-center d-flex flex-column" id="">
+                    <i class="fa-solid fa-triangle-exclamation" id="fa-triangle-exclamation"></i>
+                    <span>Êtes vous sûres?</span>
                 </div>
+                <p>Voulez-vous supprimer l'étudiant <span id="nom_affiche"></span> ?</p>
+                <div id="button" class="d-flex justify-content-around">
+                    <button type="submit" class="btn btn-success">Oui, je confirme</button>
+                    <button type="cancel" class="btn btn-secondaire" data-bs-dismiss="modal">Annuler</button>
                 </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     @include('admin.include.footer')
@@ -750,9 +727,8 @@
                     $(element).addClass('is-valid').removeClass('is-invalid');
                 }
             });
-            
-        });
 
+        });
     </script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -762,98 +738,97 @@
                 element.addEventListener('click', function() {
                     const nomCell = this.closest('tr').querySelector('td[data-label="Nom"]');
                     const nomCells = this.closest('tr').querySelector('td[data-label="Prenom"]');
-                    
+
                     const nomText = nomCell.textContent.trim() + ' ' + nomCells.textContent.trim();
 
                     const nomAfficheElement = document.querySelector('#nom_affiche');
                     nomAfficheElement.textContent = nomText;
-                    nomAfficheElement.style.textTransform='capitalize';
-                    nomAfficheElement.style.color='#293d7a';
-                    nomAfficheElement.style.fontWeight='bold';
+                    nomAfficheElement.style.textTransform = 'capitalize';
+                    nomAfficheElement.style.color = '#293d7a';
+                    nomAfficheElement.style.fontWeight = 'bold';
                 });
             });
         });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const solidDistancesElement = document.querySelectorAll('.solid_distance');
 
-</script>
-<script>
+            solidDistancesElement.forEach(function(element) {
+                element.addEventListener('click', function() {
+                    const row = this.closest('tr');
+                    const nomCells = [
+                        row.querySelector('td[data-label="Matricule"]'),
+                        row.querySelector('td[data-label="Nom"]'),
+                        row.querySelector('td[data-label="Prenom"]'),
+                        row.querySelector('td[data-label="Email"]'),
+                        row.querySelector('td[data-label="Contact"]'),
+                        row.querySelector('td[data-label="Genre"]'),
+                        row.querySelector('td[data-label="Date-naissance"]'),
+                        row.querySelector(
+                            'td[data-label="Classe"]') // Vérifiez l'orthographe ici
+                    ];
 
+                    const nomTexts = nomCells.map(cell => cell ? cell.textContent.trim() : '');
 
-document.addEventListener('DOMContentLoaded', function() {
-    const solidDistancesElement = document.querySelectorAll('.solid_distance');
+                    // Format de la date pour l'input (aaaa-MM-jj)
+                    const dateNaissance = nomTexts[6];
+                    let formattedDate = '';
 
-    solidDistancesElement.forEach(function(element) {
-        element.addEventListener('click', function() {
-            const row = this.closest('tr');
-            const nomCells = [
-                row.querySelector('td[data-label="Matricule"]'),
-                row.querySelector('td[data-label="Nom"]'),
-                row.querySelector('td[data-label="Prenom"]'),
-                row.querySelector('td[data-label="Email"]'),
-                row.querySelector('td[data-label="Contact"]'),
-                row.querySelector('td[data-label="Genre"]'),
-                row.querySelector('td[data-label="Date-naissance"]'),
-                row.querySelector('td[data-label="Classe"]') // Vérifiez l'orthographe ici
-            ];
-
-            const nomTexts = nomCells.map(cell => cell ? cell.textContent.trim() : '');
-
-            // Format de la date pour l'input (aaaa-MM-jj)
-            const dateNaissance = nomTexts[6];
-            let formattedDate = '';
-
-            if (dateNaissance) {
-                const parts = dateNaissance.split('/');
-                if (parts.length === 3) {
-                    formattedDate = `${parts[2]}-${parts[1]}-${parts[0]}`; // Formate en aaaa-MM-jj
-                }
-            }
-
-            const displayElements = [
-                document.querySelector('#matricule'),
-                document.querySelector('#firstName'),
-                document.querySelector('#lastName'),
-                document.querySelector('#email'),
-                document.querySelector('#contact'),
-                document.querySelector('#genre'),
-                document.querySelector('#datenaiss'),
-                document.querySelector('#classe_id') // Assurez-vous que cet ID est correct
-            ];
-
-            displayElements.forEach((el, index) => {
-                if (el) {
-                    el.value = nomTexts[index]; // Utiliser 'value' pour les champs d'entrée
-                    el.style.textTransform = 'capitalize';
-                    el.style.color = '#293d7a';
-                    el.style.fontWeight = 'bold';
-
-                    // Mettre la date formatée dans l'input
-                    if (index === 6) {
-                        el.value = formattedDate;
+                    if (dateNaissance) {
+                        const parts = dateNaissance.split('/');
+                        if (parts.length === 3) {
+                            formattedDate =
+                                `${parts[2]}-${parts[1]}-${parts[0]}`; // Formate en aaaa-MM-jj
+                        }
                     }
-                }
+
+                    const displayElements = [
+                        document.querySelector('#matricule'),
+                        document.querySelector('#firstName'),
+                        document.querySelector('#lastName'),
+                        document.querySelector('#email'),
+                        document.querySelector('#contact'),
+                        document.querySelector('#genre'),
+                        document.querySelector('#datenaiss'),
+                        document.querySelector(
+                            '#classe_id') // Assurez-vous que cet ID est correct
+                    ];
+
+                    displayElements.forEach((el, index) => {
+                        if (el) {
+                            el.value = nomTexts[
+                                index]; // Utiliser 'value' pour les champs d'entrée
+                            el.style.textTransform = 'capitalize';
+                            el.style.color = '#293d7a';
+                            el.style.fontWeight = 'bold';
+
+                            // Mettre la date formatée dans l'input
+                            if (index === 6) {
+                                el.value = formattedDate;
+                            }
+                        }
+                    });
+
+                    // Sélectionner l'option correspondante dans le select pour la classe
+                    const classeSelect = document.querySelector('#classe_id');
+                    const classeText = nomTexts[7]; // Récupère le texte de la classe
+
+                    if (classeSelect) {
+                        // Parcourir les options et sélectionner celle qui correspond
+                        for (let option of classeSelect.options) {
+                            if (option.text === classeText) {
+                                option.selected = true;
+                                break; // Sortir de la boucle une fois que l'option est trouvée
+                            }
+                        }
+                    }
+
+                    console.log('Date formatée:', formattedDate); // Pour vérifier la date formatée
+                });
             });
-
-            // Sélectionner l'option correspondante dans le select pour la classe
-            const classeSelect = document.querySelector('#classe_id');
-            const classeText = nomTexts[7]; // Récupère le texte de la classe
-
-            if (classeSelect) {
-                // Parcourir les options et sélectionner celle qui correspond
-                for (let option of classeSelect.options) {
-                    if (option.text === classeText) {
-                        option.selected = true;
-                        break; // Sortir de la boucle une fois que l'option est trouvée
-                    }
-                }
-            }
-
-            console.log('Date formatée:', formattedDate); // Pour vérifier la date formatée
         });
-    });
-});
-
-
-</script>
+    </script>
 
 
 </body>

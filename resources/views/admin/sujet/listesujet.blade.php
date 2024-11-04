@@ -21,71 +21,72 @@
     <title>Sujets</title>
 </head>
 <style>
-        .modal-content {
+    .modal-content {
         background-color: #f8f9fa;
         border: none;
-        }
+    }
 
-        .modal-header {
-            border-bottom: none;
-            padding: 20px 20px 0;
-            position: relative;
-        }
+    .modal-header {
+        border-bottom: none;
+        padding: 20px 20px 0;
+        position: relative;
+    }
 
-        .modal-title {
-            color: #4A41C5;
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
+    .modal-title {
+        color: #4A41C5;
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
 
-        .close {
-            color: #4A41C5;
-            border: none;
-            background-color: transparent;
-            position: absolute;
-            right: -1%;
-            top: -20%;
-        }
-        .close span{
-            font-size: 3rem;
-        }
+    .close {
+        color: #4A41C5;
+        border: none;
+        background-color: transparent;
+        position: absolute;
+        right: -1%;
+        top: -20%;
+    }
 
-        .modal-body {
-            padding: 20px;
-        }
+    .close span {
+        font-size: 3rem;
+    }
 
-        .add-printer {
-            margin-bottom: 20px;
-        }
+    .modal-body {
+        padding: 20px;
+    }
 
-        .add-button {
-            background-color: #e8eaf6;
-            color: #4A41C5;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            font-weight: bold;
-        }
+    .add-printer {
+        margin-bottom: 20px;
+    }
 
-        .add-button i {
-            margin-right: 5px;
-        }
+    .add-button {
+        background-color: #e8eaf6;
+        color: #4A41C5;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        font-weight: bold;
+    }
 
-        h3 {
-            color: #4A41C5;
-            font-size: 1.2rem;
-            margin-bottom: 15px;
-        }
+    .add-button i {
+        margin-right: 5px;
+    }
 
-        .devices-list {
-            list-style-type: none;
-            padding: 0;
-        }
+    h3 {
+        color: #4A41C5;
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+    }
 
-        .devices-list li {
-            background-color: #ffffff;
-            margin-bottom: 10px;
-        }
+    .devices-list {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .devices-list li {
+        background-color: #ffffff;
+        margin-bottom: 10px;
+    }
 
     .add-printer-scanner {
         margin-bottom: 20px;
@@ -147,16 +148,19 @@
         height: 24px;
         fill: white;
     }
-    .titres{
-        display:none;
+
+    .titres {
+        display: none;
     }
-    #inscriptionTables0{
-        display:none;
+
+    #inscriptionTables0 {
+        display: none;
     }
-    .fa-solid.fa-trash{
-            color: #ffd100!important;
-        }
-    </style>
+
+    .fa-solid.fa-trash {
+        color: #ffd100 !important;
+    }
+</style>
 
 <body>
     <!-- header -->
@@ -272,8 +276,8 @@
                             {{-- <th>Identifiant</th> --}}
                             <th>Code</th>
                             <!-- @if (intval(auth()->user()->role_id) === 3)
-                                <th>Professeur</th>
-                            @endif -->
+<th>Professeur</th>
+@endif -->
                             <th>Matière</th>
                             <th>Filière</th>
                             <th>Classes</th>
@@ -287,33 +291,49 @@
                             <tr>
                                 {{-- <td data-label="Identifiant">{{ $listesujet->id }}</td> --}}
                                 <td data-label="Code">{{ $listesujet->code }}</td>
-                                <!-- @if (intval(auth()->user()->role_id) === 3)
-                                    <td data-label="User">{{ $listesujet->nom . ' ' . $listesujet->prenom }}</td>
-                                @endif -->
-                                <td data-label="Matière">{{ $listesujet->nommatiere }}</td>
-                                <td data-label="Filière">{{ $listesujet->nomfiliere }}</td>
-                                <td data-label="Classes">{{ $listesujet->nomclasse }}</td>
-                                <td data-label="Date de création">{{ $listesujet->created_date }}</td>
-                                <td data-label="statut" id="corrigé"><span>
+                                <td data-label="Matière">{{ $listesujet->matiere->nommatiere }}</td>
+                                <td data-label="Filière">
+                                    {{ $listesujet->filiere->nomfiliere ?? $listesujet->filiere->etablissementFilieres->nomfilieretablissement }}
+                                </td>
+                                <td data-label="Classes">{{ $listesujet->classe->nomclasse }}</td>
+                                <td data-label="Date de création">
+                                    {{ \Carbon\Carbon::parse($listesujet->created_date)->format('d - m - Y') }}</td>
+
+                                {{--  --}}
+                                <td data-label="statut">
+                                    <span
+                                        style="background-color: {{ $listesujet->status === 'corrige' ? '#9FE4B6' : '#F9D465' }};
+                                           color: {{ $listesujet->status === 'corrige' ? '#024802' : '#6E5400' }};
+                                           padding: 0px 10px;
+                                           border-radius: 20px;">
                                         @if ($listesujet->status === 'non-corrige')
                                             Non Corrigé
                                         @elseif($listesujet->status === 'corrige')
                                             Corrigé
                                         @endif
-                                    </span></td>
+                                    </span>
+                                </td>
+                                {{--  --}}
+
                                 <td data-label="Action" class="action-icons no-print">
-                                    <a href="{{ route('sujetadmin.details', ['id' =>  $listesujet->id]) }}"> <i
-                                            class="fas fa-eye"></i></a>
-                                            <button class="printSujet" data-idsujet="{{$listesujet->id}}"> <i
+                                    @if (auth()->user()->role_id == 3)
+                                        <a href="{{ route('sujetadmin.details', ['id' => $listesujet->id]) }}"> <i
+                                                class="fas fa-eye"></i></a>
+                                    @elseif (auth()->user()->role_id == 2)
+                                        <a href="{{ route('sujetprofesseur.details', ['id' => $listesujet->id]) }}">
+                                            <i class="fas fa-eye"></i></a>
+                                    @endif
+                                    <button class="printSujet" data-idsujet="{{ $listesujet->id }}"> <i
                                             style="color: #4A41C5;" class="fa-solid fa-print"></i></button>
-                                            <button data-bs-toggle="modal" data-bs-target="#impri">
+                                    <button data-bs-toggle="modal" data-bs-target="#impri">
                                         <i style="color:#38B293" class="fa-solid fa-calculator"></i>
                                     </button>
                                     <button data-bs-toggle="modal" class="editTeacher1"> <i
                                             class="fa-solid fa-list"></i></button>
                                     <!-- <button data-bs-toggle="modal" data-bs-target="#deleteTeacher"><i
                                             class="fa-solid fa-box-archive"></i></button> -->
-                                    <button data-bs-toggle="modal" data-bs-target="#deleteSujet" id="suppression_sujet"><i class="fa-solid fa-trash"></i></button>
+                                    <button data-bs-toggle="modal" data-bs-target="#deleteSujet"
+                                        id="suppression_sujet"><i class="fa-solid fa-trash"></i></button>
                                 </td>
                             </tr>
                         @endforeach
@@ -346,13 +366,13 @@
     </div>
     <!--  -->
     {{--  --}} {{-- modal scan --}}
-    
 
-    
+
+
     <div class="modal fade " id="impri" tabindex="-1" aria-labelledby="largeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-            <i class="fa-solid fa-xmark" id="fa-xmark" data-bs-dismiss="modal"></i>
+                <i class="fa-solid fa-xmark" id="fa-xmark" data-bs-dismiss="modal"></i>
                 <div class="modal-header">
                     <h5 class="modal-title" id="largeModalLabel">Connecter un scanner</h5>
                 </div>
@@ -442,67 +462,67 @@
         </div>
     </div>
     <div class="modal fade" id="impri" tabindex="-1" aria-labelledby="printerModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title" id="printerModalLabel">Connecter une imprimante</h2>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="add-printer">
-                    <button class="add-button">
-                        <i class="fas fa-plus"></i> Ajouter une imprimante
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="printerModalLabel">Connecter une imprimante</h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <h3>Imprimante et scanners disponible</h3>
-                <ul class="devices-list">
-                    <li>
-                        <i class="fas fa-print"></i>
-                        ImageRUNNER ADVANCE DX C580
-                    </li>
-                    <li>
-                        <i class="fas fa-print"></i>
-                        Canon G3010 séries
-                    </li>
-                    <li>
-                        <i class="fas fa-print"></i>
-                        Canon Colortrac SmartLF SCi 36
-                    </li>
-                    <li>
-                        <i class="fas fa-fax"></i>
-                        Fax
-                    </li>
-                </ul>
+                <div class="modal-body">
+                    <div class="add-printer">
+                        <button class="add-button">
+                            <i class="fas fa-plus"></i> Ajouter une imprimante
+                        </button>
+                    </div>
+                    <h3>Imprimante et scanners disponible</h3>
+                    <ul class="devices-list">
+                        <li>
+                            <i class="fas fa-print"></i>
+                            ImageRUNNER ADVANCE DX C580
+                        </li>
+                        <li>
+                            <i class="fas fa-print"></i>
+                            Canon G3010 séries
+                        </li>
+                        <li>
+                            <i class="fas fa-print"></i>
+                            Canon Colortrac SmartLF SCi 36
+                        </li>
+                        <li>
+                            <i class="fas fa-fax"></i>
+                            Fax
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-        <!-- Footer -->
-        @include('admin.include.footer')
-                            <!-- Modal de Suppression -->
-                            <div class="modal fade" id="deleteSujet" tabindex="-1"aria-labelledby="deleteSujetLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content text-center">
-                                        <button type="button" class="custom-close-btn" data-bs-dismiss="modal" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
-                                        <div  class="modal-body text-center d-flex flex-column" id="">
-                                            <i class="fa-solid fa-triangle-exclamation" id="fa-triangle-exclamation"></i>                            
-                                            <span>Êtes vous sûres ?</span>
-                                        </div>
-                                        <p>Voulez-vous supprimer l'évaluation <strong><span id="nom_affiche"></span></strong> ?</p>
-                                        <div class="d-flex justify-content-around">
-                                            <form action="" method="POST">
-                                                <button type="submit" class="btn btn-success marge">Oui, je confirme</button>
-                                            </form>
-                                            <button type="button" class="btn btn-secondaire"
-                                                data-bs-dismiss="modal">Annuler</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-        
+    <!-- Footer -->
+    @include('admin.include.footer')
+    <!-- Modal de Suppression -->
+    <div class="modal fade" id="deleteSujet" tabindex="-1"aria-labelledby="deleteSujetLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content text-center">
+                <button type="button" class="custom-close-btn" data-bs-dismiss="modal" aria-label="Close"><i
+                        class="fa-solid fa-xmark"></i></button>
+                <div class="modal-body text-center d-flex flex-column" id="">
+                    <i class="fa-solid fa-triangle-exclamation" id="fa-triangle-exclamation"></i>
+                    <span>Êtes vous sûres ?</span>
+                </div>
+                <p>Voulez-vous supprimer l'évaluation <strong><span id="nom_affiche"></span></strong> ?</p>
+                <div class="d-flex justify-content-around">
+                    <form action="" method="POST">
+                        <button type="submit" class="btn btn-success marge">Oui, je confirme</button>
+                    </form>
+                    <button type="button" class="btn btn-secondaire" data-bs-dismiss="modal">Annuler</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     {{--  --}}
     <!-- importer -->
     <div class="modal fade" id="importModal" tabindex="-1" aria-labelledby="importModalLabel" aria-hidden="true">
@@ -565,57 +585,59 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
-      <script>
-       document.querySelectorAll('.printSujet').forEach(function(button) {
+    <script>
+        document.querySelectorAll('.printSujet').forEach(function(button) {
 
-        button.addEventListener('click', function () {
+            button.addEventListener('click', function() {
 
-            var idSujet = this.getAttribute('data-idsujet');
+                var idSujet = this.getAttribute('data-idsujet');
 
-            // Obtenir la racine de l'URL
-            var baseUrl = window.location.origin;
+                // Obtenir la racine de l'URL
+                var baseUrl = window.location.origin;
 
-            // URL
-            var url = baseUrl + '/admin/nouvelle-page/' + idSujet;
+                // URL
+                var url = baseUrl + '/nouvelle-page/' + idSujet;
 
-            //URL dans l'iframe
-            var iframe = document.getElementById('pageIframe');
-            iframe.src = url;
-            console.log(iframe.src);
+                //URL dans l'iframe
+                var iframe = document.getElementById('pageIframe');
+                iframe.src = url;
+                console.log(iframe.src);
 
-            // Déclencher l'impression
-            iframe.onload = function() {
-                console.log("Le contenu a bien été chargé dans l'iframe");
-                requestAnimationFrame(function() {
+                // Déclencher l'impression
+                iframe.onload = function() {
+                    console.log("Le contenu a bien été chargé dans l'iframe");
                     requestAnimationFrame(function() {
-                        iframe.contentWindow.focus();
-                        iframe.contentWindow.print();
+                        requestAnimationFrame(function() {
+                            iframe.contentWindow.focus();
+                            iframe.contentWindow.print();
+                        });
                     });
-                });
-            };
+                };
 
-            iframe.onerror = function() {
-                console.log("Erreur lors du chargement de la page dans l'iframe");
-            };
-    });
-    });
+                iframe.onerror = function() {
+                    console.log("Erreur lors du chargement de la page dans l'iframe");
+                };
+            });
+        });
     </script>
     <script>
         document.querySelectorAll('[data-label="statut"]').forEach(function(element) {
             if (element.textContent.trim() == "Non Corrigé") {
                 const trElement = element.closest("tr"); // Sélectionne le parent <tr> de l'élément
-                const editButton = trElement.querySelector(".editTeacher1"); // Sélectionne le bouton avec la classe "editTeacher1" dans le même <tr>
-                
+                const editButton = trElement.querySelector(
+                    ".editTeacher1"); // Sélectionne le bouton avec la classe "editTeacher1" dans le même <tr>
+
                 if (editButton) {
                     editButton.disabled = true; // Désactive le bouton
-                    editButton.children[0].setAttribute('style','background:#d3d3d3!important'); // Désactive le bouton
+                    editButton.children[0].setAttribute('style',
+                        'background:#d3d3d3!important'); // Désactive le bouton
                 }
             }
         });
-
     </script>
 
 </body>
+
 </html>
 
 </body>

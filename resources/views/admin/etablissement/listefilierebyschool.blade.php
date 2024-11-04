@@ -349,9 +349,9 @@
                     de
                 </div>
                 <div class="pagination-buttons">
-                    <button class="btn prev">‹</button>
+                    <button class="btn prev"><i class="fa-solid fa-chevron-left"></i></button>
                     <button class="btn active">1</button>
-                    <button class="btn next">›</button>
+                    <button class="btn next"><i class="fa-solid fa-chevron-right"></i></button>
                     <span id="nbr">sur 2</span>
                 </div>
             </div><br>

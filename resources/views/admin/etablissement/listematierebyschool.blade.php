@@ -97,6 +97,20 @@
             transform: none !important;
             box-shadow: none !important;
         }
+
+
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type=number] {
+            -moz-appearance: textfield;
+            /* Masquer le spinner */
+        }
+
+        .aplus {}
     </style>
 
     <title>matiere</title>
@@ -287,17 +301,18 @@
                                                         <div class="invalid-feedback">
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-6">
+                                                    <div class="col-sm-6 aplus">
                                                         <div class="form-control"
                                                             style="display: flex; align-items: center;">
                                                             <!-- Button to decrease value -->
-                                                            <button class="btn btn-outline-secondary" type="button"
-                                                                id="decrease-btnedit">-</button>
+                                                            <button class="btn circular-btn"
+                                                                style=" background-color: #9a95de !important;border: none !important; color:white;width: 30px; height: 30px;border-radius: 50%;display: flex; align-items: center;justify-content: center;"
+                                                                type="button" id="decrease-btn">-</button>
 
                                                             <select
                                                                 class="sort-by btn custom-btn-color rounded-start-pill ticketBtn vvip py-2"
                                                                 id="niveau_id" name="niveau_id" required
-                                                                style="height: 38px; border-right: none;">
+                                                                style="height: 35px; border-right: none;">
                                                                 <option selected disabled>Niveau</option>
                                                                 @foreach ($niveaux as $niveau)
                                                                     <option value="{{ $niveau->id }}"
@@ -310,16 +325,13 @@
                                                                 class="sort-by custom-btn-color rounded-end-pill ticketBtn vvip py-2"
                                                                 id="coefficient" name="coefficient"
                                                                 value="{{ $matiere->coefficient }}" min="1"
-                                                                style="width: 63px; height: 38px; border-left: none; -webkit-appearance: none; -moz-appearance: textfield;"
+                                                                style="width: 62px; height: 35px; border-left: none; -webkit-appearance: none; -moz-appearance: textfield; text-align:center;"
                                                                 required>
-
                                                             <!-- Button to increase value -->
                                                             <button class="btn circular-btn"
-                                                                style=" background-color: #4A41C5 !important;border: none !important; color:white;width: 30px; height: 30px;border-radius: 50%;"
-                                                                type="button" id="increase-btnedit">+</button>
+                                                                style=" background-color: #9a95de !important;border: none !important; color:white;width: 30px; height: 30px;border-radius: 50%;display: flex; align-items: center;justify-content: center;"
+                                                                type="button" id="increase-btn">+</button>
                                                         </div>
-
-
                                                     </div>
 
 
@@ -449,20 +461,39 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm-6" style="display: flex; align-items: center;">
-                                <button type="button" class="moins">-</button>
+                            <div class="col-sm-6 aplus">
+                                <div class="form-control"
+                                    style="display: flex; align-items: center;">
+                                    <!-- Button to decrease value -->
+                                    <button class="btn circular-btn"
+                                        style=" background-color: #9a95de !important;border: none !important; color:white;width: 30px; height: 30px;border-radius: 50%;display: flex; align-items: center;justify-content: center;"
+                                        type="button" id="decrease-btn">-</button>
 
-                                <select class="sort-by btn btn-outline-primary rounded-pill ticketBtn vvip py-2"
-                                    required>
-                                    <option value="" selected disabled>--Choisir un ticket--</option>
-                                    <option value="vvip" data-count="0">VVIP: 100 F [0]</option>
-                                    <option value="vip" data-count="0">VIP: 50 F [0]</option>
-                                    <option value="stand1" data-count="0">GP1: 30 F [0]</option>
-                                    <option value="stand2" data-count="0">GP2: 20 F [0]</option>
-                                </select>
-
-                                <button type="button" class="pluss">+</button>
+                                    <select
+                                        class="sort-by btn custom-btn-color rounded-start-pill ticketBtn vvip py-2"
+                                        id="niveau_id" name="niveau_id" required
+                                        style="height: 35px; border-right: none;">
+                                        <option selected disabled>Niveau</option>
+                                        @foreach ($niveaux as $niveau)
+                                            <option value="{{ $niveau->id }}"
+                                                {{ $niveau->id == $matiere->niveau_id ? 'selected' : '' }}>
+                                                {{ $niveau->code }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    <input type="number" placeholder="coef"
+                                        class="sort-by custom-btn-color rounded-end-pill ticketBtn vvip py-2"
+                                        id="coefficient" name="coefficient"
+                                        value="{{ $matiere->coefficient }}" min="1"
+                                        style="width: 62px; height: 35px; border-left: none; -webkit-appearance: none; -moz-appearance: textfield; text-align:center;"
+                                        required>
+                                    <!-- Button to increase value -->
+                                    <button class="btn circular-btn"
+                                        style=" background-color: #9a95de !important;border: none !important; color:white;width: 30px; height: 30px;border-radius: 50%;display: flex; align-items: center;justify-content: center;"
+                                        type="button" id="increase-btn">+</button>
+                                </div>
                             </div>
+
 
                             <!-- Crédit Field -->
                             <div class="col-sm-6" style="display: flex; align-items: center;">
@@ -630,8 +661,30 @@
             hiddenInput.value = select.value;
         });
     </script>
-
     <script>
+        // Fonction pour changer la valeur du coefficient
+        function changeCoefficient(value) {
+            var coefficientInput = document.getElementById('coefficient');
+            var currentValue = parseInt(coefficientInput.value);
+
+            // Vérifier que la valeur est bien un nombre et qu'elle reste supérieure ou égale à 1
+            if (!isNaN(currentValue) && currentValue + value >= 1) {
+                coefficientInput.value = currentValue + value;
+            }
+        }
+
+        // Assignation des fonctions aux boutons
+        document.getElementById('decrease-btn').onclick = function() {
+            changeCoefficient(-1);
+        };
+
+        document.getElementById('increase-btn').onclick = function() {
+            changeCoefficient(1);
+        };
+    </script>
+
+
+    {{-- <script>
         // Fonction pour changer la valeur du coefficient
         function changeCoefficient(value) {
             var coefficientInput = document.getElementById('coefficient');
@@ -671,7 +724,7 @@
         document.getElementById('increase-btnedit').onclick = function() {
             changeCoefficientEdit(1);
         };
-    </script>
+    </script> --}}
     <script>
         $(document).ready(function() {
             $('.pluss').on('click', function() {

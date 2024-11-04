@@ -73,7 +73,6 @@
                 <i class="fa fa-search"></i>
 
                 <input id="searchInput" type="text" id="search" class="form-control search-bar"
-
                     placeholder="Rechercher...">
 
             </div>
@@ -83,11 +82,9 @@
             <div class="d-flex justify-content-end flex-wrap action-buttons">
 
                 <button class="btn btn-custom btn-imprimer" id="printBtn" onclick="printDiv()"><i
-
                         class="fa fa-print"></i> Imprimer</button>
 
                 <button class="btn btn-custom btn-importer" data-bs-toggle="modal" data-bs-target="#importModal"><i
-
                         class="fa fa-upload"></i> Importer</button>
 
 
@@ -97,7 +94,6 @@
                 <div class="btn-group">
 
                     <button class="btn btn-custom btn-exporter dropdown-toggle" type="button" data-bs-toggle="dropdown"
-
                         aria-expanded="false">
 
                         <i class="fa fa-download"></i> Exporter
@@ -109,11 +105,9 @@
                         <!-- Assurez-vous que ces liens ont bien l'attribut href="#" et que onclick est correct -->
 
                         <li><a class="dropdown-item" id="excel" href="#"
-
                                 onclick="exportTableToExcel('#teacherTable')">Excel</a></li>
 
                         <li><a class="dropdown-item" id="pdf" href="#"
-
                                 onclick="exportTableToPDF('#teacherTable')">PDF</a></li>
 
 
@@ -123,7 +117,6 @@
                 </div>
 
                 <button class="btn btn-custom btn-ajouter" data-bs-toggle="modal" data-bs-target="#enseignant"><i
-
                         class="fa fa-plus"></i> Ajouter un enseignant</button>
 
 
@@ -131,7 +124,6 @@
                 <div class="dropdown" id="filterMenu">
 
                     <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
-
                         aria-expanded="false">
 
                         <i class="fa fa-filter"></i> Filtrer par
@@ -143,17 +135,14 @@
                         <li class="dropdown-submenu">
 
                             <a class="dropdown-item dropdown-toggle" href="#"
-
                                 data-bs-toggle="dropdown">Nom-Matière</a>
 
                             <ul class="dropdown-menu">
 
                                 @foreach ($professeurs as $professeur)
-
                                     <li>
 
                                         <a class="dropdown-item" href="#"
-
                                             onclick="applyFilter('Nom-Matière', '{{ $professeur->nommatieres }}')">
 
                                             {{ $professeur->nommatieres }}
@@ -161,7 +150,6 @@
                                         </a>
 
                                     </li>
-
                                 @endforeach
 
                             </ul>
@@ -177,11 +165,9 @@
                             <ul class="dropdown-menu">
 
                                 @foreach ($professeurs as $professeur)
-
                                     <li>
 
                                         <a class="dropdown-item" href="#"
-
                                             onclick="applyFilter('Classe', '{{ $professeur->nomclasses }}')">
 
                                             {{ $professeur->nomclasses }}
@@ -189,7 +175,6 @@
                                         </a>
 
                                     </li>
-
                                 @endforeach
 
                             </ul>
@@ -236,7 +221,7 @@
 
                         <th>Contact</th>
 
-                       <!-- <th>Adresse</th> -->
+                        <!-- <th>Adresse</th> -->
 
                         <th>Matière</th>
 
@@ -250,38 +235,7 @@
 
                 <tbody id="teacherTable">
 
-                <tr>
 
-                            <td data-label="Identifiant">0001</td>
-
-                            <td data-label="Nom">N'dri</td>
-                            <td data-label="Prenom">Yao Chris Bryan</td>
-
-                            <td data-label="Email">ndriycb18@gmail.com</td>
-
-                            <td data-label="Contact">0748262614</td>
-
-                            <td data-label="Matière">Anglais</td>
-
-                            <td data-label="Classes">DAS</td>
-
-                            <td data-label="Action" class="action-icons no-print">
-
-                                <button class="btn  btn-sm solid_distance" data-bs-toggle="modal" data-bs-target="#enseignant">
-
-                                    <i class="fas fa-pen"></i>
-
-                                </button>
-
-                                <button class="btn  btn-sm solid_distances" data-bs-toggle="modal" data-bs-target="#myModaldelete">
-
-                                    <i class="fas fa-trash"></i>
-
-                                </button>
-
-                            </td>
-
-                        </tr>
 
 
                     @php
@@ -293,61 +247,12 @@
 
 
                     @foreach ($professeurs as $professeur)
-
                         <tr>
 
                             <td data-label="Identifiant">{{ $num++ }}</td>
 
-                            <td data-label="Nom">
-
-                                @if ($professeur->image)
-
-                                    <img src="{{ asset('storage/profile/' . $professeur->image) }}" alt="User"
-
-                                        class="rounded-circle profile-image"
-
-                                        style="width: 40px; height: 35x; margin-top:-5px">
-
-                                @else
-
-                                    <img src="{{ Avatar::create($professeur->nom . ' ' . $professeur->prenom)->toBase64() }}"
-
-                                        alt="User" class="rounded-circle profile-image"
-
-                                        style="width: 40px; height: 35x; margin-top:-5px">
-
-                                @endif
-
-
-
-                                {{ $professeur->nom . ' ' . $professeur->prenom }}
-
-                            </td>
-                            <td data-label="Prenom">
-
-                                @if ($professeur->image)
-
-                                    <img src="{{ asset('storage/profile/' . $professeur->image) }}" alt="User"
-
-                                        class="rounded-circle profile-image"
-
-                                        style="width: 40px; height: 35x; margin-top:-5px">
-
-                                @else
-
-                                    <img src="{{ Avatar::create($professeur->nom . ' ' . $professeur->prenom)->toBase64() }}"
-
-                                        alt="User" class="rounded-circle profile-image"
-
-                                        style="width: 40px; height: 35x; margin-top:-5px">
-
-                                @endif
-
-
-
-                                {{ $professeur->nom . ' ' . $professeur->prenom }}
-
-                            </td>
+                            <td data-label="Nom">{{ $professeur->nom }}</td>
+                            <td data-label="Prenom">{{ $professeur->prenom }}</td>
 
                             <td data-label="Email">{{ $professeur->email }}</td>
 
@@ -362,17 +267,11 @@
                             <td data-label="Action" class="action-icons no-print">
 
                                 <button class="btn  btn-sm" data-bs-toggle="modal"
-
                                     data-bs-target="#editTeacher{{ $professeur->id }}"
-
                                     data-id="{{ $professeur->id }}" data-nom="{{ $professeur->nom }}"
-
                                     data-prenom="{{ $professeur->prenom }}" data-email="{{ $professeur->email }}"
-
                                     data-matiere_id="{{ $professeur->matiere_id }}"
-
                                     data-selected_classes="{{ $professeur->selected_classes }}"
-
                                     data-adresse="{{ $professeur->adresse }}">
 
                                     <i class="fas fa-pen"></i>
@@ -380,7 +279,6 @@
                                 </button>
 
                                 <button class="btn  btn-sm" data-bs-toggle="modal"
-
                                     data-bs-target="#deleteTeacher{{ $professeur->id }}">
 
                                     <i class="fas fa-trash"></i>
@@ -396,7 +294,6 @@
                         <!-- Modal de Modification -->
 
                         <div class="modal fade" id="editTeacher{{ $professeur->id }}" tabindex="-1"
-
                             aria-labelledby="editTeacherLabel{{ $professeur->id }}" aria-hidden="true">
 
                             <div class="modal-dialog modal-dialog-centered">
@@ -406,7 +303,6 @@
                                     {{-- <h1 class="text-center">Modifier</h1> --}}
 
                                     <button type="button" class="custom-close-btn" data-bs-dismiss="modal"
-
                                         aria-label="Close">
 
                                         <i class="fa-solid fa-xmark"></i> <!-- Font Awesome close icon -->
@@ -414,7 +310,6 @@
                                     </button>
 
                                     <form action="{{ route('user.update', $professeur->id) }}" method="POST"
-
                                         enctype="multipart/form-data" class="needs-validation" novalidate>
 
                                         @csrf
@@ -430,9 +325,7 @@
                                                 <div class="col-sm-6">
 
                                                     <input type="text" class="form-control"
-
                                                         id="editNom{{ $professeur->id }}" name="nom"
-
                                                         placeholder="Nom" value="{{ $professeur->nom }}" required>
 
                                                     <div class="invalid-feedback">
@@ -446,11 +339,8 @@
                                                 <div class="col-sm-6">
 
                                                     <input type="text" class="form-control"
-
                                                         id="editPrenom{{ $professeur->id }}" name="prenom"
-
                                                         placeholder="Prénoms" value="{{ $professeur->prenom }}"
-
                                                         required>
 
                                                     <div class="invalid-feedback">
@@ -462,11 +352,8 @@
                                                 <div class="col-sm-6">
 
                                                     <input type="email" class="form-control"
-
                                                         id="editEmail{{ $professeur->id }}" name="email"
-
                                                         placeholder="Email" value="{{ $professeur->email }}"
-
                                                         required>
 
                                                     <div class="invalid-feedback">
@@ -480,11 +367,8 @@
                                                 <div class="col-sm-6">
 
                                                     <input type="tel" class="form-control"
-
                                                         id="editContact{{ $professeur->id }}" name="contact"
-
                                                         placeholder="Contact" value="{{ $professeur->contact }}"
-
                                                         required>
 
                                                     <div class="invalid-feedback">
@@ -502,19 +386,15 @@
                                                     <div class="form-group">
 
                                                         <select name="matiere_id[]" id="matiereselect2"
-
                                                             class="matiereprof-multiple form-control" multiple>
 
                                                             @foreach ($matieres as $matiere)
-
                                                                 <option value="{{ $matiere->id }}"
-
                                                                     @if (in_array((string) $matiere->id, explode(',', $professeur->matiere_id))) selected @endif>
 
                                                                     {{ $matiere->nommatiere }}
 
                                                                 </option>
-
                                                             @endforeach
 
                                                         </select>
@@ -536,23 +416,18 @@
                                                     <div class="form-group">
 
                                                         <select class="select2-multiple form-control"
-
                                                             name="classe_id[]" style="width: 100%" id="classeselect2"
-
                                                             multiple>
 
                                                             <option value="">Selectionnez une classe</option>
 
                                                             @foreach ($classes as $classe)
-
                                                                 <option value="{{ $classe->id }}"
-
                                                                     @if (in_array($classe->id, json_decode($professeur->selected_classes))) selected @endif>
 
                                                                     {{ $classe->nomclasse }}
 
                                                                 </option>
-
                                                             @endforeach
 
                                                         </select>
@@ -570,11 +445,8 @@
                                                 <div class="col-sm-6">
 
                                                     <input type="text" class="form-control"
-
                                                         id="adresse{{ $professeur->id }}" name="adresse"
-
                                                         placeholder="Adresse" value="{{ $professeur->adresse }}"
-
                                                         required>
 
                                                     <div class="invalid-feedback">
@@ -610,11 +482,9 @@
                                         <div class="col-sm-12 d-flex justify-content-between mt-5 margin-bot">
 
                                             <button type="submit"
-
                                                 class="btn btn-success p-3 border-0">Sauvegarder</button>
 
                                             <button type="button" class="btn btn-annuler p-3 px-5 border-0"
-
                                                 data-bs-dismiss="modal">Annuler</button>
 
                                         </div>
@@ -636,7 +506,6 @@
                         <!-- Modal de Suppression -->
 
                         <div class="modal fade" id="deleteTeacher{{ $professeur->id }}" tabindex="-1"
-
                             aria-labelledby="deleteTeacherLabel{{ $professeur->id }}" aria-hidden="true">
 
                             <div class="modal-dialog modal-dialog-centered">
@@ -646,7 +515,6 @@
                                     <div class="modal-body text-center">
 
                                         <img src="{{ asset('frontend/dashboard/images/images.png') }}" width="50"
-
                                             height="50" alt=""><br><br>
 
                                         <p id="sure">Êtes-vous sûr?</p>
@@ -668,8 +536,7 @@
                                                 <button type="submit" class="btn btn-danger p-3">Supprimer</button>
 
                                                 <button type="button" class="btn btn-annuler p-3 px-5"
-
-                                                data-bs-dismiss="modal">Annuler</button>
+                                                    data-bs-dismiss="modal">Annuler</button>
 
                                             </div>
 
@@ -682,7 +549,6 @@
                             </div>
 
                         </div>
-
                     @endforeach
 
 
@@ -767,7 +633,6 @@
                 <div class="modal-body">
 
                     <form action="{{ route('user.store') }}" id="quickForm" method="POST" class="needs-validation"
-
                         novalidate>
 
                         @csrf
@@ -779,7 +644,6 @@
                             <div class="col-sm-6">
 
                                 <input type="text" class="form-control" id="firstName" name="nom"
-
                                     placeholder="Nom" value="" required>
 
                                 <div class="invalid-feedback">
@@ -793,7 +657,6 @@
                             <div class="col-sm-6">
 
                                 <input type="text" class="form-control" id="lastName" name="prenom"
-
                                     placeholder="Prenoms" value="" required>
 
                                 <div class="invalid-feedback">
@@ -807,7 +670,6 @@
                             <div class="col-sm-6">
 
                                 <input type="tel" class="form-control" id="contact" name="contact"
-
                                     placeholder="Contact" value="" required>
 
                                 <div class="invalid-feedback">
@@ -819,7 +681,6 @@
                             <div class="col-sm-6">
 
                                 <input type="email" class="form-control" id="email" name="email"
-
                                     placeholder="Email" value="" required>
 
                                 <div class="invalid-feedback">
@@ -835,13 +696,10 @@
                                 <div class="form-group">
 
                                     <select name="matiere_id[]" id="matiereselect3"
-
                                         class="matiereprof-multiple form-control" multiple>
 
                                         @foreach ($matieres as $matiere)
-
                                             <option value="{{ $matiere->id }}">{{ $matiere->nommatiere }}</option>
-
                                         @endforeach
 
                                     </select>
@@ -859,13 +717,10 @@
                                 <div class="form-group">
 
                                     <select class="select2-multiple form-control" name="classe_id[]"
-
                                         style="width: 100%" id="classeselect3" multiple>
 
                                         @foreach ($classes as $classe)
-
                                             <option value="{{ $classe->id }}">{{ $classe->nomclasse }}</option>
-
                                         @endforeach
 
                                         <div class="invalid-feedback">
@@ -928,12 +783,9 @@
 
                             <div class="col-sm-12 d-flex justify-content-between mt-5 margin-bot">
 
-                                <button type="submit"
-
-                                    class="btn btn-success p-3 border-0">Sauvegarder</button>
+                                <button type="submit" class="btn btn-success p-3 border-0">Sauvegarder</button>
 
                                 <button type="button" class="btn btn-annuler p-3 px-5 border-0"
-
                                     data-bs-dismiss="modal" id="annulerBtn">Annuler</button>
 
                             </div>
@@ -983,7 +835,6 @@
 
 
                 <form action="/path/to/your/upload/handler" method="post" enctype="multipart/form-data"
-
                     class="needs-validation" novalidate>
 
                     <div class="modal-body">
@@ -1013,7 +864,6 @@
                     <button type="submit" class="btn btn-success p-3 border-0">Importer</button>
 
                     <button type="button" class="btn btn-annuler p-3 px-5 border-0"
-
                         data-bs-dismiss="modal">Annuler</button>
 
                 </div>
@@ -1026,22 +876,24 @@
 
     </div>
     <!-- Modal Structure -->
-<div id="myModaldelete" class="modal fade">
-                <div class="modal-dialog modal-dialog-centered ">
-                    <div class="modal-content text-center">
-                        <button type="button" class="custom-close-btn" data-bs-dismiss="modal" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
-                        <div  class="modal-body text-center d-flex flex-column" id="">
-                            <i class="fa-solid fa-triangle-exclamation" id="fa-triangle-exclamation"></i>                            
-                            <span>Êtes vous sûres ?</span>
-                        </div>
-                        <p>Voulez-vous supprimer l'enseignant <span id="nom_affiche"></span> ?</p>
-                        <div id="button" class="d-flex justify-content-around">
-                            <button type="submit" class="btn btn-success">Oui, je confirme</button>
-                            <button type="button"  class="btn btn-secondaire" data-bs-dismiss="modal" aria-invalid="false">Annuler</button>
-                        </div>
-                    </div>
+    <div id="myModaldelete" class="modal fade">
+        <div class="modal-dialog modal-dialog-centered ">
+            <div class="modal-content text-center">
+                <button type="button" class="custom-close-btn" data-bs-dismiss="modal" aria-label="Close"><i
+                        class="fa-solid fa-xmark"></i></button>
+                <div class="modal-body text-center d-flex flex-column" id="">
+                    <i class="fa-solid fa-triangle-exclamation" id="fa-triangle-exclamation"></i>
+                    <span>Êtes vous sûres ?</span>
                 </div>
+                <p>Voulez-vous supprimer l'enseignant <span id="nom_affiche"></span> ?</p>
+                <div id="button" class="d-flex justify-content-around">
+                    <button type="submit" class="btn btn-success">Oui, je confirme</button>
+                    <button type="button" class="btn btn-secondaire" data-bs-dismiss="modal"
+                        aria-invalid="false">Annuler</button>
                 </div>
+            </div>
+        </div>
+    </div>
 
 
 
@@ -1049,7 +901,6 @@
 
 
     <script>
-
         document.addEventListener('DOMContentLoaded', function() {
 
             // Définir la configuration pour ce fichier
@@ -1069,7 +920,6 @@
             paginateTable('#teacherTable');
 
         });
-
     </script>
 
 
@@ -1091,9 +941,7 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
@@ -1103,7 +951,6 @@
 
 
     <script>
-
         $(document).ready(function() {
 
             $('#classeselect2').select2({
@@ -1147,13 +994,11 @@
 
 
         });
-
     </script>
 
 
 
     <script>
-
         $(document).ready(function() {
 
             $.ajaxSetup({
@@ -1357,86 +1202,82 @@
             });
 
         });
-
     </script>
     <script>
-document.addEventListener("DOMContentLoaded", function() {
-    const modal = document.getElementById("enseignant");
-    const btns = document.querySelectorAll(".btn-ajouter");
-    const span = document.getElementsByClassName("close")[0];
-    // const overlay = document.getElementById("overlay");
-    const annulerBtn = document.getElementById("annulerBtn");
-    // const modals = document.getElementById("solid_distance");
+        document.addEventListener("DOMContentLoaded", function() {
+            const modal = document.getElementById("enseignant");
+            const btns = document.querySelectorAll(".btn-ajouter");
+            const span = document.getElementsByClassName("close")[0];
+            // const overlay = document.getElementById("overlay");
+            const annulerBtn = document.getElementById("annulerBtn");
+            // const modals = document.getElementById("solid_distance");
 
-    // Ouvrir le modal au clic sur les boutons ayant la classe "btn-ajouter"
-    btns.forEach(function(btn) {
-        btn.addEventListener("click", function() {
-            modal.style.display = "block";
-            modal.style.background = "rgb(18 18 18 / 70%)";
-            // overlay.style.display = "block"; // Affiche l'overlay
+            // Ouvrir le modal au clic sur les boutons ayant la classe "btn-ajouter"
+            btns.forEach(function(btn) {
+                btn.addEventListener("click", function() {
+                    modal.style.display = "block";
+                    modal.style.background = "rgb(18 18 18 / 70%)";
+                    // overlay.style.display = "block"; // Affiche l'overlay
+                });
+            });
+            // modals.forEach(function(btn) {
+            //     modal.addEventListener("click", function() {
+            //         modal.style.display = "block";
+            //         modal.style.background = "#c6c6c6";
+            //         // overlay.style.display = "block"; // Affiche l'overlay
+            //     });
+            // });
+
+            // Fermer le modal au clic sur le "x"
+            span.addEventListener("click", closeModal);
+
+            // Fermer le modal au clic sur le bouton "Annuler"
+            annulerBtn.addEventListener("click", closeModal);
+
+            // Fermer le modal au clic en dehors de celui-ci ou sur l'overlay
+            window.addEventListener("click", function(event) {
+                if (event.target === modal || event.target === overlay) {
+                    closeModal();
+                }
+            });
+
+            function closeModal() {
+                modal.style.display = "none"; // Masque le modal
+                // overlay.style.display = "none"; // Masque l'overlay
+            }
         });
-    });
-    // modals.forEach(function(btn) {
-    //     modal.addEventListener("click", function() {
-    //         modal.style.display = "block";
-    //         modal.style.background = "#c6c6c6";
-    //         // overlay.style.display = "block"; // Affiche l'overlay
-    //     });
-    // });
 
-    // Fermer le modal au clic sur le "x"
-    span.addEventListener("click", closeModal);
+        document.addEventListener("DOMContentLoaded", function() {
+            const modal1 = document.getElementById("myModaldelete");
+            const btns1 = document.querySelectorAll(".solid_distances");
+            const span1 = document.getElementsByClassName("close")[0];
+            // const overlay = document.getElementById("overlay");
+            const annulerBtn1 = document.getElementById("btn_secondaire");
+            // const modals = document.getElementById("solid_distance");
 
-    // Fermer le modal au clic sur le bouton "Annuler"
-    annulerBtn.addEventListener("click", closeModal);
+            btns1.forEach(function(btn) {
+                btn.addEventListener("click", function() {
+                    modal1.style.display = "block";
+                    modal1.style.background = "rgb(18 18 18 / 70%)";
+                });
+            });
 
-    // Fermer le modal au clic en dehors de celui-ci ou sur l'overlay
-    window.addEventListener("click", function(event) {
-        if (event.target === modal || event.target === overlay) {
-            closeModal();
-        }
-    });
+            span1.addEventListener("click", closeModal1);
 
-    function closeModal() {
-        modal.style.display = "none"; // Masque le modal
-        // overlay.style.display = "none"; // Masque l'overlay
-    }
-});
+            annulerBtn1.addEventListener("click", closeModal1);
 
-document.addEventListener("DOMContentLoaded", function() {
-    const modal1 = document.getElementById("myModaldelete");
-    const btns1 = document.querySelectorAll(".solid_distances");
-    const span1 = document.getElementsByClassName("close")[0];
-    // const overlay = document.getElementById("overlay");
-    const annulerBtn1 = document.getElementById("btn_secondaire");
-    // const modals = document.getElementById("solid_distance");
+            window.addEventListener("click", function(event) {
+                if (event.target === modal || event.target === overlay) {
+                    closeModal1();
+                }
+            });
 
-    btns1.forEach(function(btn) {
-        btn.addEventListener("click", function() {
-            modal1.style.display = "block";
-            modal1.style.background = "rgb(18 18 18 / 70%)";
+            function closeModal1() {
+                modal1.style.display = "none"; // Masque le modal
+            }
         });
-    });
-
-    span1.addEventListener("click", closeModal1);
-
-    annulerBtn1.addEventListener("click", closeModal1);
-
-    window.addEventListener("click", function(event) {
-        if (event.target === modal || event.target === overlay) {
-            closeModal1();
-        }
-    });
-
-    function closeModal1() {
-        modal1.style.display = "none"; // Masque le modal
-    }
-});
-
-
-
     </script>
-<script>
+    <script>
         document.addEventListener('DOMContentLoaded', function() {
             const solidDistancesElements = document.querySelectorAll('.solid_distances');
 
@@ -1444,157 +1285,159 @@ document.addEventListener("DOMContentLoaded", function() {
                 element.addEventListener('click', function() {
                     const nomCell = this.closest('tr').querySelector('td[data-label="Nom"]');
                     const nomCells = this.closest('tr').querySelector('td[data-label="Prenom"]');
-                    
+
                     const nomText = nomCell.textContent.trim() + ' ' + nomCells.textContent.trim();
 
                     const nomAfficheElement = document.querySelector('#nom_affiche');
                     nomAfficheElement.textContent = nomText;
-                    nomAfficheElement.style.textTransform='capitalize';
-                    nomAfficheElement.style.color='#293d7a';
-                    nomAfficheElement.style.fontWeight='bold';
+                    nomAfficheElement.style.textTransform = 'capitalize';
+                    nomAfficheElement.style.color = '#293d7a';
+                    nomAfficheElement.style.fontWeight = 'bold';
                 });
             });
         });
-</script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const solidDistancesElementprofesseur = document.querySelectorAll('.btn-ajouter');
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const solidDistancesElementprofesseur = document.querySelectorAll('.btn-ajouter');
 
-    solidDistancesElementprofesseur.forEach(function(elements) {
-        elements.addEventListener('click', function() {
-            const rows = this.closest('tr');
-            const nomCellsprofesseur = [
-                rows.querySelector('td[data-label="Nom"]'),
-                rows.querySelector('td[data-label="Prenom"]'),
-                rows.querySelector('td[data-label="Email"]'),
-                rows.querySelector('td[data-label="Contact"]'),
-                rows.querySelector('td[data-label="Matière"]')
-                // rows.querySelector('td[data-label="Classes"]') // Uncomment if needed
-            ];
+            solidDistancesElementprofesseur.forEach(function(elements) {
+                elements.addEventListener('click', function() {
+                    const rows = this.closest('tr');
+                    const nomCellsprofesseur = [
+                        rows.querySelector('td[data-label="Nom"]'),
+                        rows.querySelector('td[data-label="Prenom"]'),
+                        rows.querySelector('td[data-label="Email"]'),
+                        rows.querySelector('td[data-label="Contact"]'),
+                        rows.querySelector('td[data-label="Matière"]')
+                        // rows.querySelector('td[data-label="Classes"]') // Uncomment if needed
+                    ];
 
-            const nomTextsprofesseur = nomCellsprofesseur.map(cell => cell ? cell.textContent.trim() : '');
+                    const nomTextsprofesseur = nomCellsprofesseur.map(cell => cell ? cell
+                        .textContent.trim() : '');
 
-            const displayElementsprofesseur = [
-                document.querySelector('#firstName'),
-                document.querySelector('#lastName'),
-                document.querySelector('#email'),
-                document.querySelector('#contact'),
-                document.querySelector('#matiereselect3'),
-                // document.querySelector('#classe_id[]') // Uncomment if needed
-            ];
+                    const displayElementsprofesseur = [
+                        document.querySelector('#firstName'),
+                        document.querySelector('#lastName'),
+                        document.querySelector('#email'),
+                        document.querySelector('#contact'),
+                        document.querySelector('#matiereselect3'),
+                        // document.querySelector('#classe_id[]') // Uncomment if needed
+                    ];
 
-            // Réinitialisation des valeurs des inputs à un texte vide
-            displayElementsprofesseur.forEach(el => {
-                if (el) {
-                    el.value = ''; // Réinitialiser à une chaîne vide
-                    el.style.textTransform = 'capitalize'; // Cette propriété n'affecte pas les inputs
-                    el.style.color = '#293d7a';
-                    el.style.fontWeight = 'bold';
-                }
-            });
+                    // Réinitialisation des valeurs des inputs à un texte vide
+                    displayElementsprofesseur.forEach(el => {
+                        if (el) {
+                            el.value = ''; // Réinitialiser à une chaîne vide
+                            el.style.textTransform =
+                            'capitalize'; // Cette propriété n'affecte pas les inputs
+                            el.style.color = '#293d7a';
+                            el.style.fontWeight = 'bold';
+                        }
+                    });
 
-            // Remplir les champs avec les valeurs récupérées
-            displayElementsprofesseur.forEach((el, index) => {
-                if (el) {
-                    el.value = nomTextsprofesseur[index]; // Utiliser 'value' pour les champs d'entrée
-                }
-            });
+                    // Remplir les champs avec les valeurs récupérées
+                    displayElementsprofesseur.forEach((el, index) => {
+                        if (el) {
+                            el.value = nomTextsprofesseur[
+                            index]; // Utiliser 'value' pour les champs d'entrée
+                        }
+                    });
 
-            // Sélectionner l'option correspondante dans le select pour la classe
-            const classeSelect = document.querySelector('#classe_id');
-            const classeText = nomTextsprofesseur[4]; // Assurez-vous que c'est le bon index pour la classe
+                    // Sélectionner l'option correspondante dans le select pour la classe
+                    const classeSelect = document.querySelector('#classe_id');
+                    const classeText = nomTextsprofesseur[
+                    4]; // Assurez-vous que c'est le bon index pour la classe
 
-            if (classeSelect) {
-                // Parcourir les options et sélectionner celle qui correspond
-                for (let option of classeSelect.options) {
-                    if (option.text === classeText) {
-                        option.selected = true;
-                        break; // Sortir de la boucle une fois que l'option est trouvée
+                    if (classeSelect) {
+                        // Parcourir les options et sélectionner celle qui correspond
+                        for (let option of classeSelect.options) {
+                            if (option.text === classeText) {
+                                option.selected = true;
+                                break; // Sortir de la boucle une fois que l'option est trouvée
+                            }
+                        }
                     }
-                }
-            }
+                });
+            });
         });
-    });
-});
 
 
 
-document.addEventListener('DOMContentLoaded', function() {
-    const solidDistancesElement = document.querySelectorAll('.solid_distance');
+        document.addEventListener('DOMContentLoaded', function() {
+            const solidDistancesElement = document.querySelectorAll('.solid_distance');
 
-    solidDistancesElement.forEach(function(element) {
-        element.addEventListener('click', function() {
-            const row = this.closest('tr');
-            const nomCells = [
-                row.querySelector('td[data-label="Nom"]'),
-                row.querySelector('td[data-label="Prenom"]'),
-                row.querySelector('td[data-label="Email"]'),
-                row.querySelector('td[data-label="Contact"]'),
-                row.querySelector('td[data-label="Matière"]'),
-                row.querySelector('td[data-label="Classes"]') // Assurez-vous que c'est correct
-            ];
+            solidDistancesElement.forEach(function(element) {
+                element.addEventListener('click', function() {
+                    const row = this.closest('tr');
+                    const nomCells = [
+                        row.querySelector('td[data-label="Nom"]'),
+                        row.querySelector('td[data-label="Prenom"]'),
+                        row.querySelector('td[data-label="Email"]'),
+                        row.querySelector('td[data-label="Contact"]'),
+                        row.querySelector('td[data-label="Matière"]'),
+                        row.querySelector(
+                        'td[data-label="Classes"]') // Assurez-vous que c'est correct
+                    ];
 
-            const nomTexts = nomCells.map(cell => cell ? cell.textContent.trim() : '');
+                    const nomTexts = nomCells.map(cell => cell ? cell.textContent.trim() : '');
 
-            const displayElements = [
-                document.querySelector('#firstName'),
-                document.querySelector('#lastName'),
-                document.querySelector('#email'),
-                document.querySelector('#contact'),
-                document.querySelector('#matiereselect3'), // Matière
-                document.querySelector('#classeselect3') // Classe
-            ];
+                    const displayElements = [
+                        document.querySelector('#firstName'),
+                        document.querySelector('#lastName'),
+                        document.querySelector('#email'),
+                        document.querySelector('#contact'),
+                        document.querySelector('#matiereselect3'), // Matière
+                        document.querySelector('#classeselect3') // Classe
+                    ];
 
-            displayElements.forEach((el, index) => {
-                if (el) {
-                    el.value = nomTexts[index]; // Utiliser 'value' pour les champs d'entrée
-                    el.style.textTransform = 'capitalize'; // Cette propriété n'affecte pas les inputs
-                    el.style.color = '#293d7a';
-                    el.style.fontWeight = 'bold';
-                }
+                    displayElements.forEach((el, index) => {
+                        if (el) {
+                            el.value = nomTexts[
+                            index]; // Utiliser 'value' pour les champs d'entrée
+                            el.style.textTransform =
+                            'capitalize'; // Cette propriété n'affecte pas les inputs
+                            el.style.color = '#293d7a';
+                            el.style.fontWeight = 'bold';
+                        }
+                    });
+
+                    // Sélectionner l'option correspondante dans le select pour la matière
+                    const matiereSelect = document.querySelector('#matiereselect3');
+                    const matiereText = nomTexts[4]; // Récupérer le texte de la matière
+
+                    if (matiereSelect) {
+                        for (let option of matiereSelect.options) {
+                            if (option.text === matiereText) {
+                                option.selected = true;
+                                break; // Sortir de la boucle une fois que l'option est trouvée
+                            }
+                        }
+                        // Mettre à jour le champ de recherche Select2 pour la matière
+                        $(matiereSelect).trigger('change'); // Déclenche le changement pour Select2
+                    }
+
+                    // Sélectionner l'option correspondante dans le select pour la classe
+                    const classeSelect = document.querySelector('#classeselect3');
+                    const classeText = nomTexts[5]; // Récupérer le texte de la classe
+
+                    if (classeSelect) {
+                        for (let option of classeSelect.options) {
+                            if (option.text === classeText) {
+                                option.selected = true;
+                                break; // Sortir de la boucle une fois que l'option est trouvée
+                            }
+                        }
+                        // Mettre à jour le champ de recherche Select2 pour la classe
+                        $(classeSelect).trigger('change'); // Déclenche le changement pour Select2
+                    }
+                });
             });
-
-            // Sélectionner l'option correspondante dans le select pour la matière
-            const matiereSelect = document.querySelector('#matiereselect3');
-            const matiereText = nomTexts[4]; // Récupérer le texte de la matière
-
-            if (matiereSelect) {
-                for (let option of matiereSelect.options) {
-                    if (option.text === matiereText) {
-                        option.selected = true;
-                        break; // Sortir de la boucle une fois que l'option est trouvée
-                    }
-                }
-                // Mettre à jour le champ de recherche Select2 pour la matière
-                $(matiereSelect).trigger('change'); // Déclenche le changement pour Select2
-            }
-
-            // Sélectionner l'option correspondante dans le select pour la classe
-            const classeSelect = document.querySelector('#classeselect3');
-            const classeText = nomTexts[5]; // Récupérer le texte de la classe
-
-            if (classeSelect) {
-                for (let option of classeSelect.options) {
-                    if (option.text === classeText) {
-                        option.selected = true;
-                        break; // Sortir de la boucle une fois que l'option est trouvée
-                    }
-                }
-                // Mettre à jour le champ de recherche Select2 pour la classe
-                $(classeSelect).trigger('change'); // Déclenche le changement pour Select2
-            }
         });
-    });
-});
-
-
-</script>
-<script>
-
-</script>
+    </script>
+    <script></script>
 </body>
 
 
 
 </html>
-

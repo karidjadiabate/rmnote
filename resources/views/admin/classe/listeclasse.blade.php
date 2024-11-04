@@ -28,7 +28,7 @@
 
 
 <body>
-     <!-- header -->
+    <!-- header -->
     @include('admin.include.menu')
     <!-- accueil -->
     <div class="container printableArea principal">
@@ -170,7 +170,9 @@
                                 aria-labelledby="editFiliereLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content ">
-                                        <button type="button" class="custom-close-btn" data-bs-dismiss="modal" aria-label="Close"><i class="fa-solid fa-xmark"></i> <!-- Font Awesome close icon --></button>
+                                        <button type="button" class="custom-close-btn" data-bs-dismiss="modal"
+                                            aria-label="Close"><i class="fa-solid fa-xmark"></i>
+                                            <!-- Font Awesome close icon --></button>
                                         <!-- <h1 class="text-center">Modifier</h1> -->
                                         <form action="{{ route('classe.update', $classe->id) }}" method="POST"
                                             class="needs-validation" novalidate>
@@ -196,7 +198,7 @@
                                                             @foreach ($listefilieres as $filiere)
                                                                 <option value="{{ $filiere->filiere_id }}"
                                                                     {{ $filiere->filiere_id == $classe->etablissement_filiere_id ? 'selected' : '' }}>
-                                                                    {{ $filiere->nomfiliere ?? $filiere->nomfilieretablissement}}
+                                                                    {{ $filiere->nomfiliere ?? $filiere->nomfilieretablissement }}
                                                                 </option>
                                                             @endforeach
                                                         </select>
@@ -207,13 +209,14 @@
 
                                                     <!-- Sélection des niveaux -->
                                                     <div class="col-sm-6">
-                                                        <select name="niveau_id" id="niveaux" class="form-control"required>
-                                                                @foreach ($niveaux as $niveau)
-                                                                    <option value="{{ $niveau->id }}"
-                                                                        {{ $niveau->id == $classe->niveau_id ? 'selected' : '' }}>
-                                                                        {{ $niveau->code }}
-                                                                    </option>
-                                                                @endforeach
+                                                        <select name="niveau_id" id="niveaux"
+                                                            class="form-control"required>
+                                                            @foreach ($niveaux as $niveau)
+                                                                <option value="{{ $niveau->id }}"
+                                                                    {{ $niveau->id == $classe->niveau_id ? 'selected' : '' }}>
+                                                                    {{ $niveau->code }}
+                                                                </option>
+                                                            @endforeach
                                                         </select>
                                                         <div class="invalid-feedback">
                                                             Le niveau est requis.
@@ -250,17 +253,21 @@
                                 aria-labelledby="deleteclasseLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content text-center">
-                                        <button type="button" class="custom-close-btn" data-bs-dismiss="modal" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
-                                        <div  class="modal-body text-center d-flex flex-column" id="">
-                                            <i class="fa-solid fa-triangle-exclamation" id="fa-triangle-exclamation"></i>                            
+                                        <button type="button" class="custom-close-btn" data-bs-dismiss="modal"
+                                            aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+                                        <div class="modal-body text-center d-flex flex-column" id="">
+                                            <i class="fa-solid fa-triangle-exclamation"
+                                                id="fa-triangle-exclamation"></i>
                                             <span>Êtes vous sûres ?</span>
                                         </div>
-                                        <p>Voulez-vous supprimer la classe <strong><span id="nom_affiche"></span></strong> ?</p>
+                                        <p>Voulez-vous supprimer la classe <strong><span
+                                                    id="nom_affiche"></span></strong> ?</p>
                                         <div class="d-flex justify-content-around">
                                             <form action="{{ route('classe.destroy', $classe->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-success marge">Supprimer</button>
+                                                <button type="submit"
+                                                    class="btn btn-success marge">Supprimer</button>
                                             </form>
                                             <button type="button" class="btn btn-secondaire"
                                                 data-bs-dismiss="modal">Annuler</button>
@@ -288,9 +295,9 @@
                     de
                 </div>
                 <div class="pagination-buttons">
-                    <button class="btn prev">‹</button>
+                    <button class="btn prev"><i class="fa-solid fa-chevron-left"></i></button>
                     <button class="btn active">1</button>
-                    <button class="btn next">›</button>
+                    <button class="btn next"><i class="fa-solid fa-chevron-right"></i></button>
                     <span id="nbr">sur 2</span>
                 </div>
             </div><br>
@@ -357,7 +364,8 @@
                         </div>
                         <div class="modal-footer d-flex justify-content-between">
                             <button type="submit" class="btn btn-success">Sauvegarder</button>
-                            <button type="button" class="btn btn-secondaire" data-bs-dismiss="modal">Annuler</button>
+                            <button type="button" class="btn btn-secondaire"
+                                data-bs-dismiss="modal">Annuler</button>
                         </div>
                     </form>
                 </div>
@@ -367,9 +375,9 @@
         </div>
     </div>
     <!--  -->
-            <!-- Footer -->
+    <!-- Footer -->
 
-            @include('admin.include.footer')
+    @include('admin.include.footer')
 
     <!-- importer -->
     <div class="modal fade" id="importModal" tabindex="-1" aria-labelledby="importModalLabel" aria-hidden="true">
@@ -449,19 +457,18 @@
             solidDistancesElements.forEach(function(element) {
                 element.addEventListener('click', function() {
                     const nomCell = this.closest('tr').querySelector('td[data-label="Nom"]');
-                    
+
                     const nomText = nomCell.textContent.trim();
 
                     const nomAfficheElement = document.querySelector('#nom_affiche');
                     nomAfficheElement.textContent = nomText;
-                    nomAfficheElement.style.textTransform='capitalize';
-                    nomAfficheElement.style.color='#293d7a';
-                    nomAfficheElement.style.fontWeight='bold';
+                    nomAfficheElement.style.textTransform = 'capitalize';
+                    nomAfficheElement.style.color = '#293d7a';
+                    nomAfficheElement.style.fontWeight = 'bold';
                 });
             });
         });
-
-</script>
+    </script>
 </body>
 
 </html>
