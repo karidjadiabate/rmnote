@@ -46,11 +46,11 @@
 <section class="head-content">
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex justify-content-center align-items-center mt-5">
-      
+
      <div class="col-md-12 d-flex justify-content-around align-items-center">
-          
+
     <div class="row col-md-12 d-flex justify-content-around align-items-center">
-         
+
     <div class="col-md-6 text-head d-flex justify-content-end">
       <div class="text-car w-75 d-flex align-items-center justify-content-start text-start flex-column">
         <h1 class="title-head w-100">Découvrez <span class="navbar-title">ROM</span>Note,</h1>
@@ -64,13 +64,13 @@
         </form>
       </div>
     </div>
-    
+
     <div id="heroCarousel" class="col-md-6">
-        
+
       <span class="circle"></span>
-      
+
         <div class="owlcarousel  position-relative">
-            
+
               <!-- Slide 1 -->
         <div class="item active item1" data-slide-item="0" style="margin-top:11rem">
           <div class="carousel-container">
@@ -91,17 +91,17 @@
             <p class="animated fadeInUp"><img src="{{ asset('assets/img/scanner-final-en-GIF-compresser.gif') }}" height="450" width="auto" alt="Imprimante" srcset="" class="imprimante_class"></p>
           </div>
         </div>
-        
+
       </div>
-      
+
        <ol class="carousel-indicators col-md-12  justify-content-center d-none">
          <li data-target="#customCarousel1" data-slide-to="0" class="active"></li>
          <li data-target="#customCarousel1" data-slide-to="1"></li>
          <li data-target="#customCarousel1" data-slide-to="2"></li>
       </ol>
-      
+
   </div>
-  </div>         
+  </div>
 </div>
 
   </section><!-- End Hero -->
@@ -115,7 +115,7 @@
       <div class="container  d-flex align-items-center justify-content-center">
           <div class="row col-md-12 feature-row">
             <div class="col-md-12 d-flex align-items-center justify-content-center mb-5 mt-3"><h2 class="feature-title">AKP ROM Note en bref</h2></div>
-            
+
             <div class="row mb-2 mt-4">
               <div class="col-6 col-sm-6 col-md-4 text-center mb-5">
                 <img src="{{ asset('assets/img/securite.png') }}" alt="Sécurisation des evaluations">
@@ -181,24 +181,24 @@
             <div class="col-12 col-sm-6 col-md-2 mb-4 d-flex align-items-center justify-content-center">
                 <img src="{{ asset('assets/img/universite/Loko.png') }}" alt="Logo 10">
             </div>
-            
+
             <div class="col-12 col-sm-6 mb-4 d-flex align-items-center justify-content-center">
                 <img src="{{ asset('assets/img/universite/Logo.png') }}" alt="Logo 7">
             </div>
-     
+
             <div class="col-12 col-sm-6 col-md-2 mb-4 d-flex align-items-center justify-content-center">
                 <img src="{{ asset('assets/img/universite/UCAO.UUA_.png') }}" alt="Logo 9">
             </div>
             <div class="col-12 col-sm-6 col-md-3 mb-4 d-flex align-items-center justify-content-center">
                 <img src="{{ asset('assets/img/universite/esatic.png') }}" height="100" width="auto" alt="Logo 1">
             </div>
-    
+
             <div class="col-12 col-sm-6 col-md-2 mb-4 d-flex align-items-center">
                 <img src="{{ asset('assets/img/universite/inphb.png') }}" alt="Logo 3" class="img-fluid">
             </div>
             </div>
           </div>
-          
+
         </section><!-- End Features Section -->
 
   </main><!-- End #main -->
@@ -291,9 +291,9 @@
           <div class="form-group col-md-11 d-flex justify-content-center">
             <input type="text" name="nometablissement" class="form-control margin-text" id="nometablissement" aria-describedby="emailHelp" placeholder="Entrez votre établissement" required>
           </div>
-          <!-- <div class="form-group">
-            <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Entez votre email" required>
-          </div> -->
+          <div class="form-group col-md-11 d-flex justify-content-center">
+            <input type="email" name="email" class="form-control margin-text" id="email" aria-describedby="emailHelp" placeholder="Entez votre email" required>
+          </div>
           <div class="form-group col-md-11 d-flex justify-content-center">
             <input type="text" name="numerotel" class="form-control margin-text" id="numerotel" aria-describedby="emailHelp" placeholder="Entrez votre numéro de telephone" required>
           </div>

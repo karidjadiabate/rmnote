@@ -90,7 +90,6 @@ class DemoController extends Controller
             'nometablissement' => $demande->nometablissement,
             'contact' => $demande->numerotel,
             'adresse' => $demande->adresseetablissement,
-            'email' => $demande->email,
             'logo' => null,
         ];
 
