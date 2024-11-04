@@ -32,7 +32,6 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
     <script src="{{ asset('frontend/dashboard/js/list.js') }}"></script>
 
@@ -743,7 +742,7 @@
 
                                 <select name="role_id" id="role_id" class="form-control rounded-0">
 
-                                    <option value="2">Rôle</option>
+                                    <option value="2">Professeur</option>
 
                                 </select>
 
@@ -932,7 +931,6 @@
 
     <!-- Bootstrap JS -->
 
-    <script src="../js/list.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
@@ -981,7 +979,7 @@
 
 
 
-            $('#matiereselect3').select2({
+            $('.matiereprof').select2({
 
                 placeholder: "Matière",
 

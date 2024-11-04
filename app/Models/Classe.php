@@ -54,6 +54,7 @@ class Classe extends Model
             ->groupBy('c.id', 'f.nomfiliere', 'c.code', 'c.nomclasse', 'c.nbclasse', 'c.niveau_id', 'etablissement_filiere_id', 'ef.filiere_id', 'n.code')
             ->get();
 
+
         return $listeclasse;
     }
 

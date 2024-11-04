@@ -16,8 +16,6 @@
     <link rel="stylesheet" href="{{ asset('frontend/dashboard/html/admin.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/dashboard/css/parametre.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/dashboard/css/lists.css') }}">
-    <link rel="icon" href="{{ asset('assets/img/FaviconROMNOTE.png') }}" type="image/png">
-
 </head>
 
 <body>
@@ -85,17 +83,70 @@
                     <span>Gérer les paramètres de l'apparence de l'interface</span>
                 </div>
                 <div id="theme_application" class="stack">
-                    <div id="theme_defaut">
+                    <div id="theme_clair">
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                            width="550.211" height="317.041" viewBox="0 0 683.211 317.041" class="fa-sun1">
+                            width="350.5" height="317.424" viewBox="0 0 401.5 317.424" class="fa-sun1">
                             <defs>
                                 <clipPath id="clip-path">
                                     <rect id="Rectangle_205" data-name="Rectangle 205" width="400.064" height="316.896"
                                         fill="none" />
                                 </clipPath>
                             </defs>
-                            <g id="Thème_système" data-name="Thème système"
-                                transform="translate(0.25 0.145)"class="fa-sun1">
+                            <g id="Thème_défaut" data-name="Thème défaut" transform="translate(0.722 0.528)">
+                                <g id="Groupe_333" data-name="Groupe 333">
+                                    <rect id="Rectangle_216" data-name="Rectangle 216" width="401" height="306"
+                                        transform="translate(-0.472 -0.278)" fill="#fff" stroke="#4a41c5"
+                                        stroke-width="0.5" />
+                                    <g id="Groupe_330" data-name="Groupe 330" transform="translate(0.297 0)">
+                                        <g id="Groupe_329" data-name="Groupe 329" clip-path="url(#clip-path)">
+                                            <rect id="Rectangle_204" data-name="Rectangle 204" width="494.382"
+                                                height="74.842" transform="translate(-43.724 -47.632)"
+                                                fill="#4a41c5" />
+                                        </g>
+                                    </g>
+                                    <g id="Groupe_332" data-name="Groupe 332" transform="translate(161.101 9)">
+                                        <path id="Tracé_501" data-name="Tracé 501"
+                                            d="M419.059,85.141a5.01,5.01,0,1,1-5.01-5.01,5.011,5.011,0,0,1,5.01,5.01"
+                                            transform="translate(-195.92 -80.13)" fill="#9abdeb" />
+                                        <path id="Tracé_502" data-name="Tracé 502"
+                                            d="M417.167,90.151H219.258a5.01,5.01,0,1,1,0-10.021h197.91a5.01,5.01,0,0,1,0,10.021"
+                                            transform="translate(-214.247 -80.13)" fill="#fff" />
+                                        <rect id="Rectangle_206" data-name="Rectangle 206" width="189.596"
+                                            height="9.077" transform="translate(29.584 39.483)" fill="#d9e0fb" />
+                                        <rect id="Rectangle_207" data-name="Rectangle 207" width="189.596"
+                                            height="9.077" transform="translate(29.584 57.132)" fill="#d9e0fb" />
+                                        <rect id="Rectangle_208" data-name="Rectangle 208" width="189.596"
+                                            height="9.077" transform="translate(29.584 74.781)" fill="#d9e0fb" />
+                                        <rect id="Rectangle_209" data-name="Rectangle 209" width="136.532"
+                                            height="9.077" transform="translate(29.584 107.056)" fill="#d9e0fb" />
+                                        <rect id="Rectangle_210" data-name="Rectangle 210" width="189.596"
+                                            height="9.077" transform="translate(29.584 139.828)" fill="#d9e0fb" />
+                                        <rect id="Rectangle_211" data-name="Rectangle 211" width="77.15"
+                                            height="9.077" transform="translate(29.584 124.196)" fill="#d9e0fb" />
+                                        <rect id="Rectangle_212" data-name="Rectangle 212" width="71.176"
+                                            height="5.213" transform="translate(29.584 236.133)" fill="#d9e0fb" />
+                                        <rect id="Rectangle_213" data-name="Rectangle 213" width="71.176"
+                                            height="5.213" transform="translate(29.584 246.235)" fill="#d9e0fb" />
+                                        <rect id="Rectangle_214" data-name="Rectangle 214" width="71.176"
+                                            height="5.213" transform="translate(29.584 256.337)" fill="#d9e0fb" />
+                                        <rect id="Rectangle_215" data-name="Rectangle 215" width="37.026"
+                                            height="5.213" transform="translate(29.584 266.44)" fill="#d9e0fb" />
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                        <span>Thème clair</span>
+                    </div>
+                    <div id="theme_defaut">
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                            width="550.211" height="317.041" viewBox="0 0 683.211 317.041" class="fa-sun1">
+                            <defs>
+                                <clipPath id="clip-path">
+                                    <rect id="Rectangle_205" data-name="Rectangle 205" width="400.064"
+                                        height="316.896" fill="none" />
+                                </clipPath>
+                            </defs>
+                            <g id="Thème_système" data-name="Thème système" transform="translate(0.25 0.145)"class="fa-sun1">
                                 <g id="Groupe_337" data-name="Groupe 337">
                                     <g id="Groupe_333" data-name="Groupe 333" transform="translate(0)">
                                         <rect id="Rectangle_216" data-name="Rectangle 216" width="400.436"
@@ -144,8 +195,7 @@
                                         </g>
                                     </g>
                                 </g>
-                                <g id="Groupe_336" data-name="Groupe 336"
-                                    transform="translate(282.275)"class="fa-sun1">
+                                <g id="Groupe_336" data-name="Groupe 336" transform="translate(282.275)"class="fa-sun1">
                                     <g id="Groupe_333-2" data-name="Groupe 333" transform="translate(0)">
                                         <rect id="Rectangle_216-2" data-name="Rectangle 216" width="400.436"
                                             height="305.25" transform="translate(0 0.105)" fill="#050043"
@@ -195,60 +245,6 @@
                             </g>
                         </svg>
                         <span>Thème par défaut du système</span>
-                    </div>
-                    <div id="theme_clair">
-                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                            width="350.5" height="317.424" viewBox="0 0 401.5 317.424" class="fa-sun1">
-                            <defs>
-                                <clipPath id="clip-path">
-                                    <rect id="Rectangle_205" data-name="Rectangle 205" width="400.064"
-                                        height="316.896" fill="none" />
-                                </clipPath>
-                            </defs>
-                            <g id="Thème_défaut" data-name="Thème défaut" transform="translate(0.722 0.528)">
-                                <g id="Groupe_333" data-name="Groupe 333">
-                                    <rect id="Rectangle_216" data-name="Rectangle 216" width="401" height="306"
-                                        transform="translate(-0.472 -0.278)" fill="#fff" stroke="#4a41c5"
-                                        stroke-width="0.5" />
-                                    <g id="Groupe_330" data-name="Groupe 330" transform="translate(0.297 0)">
-                                        <g id="Groupe_329" data-name="Groupe 329" clip-path="url(#clip-path)">
-                                            <rect id="Rectangle_204" data-name="Rectangle 204" width="494.382"
-                                                height="74.842" transform="translate(-43.724 -47.632)"
-                                                fill="#4a41c5" />
-                                        </g>
-                                    </g>
-                                    <g id="Groupe_332" data-name="Groupe 332" transform="translate(161.101 9)">
-                                        <path id="Tracé_501" data-name="Tracé 501"
-                                            d="M419.059,85.141a5.01,5.01,0,1,1-5.01-5.01,5.011,5.011,0,0,1,5.01,5.01"
-                                            transform="translate(-195.92 -80.13)" fill="#9abdeb" />
-                                        <path id="Tracé_502" data-name="Tracé 502"
-                                            d="M417.167,90.151H219.258a5.01,5.01,0,1,1,0-10.021h197.91a5.01,5.01,0,0,1,0,10.021"
-                                            transform="translate(-214.247 -80.13)" fill="#fff" />
-                                        <rect id="Rectangle_206" data-name="Rectangle 206" width="189.596"
-                                            height="9.077" transform="translate(29.584 39.483)" fill="#d9e0fb" />
-                                        <rect id="Rectangle_207" data-name="Rectangle 207" width="189.596"
-                                            height="9.077" transform="translate(29.584 57.132)" fill="#d9e0fb" />
-                                        <rect id="Rectangle_208" data-name="Rectangle 208" width="189.596"
-                                            height="9.077" transform="translate(29.584 74.781)" fill="#d9e0fb" />
-                                        <rect id="Rectangle_209" data-name="Rectangle 209" width="136.532"
-                                            height="9.077" transform="translate(29.584 107.056)" fill="#d9e0fb" />
-                                        <rect id="Rectangle_210" data-name="Rectangle 210" width="189.596"
-                                            height="9.077" transform="translate(29.584 139.828)" fill="#d9e0fb" />
-                                        <rect id="Rectangle_211" data-name="Rectangle 211" width="77.15"
-                                            height="9.077" transform="translate(29.584 124.196)" fill="#d9e0fb" />
-                                        <rect id="Rectangle_212" data-name="Rectangle 212" width="71.176"
-                                            height="5.213" transform="translate(29.584 236.133)" fill="#d9e0fb" />
-                                        <rect id="Rectangle_213" data-name="Rectangle 213" width="71.176"
-                                            height="5.213" transform="translate(29.584 246.235)" fill="#d9e0fb" />
-                                        <rect id="Rectangle_214" data-name="Rectangle 214" width="71.176"
-                                            height="5.213" transform="translate(29.584 256.337)" fill="#d9e0fb" />
-                                        <rect id="Rectangle_215" data-name="Rectangle 215" width="37.026"
-                                            height="5.213" transform="translate(29.584 266.44)" fill="#d9e0fb" />
-                                    </g>
-                                </g>
-                            </g>
-                        </svg>
-                        <span>Thème clair</span>
                     </div>
                     <div id="theme_sombre">
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -627,7 +623,7 @@
                                             <i class="fa-solid fa-toggle-on red-color" id="red_color7"></i>
                                         </div>
                                     </div>
-                                    <!-- <div class="stacks">
+                                    <div class="stacks">
                                         <label for="">Créer un dossier</label>
                                         <div class="checkbox-container">
                                             <input type="checkbox" name="">
@@ -638,7 +634,7 @@
                                         <div class="checkbox-container">
                                             <input type="checkbox" name="">
                                         </div>
-                                    </div> -->
+                                    </div>
                                     <div class="stacks">
                                         <label for="">Imprimer</label>
                                         <div class="checkbox-container">
@@ -731,44 +727,37 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td data-label="Id">0001</td>
-                            <td data-label="Nom" class="data2">ADMINISTRATEUR</td>
-                            <td data-label="Utilisateur">01</td>
-                            <td data-label="Action"><span class="solid_distance"><i
-                                        class="fa-solid fa-pen"></i></span><span class="solid_distances"
-                                    data-bs-toggle="modal" data-bs-target="#myModaldelete"><i
-                                        class="fa-solid fa-trash-can"></i></span></td>
-                        </tr>
-                        <tr>
-                            <td data-label="Id">0002</td>
-                            <td data-label="Nom" class="data2">PROFESSEUR</td>
-                            <td data-label="Utilisateur">50</td>
-                            <td data-label="Action"><span class="solid_distance"><i
-                                        class="fa-solid fa-pen"></i></span><span class="solid_distances"
-                                    data-bs-toggle="modal" data-bs-target="#myModaldelete"><i
-                                        class="fa-solid fa-trash-can"></i></span></td>
-                        </tr>
-                        <tr>
-                            <td data-label="Id">0003</td>
-                            <td data-label="Nom" class="data2">SURVEILLANT</td>
-                            <td data-label="Utilisateur">10</td>
-                            <td data-label="Action"><span class="solid_distance"><i
-                                        class="fa-solid fa-pen"></i></span><span class="solid_distances"
-                                    data-bs-toggle="modal" data-bs-target="#myModaldelete"><i
-                                        class="fa-solid fa-trash-can"></i></span></td>
-                        </tr>
-                        <tr>
-                            <td data-label="Id">0004</td>
-                            <td data-label="Nom" class="data2">CORRECTEUR</td>
-                            <td data-label="Utilisateur">8</td>
-                            <td data-label="Action"><span class="solid_distance"><i
-                                        class="fa-solid fa-pen"></i></span><span class="solid_distances"
-                                    data-bs-toggle="modal" data-bs-target="#myModaldelete"><i
-                                        class="fa-solid fa-trash-can"></i></span></td>
-                        </tr>
+                        @foreach ($listroles as $index => $listrole)
+                            <tr>
+                                <td data-label="Id">{{ str_pad($index + 1, 4, '0', STR_PAD_LEFT) }}</td>
+                                <td data-label="Nom" class="data2">{{ strtoupper($listrole->nomrole) }}</td>
+                                <td data-label="Utilisateur">{{ $listrole->nbutilisateur }}</td>
+                                <td data-label="Action">
+                                    <span class="solid_distance"><i class="fa-solid fa-pen"></i></span>
+                                    <span class="solid_distances"><i class="fa-solid fa-trash-can"></i></span>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
+                <!-- Modal Structure -->
+                <div id="myModal" class="modal">
+                <div class="modal-dialog modal-dialog-centered ">
+                    <div class="modal-content text-center">
+                    <button type="button" class="custom-close-btn" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i></button>
+                        <div  class="modal-body text-center d-flex flex-column" id="">
+                            <i class="fa-solid fa-triangle-exclamation" id="fa-triangle-exclamation"></i>
+                            <span>Êtes vous sûres?</span>
+                        </div>
+                        <p>Voulez-vous supprimer le profil <span id="nom_affiche"></span> ?</p>
+                        <div id="button" class="d-flex justify-content-around">
+                            <button type="submit" class="btn btn-success">Oui, je confirme</button>
+                            <button type="cancel"  class="btn btn-secondaire">Annuler</button>
+                        </div>
+                    </div>
+                </div>
+                </div>
             </div>
         </div>
 
@@ -778,21 +767,21 @@
                 </div>
                 <div class="trait"></div> -->
 
-            <form action="{{ route('updateetablissement', auth()->user()->etablissement_id) }}" method="POST"
-                enctype="multipart/form-data">
+            <form action="{{ route('updateetablissement', auth()->user()->etablissement_id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="affichage">
                     <div class="containers0">
                         <div class="circle">
-                            <input type="file" id="file-input" name="file" accept="image/*"
-                                onchange="uploadImage(event)" style="display: none;">
+                            <input type="file" id="file-input" name="file" accept="image/*" onchange="uploadImage(event)" style="display: none;">
                             <div id="image-overlay">
                                 @if (auth()->user()->etablissement->logo)
-                                    <img src="{{ asset('storage/logo/' . auth()->user()->etablissement->logo) }}"
-                                        alt="User" class="profile-img" id="user-image">
+
+                                <img src="{{ asset('storage/logo/' . auth()->user()->etablissement->logo) }}" alt="User"
+
+                                class="profile-img" id="user-image">
                                 @else
-                                    <img src="{{ Avatar::create(auth()->user()->etablissement->nometablissement)->toBase64() }}"
-                                        alt="User" class="profile-img" id="user-image">
+                                    <img src="{{ Avatar::create(auth()->user()->etablissement->nometablissement)->toBase64() }}" alt="User"
+                                    class="profile-img" id="user-image">
                                 @endif
                             </div>
 
@@ -806,33 +795,28 @@
                     <div class="champ stack">
                         <div class="champs">
                             <label for="">Nom de l'établissement</label>
-                            <input type="text" name="nometablissement"
-                                value="{{ auth()->user()->etablissement->nometablissement }}"
-                                placeholder="Entrez un nom du profil" id="input_text1">
+                            <input type="text" name="nometablissement" value="{{auth()->user()->etablissement->nometablissement}}" placeholder="Entrez un nom du profil"
+                                id="input_text">
                             <div id="error1"></div>
                         </div>
                         <div class="champs">
                             <label for="">Contact</label>
-                            <input type="tel" name="contact" value="{{ auth()->user()->etablissement->contact }}"
-                                placeholder="Entrez votre contact" id="input_text2">
+                            <input type="tel" name="contact" value="{{auth()->user()->etablissement->contact}}" placeholder="Entrez votre contact" id="input_text">
                             <div id="error1"></div>
                         </div>
                         <div class="champs">
                             <label for="">Email</label>
-                            <input type="email" name="email" value="{{ auth()->user()->etablissement->email }}"
-                                placeholder="Entrez votre email" id="input_text3">
+                            <input type="email" name="email" value="{{auth()->user()->etablissement->email}}" placeholder="Entrez votre email" id="input_text">
                             <div id="error1"></div>
                         </div>
                         <div class="champs">
                             <label for="">Adresse</label>
-                            <input type="text" name="adresse"
-                                value="{{ auth()->user()->etablissement->adresse }}" placeholder="Entrez email"
-                                id="input_text4">
+                            <input type="text" name="adresse" value="{{auth()->user()->etablissement->adresse}}" placeholder="Entrez L'adresse" id="input_text">
                             <div id="error1"></div>
                         </div>
                         <div class="champs">
                             <label for="">Description</label>
-                            <textarea id="input_textarea" name="description" placeholder="Entrez une description">{{ auth()->user()->etablissement->description }}</textarea>
+                            <textarea id="input_textarea" name="description" placeholder="Entrez une description">{{auth()->user()->etablissement->description}}</textarea>
                             <div id="error2"></div>
                         </div>
                         <div>
@@ -845,28 +829,6 @@
         {{-- </div> --}}
 
     </div>
-
-    <!-- Modal Structure -->
-    <div id="myModaldelete" class="modal fade">
-        <div class="modal-dialog modal-dialog-centered ">
-            <div class="modal-content text-center">
-                <button type="button" class="custom-close-btn" data-bs-dismiss="modal" aria-label="Close"><i
-                        class="fa-solid fa-xmark"></i></button>
-                <div class="modal-body text-center d-flex flex-column" id="">
-                    <i class="fa-solid fa-triangle-exclamation" id="fa-triangle-exclamation"></i>
-                    <span>Êtes vous sûres ?</span>
-                </div>
-                <p>Voulez-vous supprimer le profil <span id="nom_affiche"></span> ?</p>
-                <div id="button" class="d-flex justify-content-around">
-                    <button type="submit" class="btn btn-success">Oui, je confirme</button>
-                    <button type="button" class="btn btn-secondaire" data-bs-dismiss="modal"
-                        aria-invalid="false">Annuler</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
     <!-- Footer -->
 
     @include('admin.include.footer')
@@ -879,117 +841,105 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
     <script>
-        var apparence = document.getElementById('apparence');
-        var profil = document.getElementById('profil');
-        var parametre = document.getElementById('parametre01');
-        var apparences = document.getElementById('apparence_accessibilite');
-        var profils = document.getElementById('profils');
-        var parametres = document.getElementById('parametre_supplementaire01');
+    var apparence = document.getElementById('apparence');
+    var profil = document.getElementById('profil');
+    var parametre = document.getElementById('parametre01');
+    var apparences = document.getElementById('apparence_accessibilite');
+    var profils = document.getElementById('profils');
+    var parametres = document.getElementById('parametre_supplementaire01');
 
-        var creerprofils = document.getElementById('creer_profils');
-        var vueprofils = document.getElementById('vue_profils');
-        var creerprofil = document.getElementById('creer_profil');
-        var vueprofil = document.getElementById('vue_profil');
+    var creerprofils = document.getElementById('creer_profils');
+    var vueprofils = document.getElementById('vue_profils');
+    var creerprofil = document.getElementById('creer_profil');
+    var vueprofil = document.getElementById('vue_profil');
 
-        const underline = document.getElementById('ensemble_profil12');
-        const underlines = document.getElementById('ensemble_profil22');
-
-
-        apparence.addEventListener('click', function() {
-            console.log("125252255");
-            apparences.style.display = 'flex';
-            apparences.style.flexDirection = 'column';
-            apparence.style.background = '#e8eaed';
-            apparence.style.borderRadius = '10px';
-            apparence.style.paddingLeft = '10px';
-            apparence.style.paddingRight = '10px';
-            apparence.style.paddingTop = '5px';
-            apparence.style.paddingBottom = '5px';
-            profil.style.background = 'none';
-            parametre.style.background = 'none';
-            profils.style.display = 'none';
-            parametres.style.display = 'none';
-        });
-
-        parametre.addEventListener('click', function() {
-            console.log("125252255");
-            parametres.style.display = 'flex';
-            parametres.style.flexDirection = 'column';
-            parametre.style.background = '#e8eaed';
-            parametre.style.borderRadius = '10px';
-            parametre.style.paddingLeft = '10px';
-            parametre.style.paddingRight = '10px';
-            parametre.style.paddingTop = '5px';
-            parametre.style.paddingBottom = '5px';
-            profil.style.background = 'none';
-            apparence.style.background = 'none';
-            apparences.style.display = 'none';
-            profils.style.display = 'none';
-        });
-
-        profil.addEventListener('click', function() {
-            profils.style.display = 'flex';
-            profils.style.flexDirection = 'column';
-            profil.style.background = '#e8eaed';
-            profil.style.borderRadius = '10px';
-            profil.style.paddingLeft = '10px';
-            profil.style.paddingRight = '10px';
-            profil.style.paddingTop = '5px';
-            profil.style.paddingBottom = '5px';
-            apparence.style.background = 'none';
-            parametre.style.background = 'none';
-            apparences.style.display = 'none';
-            parametres.style.display = 'none';
-        });
+    const underline = document.getElementById('ensemble_profil12');
+    const underlines = document.getElementById('ensemble_profil22');
 
 
-        let activeProfile = null; // Variable pour suivre l'élément actif
+    apparence.addEventListener('click', function() {
+        console.log("125252255");
+        apparences.style.display = 'flex';
+        apparences.style.flexDirection = 'column';
+        apparence.style.background = '#e8eaed';
+        apparence.style.borderRadius = '10px';
+        profil.style.background = 'none';
+        parametre.style.background = 'none';
+        profils.style.display = 'none';
+        parametres.style.display = 'none';
+    });
 
-        vueprofils.addEventListener('mouseenter', function() {
-            if (activeProfile !== 'vueprofils') {
-                underlines.style.display = 'flex';
-                vueprofils.style.cursor = 'pointer';
-            }
-        });
+    parametre.addEventListener('click', function() {
+        console.log("125252255");
+        parametres.style.display = 'flex';
+        parametres.style.flexDirection = 'column';
+        parametre.style.background = '#e8eaed';
+        parametre.style.borderRadius = '10px';
+        profil.style.background = 'none';
+        apparence.style.background = 'none';
+        apparences.style.display = 'none';
+        profils.style.display = 'none';
+    });
 
-        vueprofils.addEventListener('mouseleave', function() {
-            if (activeProfile !== 'vueprofils') {
-                underlines.style.display = 'none';
-            }
-        });
+    profil.addEventListener('click', function() {
+        profils.style.display = 'flex';
+        profils.style.flexDirection = 'column';
+        profil.style.background = '#e8eaed';
+        profil.style.borderRadius = '10px';
+        apparence.style.background = 'none';
+        parametre.style.background = 'none';
+        apparences.style.display = 'none';
+        parametres.style.display = 'none';
+    });
 
-        creerprofils.addEventListener('mouseenter', function() {
-            if (activeProfile !== 'creerprofils') {
-                underline.style.display = 'flex';
-                creerprofils.style.cursor = 'pointer';
-            }
-        });
 
-        creerprofils.addEventListener('mouseleave', function() {
-            if (activeProfile !== 'creerprofils') {
-                underline.style.display = 'none';
-            }
-        });
+    let activeProfile = null; // Variable pour suivre l'élément actif
 
-        creerprofils.addEventListener('click', function() {
-            creerprofil.style.display = 'flex';
-            creerprofil.style.flexDirection = 'column';
-            vueprofil.style.display = 'none';
-            underline.style.display = 'flex';
-            underlines.style.display = 'none';
-            activeProfile = 'creerprofils';
-        });
+vueprofils.addEventListener('mouseenter', function() {
+    if (activeProfile !== 'vueprofils') {
+        underlines.style.display = 'flex';
+        vueprofils.style.cursor='pointer';
+    }
+});
 
-        vueprofils.addEventListener('click', function() {
-            vueprofil.style.display = 'grid';
-            vueprofil.style.flexDirection = 'column';
-            creerprofil.style.display = 'none';
-            underlines.style.display = 'flex';
-            underline.style.display = 'none';
-            activeProfile = 'vueprofils';
-        });
+vueprofils.addEventListener('mouseleave', function() {
+    if (activeProfile !== 'vueprofils') {
+        underlines.style.display = 'none';
+    }
+});
 
-        // Verification des informations des differents input lors de la soumission du formulaire
+creerprofils.addEventListener('mouseenter', function() {
+    if (activeProfile !== 'creerprofils') {
+        underline.style.display = 'flex';
+        creerprofils.style.cursor='pointer';
+    }
+});
+
+creerprofils.addEventListener('mouseleave', function() {
+    if (activeProfile !== 'creerprofils') {
+        underline.style.display = 'none';
+    }
+});
+
+creerprofils.addEventListener('click', function() {
+    creerprofil.style.display = 'flex';
+    creerprofil.style.flexDirection = 'column';
+    vueprofil.style.display = 'none';
+    underline.style.display = 'flex';
+    underlines.style.display = 'none';
+    activeProfile = 'creerprofils';
+});
+
+vueprofils.addEventListener('click', function() {
+    vueprofil.style.display = 'grid';
+    vueprofil.style.flexDirection = 'column';
+    creerprofil.style.display = 'none';
+    underlines.style.display = 'flex';
+    underline.style.display = 'none';
+    activeProfile = 'vueprofils';
+});
+
+// Verification des informations des differents input lors de la soumission du formulaire
 
         var input_text = document.getElementById('input_text');
         var input_textarea = document.getElementById('input_textarea');
@@ -1002,29 +952,29 @@
             // Vérification des champs
             if (input_text.value.trim() === '') {
                 error_message1.textContent = 'Le champ est obligatoire.';
-                error_message1.style.color = 'red';
+                error_message1.style.color='red';
                 event.preventDefault();
-            } else {
+            }else{
                 error_message1.textContent = '';
             }
 
             if (input_textarea.value.trim() === '') {
                 error_message2.textContent = 'Le champ est obligatoire.';
-                error_message2.style.color = 'red';
+                error_message2.style.color='red';
                 event.preventDefault();
-            } else {
+            }else{
                 error_message2.textContent = '';
             }
 
         });
 
-        input_text.addEventListener('blur', function() {
-            input_text.style.borderColor = '##4A41C5';
+        input_text.addEventListener('blur', function(){
+            input_text.style.borderColor='##4A41C5';
         });
-        input_textarea.addEventListener('blur', function() {
-            input_textarea.style.borderColor = '##4A41C5';
+        input_textarea.addEventListener('blur', function(){
+            input_textarea.style.borderColor='##4A41C5';
         });
-        var modal = document.getElementById("myModals0");
+        var modal = document.getElementById("myModal");
 
         var closeBtn = document.getElementsByClassName("close")[0];
         var cancelBtn = document.getElementsByClassName("cancel")[0];
@@ -1032,46 +982,33 @@
         var solidDistanceElements = document.querySelectorAll(".solid_distances");
 
         solidDistanceElements.forEach(function(element) {
-            element.addEventListener("click", function() {
-                modal.style.display = "block";
-            });
+        element.addEventListener("click", function() {
+            modal.style.display = "block";
+        });
         });
 
-        closeBtn.addEventListener("click", function() {
-            modal.style.display = "none";
-        });
-        cancelBtn.addEventListener("click", function() {
-            modal.style.display = "none";
-        });
-
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
+        closeBtn.onclick = function() {
+        modal.style.display = "none";
+        }
+        cancelBtn.onclick = function() {
+        modal.style.display = "none";
         }
 
-        // Sélectionne tous les boutons avec la classe "solid_distances"
-        var modification_Btns = document.getElementsByClassName("solid_distance");
+        window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+        }
 
-        // Ajoute un écouteur d'événements à chaque bouton
-        modification_Btns.forEach(function(button) {
-            button.addEventListener("click", function() {
-                // Clique sur l'élément creerprofils
+        var modification_Btns = document.getElementsByClassName("fa-pen");
+        Array.prototype.forEach.call(modification_Btns, function(element) {
+            element.addEventListener("click", function() {
                 creerprofils.click();
-
-                // Récupère tous les éléments de distances solides
-                var solidDistancesElements = document.querySelectorAll(
-                    '.solid_distance'); // Remplacez '.solid-distance' par la classe appropriée
-
                 solidDistancesElements.forEach(function(element) {
-                    // Ajoute un écouteur d'événements à chaque élément de distance
                     element.addEventListener('click', function() {
-                        // Récupère le nom de la cellule correspondante
-                        const nomCells = this.closest('tr').querySelector(
-                            'td[data-label="Nom"]');
+                        const nomCells = this.closest('tr').querySelector('td[data-label="Nom"]');
                         const nomTexts = nomCells.textContent.trim();
-                        console.log('11111111111')
-                        // Met à jour l'élément d'affichage du nom
+
                         const nomAfficheElements = document.getElementById('input_text');
                         nomAfficheElements.value = nomTexts;
                     });
@@ -1081,18 +1018,136 @@
 
 
 
-
         var solidDistance = document.querySelectorAll(".solid_distance");
         var solidDistanceBtn = document.querySelectorAll(".solid_distances");
 
         solidDistanceBtn.addEventListener('mouseenter', function() {
-            solidDistanceBtn.style.cursor = 'pointer';
+            solidDistanceBtn.style.cursor='pointer';
         });
         solidDistance.addEventListener('mouseenter', function() {
-            solidDistance.style.cursor = 'pointer';
+            solidDistance.style.cursor='pointer';
         });
-    </script>
-    <script>
+
+
+</script>
+
+<script>
+    document.getElementById('camera-btn').addEventListener('click', () => {
+
+navigator.mediaDevices.getUserMedia({
+
+        video: true
+
+    })
+
+    .then((stream) => {
+
+        const video = document.createElement('video');
+
+        video.srcObject = stream;
+
+        video.play();
+
+
+
+        const modal = document.createElement('div');
+
+        modal.style.position = 'fixed';
+
+        modal.style.top = '50%';
+
+        modal.style.left = '50%';
+
+        modal.style.transform = 'translate(-50%, -50%)';
+
+        modal.style.zIndex = '1000';
+
+        modal.style.backgroundColor = 'white';
+
+        modal.style.padding = '20px';
+
+        modal.appendChild(video);
+
+
+
+        const captureBtn = document.createElement('button');
+
+        captureBtn.innerText = 'Capturer';
+
+        captureBtn.onclick = () => {
+
+            const canvas = document.createElement('canvas');
+
+            canvas.width = video.videoWidth;
+
+            canvas.height = video.videoHeight;
+
+            const ctx = canvas.getContext('2d');
+
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            const imageDataUrl = canvas.toDataURL('image/png');
+
+            document.getElementById('user-image').src = imageDataUrl;
+
+
+
+            stream.getTracks().forEach(track => track.stop());
+
+            document.body.removeChild(modal);
+
+        };
+
+
+
+        modal.appendChild(captureBtn);
+
+        document.body.appendChild(modal);
+
+    })
+
+    .catch((err) => {
+
+        alert('Erreur lors de l\'accès à la caméra : ' + err.message);
+
+    });
+
+});
+
+
+
+function uploadImage(event) {
+
+const file = event.target.files[0];
+
+const reader = new FileReader();
+
+
+
+reader.onload = function(e) {
+
+    document.getElementById('user-image').src = e.target.result;
+
+};
+
+
+
+reader.readAsDataURL(file);
+
+}
+
+
+
+function deleteImage() {
+
+document.getElementById('user-image').src =
+
+    '{{ asset('frontend/dashboard/images/kad.jpg') }}';
+
+}
+
+</script>
+<script>
         document.addEventListener('DOMContentLoaded', function() {
             const solidDistancesElements = document.querySelectorAll('.solid_distances');
 
@@ -1104,540 +1159,540 @@
 
                     const nomAfficheElement = document.querySelector('#nom_affiche');
                     nomAfficheElement.textContent = nomText;
-                    nomAfficheElement.style.textTransform = 'capitalize';
-                    nomAfficheElement.style.color = '#293d7a';
-                    nomAfficheElement.style.fontWeight = 'bold';
+                    nomAfficheElement.style.textTransform='capitalize';
+                    nomAfficheElement.style.color='#293d7a';
+                    nomAfficheElement.style.fontWeight='bold';
                 });
             });
         });
-    </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var couleur_red = document.getElementById('red_color8');
-            var couleur_green = document.getElementById('green_color8');
-            var checkboxcontainer = document.getElementById('checkbox-containers');
-            var checkboxes = document.querySelectorAll('#option3_sujet input[type="checkbox"]');
+</script>
+<script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var couleur_red = document.getElementById('red_color8');
+                var couleur_green = document.getElementById('green_color8');
+                var checkboxcontainer = document.getElementById('checkbox-containers');
+                var checkboxes = document.querySelectorAll('#option3_sujet input[type="checkbox"]');
 
-            function updateCouleurGreenDisplay() {
-                // Vérifie si toutes les cases sont cochées
-                const allChecked = Array.from(checkboxes).every(checkbox => checkbox.checked);
-                couleur_green.style.display = allChecked ? 'flex' : 'none';
-                couleur_red.style.display = allChecked ? 'none' : 'flex';
-            }
-
-            // Écoute l'événement de changement sur chaque case à cocher
-            checkboxes.forEach(function(checkbox) {
-                checkbox.addEventListener('change', updateCouleurGreenDisplay);
-            });
-
-            // Fonction pour gérer le clic sur couleur_green
-            couleur_green.addEventListener('click', function() {
-                if (couleur_green.style.display === "flex") {
-                    // Si couleur_green est visible, décocher tous les checkboxes
-                    couleur_red.style.display = 'flex';
-                    couleur_green.style.display = 'none';
-                    checkboxes.forEach(function(checkbox) {
-                        checkbox.checked = false;
-                    });
-                } else {
-                    // Sinon, cocher tous les checkboxes
-                    couleur_red.style.display = 'none';
-                    couleur_green.style.display = 'flex';
-                    checkboxes.forEach(function(checkbox) {
-                        checkbox.checked = true;
-                    });
+                function updateCouleurGreenDisplay() {
+                    // Vérifie si toutes les cases sont cochées
+                    const allChecked = Array.from(checkboxes).every(checkbox => checkbox.checked);
+                    couleur_green.style.display = allChecked ? 'flex' : 'none';
+                    couleur_red.style.display = allChecked ? 'none' : 'flex';
                 }
+
+                // Écoute l'événement de changement sur chaque case à cocher
+                checkboxes.forEach(function(checkbox) {
+                    checkbox.addEventListener('change', updateCouleurGreenDisplay);
+                });
+
+                // Fonction pour gérer le clic sur couleur_green
+                couleur_green.addEventListener('click', function() {
+                    if (couleur_green.style.display === "flex") {
+                        // Si couleur_green est visible, décocher tous les checkboxes
+                        couleur_red.style.display = 'flex';
+                        couleur_green.style.display = 'none';
+                        checkboxes.forEach(function(checkbox) {
+                            checkbox.checked = false;
+                        });
+                    } else {
+                        // Sinon, cocher tous les checkboxes
+                        couleur_red.style.display = 'none';
+                        couleur_green.style.display = 'flex';
+                        checkboxes.forEach(function(checkbox) {
+                            checkbox.checked = true;
+                        });
+                    }
+                    updateCouleurGreenDisplay();
+                });
+
+                // Fonction pour gérer le clic sur couleur_red
+                couleur_red.addEventListener('click', function() {
+                    if (couleur_red.style.display === "flex") {
+                        couleur_red.style.display = 'none';
+                        couleur_green.style.display = 'flex';
+                        checkboxes.forEach(function(checkbox) {
+                            checkbox.checked = true;
+                        });
+                    } else {
+                        couleur_red.style.display = 'flex';
+                        couleur_green.style.display = 'none';
+                        checkboxes.forEach(function(checkbox) {
+                            checkbox.checked = false;
+                        });
+                    }
+                    updateCouleurGreenDisplay();
+                });
+
+                // Initialiser l'affichage de couleur_green
                 updateCouleurGreenDisplay();
-            });
 
-            // Fonction pour gérer le clic sur couleur_red
-            couleur_red.addEventListener('click', function() {
-                if (couleur_red.style.display === "flex") {
-                    couleur_red.style.display = 'none';
-                    couleur_green.style.display = 'flex';
-                    checkboxes.forEach(function(checkbox) {
-                        checkbox.checked = true;
-                    });
-                } else {
-                    couleur_red.style.display = 'flex';
-                    couleur_green.style.display = 'none';
-                    checkboxes.forEach(function(checkbox) {
-                        checkbox.checked = false;
-                    });
+
+
+
+
+                var couleur_red7 = document.getElementById('red_color7');
+                var couleur_green7 = document.getElementById('green_color7');
+                var checkboxcontainer7 = document.getElementById('checkbox-containers7');
+                var checkboxes7 = document.querySelectorAll('#option3_c input[type="checkbox"]');
+
+                function updateCouleurGreenDisplay7() {
+                    // Vérifie si toutes les cases sont cochées
+                    const allChecked7 = Array.from(checkboxes7).every(checkbox => checkbox.checked);
+                    couleur_green7.style.display = allChecked7 ? 'flex' : 'none';
+                    couleur_red7.style.display = allChecked7 ? 'none' : 'flex';
                 }
-                updateCouleurGreenDisplay();
-            });
 
-            // Initialiser l'affichage de couleur_green
-            updateCouleurGreenDisplay();
-
-
+                // Écoute l'événement de changement sur chaque case à cocher
+                checkboxes7.forEach(function(checkbox) {
+                    checkbox.addEventListener('change', updateCouleurGreenDisplay7);
+                });
 
 
+                couleur_green7.addEventListener('click', function(e){
+                    if(couleur_green7.style.display === "flex"){
+                        couleur_red7.style.display='flex';
+                        couleur_green7.style.display='none';
+                            // Cocher tous les checkboxes
+                            checkboxes7.forEach(function(checkbox) {
+                            checkbox.checked = false;
+                        });
 
-            var couleur_red7 = document.getElementById('red_color7');
-            var couleur_green7 = document.getElementById('green_color7');
-            var checkboxcontainer7 = document.getElementById('checkbox-containers7');
-            var checkboxes7 = document.querySelectorAll('#option3_c input[type="checkbox"]');
+                    }else {
+                        couleur_red7.style.display='none';
+                        couleur_green7.style.display='flex';
+                        // Cocher tous les checkboxes
+                        checkboxes7.forEach(function(checkbox) {
+                            checkbox.checked = true;
+                            couleur_green7.style.display='flex';
 
-            function updateCouleurGreenDisplay7() {
-                // Vérifie si toutes les cases sont cochées
-                const allChecked7 = Array.from(checkboxes7).every(checkbox => checkbox.checked);
-                couleur_green7.style.display = allChecked7 ? 'flex' : 'none';
-                couleur_red7.style.display = allChecked7 ? 'none' : 'flex';
-            }
+                        });
+                    }
+                    updateCouleurGreenDisplay7();
 
-            // Écoute l'événement de changement sur chaque case à cocher
-            checkboxes7.forEach(function(checkbox) {
-                checkbox.addEventListener('change', updateCouleurGreenDisplay7);
-            });
+                });
+                couleur_red7.addEventListener('click', function(e){
+                    if(couleur_red7.style.display === "flex"){
+                        couleur_red7.style.display='none';
+                        couleur_green7.style.display='flex';
+                            // Cocher tous les checkboxes
+                            checkboxes7.forEach(function(checkbox) {
+                            checkbox.checked = true;
+                            couleur_green7.style.display='flex';
 
+                        });
 
-            couleur_green7.addEventListener('click', function(e) {
-                if (couleur_green7.style.display === "flex") {
-                    couleur_red7.style.display = 'flex';
-                    couleur_green7.style.display = 'none';
-                    // Cocher tous les checkboxes
-                    checkboxes7.forEach(function(checkbox) {
-                        checkbox.checked = false;
-                    });
+                    }else {
+                        couleur_red7.style.display='flex';
+                        couleur_green7.style.display='none';
+                        // Cocher tous les checkboxes
+                        checkboxes7.forEach(function(checkbox) {
+                            checkbox.checked = false;
+                        });
+                    }
+                    updateCouleurGreenDisplay7();
 
-                } else {
-                    couleur_red7.style.display = 'none';
-                    couleur_green7.style.display = 'flex';
-                    // Cocher tous les checkboxes
-                    checkboxes7.forEach(function(checkbox) {
-                        checkbox.checked = true;
-                        couleur_green7.style.display = 'flex';
-
-                    });
-                }
+                });
                 updateCouleurGreenDisplay7();
 
-            });
-            couleur_red7.addEventListener('click', function(e) {
-                if (couleur_red7.style.display === "flex") {
-                    couleur_red7.style.display = 'none';
-                    couleur_green7.style.display = 'flex';
-                    // Cocher tous les checkboxes
-                    checkboxes7.forEach(function(checkbox) {
-                        checkbox.checked = true;
-                        couleur_green7.style.display = 'flex';
 
-                    });
 
-                } else {
-                    couleur_red7.style.display = 'flex';
-                    couleur_green7.style.display = 'none';
-                    // Cocher tous les checkboxes
-                    checkboxes7.forEach(function(checkbox) {
-                        checkbox.checked = false;
-                    });
+
+                var couleur_red6 = document.getElementById('red_color6');
+                var couleur_green6 = document.getElementById('green_color6');
+                var checkboxcontainer6 = document.getElementById('checkbox-containers6');
+                var checkboxes6 = document.querySelectorAll('#option2_c input[type="checkbox"]');
+
+                function updateCouleurGreenDisplay6() {
+                    // Vérifie si toutes les cases sont cochées
+                    const allChecked6 = Array.from(checkboxes6).every(checkbox => checkbox.checked);
+                    couleur_green6.style.display = allChecked6 ? 'flex' : 'none';
+                    couleur_red6.style.display = allChecked6 ? 'none' : 'flex';
                 }
-                updateCouleurGreenDisplay7();
 
-            });
-            updateCouleurGreenDisplay7();
-
-
-
-
-            var couleur_red6 = document.getElementById('red_color6');
-            var couleur_green6 = document.getElementById('green_color6');
-            var checkboxcontainer6 = document.getElementById('checkbox-containers6');
-            var checkboxes6 = document.querySelectorAll('#option2_c input[type="checkbox"]');
-
-            function updateCouleurGreenDisplay6() {
-                // Vérifie si toutes les cases sont cochées
-                const allChecked6 = Array.from(checkboxes6).every(checkbox => checkbox.checked);
-                couleur_green6.style.display = allChecked6 ? 'flex' : 'none';
-                couleur_red6.style.display = allChecked6 ? 'none' : 'flex';
-            }
-
-            // Écoute l'événement de changement sur chaque case à cocher
-            checkboxes6.forEach(function(checkbox) {
-                checkbox.addEventListener('change', updateCouleurGreenDisplay6);
-            });
+                // Écoute l'événement de changement sur chaque case à cocher
+                checkboxes6.forEach(function(checkbox) {
+                    checkbox.addEventListener('change', updateCouleurGreenDisplay6);
+                });
 
 
-            couleur_green6.addEventListener('click', function(e) {
-                if (couleur_green6.style.display === "flex") {
-                    couleur_red6.style.display = 'flex';
-                    couleur_green6.style.display = 'none';
-                    // Cocher tous les checkboxes
-                    checkboxes6.forEach(function(checkbox) {
-                        checkbox.checked = false;
-                    });
+                couleur_green6.addEventListener('click', function(e){
+                    if(couleur_green6.style.display === "flex"){
+                        couleur_red6.style.display='flex';
+                        couleur_green6.style.display='none';
+                            // Cocher tous les checkboxes
+                            checkboxes6.forEach(function(checkbox) {
+                            checkbox.checked = false;
+                        });
 
-                } else {
-                    couleur_red6.style.display = 'none';
-                    couleur_green6.style.display = 'flex';
-                    // Cocher tous les checkboxes
-                    checkboxes6.forEach(function(checkbox) {
-                        checkbox.checked = true;
-                        couleur_green6.style.display = 'flex';
+                    }else {
+                        couleur_red6.style.display='none';
+                        couleur_green6.style.display='flex';
+                        // Cocher tous les checkboxes
+                        checkboxes6.forEach(function(checkbox) {
+                            checkbox.checked = true;
+                            couleur_green6.style.display='flex';
 
-                    });
-                }
+                        });
+                    }
+                    updateCouleurGreenDisplay6();
+
+                });
+                couleur_red6.addEventListener('click', function(e){
+                    if(couleur_red6.style.display === "flex"){
+                        couleur_red6.style.display='none';
+                        couleur_green6.style.display='flex';
+                            // Cocher tous les checkboxes
+                            checkboxes6.forEach(function(checkbox) {
+                            checkbox.checked = true;
+                            couleur_green6.style.display='flex';
+
+                        });
+
+                    }else {
+                        couleur_red6.style.display='flex';
+                        couleur_green6.style.display='none';
+                        // Cocher tous les checkboxes
+                        checkboxes6.forEach(function(checkbox) {
+                            checkbox.checked = false;
+                        });
+                    }
+                    updateCouleurGreenDisplay6();
+
+                });
                 updateCouleurGreenDisplay6();
 
-            });
-            couleur_red6.addEventListener('click', function(e) {
-                if (couleur_red6.style.display === "flex") {
-                    couleur_red6.style.display = 'none';
-                    couleur_green6.style.display = 'flex';
-                    // Cocher tous les checkboxes
-                    checkboxes6.forEach(function(checkbox) {
-                        checkbox.checked = true;
-                        couleur_green6.style.display = 'flex';
 
-                    });
 
-                } else {
-                    couleur_red6.style.display = 'flex';
-                    couleur_green6.style.display = 'none';
-                    // Cocher tous les checkboxes
-                    checkboxes6.forEach(function(checkbox) {
-                        checkbox.checked = false;
-                    });
+
+                var couleur_red5 = document.getElementById('red_color5');
+                var couleur_green5 = document.getElementById('green_color5');
+                var checkboxcontainer5 = document.getElementById('checkbox-containers5');
+                var checkboxes5 = document.querySelectorAll('#option2_classe input[type="checkbox"]');
+
+                function updateCouleurGreenDisplay5() {
+                    // Vérifie si toutes les cases sont cochées
+                    const allChecked5 = Array.from(checkboxes5).every(checkbox => checkbox.checked);
+                    couleur_green5.style.display = allChecked5 ? 'flex' : 'none';
+                    couleur_red5.style.display = allChecked5 ? 'none' : 'flex';
                 }
-                updateCouleurGreenDisplay6();
 
-            });
-            updateCouleurGreenDisplay6();
-
-
-
-
-            var couleur_red5 = document.getElementById('red_color5');
-            var couleur_green5 = document.getElementById('green_color5');
-            var checkboxcontainer5 = document.getElementById('checkbox-containers5');
-            var checkboxes5 = document.querySelectorAll('#option2_classe input[type="checkbox"]');
-
-            function updateCouleurGreenDisplay5() {
-                // Vérifie si toutes les cases sont cochées
-                const allChecked5 = Array.from(checkboxes5).every(checkbox => checkbox.checked);
-                couleur_green5.style.display = allChecked5 ? 'flex' : 'none';
-                couleur_red5.style.display = allChecked5 ? 'none' : 'flex';
-            }
-
-            // Écoute l'événement de changement sur chaque case à cocher
-            checkboxes5.forEach(function(checkbox) {
-                checkbox.addEventListener('change', updateCouleurGreenDisplay5);
-            });
+                // Écoute l'événement de changement sur chaque case à cocher
+                checkboxes5.forEach(function(checkbox) {
+                    checkbox.addEventListener('change', updateCouleurGreenDisplay5);
+                });
 
 
-            couleur_green5.addEventListener('click', function(e) {
-                if (couleur_green5.style.display === "flex") {
-                    couleur_red5.style.display = 'flex';
-                    couleur_green5.style.display = 'none';
-                    // Cocher tous les checkboxes
-                    checkboxes5.forEach(function(checkbox) {
-                        checkbox.checked = false;
-                    });
+                couleur_green5.addEventListener('click', function(e){
+                    if(couleur_green5.style.display === "flex"){
+                        couleur_red5.style.display='flex';
+                        couleur_green5.style.display='none';
+                            // Cocher tous les checkboxes
+                            checkboxes5.forEach(function(checkbox) {
+                            checkbox.checked = false;
+                        });
 
-                } else {
-                    couleur_red5.style.display = 'none';
-                    couleur_green5.style.display = 'flex';
-                    // Cocher tous les checkboxes
-                    checkboxes5.forEach(function(checkbox) {
-                        checkbox.checked = true;
-                        couleur_green5.style.display = 'flex';
+                    }else {
+                        couleur_red5.style.display='none';
+                        couleur_green5.style.display='flex';
+                        // Cocher tous les checkboxes
+                        checkboxes5.forEach(function(checkbox) {
+                            checkbox.checked = true;
+                            couleur_green5.style.display='flex';
 
-                    });
-                }
+                        });
+                    }
+                    updateCouleurGreenDisplay5();
+
+                });
+                couleur_red5.addEventListener('click', function(e){
+                    if(couleur_red5.style.display === "flex"){
+                        couleur_red5.style.display='none';
+                        couleur_green5.style.display='flex';
+                            // Cocher tous les checkboxes
+                            checkboxes5.forEach(function(checkbox) {
+                            checkbox.checked = true;
+                            couleur_green5.style.display='flex';
+
+                        });
+
+                    }else {
+                        couleur_red5.style.display='flex';
+                        couleur_green5.style.display='none';
+                        // Cocher tous les checkboxes
+                        checkboxes5.forEach(function(checkbox) {
+                            checkbox.checked = false;
+                        });
+                    }
+                    updateCouleurGreenDisplay5();
+
+                });
                 updateCouleurGreenDisplay5();
 
-            });
-            couleur_red5.addEventListener('click', function(e) {
-                if (couleur_red5.style.display === "flex") {
-                    couleur_red5.style.display = 'none';
-                    couleur_green5.style.display = 'flex';
-                    // Cocher tous les checkboxes
-                    checkboxes5.forEach(function(checkbox) {
-                        checkbox.checked = true;
-                        couleur_green5.style.display = 'flex';
 
-                    });
 
-                } else {
-                    couleur_red5.style.display = 'flex';
-                    couleur_green5.style.display = 'none';
-                    // Cocher tous les checkboxes
-                    checkboxes5.forEach(function(checkbox) {
-                        checkbox.checked = false;
-                    });
+
+                var couleur_red4 = document.getElementById('red_color4');
+                var couleur_green4 = document.getElementById('green_color4');
+                var checkboxcontainer4 = document.getElementById('checkbox-containers4');
+                var checkboxes4 = document.querySelectorAll('#option2_filiere input[type="checkbox"]');
+
+                function updateCouleurGreenDisplay4() {
+                    // Vérifie si toutes les cases sont cochées
+                    const allChecked4 = Array.from(checkboxes4).every(checkbox => checkbox.checked);
+                    couleur_green4.style.display = allChecked4 ? 'flex' : 'none';
+                    couleur_red4.style.display = allChecked4? 'none' : 'flex';
                 }
-                updateCouleurGreenDisplay5();
 
-            });
-            updateCouleurGreenDisplay5();
-
-
-
-
-            var couleur_red4 = document.getElementById('red_color4');
-            var couleur_green4 = document.getElementById('green_color4');
-            var checkboxcontainer4 = document.getElementById('checkbox-containers4');
-            var checkboxes4 = document.querySelectorAll('#option2_filiere input[type="checkbox"]');
-
-            function updateCouleurGreenDisplay4() {
-                // Vérifie si toutes les cases sont cochées
-                const allChecked4 = Array.from(checkboxes4).every(checkbox => checkbox.checked);
-                couleur_green4.style.display = allChecked4 ? 'flex' : 'none';
-                couleur_red4.style.display = allChecked4 ? 'none' : 'flex';
-            }
-
-            // Écoute l'événement de changement sur chaque case à cocher
-            checkboxes4.forEach(function(checkbox) {
-                checkbox.addEventListener('change', updateCouleurGreenDisplay4);
-            });
+                // Écoute l'événement de changement sur chaque case à cocher
+                checkboxes4.forEach(function(checkbox) {
+                    checkbox.addEventListener('change', updateCouleurGreenDisplay4);
+                });
 
 
-            couleur_green4.addEventListener('click', function(e) {
-                if (couleur_green4.style.display === "flex") {
-                    couleur_red4.style.display = 'flex';
-                    couleur_green4.style.display = 'none';
-                    // Cocher tous les checkboxes
-                    checkboxes4.forEach(function(checkbox) {
-                        checkbox.checked = false;
-                    });
+                couleur_green4.addEventListener('click', function(e){
+                    if(couleur_green4.style.display === "flex"){
+                        couleur_red4.style.display='flex';
+                        couleur_green4.style.display='none';
+                            // Cocher tous les checkboxes
+                            checkboxes4.forEach(function(checkbox) {
+                            checkbox.checked = false;
+                        });
 
-                } else {
-                    couleur_red4.style.display = 'none';
-                    couleur_green4.style.display = 'flex';
-                    // Cocher tous les checkboxes
-                    checkboxes4.forEach(function(checkbox) {
-                        checkbox.checked = true;
-                        couleur_green4.style.display = 'flex';
+                    }else {
+                        couleur_red4.style.display='none';
+                        couleur_green4.style.display='flex';
+                        // Cocher tous les checkboxes
+                        checkboxes4.forEach(function(checkbox) {
+                            checkbox.checked = true;
+                            couleur_green4.style.display='flex';
 
-                    });
-                }
+                        });
+                    }
+                    updateCouleurGreenDisplay4();
+
+                });
+                couleur_red4.addEventListener('click', function(e){
+                    if(couleur_red4.style.display === "flex"){
+                        couleur_red4.style.display='none';
+                        couleur_green4.style.display='flex';
+                            // Cocher tous les checkboxes
+                            checkboxes4.forEach(function(checkbox) {
+                            checkbox.checked = true;
+                            couleur_green4.style.display='flex';
+
+                        });
+
+                    }else {
+                        couleur_red4.style.display='flex';
+                        couleur_green4.style.display='none';
+                        // Cocher tous les checkboxes
+                        checkboxes4.forEach(function(checkbox) {
+                            checkbox.checked = false;
+                        });
+                    }
+                    updateCouleurGreenDisplay4();
+
+                });
+
                 updateCouleurGreenDisplay4();
 
-            });
-            couleur_red4.addEventListener('click', function(e) {
-                if (couleur_red4.style.display === "flex") {
-                    couleur_red4.style.display = 'none';
-                    couleur_green4.style.display = 'flex';
-                    // Cocher tous les checkboxes
-                    checkboxes4.forEach(function(checkbox) {
-                        checkbox.checked = true;
-                        couleur_green4.style.display = 'flex';
 
-                    });
 
-                } else {
-                    couleur_red4.style.display = 'flex';
-                    couleur_green4.style.display = 'none';
-                    // Cocher tous les checkboxes
-                    checkboxes4.forEach(function(checkbox) {
-                        checkbox.checked = false;
-                    });
+                var couleur_red3 = document.getElementById('red_color3');
+                var couleur_green3 = document.getElementById('green_color3');
+                var checkboxcontainer3 = document.getElementById('checkbox-containers3');
+                var checkboxes3 = document.querySelectorAll('#option1_matiere input[type="checkbox"]');
+
+                function updateCouleurGreenDisplay3() {
+                    // Vérifie si toutes les cases sont cochées
+                    const allChecked3 = Array.from(checkboxes3).every(checkbox => checkbox.checked);
+                    couleur_green3.style.display = allChecked3 ? 'flex' : 'none';
+                    couleur_red3.style.display = allChecked3 ? 'none' : 'flex';
                 }
-                updateCouleurGreenDisplay4();
 
-            });
+                // Écoute l'événement de changement sur chaque case à cocher
+                checkboxes3.forEach(function(checkbox) {
+                    checkbox.addEventListener('change', updateCouleurGreenDisplay3);
+                });
 
-            updateCouleurGreenDisplay4();
+                couleur_green3.addEventListener('click', function(e){
+                    if(couleur_green3.style.display === "flex"){
+                        couleur_red3.style.display='flex';
+                        couleur_green3.style.display='none';
+                            // Cocher tous les checkboxes
+                            checkboxes3.forEach(function(checkbox) {
+                            checkbox.checked = false;
+                        });
 
+                    }else {
+                        couleur_red3.style.display='none';
+                        couleur_green3.style.display='flex';
+                        // Cocher tous les checkboxes
+                        checkboxes3.forEach(function(checkbox) {
+                            checkbox.checked = true;
+                            couleur_green3.style.display='flex';
+                        });
+                    }
+                    updateCouleurGreenDisplay3();
 
+                });
+                couleur_red3.addEventListener('click', function(e){
+                    if(couleur_red3.style.display === "flex"){
+                        couleur_red3.style.display='none';
+                        couleur_green3.style.display='flex';
+                            // Cocher tous les checkboxes
+                            checkboxes3.forEach(function(checkbox) {
+                            checkbox.checked = true;
+                            couleur_green3.style.display='flex';
+                        });
 
-            var couleur_red3 = document.getElementById('red_color3');
-            var couleur_green3 = document.getElementById('green_color3');
-            var checkboxcontainer3 = document.getElementById('checkbox-containers3');
-            var checkboxes3 = document.querySelectorAll('#option1_matiere input[type="checkbox"]');
+                    }else {
+                        couleur_red3.style.display='flex';
+                        couleur_green3.style.display='none';
+                        // Cocher tous les checkboxes
+                        checkboxes3.forEach(function(checkbox) {
+                            checkbox.checked = false;
+                        });
+                    }
+                    updateCouleurGreenDisplay3();
 
-            function updateCouleurGreenDisplay3() {
-                // Vérifie si toutes les cases sont cochées
-                const allChecked3 = Array.from(checkboxes3).every(checkbox => checkbox.checked);
-                couleur_green3.style.display = allChecked3 ? 'flex' : 'none';
-                couleur_red3.style.display = allChecked3 ? 'none' : 'flex';
-            }
-
-            // Écoute l'événement de changement sur chaque case à cocher
-            checkboxes3.forEach(function(checkbox) {
-                checkbox.addEventListener('change', updateCouleurGreenDisplay3);
-            });
-
-            couleur_green3.addEventListener('click', function(e) {
-                if (couleur_green3.style.display === "flex") {
-                    couleur_red3.style.display = 'flex';
-                    couleur_green3.style.display = 'none';
-                    // Cocher tous les checkboxes
-                    checkboxes3.forEach(function(checkbox) {
-                        checkbox.checked = false;
-                    });
-
-                } else {
-                    couleur_red3.style.display = 'none';
-                    couleur_green3.style.display = 'flex';
-                    // Cocher tous les checkboxes
-                    checkboxes3.forEach(function(checkbox) {
-                        checkbox.checked = true;
-                        couleur_green3.style.display = 'flex';
-                    });
-                }
+                });
                 updateCouleurGreenDisplay3();
 
-            });
-            couleur_red3.addEventListener('click', function(e) {
-                if (couleur_red3.style.display === "flex") {
-                    couleur_red3.style.display = 'none';
-                    couleur_green3.style.display = 'flex';
-                    // Cocher tous les checkboxes
-                    checkboxes3.forEach(function(checkbox) {
-                        checkbox.checked = true;
-                        couleur_green3.style.display = 'flex';
-                    });
 
-                } else {
-                    couleur_red3.style.display = 'flex';
-                    couleur_green3.style.display = 'none';
-                    // Cocher tous les checkboxes
-                    checkboxes3.forEach(function(checkbox) {
-                        checkbox.checked = false;
-                    });
+
+
+                var couleur_red2 = document.getElementById('red_color2');
+                var couleur_green2 = document.getElementById('green_color2');
+                var checkboxcontainer2 = document.getElementById('checkbox-containers2');
+                var checkboxes2 = document.querySelectorAll('#option1_etudiant input[type="checkbox"]');
+
+                function updateCouleurGreenDisplay2() {
+                    // Vérifie si toutes les cases sont cochées
+                    const allChecked2 = Array.from(checkboxes2).every(checkbox => checkbox.checked);
+                    couleur_green2.style.display = allChecked2 ? 'flex' : 'none';
+                    couleur_red2.style.display = allChecked2 ? 'none' : 'flex';
                 }
-                updateCouleurGreenDisplay3();
 
-            });
-            updateCouleurGreenDisplay3();
-
-
-
-
-            var couleur_red2 = document.getElementById('red_color2');
-            var couleur_green2 = document.getElementById('green_color2');
-            var checkboxcontainer2 = document.getElementById('checkbox-containers2');
-            var checkboxes2 = document.querySelectorAll('#option1_etudiant input[type="checkbox"]');
-
-            function updateCouleurGreenDisplay2() {
-                // Vérifie si toutes les cases sont cochées
-                const allChecked2 = Array.from(checkboxes2).every(checkbox => checkbox.checked);
-                couleur_green2.style.display = allChecked2 ? 'flex' : 'none';
-                couleur_red2.style.display = allChecked2 ? 'none' : 'flex';
-            }
-
-            // Écoute l'événement de changement sur chaque case à cocher
-            checkboxes2.forEach(function(checkbox) {
-                checkbox.addEventListener('change', updateCouleurGreenDisplay2);
-            });
+                // Écoute l'événement de changement sur chaque case à cocher
+                checkboxes2.forEach(function(checkbox) {
+                    checkbox.addEventListener('change', updateCouleurGreenDisplay2);
+                });
 
 
-            couleur_green2.addEventListener('click', function(e) {
-                if (couleur_green2.style.display === "flex") {
-                    couleur_red2.style.display = 'flex';
-                    couleur_green2.style.display = 'none';
-                    // Cocher tous les checkboxes
-                    checkboxes2.forEach(function(checkbox) {
-                        checkbox.checked = false;
-                    });
+                couleur_green2.addEventListener('click', function(e){
+                    if(couleur_green2.style.display === "flex"){
+                        couleur_red2.style.display='flex';
+                        couleur_green2.style.display='none';
+                            // Cocher tous les checkboxes
+                            checkboxes2.forEach(function(checkbox) {
+                            checkbox.checked = false;
+                        });
 
-                } else {
-                    couleur_red2.style.display = 'none';
-                    couleur_green2.style.display = 'flex';
-                    // Cocher tous les checkboxes
-                    checkboxes2.forEach(function(checkbox) {
-                        checkbox.checked = true;
-                        couleur_green2.style.display = 'flex';
-                    });
-                }
+                    }else {
+                        couleur_red2.style.display='none';
+                        couleur_green2.style.display='flex';
+                        // Cocher tous les checkboxes
+                        checkboxes2.forEach(function(checkbox) {
+                            checkbox.checked = true;
+                            couleur_green2.style.display='flex';
+                        });
+                    }
+                    updateCouleurGreenDisplay2();
+
+                });
+                couleur_red2.addEventListener('click', function(e){
+                    if(couleur_red2.style.display === "flex"){
+                        couleur_red2.style.display='none';
+                        couleur_green2.style.display='flex';
+                            // Cocher tous les checkboxes
+                            checkboxes2.forEach(function(checkbox) {
+                            checkbox.checked = true;
+                            couleur_green2.style.display='flex';
+
+                        });
+
+                    }else {
+                        couleur_red2.style.display='flex';
+                        couleur_green2.style.display='none';
+                        // Cocher tous les checkboxes
+                        checkboxes2.forEach(function(checkbox) {
+                            checkbox.checked = false;
+                        });
+                    }
+                    updateCouleurGreenDisplay2();
+
+                });
                 updateCouleurGreenDisplay2();
 
-            });
-            couleur_red2.addEventListener('click', function(e) {
-                if (couleur_red2.style.display === "flex") {
-                    couleur_red2.style.display = 'none';
-                    couleur_green2.style.display = 'flex';
-                    // Cocher tous les checkboxes
-                    checkboxes2.forEach(function(checkbox) {
-                        checkbox.checked = true;
-                        couleur_green2.style.display = 'flex';
 
-                    });
 
-                } else {
-                    couleur_red2.style.display = 'flex';
-                    couleur_green2.style.display = 'none';
-                    // Cocher tous les checkboxes
-                    checkboxes2.forEach(function(checkbox) {
-                        checkbox.checked = false;
-                    });
+
+                var couleur_red1 = document.getElementById('red_color1');
+                var couleur_green1 = document.getElementById('green_color1');
+                var checkboxcontainer1 = document.getElementById('checkbox-containers1');
+                var checkboxes1 = document.querySelectorAll('#option1_enseignant input[type="checkbox"]');
+
+                function updateCouleurGreenDisplay1() {
+                    // Vérifie si toutes les cases sont cochées
+                    const allChecked1 = Array.from(checkboxes1).every(checkbox => checkbox.checked);
+                    couleur_green1.style.display = allChecked1 ? 'flex' : 'none';
+                    couleur_red1.style.display = allChecked1 ? 'none' : 'flex';
                 }
-                updateCouleurGreenDisplay2();
 
-            });
-            updateCouleurGreenDisplay2();
+                // Écoute l'événement de changement sur chaque case à cocher
+                checkboxes1.forEach(function(checkbox) {
+                    checkbox.addEventListener('change', updateCouleurGreenDisplay1);
+                });
 
+                couleur_green1.addEventListener('click', function(e){
+                    if(couleur_green1.style.display === "flex"){
+                        couleur_red1.style.display='flex';
+                        couleur_green1.style.display='none';
+                            // Cocher tous les checkboxes
+                            checkboxes1.forEach(function(checkbox) {
+                            checkbox.checked = false;
+                        });
 
+                    }else {
+                        couleur_red1.style.display='none';
+                        couleur_green1.style.display='flex';
+                        // Cocher tous les checkboxes
+                        checkboxes1.forEach(function(checkbox) {
+                            checkbox.checked = true;
+                            couleur_green1.style.display='flex';
+                        });
+                    }
+                    updateCouleurGreenDisplay1();
 
+                });
+                couleur_red1.addEventListener('click', function(e){
+                    if(couleur_red1.style.display === "flex"){
+                        couleur_red1.style.display='none';
+                        couleur_green1.style.display='flex';
+                            // Cocher tous les checkboxes
+                            checkboxes1.forEach(function(checkbox) {
+                            checkbox.checked = true;
+                            couleur_green1.style.display='flex';
+                        });
 
-            var couleur_red1 = document.getElementById('red_color1');
-            var couleur_green1 = document.getElementById('green_color1');
-            var checkboxcontainer1 = document.getElementById('checkbox-containers1');
-            var checkboxes1 = document.querySelectorAll('#option1_enseignant input[type="checkbox"]');
+                    }else {
+                        couleur_red1.style.display='flex';
+                        couleur_green1.style.display='none';
+                        // Cocher tous les checkboxes
+                        checkboxes1.forEach(function(checkbox) {
+                            checkbox.checked = false;
+                        });
+                    }
+                    updateCouleurGreenDisplay1();
 
-            function updateCouleurGreenDisplay1() {
-                // Vérifie si toutes les cases sont cochées
-                const allChecked1 = Array.from(checkboxes1).every(checkbox => checkbox.checked);
-                couleur_green1.style.display = allChecked1 ? 'flex' : 'none';
-                couleur_red1.style.display = allChecked1 ? 'none' : 'flex';
-            }
-
-            // Écoute l'événement de changement sur chaque case à cocher
-            checkboxes1.forEach(function(checkbox) {
-                checkbox.addEventListener('change', updateCouleurGreenDisplay1);
-            });
-
-            couleur_green1.addEventListener('click', function(e) {
-                if (couleur_green1.style.display === "flex") {
-                    couleur_red1.style.display = 'flex';
-                    couleur_green1.style.display = 'none';
-                    // Cocher tous les checkboxes
-                    checkboxes1.forEach(function(checkbox) {
-                        checkbox.checked = false;
-                    });
-
-                } else {
-                    couleur_red1.style.display = 'none';
-                    couleur_green1.style.display = 'flex';
-                    // Cocher tous les checkboxes
-                    checkboxes1.forEach(function(checkbox) {
-                        checkbox.checked = true;
-                        couleur_green1.style.display = 'flex';
-                    });
-                }
+                });
                 updateCouleurGreenDisplay1();
-
-            });
-            couleur_red1.addEventListener('click', function(e) {
-                if (couleur_red1.style.display === "flex") {
-                    couleur_red1.style.display = 'none';
-                    couleur_green1.style.display = 'flex';
-                    // Cocher tous les checkboxes
-                    checkboxes1.forEach(function(checkbox) {
-                        checkbox.checked = true;
-                        couleur_green1.style.display = 'flex';
-                    });
-
-                } else {
-                    couleur_red1.style.display = 'flex';
-                    couleur_green1.style.display = 'none';
-                    // Cocher tous les checkboxes
-                    checkboxes1.forEach(function(checkbox) {
-                        checkbox.checked = false;
-                    });
-                }
-                updateCouleurGreenDisplay1();
-
-            });
-            updateCouleurGreenDisplay1();
 
         });
-    </script>
-    <script>
-        const fileInput = document.getElementById('file-input');
+</script>
+<script>
+       const fileInput = document.getElementById('file-input');
         const preview = document.getElementById('preview');
         const deleteButton = document.getElementById('delete-button');
         const downloadButton = document.getElementById('download-button');
@@ -1665,16 +1720,18 @@
             fileInput.click();
         });
 
-        document.addEventListener('DOMContentLoaded', function() {
-            const closeButton = document.querySelector('.fa-xmark');
-            const modal = document.getElementById('myModals0');
+        document.addEventListener('DOMContentLoaded', function () {
+    const closeButton = document.querySelector('.custom-close-btn');
+    const modal = document.getElementById('myModal');
 
-            closeButton.addEventListener('click', function() {
-                modal.setAttribute('style', 'display:none!important;');
-            });
-        });
-    </script>
-    <script>
+    closeButton.addEventListener('click', function () {
+        modal.style.display = 'none';
+    });
+});
+
+
+</script>
+<script>
         document.querySelector('.fa-sun1').addEventListener('click', function() {
             document.querySelector('.fa-sun').click(); // Simule un clic sur fa-sun
         });
@@ -1683,42 +1740,6 @@
             document.querySelector('.fa-moon').click(); // Simule un clic sur fa-moon
         });
     </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const modification_Btns1 = document.getElementsByClassName("solid_distances");
-            const solidDistancesElements0 = document.querySelectorAll('.solid_distance');
-            const creerProfils1 = document.getElementById("creer_profils");
-            const nomAfficheElements1 = document.getElementById("input_text");
-
-            // Événement pour les éléments de classe 'solid_distance'
-            solidDistancesElements0.forEach(function(element) {
-                element.addEventListener('click', function() {
-                    // Trouver le nom associé à l'élément cliqué
-                    const nomCell01 = this.closest('tr').querySelector('td[data-label="Nom"]');
-                    if (nomCell01) {
-                        const nomText01 = nomCell01.textContent.trim();
-
-                        // Cliquer sur le bouton 'creer_profils'
-                        creerProfils1.click();
-
-                        // Remplir le champ de texte avec le nom récupéré
-                        nomAfficheElements1.value = nomText01;
-
-                        // Appliquer du style au champ de texte
-                        nomAfficheElements1.style.textTransform = 'capitalize';
-                        nomAfficheElements1.style.color = '#293d7a';
-                        nomAfficheElements1.style.fontWeight = 'bold';
-                    }
-                });
-            });
-        });
-    </script>
-    <script>
-        document.getElementById('theme_clair').addEventListener('click', function() {
-            document.getElementById('soleil').click();
-        });
-    </script>
-
 </body>
 
 </html>

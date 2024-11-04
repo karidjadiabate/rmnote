@@ -276,34 +276,26 @@
                                                     </div>
                                                 </div> --}}
 
-                                                {{-- <div class="col-sm-6">
-                                                    <input type="file" class="form-control"
-                                                        id="adresse{{ $etudiant->id }}" name="file"
-                                                        placeholder="datenaiss" value="{{ $etudiant->image }}"
-                                                        required>
-                                                    <div class="invalid-feedback">
-                                                    </div>
-                                                </div> --}}
                                                 <div class="col-sm-6">
                                                     <input type="text" class="form-control"
-                                                        id="nomp{{ $etudiant->id }}" name="nomp"
-                                                        placeholder="Nom Parent" value="{{ $etudiant->nom }}"
+                                                        id="nomp{{ $etudiant->id }}" name="nomparent"
+                                                        placeholder="Nom Parent" value="{{ $etudiant->nomparent }}"
                                                         required>
                                                     <div class="invalid-feedback">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <input type="tel" class="form-control"
-                                                        id="contactp{{ $etudiant->id }}" name="contactp"
+                                                        id="contactp{{ $etudiant->id }}" name="contactparent"
                                                         placeholder="Contact du parent"
-                                                        value="{{ $etudiant->contact }}" required>
+                                                        value="{{ $etudiant->contactparent }}" required>
                                                     <div class="invalid-feedback">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12">
                                                     <input type="email" class="form-control"
-                                                        id="emailp{{ $etudiant->id }}" name="emailp"
-                                                        placeholder="Email du parent" value="{{ $etudiant->email }}"
+                                                        id="emailp{{ $etudiant->id }}" name="emailparent"
+                                                        placeholder="Email du parent" value="{{ $etudiant->emailparent }}"
                                                         required>
                                                     <div class="invalid-feedback">
                                                     </div>
@@ -434,8 +426,10 @@
 
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <select name="role_id" id="role_id" class="form-control">
-                                        <option value="1">Filière</option>
+                                    <select name="filiere_id" id="filiere_id" class="form-control">
+                                        @foreach ($listefilieres as $listefiliere)
+                                            <option value="{{$listefiliere->id}}">{{$listefiliere->nomfilieretablissement}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -462,13 +456,6 @@
                                 <div class="invalid-feedback">
                                 </div>
                             </div>
-                            {{--
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="adresse" name="adresse"
-                                        placeholder="Adresse" value="" required>
-                                </div>
-                            </div> --}}
 
                             <div class="col-sm-6">
                                 <input type="Adresse" class="form-control" id="adresse" name="adresse"
@@ -476,27 +463,27 @@
                                 <div class="invalid-feedback">
                                 </div>
                             </div>
-                            {{-- <div class="col-sm-6" style="display: none">
-                                <input type="password" class="form-control" id="password" name="password"
-                                    value="password" placeholder="Password" value="" required>
-                                <div class="invalid-feedback">
-                                    Valid subject is required.
-                                </div>
-                            </div> --}}
+
+                            <div class="col-sm-6" style="display: none">
+                                <select name="role_id" id="role_id" class="form-control">
+                                    <option value="1">Etudiant</option>
+                                </select>
+                            </div>
+
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" id="nomp" name="nomp"
+                                <input type="text" class="form-control" id="nomp" name="nomparent"
                                     placeholder="Nom Parent">
                                 <div class="invalid-feedback">
                                 </div>
                             </div>
                             <div class="col-sm-6">
-                                <input type="tel" class="form-control" id="contactp" name="contactp"
+                                <input type="tel" class="form-control" id="contactp" name="contactparent"
                                     placeholder="Contact du parent">
                                 <div class="invalid-feedback">
                                 </div>
                             </div>
                             <div class="col-sm-12">
-                                <input type="email" class="form-control" id="emailp" name="emailp"
+                                <input type="email" class="form-control" id="emailp" name="emailparent"
                                     placeholder="Email du parent">
                                 <div class="invalid-feedback">
                                 </div>

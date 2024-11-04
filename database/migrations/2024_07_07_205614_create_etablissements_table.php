@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string('contact');
             $table->string('nomresponsable');
             $table->string('prenomresponsable');
-            //$table->foreignIdFor(TypeEtablissement::class);
+            $table->string('email');
+            $table->mediumText('description')->nullable();
             $table->string('logo')->nullable();
             $table->timestamps();
         });
