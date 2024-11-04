@@ -254,9 +254,8 @@
 
                                                     <!-- Sélection des niveaux -->
                                                     <div class="col-sm-6">
-                                                        <select class="select2-multiple form-control"
-                                                            name="niveau_id[]" style="width: 100%"
-                                                            id="niveaueditselect2" multiple>
+                                                        <select class="form-control"
+                                                            name="niveau_id" style="width: 100%">
                                                             @foreach ($niveaux as $niveau)
                                                                 <option value="{{ $niveau->id }}"
                                                                     {{ in_array($niveau->id, (array) json_decode($filiere->niveau_id, true) ?? []) ? 'selected' : '' }}>

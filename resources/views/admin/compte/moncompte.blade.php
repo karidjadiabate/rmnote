@@ -684,7 +684,7 @@
 
                             <label for="about">À propos</label>
 
-                            <textarea id="about" name="about" placeholder="Rédiger votre biographie"></textarea>
+                            <textarea id="apropos" name="apropos" placeholder="Rédiger votre biographie">{{auth()->user()->apropos}}</textarea>
 
                         </div>
 

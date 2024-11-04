@@ -25,8 +25,12 @@ return new class extends Migration
             $table->string('email')->unique()->nullable();
             $table->string('contact')->nullable();
             $table->string('adresse')->nullable();
+            $table->string('apropos')->nullable();
+            $table->string('nomparent')->nullable();
+            $table->string('contactparent')->nullable();
+            $table->string('emailparent')->nullable();
             $table->foreignIdFor(Classe::class)->nullable();
-            $table->foreignIdFor(Role::class);
+            $table->foreignIdFor(Role::class)->nullable();
             $table->foreignIdFor(Etablissement::class)->onDelete('cascade')->nullable();
             $table->foreignIdFor(Filiere::class)->onDelete('cascade')->nullable();
             $table->text('selected_classes')->nullable();

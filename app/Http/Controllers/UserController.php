@@ -139,7 +139,10 @@ class UserController extends Controller
             'datenaiss' => $request->datenaiss,
             'adresse' => $request->adresse,
             'filiere_id' => $request->filiere_id,
-            'apropos' => $request->apropos
+            'apropos' => $request->apropos,
+            'nomparent' => $request->nomparent,
+            'contactparent' => $request->contactparent,
+            'emailparent' => $request->emailparent,
         ];
 
         if ($request->role_id == 1) {
@@ -230,6 +233,9 @@ class UserController extends Controller
             $user->adresse = $request->adresse;
             $user->filiere_id = $request->filiere_id;
             $user->apropos = $request->apropos;
+            $user->nomparent = $request->nomparent;
+            $user->contactparent = $request->contactparent;
+            $user->emailparent = $request->emailparent;
 
         } elseif ($user->role_id == 2) {
             if (is_array($request->matiere_id)) {
