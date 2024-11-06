@@ -23,8 +23,9 @@ return new class extends Migration
             $table->foreignIdFor(Filiere::class);
             $table->foreignIdFor(Classe::class);
             $table->time('debut');
-            $table->time('fin');
+            $table->time('fin')->nullable();
             $table->date('date');
+            $table->time('duree');
             $table->foreignIdFor(Etablissement::class);
             $table->timestamps();
         });

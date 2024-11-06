@@ -6,6 +6,7 @@ use App\Models\Sujet;
 use App\Http\Requests\StoreSujetRequest;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Http\Requests\UpdateSujetRequest;
+use App\Models\CalendrierEvaluation;
 use App\Models\Classe;
 use App\Models\EtablissementFiliere;
 use App\Models\Filiere;
@@ -14,9 +15,8 @@ use App\Models\TypeSujet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use App\Models\User;
-
-
-
+use Carbon\Carbon;
+use Carbon\CarbonInterval;
 
 class SujetController extends Controller
 {
@@ -166,6 +166,36 @@ class SujetController extends Controller
                 'user_id' => auth()->user()->id,
                 'etablissement_id' => auth()->user()->etablissement_id
             ]);
+
+
+
+// Heure de début
+$debut = Carbon::now();
+
+// Récupérer la durée en heures depuis la validation
+$hours = $validated['heure']; // Par exemple, `4` pour 4 heures
+
+// Créer un intervalle de durée
+$duree = CarbonInterval::hours($hours);
+
+// Calculer l'heure de fin en ajoutant la durée au début
+$fin = $debut->copy()->add($duree);
+
+// Enregistrement dans la table CalendrierEvaluation
+CalendrierEvaluation::create([
+    'matiere_id' => $validated['matiere_id'],
+    'type_sujet_id' => $validated['type_sujet_id'],
+    'filiere_id' => $validated['filiere_id'],
+    'classe_id' => $validated['classe_id'],
+    'date' => $debut->toDateString(),
+    'debut' => $debut->format('H:i'),
+    'fin' => $fin->format('H:i'), // Heure de fin calculée
+    'duree' => $duree->format('%H:%I'), // Durée au format `time`
+    'etablissement_id' => auth()->user()->etablissement_id
+]);
+
+
+
 
             // Sauvegarder les sections, questions et réponses
             foreach ($request->input('sections', []) as $sectionKey => $sectionData) {

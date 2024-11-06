@@ -951,41 +951,41 @@
     <script>
         $(document).ready(function() {
 
-            $('#classeselect2').select2({
+            // $('#classeselect2').select2({
 
-                placeholder: "Classes",
+            //     placeholder: "Classes",
 
-                allowClear: true,
+            //     allowClear: true,
 
-            });
-
-
-
-            $('#matiereselect2').select2({
-
-                placeholder: "Matière",
-
-                allowClear: true,
-
-            });
-
-            $('#classeselect3').select2({
-
-                placeholder: "Classes",
-
-                allowClear: true,
-
-            });
+            // });
 
 
 
-            $('.matiereprof').select2({
+            // $('#matiereselect2').select2({
 
-                placeholder: "Matière",
+            //     placeholder: "Matière",
 
-                allowClear: true,
+            //     allowClear: true,
 
-            });
+            // });
+
+            // $('#classeselect3').select2({
+
+            //     placeholder: "Classes",
+
+            //     allowClear: true,
+
+            // });
+
+
+
+            // $('.matiereprof').select2({
+
+            //     placeholder: "Matière",
+
+            //     allowClear: true,
+
+            // });
 
 
 

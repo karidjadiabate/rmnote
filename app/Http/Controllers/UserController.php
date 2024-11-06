@@ -173,7 +173,7 @@ class UserController extends Controller
             $user->save();
         }
 
-        $user->notify(new NouveauCompteNotification($user->email, $passwordPlain));
+        //$user->notify(new NouveauCompteNotification($user->email, $passwordPlain));
 
         if ($user->role_id == 1) {
             $user->classe_id = $request->classe_id;

@@ -282,39 +282,19 @@
                         <div class="d-flex flex-column  p-3 mb-4 perfo">
                             <h4 class="mb-3 text-start p-3">Calendrier des tests</h4>
                             <div class="event-list mb-4">
+                                @foreach ($listecalendarevaluations as $listecalendarevaluation)
                                 <div class="event-card col-md-4">
                                     <div class="event-cards col-md-12">
-                                        <p class="text-end pe-3 col-md-6"><i class="fa-regular fa-clock"></i>08h - 12h
+                                        <p class="text-end pe-3 col-md-6"><i class="fa-regular fa-clock"></i>{{ \Carbon\Carbon::parse($listecalendarevaluation->debut)->format('H:i') }} - {{ \Carbon\Carbon::parse($listecalendarevaluation->fin)->format('H:i') }}
                                         </p>
-                                        <p class="text-start col-md-6">16-07-2024</p></br>
+                                        <p class="text-start col-md-6">{{ \Carbon\Carbon::parse($listecalendarevaluation->date)->format('d - m - Y') }}</p></br>
                                     </div>
                                     <div class="event-cards col-md-12">
-                                        <p class="text-end pe-3 col-md-6">Économie</p>
-                                        <p class="text-start col-md-6">MA2A</p>
+                                        <p class="text-end pe-3 col-md-6">{{$listecalendarevaluation->matiere->nommatiere}}</p>
+                                        <p class="text-start col-md-6">{{$listecalendarevaluation->classe->nomclasse}}</p>
                                     </div>
                                 </div>
-                                <div class="event-card col-md-4">
-                                    <div class="event-cards col-md-12">
-                                        <p class="text-end pe-3 col-md-6"><i class="fa-regular fa-clock"></i>08h - 12h
-                                        </p>
-                                        <p class="text-start">24-07-2024</p></br>
-                                    </div>
-                                    <div class="event-cards col-md-12">
-                                        <p class="text-end pe-3 col-md-6">Comptabilité</p>
-                                        <p class="text-start">CFIC</p>
-                                    </div>
-                                </div>
-                                <div class="event-card col-md-4">
-                                    <div class="event-cards col-md-12">
-                                        <p class="text-end pe-3 col-md-6"><i class="fa-regular fa-clock"></i>14h - 18h
-                                        </p>
-                                        <p class="text-start">05-11-2024</p></br>
-                                    </div>
-                                    <div class="event-cards col-md-12">
-                                        <p class="text-end pe-3 col-md-6">IDA</p>
-                                        <p class="text-start">MATH-FIN</p>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                             <div id="calendar" class="mb-4">
                                 <div class="calendar-header">

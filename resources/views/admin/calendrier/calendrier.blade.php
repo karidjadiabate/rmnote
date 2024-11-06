@@ -331,23 +331,23 @@
         /*modal*/
         .modal {
     display: none; /* Cacher par défaut */
-    position: fixed; 
-    z-index: 1; 
+    position: fixed;
+    z-index: 1;
     left: 0;
     top: 0;
-    width: 100%; 
-    height: 100%; 
-    overflow: auto; 
-    background-color: rgb(0,0,0); 
-    background-color: rgba(0,0,0,0.4); 
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
 }
 
 .modal-content {
     background-color: #fefefe;
-    margin: 15% auto; 
+    margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%; 
+    width: 80%;
 }
 
 .close-button {
@@ -417,139 +417,140 @@ tr:first-child>td>.fc-day-grid-event {
                 <div class="modal-content">
                     <button type="button" class="custom-close-btn" data-bs-dismiss="modal" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
                     <div class="modal-body">
-                        <form id="eventForm">
+                        <form id="eventForm" action="{{route('calendrieradmin.store')}}" method="POST">
+                            @csrf
                             <!-- 8 Input Fields -->
                            <div class="form-group col-md-12 row g-3">
                                 <div class="form-group col-md-6">
-                                    <select class="form-control" id="input1" required>
+                                    <select class="form-control" name="matiere_id" id="input1" required>
                                         <option value="" disabled selected>Matière</option>
-                                        <option value="option1">Option 1</option>
-                                        <option value="option2">Option 2</option>
-                                        <option value="option3">Option 3</option>
-                                        <!-- Ajoutez d'autres options ici -->
+                                        @foreach ($matieres as $matiere)
+                                            <option value="{{$matiere->id}}">{{$matiere->nommatiere}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <select class="form-control" id="input2" required>
-                                        <option value="" disabled selected>Catégorie d'évolution</option>
-                                        <option value="option1">Option 1</option>
-                                        <option value="option2">Option 2</option>
-                                        <option value="option3">Option 3</option>
-                                        <!-- Ajoutez d'autres options ici -->
+                                    <select class="form-control" name="type_sujet_id" id="input2" required>
+                                        <option value="" disabled selected>Catégorie d'évaluation</option>
+                                            <option value="1">Devoir</option>
+                                            <option value="2">Examen</option>
                                     </select>
                                 </div>
                            </div>
                            <div class="form-group col-md-12 row g-3">
                                 <div class="form-group col-md-6">
-                                    <select class="form-control" id="input3" required>
+                                    <select class="form-control" name="filiere_id" id="input3" required>
                                         <option value="" disabled selected>Filière</option>
-                                        <option value="option1">Option 1</option>
-                                        <option value="option2">Option 2</option>
-                                        <option value="option3">Option 3</option>
-                                        <!-- Ajoutez d'autres options ici -->
+                                        @foreach ($filieres as $filiere)
+                                            <option value="{{$filiere->id}}">{{$filiere->filiere->nomfiliere ?? $filiere->nomfilieretablissement }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                <div class="form-group col-md-6">
-                                    <select class="form-control" id="input4" required>
+                                    <select class="form-control" name="classe_id" id="input4" required>
                                         <option value="" disabled selected>Classe</option>
-                                        <option value="classe1">Classe 1</option>
-                                        <option value="classe2">Classe 2</option>
-                                        <option value="classe3">Classe 3</option>
-                                        <!-- Ajoutez d'autres options ici -->
+                                        @foreach ($classes as $classe)
+                                            <option value="{{$classe->id}}">{{$classe->nomclasse}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                            </div>
                            <div class="form-group col-md-12 row g-3">
                                <div class="form-group col-md-3">
-                                   <input type="time" class="form-control" id="input5" placeholder="Début" required>
+                                   <input type="time" name="debut" class="form-control" id="input5" placeholder="Début" required>
                                </div>
                                <div class="form-group col-md-3">
-                                   <input type="time" class="form-control" id="input6" placeholder="Fin" required>
+                                   <input type="time" name="fin" class="form-control" id="input6" placeholder="Fin" required>
                                </div>
                                <div class="form-group col-md-6">
-                                   <input type="date" class="form-control" id="input7" placeholder="Date" required>
+                                   <input type="date" name="date" class="form-control" id="input7" placeholder="Date" required>
                                </div>
+                           </div>
+
+                           <div class="modal-footer d-flex justify-content-between margin-space">
+                            <button type="submit" class="btn btn-success" id="submitEvent">Sauvegarder</button>
+                            <button type="button" class="btn btn-secondaire margin-r" data-dismiss="modal">Annuler</button>
                            </div>
                         </form>
                     </div>
-                    <div class="modal-footer d-flex justify-content-between margin-space">
-                        <button type="submit" class="btn btn-success" id="submitEvent">Sauvegarder</button>
-                        <button type="cancel" class="btn btn-secondaire margin-r" data-bs-dismiss="modal" aria-label="Close" >Annuler</button>
-                    </div>
+
                 </div>
             </div>
         </div>
 
     </div>
 
-<!-- Modal Structure -->
+        <!-- Modal Structure -->
+       <!-- Modal Structure pour l'édition -->
 <div class="modal fade" id="eventModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <button type="button" class="custom-close-btn" data-bs-dismiss="modal" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
-                    <div class="modal-body">
-                        <form id="eventForm">
-                            <!-- 8 Input Fields -->
-                           <div class="form-group col-md-12 row g-3">
-                                <div class="form-group col-md-6">
-                                    <select class="form-control" id="input10" disabled>
-                                        <option value="" disabled selected>Matière</option>
-                                        <option value="option1">Option 1</option>
-                                        <option value="option2">Option 2</option>
-                                        <option value="option3">Option 3</option>
-                                        <!-- Ajoutez d'autres options ici -->
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <select class="form-control" id="input20" disabled>
-                                        <option value="" disabled selected>Catégorie d'évolution</option>
-                                        <option value="option1">Option 1</option>
-                                        <option value="option2">Option 2</option>
-                                        <option value="option3">Option 3</option>
-                                        <!-- Ajoutez d'autres options ici -->
-                                    </select>
-                                </div>
-                           </div>
-                           <div class="form-group col-md-12 row g-3">
-                                <div class="form-group col-md-6">
-                                    <select class="form-control" id="input30" disabled>
-                                        <option value="" disabled selected>Filière</option>
-                                        <option value="option1">Option 1</option>
-                                        <option value="option2">Option 2</option>
-                                        <option value="option3">Option 3</option>
-                                        <!-- Ajoutez d'autres options ici -->
-                                    </select>
-                                </div>
-                               <div class="form-group col-md-6">
-                                    <select class="form-control" id="input40" disabled>
-                                        <option value="" disabled selected>Classe</option>
-                                        <option value="classe1">Classe 1</option>
-                                        <option value="classe2">Classe 2</option>
-                                        <option value="classe3">Classe 3</option>
-                                        <!-- Ajoutez d'autres options ici -->
-                                    </select>
-                                </div>
-                           </div>
-                           <div class="form-group col-md-12 row g-3">
-                               <div class="form-group col-md-3">
-                                   <input type="time" class="form-control" id="input50" placeholder="Début" required>
-                               </div>
-                               <div class="form-group col-md-3">
-                                   <input type="time" class="form-control" id="input60" placeholder="Fin" disabled>
-                               </div>
-                               <div class="form-group col-md-6">
-                                   <input type="date" class="form-control" id="input70" placeholder="Date" required>
-                               </div>
-                           </div>
-                        </form>
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <button type="button" class="custom-close-btn" data-bs-dismiss="modal" aria-label="Close">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="modal-body">
+                <form id="editEventForm">
+                    <!-- Champs grisés sauf date, début et fin -->
+                    <div class="form-group col-md-12 row g-3">
+                        <div class="form-group col-md-6">
+                            <select class="form-control" name="matiere_id" id="editInput1" disabled>
+                                <option value="" disabled selected>Matière</option>
+                                @foreach ($matieres as $matiere)
+                                    <option value="{{$matiere->id}}">{{$matiere->nommatiere}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <select class="form-control" name="type_sujet_id" id="editInput2" disabled>
+                                <option value="" disabled selected>Catégorie d'évaluation</option>
+                                @foreach ($typesujets as $typesujet)
+                                    <option value="{{$typesujet->id}}">{{$typesujet->libtypesujet}}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
+                    <div class="form-group col-md-12 row g-3">
+                        <div class="form-group col-md-6">
+                            <select class="form-control" name="filiere_id" id="editInput3" disabled>
+                                <option value="" disabled selected>Filière</option>
+                                @foreach ($filieres as $filiere)
+                                    <option value="{{$filiere->id}}">{{$filiere->filiere->nomfiliere ?? $filiere->nomfilieretablissement }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <select class="form-control" name="classe_id" id="editInput4" disabled>
+                                <option value="" disabled selected>Classe</option>
+                                @foreach ($classes as $classe)
+                                    <option value="{{$classe->id}}">{{$classe->nomclasse}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-12 row g-3">
+                        <div class="form-group col-md-3">
+                            <input type="time" name="debut" class="form-control" id="editInput5" placeholder="Début" required>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <input type="time" name="fin" class="form-control" id="editInput6" placeholder="Fin" required disabled>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <input type="date" name="date" class="form-control" id="editInput7" placeholder="Date" required>
+                        </div>
+                    </div>
+
                     <div class="modal-footer d-flex justify-content-between margin-space">
                         <button type="submit" class="btn btn-success" id="submitEvent">Sauvegarder</button>
-                        <button type="cancel" class="btn btn-secondaire margin-r" data-bs-dismiss="modal" aria-label="Close">Annuler</button>
+                        <button type="button" class="btn btn-secondaire margin-r" data-bs-dismiss="modal" aria-label="Close">Annuler</button>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
+    </div>
+</div>
+
+
 
 
                             <!-- Modal de Suppression -->
@@ -559,7 +560,7 @@ tr:first-child>td>.fc-day-grid-event {
                                     <div class="modal-content text-center">
                                         <button type="button" class="custom-close-btn" data-bs-dismiss="modal" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
                                         <div  class="modal-body text-center d-flex flex-column" id="">
-                                            <i class="fa-solid fa-triangle-exclamation" id="fa-triangle-exclamation"></i>                            
+                                            <i class="fa-solid fa-triangle-exclamation" id="fa-triangle-exclamation"></i>
                                             <span>Êtes vous sûres ?</span>
                                         </div>
                                         <p>Voulez-vous supprimer l'évaluation <strong><span id="nom_affiche"></span></strong> ?</p>
@@ -590,139 +591,215 @@ tr:first-child>td>.fc-day-grid-event {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
     <script>
-$(document).ready(function() {
-    // Définir les variables pour les dates des événements
-    var heure = "12:00:00"; // Corriger le double point à la fin
-    var ma2aStart = '2024-10-15T08:30:00';
-    var ma2aEnd = `2024-10-15T${heure}`; // Utiliser les backticks pour l'interpolation de chaîne
+        $(document).ready(function() {
+            // Ajouter le token CSRF dans toutes les requêtes AJAX
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
 
-    var cficStart = '2024-10-23T08:20:00';
-    var cficEnd = '2024-10-23T12:00:00';
+            var calendrierEvents = @json($calendrierEvents);
+            $('#calendar').fullCalendar({
+                locale: 'fr',
+                header: {
+                    left: 'createButton',
+                    center: 'searchBar title',
+                    right: 'agendaDay,agendaWeek,month prev,next'
+                },
+                customButtons: {
+                    createButton: {
+                        text: '+ Créer',
+                        click: function() {
+                            $('#createEventModal').modal('show');
+                        }
+                    },
+                },
+                defaultDate: new Date(),
+                editable: true,
+                events: calendrierEvents,
 
-    $('#calendar').fullCalendar({
-        locale: 'fr',
-        header: {
-            left: 'createButton',
-            center: 'searchBar title',
-            right: 'agendaDay,agendaWeek,month prev,next'
-        },
-        defaultDate: new Date(),
-        editable: true,
-        events: [
-            {
-                id: 1, // Assurez-vous d'ajouter un identifiant unique pour chaque événement
-                title: ' MA2A ',
-                start: ma2aStart, // Utiliser la variable pour la date de début
-                end: ma2aEnd, // Utiliser la variable pour la date de fin
-                className: 'event-economie-ma2a',
-                description: 'Économie pour MA2A',
-                location: 'Devoir'
-            },
-            {
-                id: 2, // Identifiant pour le deuxième événement
-                title: ' CFIC ',
-                start: cficStart, // Utiliser la variable pour la date de début
-                end: cficEnd, // Utiliser la variable pour la date de fin
-                className: 'event-economie-ma2a',
-                description: 'Économie pour CFIC',
-                location: 'Devoir'
-            }
-        ],
-        eventRender: function(event, element) {
-            element.find('.fc-title').append('<span class="event-icon"><i class="fa-solid fa-trash"></i></span>');
+                // Fonction pour rendre chaque événement
+                eventRender: function(event, element) {
 
-            // Écouter le clic sur l'icône de l'événement
-            element.find('.event-icon').on('click', function(e) {
-                e.stopPropagation(); // Empêcher le clic d'atteindre l'élément parent
-                $('#deleteclasse').modal('show'); // Ouvrir le deuxième modal
+                    console.log("Données de l'événement:", event);
 
-                // Stocker une référence à l'élément parent .fc-content pour utilisation ultérieure
-                const parentContent = $(this).closest('.fc-content');
+                    // Ajouter une icône de suppression
+                    element.find('.fc-title').html(event.title);
+                    element.find('.fc-title').append('<span class="event-icon"><i class="fa-solid fa-trash"></i></span>');
 
-                // Lorsque le bouton de confirmation est cliqué, ajouter la classe 'barre'
-                $(document).on('click', '.btn-success', function() {
-                    parentContent.addClass('barre'); // Ajouter la classe barre à l'élément parent
-                    $('#deleteclasse').modal('hide'); // Optionnel : Fermer le modal après la confirmation
+                    // Associer l'événement de suppression
+                    element.find(".event-icon").on('click', function() {
+                        if (confirm("Voulez-vous vraiment supprimer cet événement ?")) {
+                            $.ajax({
+                                url: '{{ route("deletevaluation") }}',
+                                data: {
+                                    id: event.id
+                                },
+                                type: 'POST',
+                                success: function(response) {
+                                    alert('Événement supprimé avec succès !');
+                                    $('#calendar').fullCalendar('removeEvents', event._id);
+                                },
+                                error: function() {
+                                    alert('Erreur lors de la suppression de l\'événement.');
+                                }
+                            });
+                        }
+                    });
+
+                    // Appliquer des couleurs selon le jour de la semaine
+                    var dayOfWeek = event.start.day(); // 0 = dimanche, 1 = lundi, etc.
+                    switch(dayOfWeek) {
+                        case 0: // Dimanche
+                            element.css('background-color', '#f39c12');
+                            break;
+                        case 1: // Lundi
+                            element.css('background-color', '#3498db');
+                            break;
+                        case 2: // Mardi
+                            element.css('background-color', '#2ecc71');
+                            break;
+                        case 3: // Mercredi
+                            element.css('background-color', '#9b59b6');
+                            break;
+                        case 4: // Jeudi
+                            element.css('background-color', '#e74c3c');
+                            break;
+                        case 5: // Vendredi
+                            element.css('background-color', '#f1c40f');
+                            break;
+                        case 6: // Samedi
+                            element.css('background-color', '#16a085');
+                            break;
+                    }
+                },
+
+                eventClick: function(event) {
+
+                    // Convertir la durée de l'événement en heures et minutes
+                    let durationParts = event.duree.split(':'); // Par exemple "02:30"
+                    let eventDurationHours = parseInt(durationParts[0], 10); // Heures
+                    let eventDurationMinutes = parseInt(durationParts[1], 10); // Minutes
+                    $('#editEventForm').data('event-id', event.id); // Définit l'ID de l'événement
+
+                    // Appliquer les valeurs aux sélections et champs dans le modal d'édition
+                    $('#editInput1').val(event.matiere_id).trigger('change');
+                    $('#editInput2').val(event.type_sujet_id).trigger('change');
+                    $('#editInput3').val(event.filiere_id).trigger('change');
+                    $('#editInput4').val(event.classe_id).trigger('change');
+                    $('#editInput5').val(event.start.format('HH:mm'));
+                    $('#editInput7').val(event.start.format('YYYY-MM-DD'));
+
+                    // Définir la valeur de fin si elle existe
+                    if (event.end) {
+                        $('#editInput6').val(event.end.format('HH:mm'));
+                    } else {
+                        $('#editInput6').val('');
+                    }
+
+                    // Afficher le modal d'édition
+                    setTimeout(function() {
+                        $('#eventModal').modal('show');
+                    }, 100);
+
+                    // Écouteur de changement pour recalculer l'heure de fin lorsque l'heure de début change
+                    $('#editInput5').on('change', function() {
+                        let newStartTime = $(this).val(); // Par exemple, "15:00"
+
+                        if (newStartTime) {
+                            // Utiliser moment.js pour manipuler l'heure
+                            let startMoment = moment(newStartTime, 'HH:mm');
+
+                            // Ajouter la durée en heures et minutes pour obtenir l'heure de fin
+                            let endMoment = startMoment.clone()
+                                .add(eventDurationHours, 'hours')
+                                .add(eventDurationMinutes, 'minutes');
+
+                            // Mettre à jour le champ de fin avec la nouvelle heure calculée
+                            $('#editInput6').val(endMoment.format('HH:mm'));
+                        }
+                    });
+                },
+
+
+                // Mise à jour de l'événement lors d'un déplacement
+                eventDrop: function(event, delta, revertFunc) {
+                    var start_time = event.start.format('HH:mm:ss');
+                    var end_time = event.end ? event.end.format('HH:mm:ss') : null;
+                    var event_date = event.start.format('YYYY-MM-DD');
+
+                    $.ajax({
+                        url: '{{ route("updatevaluation") }}',
+                        data: {
+                            id: event.id,
+                            debut: start_time,
+                            fin: end_time,
+                            date: event_date
+                        },
+                        type: 'POST',
+                        success: function(response) {
+                            alert('Événement mis à jour avec succès !');
+                        },
+                        error: function() {
+                            alert('Erreur lors de la mise à jour de l\'événement.');
+                            revertFunc();
+                        }
+                    });
+                }
+            });
+
+            $('#editEventForm').on('submit', function(e) {
+
+                // Récupération des données du formulaire
+                let debut = $('#editInput5').val();
+                let fin = $('#editInput6').val();
+                let date = $('#editInput7').val();
+                let eventId = $('#editEventForm').data('event-id'); // Assurez-vous de définir cet ID lors de l'ouverture du modal
+
+                // Vérification de l'ID de l'événement
+                if (!eventId) {
+                    alert('ID de l\'événement manquant');
+                    return;
+                }
+
+                // Envoi de la requête AJAX
+                $.ajax({
+                    url: '{{ route("updatevaluation") }}',
+                    type: 'POST',
+                    data: {
+                        id: eventId,
+                        debut: debut,
+                        fin: fin,
+                        date: date
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            alert(response.success);
+                            $('#calendar').fullCalendar('refetchEvents'); // Rafraîchit les événements dans le calendrier
+                            $('#eventModal').modal('hide'); // Ferme le modal d'édition
+                        } else if (response.error) {
+                            alert(response.error);
+                        }
+                    },
+                    error: function(xhr) {
+                        alert('Erreur lors de la mise à jour de l\'événement.');
+                    }
                 });
             });
 
 
-            // Écouter le clic sur l'élément de l'événement
-            element.on('click', function() {
-                $('#eventModal').modal('show'); // Ouvrir le premier modal
-
-                // Remplir les inputs avec les données de l'événement
-                $('#input10').val(event.title);
-                $('#input20').val(event.location);
-                $('#input30').val(event.description);
-                $('#input40').val(event.className);
-                $('#input50').val(event.start.format('HH:mm'));
-                $('#input60').val(event.end.format('HH:mm'));
-                $('#input70').val(event.start.format('YYYY-MM-DD'));
-
-                // Supprimer le backdrop
-                setTimeout(function() {
-                    $('.modal-backdrop').remove();
-                }, 0);
-            });
-        },
-        // Écouter le changement de position de l'événement
-        eventDrop: function(event, delta, revertFunc) {
-            // Mettre à jour les dates de l'événement
-            event.start = event.start.clone(); // Clone pour éviter de modifier l'original
-            event.end = event.end.clone(); // Clone pour éviter de modifier l'original
-            event.start.add(delta); // Ajoute la delta (décalage) à la date de début
-            event.end.add(delta); // Ajoute la delta (décalage) à la date de fin
-
-            // Enregistrer les nouvelles dates dans la base de données via AJAX
-            $.ajax({
-                url: '', // L'URL de votre script côté serveur pour mettre à jour l'événement
-                method: 'POST',
-                data: {
-                    id: event.id, // Envoyer l'identifiant de l'événement
-                    start: event.start.format(),
-                    end: event.end.format()
-                },
-                success: function(response) {
-                    // Traitement en cas de succès
-                    console.log('Événement mis à jour avec succès:', response);
-                },
-                error: function() {
-                    // Si une erreur se produit
-                    alert('Une erreur s\'est produite lors de la mise à jour de l\'événement.');
-                    revertFunc(); // Revenir à la position originale si l'erreur se produit
-                }
-            });
-
-            // Ne pas annuler le changement
-            // Si vous voulez annuler, utilisez revertFunc();
-        }
-    });
-
-    $(".fc-center").prepend(`
-        <div class="search-bar">
-            <i class="fas fa-search"></i>
-            <input type="text" placeholder="Rechercher...">
-        </div>
-    `);
-
-    // Gérer le formulaire du premier modal
-    $('#eventForm').on('submit', function(event) {
-        event.preventDefault();
-        alert('Formulaire soumis');
-        $('#eventModal').modal('hide'); // Fermer le premier modal
-    });
-
-    // Gérer le formulaire du deuxième modal
-    $('#deleteForm').on('submit', function(event) {
-        event.preventDefault();
-        alert('Formulaire de suppression soumis');
-        $('#deleteclasse').modal('hide'); // Fermer le deuxième modal
-    });
-});
-
-</script>
+            // Ajouter une barre de recherche dans le calendrier
+            $(".fc-center").prepend(`
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Rechercher...">
+                </div>
+            `);
+        });
+    </script>
 
 
 </body>

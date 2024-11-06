@@ -143,7 +143,7 @@ class User extends Authenticatable
             ->where('u.role_id', '=', 1)
             ->where('u.etablissement_id', '=', $ecoleId)
             ->select('u.id', 'u.nom','u.prenom','u.image', 'u.contact', 'e.nometablissement','u.email','u.adresse','u.password',
-            'u.matricule','c.nomclasse','u.datenaiss','u.classe_id','genre','u.filiere_id')
+            'u.matricule','c.nomclasse','u.datenaiss','u.classe_id','genre','u.filiere_id','u.nomparent','contactparent','emailparent')
             ->get();
 
         return $etudiants;
