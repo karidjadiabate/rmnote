@@ -114,7 +114,7 @@ class DemoController extends Controller
 
             // Créer l'utilisateur admin
             $admin = User::create($dataAdmin);
-            $admin->notify(new NouveauCompteNotification($admin->email, $passwordPlain));
+            //$admin->notify(new NouveauCompteNotification($admin->email, $passwordPlain));
 
         } catch (Exception $e) {
             Log::error('Erreur lors de la création de l\'admin: ' . $e->getMessage());

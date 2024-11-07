@@ -381,458 +381,239 @@
 
 
     @if (auth()->user()->role_id == 2)
-        <form action="{{ route('sujetprofesseur.store') }}" class="form" method="POST" enctype="multipart/form-data">
-            @csrf
-            <div class="form-step form-step-active">
-                <div class="wo">
-                    <div class="input-group select-group">
-                        <label for="position" class="label">Type de sujet</label>
-                        <select name="type_sujet_id" id="position" class="select-effect-1" required>
-                            <option value="" disabled selected hidden>
-                                Choisissez le type de sujet
-                            </option>
-                            @foreach ($typessujets as $typessujet)
-                                <option value="{{ $typessujet->id }}" data-typesujet="{{ $typessujet->libtypesujet }}">{{ $typessujet->libtypesujet }}</option>
-                            @endforeach
-                        </select>
-                        <span class="border"></span>
-                        <div class="error-message" id="position-error" style="display: none; color: red;">Veuillez
-                            sélectionner un type de sujet.</div>
-                    </div>
-                    <div class="input-group select-group">
-                        <label for="position" class="label">Matière</label>
-                        <select name="matiere_id" id="positions" class="select-effect-1" required>
-                            <option value="" disabled selected hidden>
-                                Sélectionner la matière
-                            </option>
+    <form action="{{ route('sujetprofesseur.store') }}" class="form" method="POST" enctype="multipart/form-data">
+@elseif (auth()->user()->role_id == 3)
+    <form action="{{ route('sujetadmin.store') }}" class="form" method="POST" enctype="multipart/form-data">
+@endif
+    @csrf
+    <div class="form-step form-step-active">
+        <div class="wo">
+            <div class="input-group select-group">
+                <label for="position" class="label">Type de sujet</label>
+                <select name="type_sujet_id" id="position" class="select-effect-1" required>
+                    <option value="" disabled selected hidden>
+                        Choisissez le type de sujet
+                    </option>
+                    @foreach ($typessujets as $typessujet)
+                        <option value="{{ $typessujet->id }}" data-typesujet="{{ $typessujet->libtypesujet }}">{{ $typessujet->libtypesujet }}</option>
+                    @endforeach
+                </select>
+                <span class="border"></span>
+                <div class="error-message" id="position-error" style="display: none; color: red;">Veuillez
+                    sélectionner un type de sujet.</div>
+            </div>
+            <div class="input-group select-group">
+                <label for="position" class="label">Matière</label>
+                <select name="matiere_id" id="positions" class="select-effect-1" required>
+                    <option value="" disabled selected hidden>
+                        Sélectionner la matière
+                    </option>
 
-                            @if(auth()->user()->role_id == 2)
-                                @foreach ($professeurMatiere as $matiere)
-                                    <option value="{{ $matiere->id }}" data-matiere ="{{ $matiere->nommatiere }}">{{ $matiere->nommatiere }}</option>
-                                @endforeach
-                            @endif
-                        </select>
-                        <span class="border"></span>
-                        <div class="error-message" id="positions-error" style="display: none; color: red;">Veuillez
-                            sélectionner une matière.</div>
-                    </div>
-                    <div class="input-group select-group">
-                        <label for="position" class="label">Filière</label>
-                        <select name="filiere_id" id="positions1" class="select-effect-1" required>
-                            <option value="" disabled selected hidden>
-                                Sélectionnez la Filière
-                            </option>
-                            @foreach ($filieres as $filiere)
-                                <option value="{{ $filiere->id }}" data-filiere="{{ $filiere->filiere->nomfiliere ?? $filiere->nomfilieretablissement }}">{{ $filiere->filiere->nomfiliere ?? $filiere->nomfilieretablissement }}</option>
-                            @endforeach
-                        </select>
-                        <span class="border"></span>
-                        <div class="error-message" id="positions1-error" style="display: none; color: red;">Veuillez
-                            sélectionner une filière.</div>
-                    </div>
-                    <div class="input-group select-group">
-                        <label for="position" class="label">Classe</label>
-                        <select name="classe_id" id="positions2" class="select-effect-1" required>
-                            <option value="" disabled selected hidden>
-                                Sélectionnez la classe
-                            </option>
-                            @foreach ($classes as $classe)
-                                <option value="{{ $classe->id }}" data-classe="{{ $classe->nomclasse }}">{{ $classe->nomclasse }}</option>
-                            @endforeach
-                        </select>
-                        <span class="border"></span>
-                        <div class="error-message" id="positions2-error" style="display: none; color: red;">Veuillez
-                            sélectionner une classe.</div>
-                    </div>
-                    <div class="input-group time-group">
-                        <label for="time" class="label">Durée</label>
-                        <input type="text" name="heure" id="time" class="time-effect-1"
-                            placeholder="hh:mm" onfocus="this.type='time'" onblur="this.type='time'" required />
-                        <span class="border"></span>
-                    </div>
-                    <div class="input-group ">
-                        <label for="consigne" class="label">Consigne</label>
-                        <input type="text" name="consigne" id="consigne" class="time-effect-1"
-                            placeholder="Entrez une consigne..."  required />
-                        <span class="border"></span>
-                        <div class="error-message" id="positions5-error" style="display: none; color: red;">Veuillez
-                            rempli les consignes.</div>
-                    </div><br>
-                    <div class="next-step">
-                    <a href="#" class="btn btn-next width-24 ml-auto disabled" id="suivants">Suivant</a>
+                    @if (auth()->user()->role_id == 3)
+                    @foreach ($matieres as $matiere)
+                        <option value="{{ $matiere->id }}" data-matiere="{{ $matiere->nommatiere }}">{{ $matiere->nommatiere }}</option>
+                    @endforeach
+                    @elseif(auth()->user()->role_id == 2)
+                        @foreach ($professeurMatiere as $matiere)
+                            <option value="{{ $matiere->id }}" data-matiere ="{{ $matiere->nommatiere }}">{{ $matiere->nommatiere }}</option>
+                        @endforeach
+                    @endif
+                </select>
+                <span class="border"></span>
+                <div class="error-message" id="positions-error" style="display: none; color: red;">Veuillez
+                    sélectionner une matière.</div>
+            </div>
+            <div class="input-group select-group">
+                <label for="position" class="label">Filière</label>
+                <select name="filiere_id" id="positions1" class="select-effect-1" required>
+                    <option value="" disabled selected hidden>
+                        Sélectionnez la Filière
+                    </option>
+                    @foreach ($filieres as $filiere)
+                        <option value="{{ $filiere->id }}" data-filiere="{{ $filiere->filiere->nomfiliere ?? $filiere->nomfilieretablissement }}">{{ $filiere->filiere->nomfiliere ?? $filiere->nomfilieretablissement }}</option>
+                    @endforeach
+                </select>
+                <span class="border"></span>
+                <div class="error-message" id="positions1-error" style="display: none; color: red;">Veuillez
+                    sélectionner une filière.</div>
+            </div>
+            <div class="input-group select-group">
+                <label for="position" class="label">Classe</label>
+                <select name="classe_id" id="positions2" class="select-effect-1" required>
+                    <option value="" disabled selected hidden>
+                        Sélectionnez la classe
+                    </option>
+                    @foreach ($classes as $classe)
+                        <option value="{{ $classe->id }}" data-classe="{{ $classe->nomclasse }}">{{ $classe->nomclasse }}</option>
+                    @endforeach
+                </select>
+                <span class="border"></span>
+                <div class="error-message" id="positions2-error" style="display: none; color: red;">Veuillez
+                    sélectionner une classe.</div>
+            </div>
+            <div class="input-group time-group">
+                <label for="time" class="label">Durée</label>
+                <input type="text" name="heure" id="time" class="time-effect-1"
+                    placeholder="hh:mm" onfocus="this.type='time'" onblur="this.type='time'" required />
+                <span class="border"></span>
+            </div>
+            <div class="input-group ">
+                <label for="consigne" class="label">Consigne</label>
+                <input type="text" name="consigne" id="consigne" class="time-effect-1"
+                    placeholder="Entrez une consigne..."  required />
+                <span class="border"></span>
+                <div class="error-message" id="positions5-error" style="display: none; color: red;">Veuillez
+                    rempli les consignes.</div>
+            </div><br>
+            <div class="next-step">
+            <a href="#" class="btn btn-next width-24 ml-auto disabled" id="suivants">Suivant</a>
+        </div>
+        </div>
+
+
+    </div>
+
+    <div class="form-step">
+        <div class="note-container">
+            <span>Note:</span>
+            <input type="number" name="noteprincipale" class="note-value"
+                placeholder="Entrez le nombre total de points *" pattern="\d*" title="Veuillez entrer uniquement des chiffres."/>
+            <a class="enfant_suivant width-24 disabled">Valider</a>
+            <div class="error-message" id="error-message">Le champ ne peut pas être vide.</div>
+            <div class="btns-group avancer">
+                <a href="#" class="btn-prev">Précédent</a>
+                <a href="#" class="btn width-24 disabled valid-not" id="">Suivant</a>
+            </div>
+        </div>
+
+        <div class="frm" style="display: none">
+
+            <div class="sa">
+                <div class="btnas-ends">
+                    <i class="fa-solid fa-x delete-questionnaires"></i>
                 </div>
+                <div class="input-group">
+                    <input type="text" name="sections[0][titre]" id="phone"
+                        placeholder="Sous titre 1" required />
                 </div>
+                <div class="input-group input-with-icon">
+                    <input type="text" name="sections[0][soustitre]" id="preview"
+                        placeholder="Libellé du sous titre" required />
+                    <label for="file-input" class="icon-label"><i class="fa-regular fa-image"></i></label>
+                    <input type="file" id="file-input" class="file-input" data-preview="image-preview"
+                        data-result="preview" name="sections[0][soustitre][image]" style="display: none" />
+                    <img id="image-preview" alt="Aperçu de l'image" />
 
-
+                </div>
             </div>
 
-            <div class="form-step">
-                <div class="note-container">
-                    <span>Note:</span>
-                    <input type="number" name="noteprincipale" class="note-value"
-                        placeholder="Entrez le nombre total de points *" pattern="\d*" title="Veuillez entrer uniquement des chiffres."/>
-                    <a class="enfant_suivant width-24 disabled">Valider</a>
-                    <div class="error-message" id="error-message">Le champ ne peut pas être vide.</div>
-                    <div class="btns-group avancer">
-                        <a href="#" class="btn-prev">Précédent</a>
-                        <a href="#" class="btn width-24 disabled valid-not" id="">Suivant</a>
+            <div class="section-container">
+                <div class="sectio-container">
+                    <div class="btnas-end">
+                        <!-- <i class="fa-solid fa-x delete-section"></i> -->
                     </div>
-                </div>
-
-                <div class="frm" style="display: none">
-
-                    <div class="sa">
-                        <div class="btnas-ends">
-                            <i class="fa-solid fa-x delete-questionnaires"></i>
-                        </div>
-                        <div class="input-group">
-                            <input type="text" name="sections[0][titre]" id="phone"
-                                placeholder="Sous titre 1" required />
-                        </div>
-                        <div class="input-group input-with-icon">
-                            <input type="text" name="sections[0][soustitre]" id="preview"
-                                placeholder="Libellé du sous titre" required />
-                            <label for="file-input" class="icon-label"><i class="fa-regular fa-image"></i></label>
-                            <input type="file" id="file-input" class="file-input" data-preview="image-preview"
-                                data-result="preview" name="sections[0][soustitre][image]" style="display: none" />
-                            <img id="image-preview" alt="Aperçu de l'image" />
-
-                        </div>
-                    </div>
-
-                    <div class="section-container">
-                        <div class="sectio-container">
-                            <div class="btnas-end">
-                                <!-- <i class="fa-solid fa-x delete-section"></i> -->
-                            </div>
-                            <div class="sa-1">
-                                <div class="questionnaire-container">
-                                    <div class="input-group" data-question-index="0">
-                                        <div class="questionnaire">
-                                            <div class="input-group">
-                                                <div class="display-1">
-                                                    <div class="textarea">
-                                                        <textarea name="sections[0][questions][0][libquestion]" id="previews" required placeholder="Question"></textarea>
-                                                    </div>
-                                                    <div class="file-inputa">
-                                                        <div class="eme">
-                                                            <label for="fileinputs"><i
-                                                                    class="fa-regular fa-image"></i></label>
-                                                            <input type="file" id="fileinputs" class="file-input"
-                                                                data-preview="imagepreviews" data-result="previews"
-                                                                name="sections[0][questions][0][image]" style="display: none" />
-                                                            <img id="imagepreviews" alt="Aperçu de l'image" />
-
-                                                        </div>
-                                                        <div>
-                                                            <i
-                                                                class="fa-solid fa-xmark deletes delete-questionnaire"></i>
-                                                        </div>
-                                                        <!-- <i class="fa-solid fa-x  delete-section"></i> -->
-                                                    </div>
-                                                </div>
+                    <div class="sa-1">
+                        <div class="questionnaire-container">
+                            <div class="input-group" data-question-index="0">
+                                <div class="questionnaire">
+                                    <div class="input-group">
+                                        <div class="display-1">
+                                            <div class="textarea">
+                                                <textarea name="sections[0][questions][0][libquestion]" id="previews" required placeholder="Question"></textarea>
                                             </div>
-                                            <div class="input-group">
-                                                <ol class="circle-list">
-                                                    <li>
-                                                        <input type="text" class="heckbox-reponce" id="checkbox1"
-                                                            name="sections[0][questions][0][reponses][0][libreponse]"
-                                                            required placeholder="reponse 1" />
-                                                        <input type="file" id="imagine" class="file-input"
-                                                            data-preview="imaginations" name="sections[0][questions][0][reponses][0][image]"
-                                                            style="display: none" />
-                                                        <img id="imaginations" class="img" alt="" />
-                                                        <select name="sections[0][questions][0][reponses][0][result]"
-                                                            id="mySelect" class="Select">
-                                                            <option value="" disabled selected hidden>
-                                                                resultat
-                                                            </option>
-                                                            <option value="bonne_reponse" class="green"
-                                                                data-target="1">
-                                                                Bonne réponse
-                                                            </option>
-                                                            <option value="mauvaise_reponse" class="yellow"
-                                                                data-target="2">
-                                                                Mauvaise réponse
-                                                            </option>
-                                                            <option value="mauvaise_reponse-" class="red"
-                                                                data-target="3">
-                                                                Mauvaise réponse(-)
-                                                            </option>
-                                                        </select>
-                                                        <input type="number" id="point" class="point"
-                                                            name="sections[0][questions][0][reponses][0][points]"
-                                                            placeholder="" />
-                                                        <i class="fa-regular fa-trash-can delete delete-btn"></i>
-                                                    </li>
-                                                </ol>
-                                                <a class="add-response" href="#"><input type="radio" />
-                                                    <p>
-                                                        Ajouter une autre proposition de réponse ou
-                                                        <span>ajouter '' Autre ''</span>
-                                                    </p>
-                                                </a>
+                                            <div class="file-inputa">
+                                                <div class="eme">
+                                                    <label for="fileinputs"><i
+                                                            class="fa-regular fa-image"></i></label>
+                                                    <input type="file" id="fileinputs" class="file-input"
+                                                        data-preview="imagepreviews" data-result="previews"
+                                                        name="sections[0][questions][0][image]" style="display: none" />
+                                                    <img id="imagepreviews" alt="Aperçu de l'image" />
+
+                                                </div>
+                                                <div>
+                                                    <i
+                                                        class="fa-solid fa-xmark deletes delete-questionnaire"></i>
+                                                </div>
+                                                <!-- <i class="fa-solid fa-x  delete-section"></i> -->
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <a href="#" class="Ajouter-question"><i
-                                        class="fa-solid fa-circle-plus"></i>Ajouter une
-                                    question</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="btns-end">
-                        <a href="#" class="Ajouter-section"> <i class="fa-solid fa-circle-plus"></i>Ajouter une
-                            section</a>
-                    </div>
-
-                    <div class="btns-group">
-                        <a href="#" class="btn-prev">Précédent</a>
-                        <a href="#" class="btn btn-next width-24 endnext endnexts1 disabled">Suivant</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-step">
-                <div class="content"><!-- Contenu de la page --></div>
-                <div class="btns-group">
-                    <a href="#" class="btn-prev">Précédent</a>
-                    <button type="submit" class="btn">Terminé</button>
-                </div>
-            </div>
-
-        </form>
-
-
-    @elseif(auth()->user()->role_id == 3)
-        <form action="{{ route('sujetadmin.store') }}" class="form" method="POST" enctype="multipart/form-data">
-            @csrf
-            <div class="form-step form-step-active">
-                <div class="wo">
-                    <div class="input-group select-group">
-                        <label for="position" class="label">Type de sujet</label>
-                        <select name="type_sujet_id" id="position" class="select-effect-1" required>
-                            <option value="" disabled selected hidden>
-                                Choisissez le type de sujet
-                            </option>
-                            @foreach ($typessujets as $typessujet)
-                                <option value="{{ $typessujet->id }}" data-typesujet="{{ $typessujet->libtypesujet }}">{{ $typessujet->libtypesujet }}</option>
-                            @endforeach
-                        </select>
-                        <span class="border"></span>
-                        <div class="error-message" id="position-error" style="display: none; color: red;">Veuillez
-                            sélectionner un type de sujet.</div>
-                    </div>
-                    <div class="input-group select-group">
-                        <label for="position" class="label">Matière</label>
-                        <select name="matiere_id" id="positions" class="select-effect-1" required>
-                            <option value="" disabled selected hidden>
-                                Sélectionner la matière
-                            </option>
-                            @if (auth()->user()->role_id == 3)
-                                @foreach ($matieres as $matiere)
-                                    <option value="{{ $matiere->id }}" data-matiere="{{ $matiere->nommatiere }}">{{ $matiere->nommatiere }}</option>
-                                @endforeach
-                            @elseif(auth()->user()->role_id == 2)
-                                @foreach ($professeurMatiere as $matiere)
-                                    <option value="{{ $matiere->id }}" data-matiere ="{{ $matiere->nommatiere }}">{{ $matiere->nommatiere }}</option>
-                                @endforeach
-                            @endif
-                        </select>
-                        <span class="border"></span>
-                        <div class="error-message" id="positions-error" style="display: none; color: red;">Veuillez
-                            sélectionner une matière.</div>
-                    </div>
-                    <div class="input-group select-group">
-                        <label for="position" class="label">Filière</label>
-                        <select name="filiere_id" id="positions1" class="select-effect-1" required>
-                            <option value="" disabled selected hidden>
-                                Sélectionnez la Filière
-                            </option>
-                            @foreach ($filieres as $filiere)
-                                <option value="{{ $filiere->id }}" data-filiere="{{ $filiere->filiere->nomfiliere ?? $filiere->nomfilieretablissement }}">{{ $filiere->filiere->nomfiliere ?? $filiere->nomfilieretablissement }}</option>
-                            @endforeach
-                        </select>
-                        <span class="border"></span>
-                        <div class="error-message" id="positions1-error" style="display: none; color: red;">Veuillez
-                            sélectionner une filière.</div>
-                    </div>
-                    <div class="input-group select-group">
-                        <label for="position" class="label">Classe</label>
-                        <select name="classe_id" id="positions2" class="select-effect-1" required>
-                            <option value="" disabled selected hidden>
-                                Sélectionnez la classe
-                            </option>
-                            @foreach ($classes as $classe)
-                                <option value="{{ $classe->id }}" data-classe="{{ $classe->nomclasse }}">{{ $classe->nomclasse }}</option>
-                            @endforeach
-                        </select>
-                        <span class="border"></span>
-                        <div class="error-message" id="positions2-error" style="display: none; color: red;">Veuillez
-                            sélectionner une classe.</div>
-                    </div>
-                    <div class="input-group time-group">
-                        <label for="time" class="label">Durée</label>
-                        <input type="text" name="heure" id="time" class="time-effect-1"
-                            placeholder="hh:mm" onfocus="this.type='time'" onblur="this.type='time'" required />
-                        <span class="border"></span>
-                    </div>
-                    <div class="input-group ">
-                        <label for="consigne" class="label">Consigne</label>
-                        <input type="text" name="consigne" id="consigne" class="time-effect-1"
-                            placeholder="Entrez une consigne..."  required />
-                        <span class="border"></span>
-                        <div class="error-message" id="positions5-error" style="display: none; color: red;">Veuillez
-                            rempli les consignes.</div>
-                    </div><br>
-                    <div class="next-step">
-                    <a href="#" class="btn btn-next width-24 ml-auto disabled" id="suivants">Suivant</a>
-                </div>
-                </div>
-
-
-            </div>
-
-            <div class="form-step">
-                <div class="note-container">
-                    <span>Note:</span>
-                    <input type="number" name="noteprincipale" class="note-value"
-                        placeholder="Entrez le nombre total de points *" pattern="\d*" title="Veuillez entrer uniquement des chiffres."/>
-                    <a class="enfant_suivant width-24 disabled">Valider</a>
-                    <div class="error-message" id="error-message">Le champ ne peut pas être vide.</div>
-                    <div class="btns-group avancer">
-                        <a href="#" class="btn-prev">Précédent</a>
-                        <a href="#" class="btn width-24 disabled valid-not" id="">Suivant</a>
-                    </div>
-                </div>
-
-                <div class="frm" style="display: none">
-
-                    <div class="sa">
-                        <div class="btnas-ends">
-                            <i class="fa-solid fa-x delete-questionnaires"></i>
-                        </div>
-                        <div class="input-group">
-                            <input type="text" name="sections[0][titre]" id="phone"
-                                placeholder="Sous titre 1" required />
-                        </div>
-                        <div class="input-group input-with-icon">
-                            <input type="text" name="sections[0][soustitre]" id="preview"
-                                placeholder="Libellé du sous titre" required />
-                            <label for="file-input" class="icon-label"><i class="fa-regular fa-image"></i></label>
-                            <input type="file" id="file-input" class="file-input" data-preview="image-preview"
-                                data-result="preview" name="sections[0][soustitre][image]" style="display: none" />
-                            <img id="image-preview" alt="Aperçu de l'image" />
-
-                        </div>
-                    </div>
-
-                    <div class="section-container">
-                        <div class="sectio-container">
-                            <div class="btnas-end">
-                                <!-- <i class="fa-solid fa-x delete-section"></i> -->
-                            </div>
-                            <div class="sa-1">
-                                <div class="questionnaire-container">
-                                    <div class="input-group" data-question-index="0">
-                                        <div class="questionnaire">
-                                            <div class="input-group">
-                                                <div class="display-1">
-                                                    <div class="textarea">
-                                                        <textarea name="sections[0][questions][0][libquestion]" id="previews" required placeholder="Question"></textarea>
-                                                    </div>
-                                                    <div class="file-inputa">
-                                                        <div class="eme">
-                                                            <label for="fileinputs"><i
-                                                                    class="fa-regular fa-image"></i></label>
-                                                            <input type="file" id="fileinputs" class="file-input"
-                                                                data-preview="imagepreviews" data-result="previews"
-                                                                name="sections[0][questions][0][image]" style="display: none" />
-                                                            <img id="imagepreviews" alt="Aperçu de l'image" />
-
-                                                        </div>
-                                                        <div>
-                                                            <i
-                                                                class="fa-solid fa-xmark deletes delete-questionnaire"></i>
-                                                        </div>
-                                                        <!-- <i class="fa-solid fa-x  delete-section"></i> -->
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="input-group">
-                                                <ol class="circle-list">
-                                                    <li>
-                                                        <input type="text" class="heckbox-reponce" id="checkbox1"
-                                                            name="sections[0][questions][0][reponses][0][libreponse]"
-                                                            required placeholder="reponse 1" />
-                                                        <input type="file" id="imagine" class="file-input"
-                                                            data-preview="imaginations" name="sections[0][questions][0][reponses][0][image]"
-                                                            style="display: none" />
-                                                        <img id="imaginations" class="img" alt="" />
-                                                        <select name="sections[0][questions][0][reponses][0][result]"
-                                                            id="mySelect" class="Select">
-                                                            <option value="" disabled selected hidden>
-                                                                resultat
-                                                            </option>
-                                                            <option value="bonne_reponse" class="green"
-                                                                data-target="1">
-                                                                Bonne réponse
-                                                            </option>
-                                                            <option value="mauvaise_reponse" class="yellow"
-                                                                data-target="2">
-                                                                Mauvaise réponse
-                                                            </option>
-                                                            <option value="mauvaise_reponse-" class="red"
-                                                                data-target="3">
-                                                                Mauvaise réponse(-)
-                                                            </option>
-                                                        </select>
-                                                        <input type="number" id="point" class="point"
-                                                            name="sections[0][questions][0][reponses][0][points]"
-                                                             placeholder="" />
-                                                        <i class="fa-regular fa-trash-can delete delete-btn"></i>
-                                                    </li>
-                                                </ol>
-                                                <a class="add-response" href="#"><input type="radio" />
-                                                    <p>
-                                                        Ajouter une autre proposition de réponse ou
-                                                        <span>ajouter '' Autre ''</span>
-                                                    </p>
-                                                </a>
-                                            </div>
-                                        </div>
+                                    <div class="input-group">
+                                        <ol class="circle-list">
+                                            <li>
+                                                <input type="text" class="heckbox-reponce" id="checkbox1"
+                                                    name="sections[0][questions][0][reponses][0][libreponse]"
+                                                    required placeholder="reponse 1" />
+                                                <input type="file" id="imagine" class="file-input"
+                                                    data-preview="imaginations" name="sections[0][questions][0][reponses][0][image]"
+                                                    style="display: none" />
+                                                <img id="imaginations" class="img" alt="" />
+                                                <select name="sections[0][questions][0][reponses][0][result]"
+                                                    id="mySelect" class="Select">
+                                                    <option value="" disabled selected hidden>
+                                                        resultat
+                                                    </option>
+                                                    <option value="bonne_reponse" class="green"
+                                                        data-target="1">
+                                                        Bonne réponse
+                                                    </option>
+                                                    <option value="mauvaise_reponse" class="yellow"
+                                                        data-target="2">
+                                                        Mauvaise réponse
+                                                    </option>
+                                                    <option value="mauvaise_reponse-" class="red"
+                                                        data-target="3">
+                                                        Mauvaise réponse(-)
+                                                    </option>
+                                                </select>
+                                                <input type="number" id="point" class="point"
+                                                    name="sections[0][questions][0][reponses][0][points]"
+                                                    placeholder="" />
+                                                <i class="fa-regular fa-trash-can delete delete-btn"></i>
+                                            </li>
+                                        </ol>
+                                        <a class="add-response" href="#"><input type="radio" />
+                                            <p>
+                                                Ajouter une autre proposition de réponse ou
+                                                <span>ajouter '' Autre ''</span>
+                                            </p>
+                                        </a>
                                     </div>
                                 </div>
-                                <a href="#" class="Ajouter-question"><i
-                                        class="fa-solid fa-circle-plus"></i>Ajouter une
-                                    question</a>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="btns-end">
-                        <a href="#" class="Ajouter-section"> <i class="fa-solid fa-circle-plus"></i>Ajouter une
-                            section</a>
-                    </div>
-
-                    <div class="btns-group">
-                        <a href="#" class="btn-prev">Précédent</a>
-                        <a href="#" class="btn btn-next width-24 endnext endnexts1 disabled">Suivant</a>
+                        <a href="#" class="Ajouter-question"><i
+                                class="fa-solid fa-circle-plus"></i>Ajouter une
+                            question</a>
                     </div>
                 </div>
             </div>
 
-            <div class="form-step">
-                <div class="content"><!-- Contenu de la page --></div>
-                <div class="btns-group">
-                    <a href="#" class="btn-prev">Précédent</a>
-                    <button type="submit" class="btn">Terminé</button>
-                </div>
+            <div class="btns-end">
+                <a href="#" class="Ajouter-section"> <i class="fa-solid fa-circle-plus"></i>Ajouter une
+                    section</a>
             </div>
 
-        </form>
+            <div class="btns-group">
+                <a href="#" class="btn-prev">Précédent</a>
+                <a href="#" class="btn btn-next width-24 endnext endnexts1 disabled">Suivant</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-step">
+        <div class="content"><!-- Contenu de la page --></div>
+        <div class="btns-group">
+            <a href="#" class="btn-prev">Précédent</a>
+            <button type="submit" class="btn">Terminé</button>
+        </div>
+    </div>
+
+</form>
+
+
+
 
 
     <!-- Modal -->
@@ -854,7 +635,6 @@
 
 
 
-    @endif
 
 
     <script>

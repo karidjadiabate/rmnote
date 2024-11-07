@@ -70,7 +70,7 @@
 
     <!-- accueil -->
     <!-- titre -->
-    <div class="container text-center printableArea principal">
+    <div class="container text-center printableArea principal pt-3">
         @if (auth()->user()->role_id == 2 || auth()->user()->role_id == 3)
             <h1 class="welcome">Bienvenue <span>{{ auth()->user()->etablissement->nometablissement }}</span></h1>
         @endif

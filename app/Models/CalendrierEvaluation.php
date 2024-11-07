@@ -9,7 +9,7 @@ class CalendrierEvaluation extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['matiere_id', 'type_sujet_id', 'filiere_id', 'classe_id', 'debut', 'fin','date','duree','etablissement_id'];
+    protected $fillable = ['matiere_id', 'type_sujet_id', 'filiere_id', 'classe_id', 'debut', 'fin','date','duree','etablissement_id','is_deleted','sujet_id'];
 
     public function matiere()
     {

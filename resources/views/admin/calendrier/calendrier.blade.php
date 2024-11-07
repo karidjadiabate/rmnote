@@ -386,7 +386,9 @@ tr:first-child>td>.fc-day-grid-event {
 .barre {
             position: relative; /* Nécessaire pour le positionnement de l'élément enfant */
             padding: 0px; /* Ajouter un peu d'espace autour du texte */
-            background-color: #f9f9f9; /* Couleur d'arrière-plan pour mieux voir la ligne */
+            z-index: 1; /* Assure que .barre est au-dessus */
+
+
         }
 
         .barre::after {
@@ -398,7 +400,11 @@ tr:first-child>td>.fc-day-grid-event {
             height: 1px; /* Hauteur de la ligne */
             background-color: black; /* Couleur de la ligne */
             transform: translateY(-50%); /* Centre la ligne verticalement */
+            z-index: 2; /* Met la ligne au-dessus */
+
         }
+
+
     </style>
 </head>
 
@@ -477,103 +483,101 @@ tr:first-child>td>.fc-day-grid-event {
                 </div>
             </div>
         </div>
-
     </div>
 
-        <!-- Modal Structure -->
        <!-- Modal Structure pour l'édition -->
-<div class="modal fade" id="eventModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <button type="button" class="custom-close-btn" data-bs-dismiss="modal" aria-label="Close">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            <div class="modal-body">
-                <form id="editEventForm">
-                    <!-- Champs grisés sauf date, début et fin -->
-                    <div class="form-group col-md-12 row g-3">
-                        <div class="form-group col-md-6">
-                            <select class="form-control" name="matiere_id" id="editInput1" disabled>
-                                <option value="" disabled selected>Matière</option>
-                                @foreach ($matieres as $matiere)
-                                    <option value="{{$matiere->id}}">{{$matiere->nommatiere}}</option>
-                                @endforeach
-                            </select>
+    <div class="modal fade" id="eventModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <button type="button" class="custom-close-btn" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                <div class="modal-body">
+                    <form id="editEventForm">
+                        <!-- Champs grisés sauf date, début et fin -->
+                        <div class="form-group col-md-12 row g-3">
+                            <div class="form-group col-md-6">
+                                <select class="form-control" name="matiere_id" id="editInput1" disabled>
+                                    <option value="" disabled selected>Matière</option>
+                                    @foreach ($matieres as $matiere)
+                                        <option value="{{$matiere->id}}">{{$matiere->nommatiere}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <select class="form-control" name="type_sujet_id" id="editInput2" disabled>
+                                    <option value="" disabled selected>Catégorie d'évaluation</option>
+                                    @foreach ($typesujets as $typesujet)
+                                        <option value="{{$typesujet->id}}">{{$typesujet->libtypesujet}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
-                        <div class="form-group col-md-6">
-                            <select class="form-control" name="type_sujet_id" id="editInput2" disabled>
-                                <option value="" disabled selected>Catégorie d'évaluation</option>
-                                @foreach ($typesujets as $typesujet)
-                                    <option value="{{$typesujet->id}}">{{$typesujet->libtypesujet}}</option>
-                                @endforeach
-                            </select>
+                        <div class="form-group col-md-12 row g-3">
+                            <div class="form-group col-md-6">
+                                <select class="form-control" name="filiere_id" id="editInput3" disabled>
+                                    <option value="" disabled selected>Filière</option>
+                                    @foreach ($filieres as $filiere)
+                                        <option value="{{$filiere->id}}">{{$filiere->filiere->nomfiliere ?? $filiere->nomfilieretablissement }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <select class="form-control" name="classe_id" id="editInput4" disabled>
+                                    <option value="" disabled selected>Classe</option>
+                                    @foreach ($classes as $classe)
+                                        <option value="{{$classe->id}}">{{$classe->nomclasse}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group col-md-12 row g-3">
-                        <div class="form-group col-md-6">
-                            <select class="form-control" name="filiere_id" id="editInput3" disabled>
-                                <option value="" disabled selected>Filière</option>
-                                @foreach ($filieres as $filiere)
-                                    <option value="{{$filiere->id}}">{{$filiere->filiere->nomfiliere ?? $filiere->nomfilieretablissement }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <select class="form-control" name="classe_id" id="editInput4" disabled>
-                                <option value="" disabled selected>Classe</option>
-                                @foreach ($classes as $classe)
-                                    <option value="{{$classe->id}}">{{$classe->nomclasse}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
 
-                    <div class="form-group col-md-12 row g-3">
-                        <div class="form-group col-md-3">
-                            <input type="time" name="debut" class="form-control" id="editInput5" placeholder="Début" required>
+                        <div class="form-group col-md-12 row g-3">
+                            <div class="form-group col-md-3">
+                                <input type="time" name="debut" class="form-control" id="editInput5" placeholder="Début" required>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <input type="time" name="fin" class="form-control" id="editInput6" placeholder="Fin" required disabled>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input type="date" name="date" class="form-control" id="editInput7" placeholder="Date" required>
+                            </div>
                         </div>
-                        <div class="form-group col-md-3">
-                            <input type="time" name="fin" class="form-control" id="editInput6" placeholder="Fin" required disabled>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <input type="date" name="date" class="form-control" id="editInput7" placeholder="Date" required>
-                        </div>
-                    </div>
 
-                    <div class="modal-footer d-flex justify-content-between margin-space">
-                        <button type="submit" class="btn btn-success" id="submitEvent">Sauvegarder</button>
-                        <button type="button" class="btn btn-secondaire margin-r" data-bs-dismiss="modal" aria-label="Close">Annuler</button>
-                    </div>
-                </form>
+                        <div class="modal-footer d-flex justify-content-between margin-space">
+                            <button type="submit" class="btn btn-success" id="submitEvent">Sauvegarder</button>
+                            <button type="button" class="btn btn-secondaire margin-r" data-bs-dismiss="modal" aria-label="Close">Annuler</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
 
 
-                            <!-- Modal de Suppression -->
-                            <div class="modal fade" id="deleteclasse" tabindex="-1"
-                                aria-labelledby="deleteclasseLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content text-center">
-                                        <button type="button" class="custom-close-btn" data-bs-dismiss="modal" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
-                                        <div  class="modal-body text-center d-flex flex-column" id="">
-                                            <i class="fa-solid fa-triangle-exclamation" id="fa-triangle-exclamation"></i>
-                                            <span>Êtes vous sûres ?</span>
-                                        </div>
-                                        <p>Voulez-vous supprimer l'évaluation <strong><span id="nom_affiche"></span></strong> ?</p>
-                                        <div class="d-flex justify-content-around">
-                                            <form action="" method="POST">
-                                                <button type="button" class="btn btn-success">Oui, je confirme</button>
-                                            </form>
-                                            <button type="button" class="btn btn-secondaire"
-                                                data-bs-dismiss="modal">Annuler</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+    <!-- Modal de Suppression -->
+    <div class="modal fade" id="deleteclasse" tabindex="-1"
+        aria-labelledby="deleteclasseLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content text-center">
+                <button type="button" class="custom-close-btn" data-bs-dismiss="modal" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+                <div  class="modal-body text-center d-flex flex-column" id="">
+                    <i class="fa-solid fa-triangle-exclamation" id="fa-triangle-exclamation"></i>
+                    <span>Êtes vous sûres ?</span>
+                </div>
+                <p>Voulez-vous supprimer l'évaluation <strong><span id="nom_affiche"></span></strong> ?</p>
+                <div class="d-flex justify-content-around">
+                    <form action="" method="POST">
+                        <button type="button" class="btn btn-success">Oui, je confirme</button>
+                    </form>
+                    <button type="button" class="btn btn-secondaire"
+                        data-bs-dismiss="modal">Annuler</button>
+                </div>
+            </div>
+        </div>
+    </div>
             <!-- Footer -->
 
     @include('admin.include.footer')
@@ -609,46 +613,49 @@ tr:first-child>td>.fc-day-grid-event {
                     center: 'searchBar title',
                     right: 'agendaDay,agendaWeek,month prev,next'
                 },
-                customButtons: {
-                    createButton: {
-                        text: '+ Créer',
-                        click: function() {
-                            $('#createEventModal').modal('show');
-                        }
-                    },
-                },
+
                 defaultDate: new Date(),
                 editable: true,
-                events: calendrierEvents,
+                events: calendrierEvents.map(event => {
+                    if (event.is_deleted) {
+                        event.className = 'barre'; // Applique un style barré si l'événement est marqué
+                    }
+                    return event;
+                }),
 
                 // Fonction pour rendre chaque événement
                 eventRender: function(event, element) {
-
-                    console.log("Données de l'événement:", event);
-
-                    // Ajouter une icône de suppression
                     element.find('.fc-title').html(event.title);
-                    element.find('.fc-title').append('<span class="event-icon"><i class="fa-solid fa-trash"></i></span>');
 
-                    // Associer l'événement de suppression
-                    element.find(".event-icon").on('click', function() {
-                        if (confirm("Voulez-vous vraiment supprimer cet événement ?")) {
+                    // Ajouter une icône de suppression et d'édition
+                    element.find('.fc-title').append('<span class="delete-icon"><i class="fa-solid fa-trash"></i></span>');
+
+                    // Gestionnaire pour le bouton de suppression
+                    element.find(".delete-icon").on('click', function(e) {
+                        e.stopPropagation(); // Empêche l'ouverture du modal d'édition
+                        $('#deleteclasse').modal('show');
+                        $('#nom_affiche').text(event.title);
+
+                        $('.btn.btn-success').off('click').on('click', function() {
                             $.ajax({
                                 url: '{{ route("deletevaluation") }}',
-                                data: {
-                                    id: event.id
-                                },
                                 type: 'POST',
+                                data: {
+                                    id: event.id,
+                                    sujet_id: event.sujet_id,
+                                    is_deleted: 1
+                                },
                                 success: function(response) {
-                                    alert('Événement supprimé avec succès !');
-                                    $('#calendar').fullCalendar('removeEvents', event._id);
+                                    element.addClass('barre');
+                                    $('#deleteclasse').modal('hide');
                                 },
                                 error: function() {
-                                    alert('Erreur lors de la suppression de l\'événement.');
+                                    alert("Erreur lors de la mise à jour de l'état.");
                                 }
                             });
-                        }
+                        });
                     });
+
 
                     // Appliquer des couleurs selon le jour de la semaine
                     var dayOfWeek = event.start.day(); // 0 = dimanche, 1 = lundi, etc.

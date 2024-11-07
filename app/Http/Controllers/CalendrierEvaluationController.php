@@ -6,6 +6,7 @@ use App\Models\CalendrierEvaluation;
 use App\Models\Classe;
 use App\Models\EtablissementFiliere;
 use App\Models\Matiere;
+use App\Models\Sujet;
 use App\Models\TypeSujet;
 use Illuminate\Http\Request;
 
@@ -40,6 +41,7 @@ class CalendrierEvaluationController extends Controller
                 'filiere_id' => $evaluation->filiere_id,
                 'classe_id' => $evaluation->classe_id,
                 'duree' => $evaluation->duree,
+                'is_deleted' => $evaluation->is_deleted
             ];
         });
 
@@ -122,15 +124,21 @@ class CalendrierEvaluationController extends Controller
      */
     public function destroy(Request $request)
     {
+        // Récupérer l'événement et mettre à jour son état
         $event = CalendrierEvaluation::find($request->id);
+        $event->is_deleted = $request->is_deleted;
+        $event->save();
 
-        if ($event) {
-
-            $event->delete();
-
-            return response()->json(['success' => 'Événement supprimé avec succès.']);
-        } else {
-            return response()->json(['error' => 'Événement non trouvé.'], 404);
+        // Utiliser l'identifiant du sujet associé
+        if ($event->sujet_id) {
+            $sujet = Sujet::find($event->sujet_id);
+            if ($sujet) {
+                $sujet->is_deleted = $request->is_deleted;
+                $sujet->save();
+            }
         }
+
+        return response()->json(['success' => 'Événement et sujet mis à jour.']);
     }
+
 }

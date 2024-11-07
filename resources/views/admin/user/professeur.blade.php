@@ -211,31 +211,21 @@
                     <tr class="aa">
 
                         <th>Identifiant</th>
-
-                        <th>Nom </th>
-
+                        <th>Nom</th>
                         <th>Prénoms</th>
-
                         <th>Email</th>
-
                         <th>Contact</th>
-
                         <!-- <th>Adresse</th> -->
-
                         <th>Matière</th>
-
                         <th>Classes</th>
 
                         <th class="no-print">Action</th>
 
                     </tr>
 
-                </thead>
+                </thead>&nbsp;&nbsp;
 
                 <tbody id="teacherTable">
-
-
-
 
                     @php
 
@@ -261,7 +251,7 @@
 
                             <td data-label="Matière">{{ $professeur->nommatieres }}</td>
 
-                            <td data-label="Classes">{{ $professeur->nomclasses }}</td>
+                            <td data-label="Classes">{{ str_replace(',', '-', $professeur->nomclasses) }}</td>
 
                             <td data-label="Action" class="action-icons no-print">
 
@@ -348,20 +338,6 @@
 
                                                 </div>
 
-                                                <div class="col-sm-6">
-
-                                                    <input type="email" class="form-control"
-                                                        id="editEmail{{ $professeur->id }}" name="email"
-                                                        placeholder="Email" value="{{ $professeur->email }}"
-                                                        required>
-
-                                                    <div class="invalid-feedback">
-
-                                                    </div>
-
-                                                </div>
-
-
 
                                                 <div class="col-sm-6">
 
@@ -376,7 +352,15 @@
 
                                                 </div>
 
+                                                <div class="col-sm-6">
+                                                    <input type="email" class="form-control"
+                                                        id="editEmail{{ $professeur->id }}" name="email"
+                                                        placeholder="Email" value="{{ $professeur->email }}"
+                                                        required>
+                                                    <div class="invalid-feedback">
 
+                                                    </div>
+                                                </div>
 
                                                 {{--  --}}
 
@@ -411,13 +395,10 @@
 
 
                                                 <div class="col-sm-6">
-
                                                     <div class="form-group">
-
                                                         <select class="select2-multiple form-control"
                                                             name="classe_id[]" style="width: 100%" id="classeselect2"
                                                             multiple>
-
                                                             <option value="">Selectionnez une classe</option>
 
                                                             @foreach ($classes as $classe)
@@ -428,20 +409,21 @@
 
                                                                 </option>
                                                             @endforeach
-
                                                         </select>
-
-                                                        <div class="invalid-feedback">
-
-                                                        </div>
-
+                                                        <div class="invalid-feedback"></div>
                                                     </div>
+                                                </div>
 
+                                                <div class="col-sm-12">
+                                                    <select name="role_id" id="role_id"
+                                                        class="form-control rounded-0">
+                                                        <option value="2">Professeur</option>
+                                                    </select>
                                                 </div>
 
 
 
-                                                <div class="col-sm-6">
+                                                {{-- <div class="col-sm-6">
 
                                                     <input type="text" class="form-control"
                                                         id="adresse{{ $professeur->id }}" name="adresse"
@@ -451,10 +433,7 @@
                                                     <div class="invalid-feedback">
 
                                                     </div>
-
-                                                </div>
-
-
+                                                </div> --}}
 
                                                 {{-- <div class="col-sm-6">
 
@@ -471,25 +450,18 @@
                                                 </div> --}}
 
 
-
-
-
                                             </div>
 
                                         </div>
 
-                                        <div class="col-sm-12 d-flex justify-content-between mt-5 margin-bot">
-
+                                        <div class="col-sm-12 d-flex justify-content-between">
                                             <button type="submit"
-                                                class="btn btn-success p-3 border-0">Sauvegarder</button>
+                                                class="btn btn-success border-0">Sauvegarder</button>
 
-                                            <button type="button" class="btn btn-annuler p-3 px-5 border-0"
+                                            <button type="button" class="btn btn-annuler px-5 border-0"
                                                 data-bs-dismiss="modal">Annuler</button>
 
                                         </div>
-
-
-
                                     </form>
 
                                 </div>
@@ -507,7 +479,7 @@
                         <div class="modal fade" id="deleteTeacher{{ $professeur->id }}" tabindex="-1"
                             aria-labelledby="deleteTeacherLabel{{ $professeur->id }}" aria-hidden="true">
 
-                            <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-dialog">
 
                                 <div class="modal-content">
 
