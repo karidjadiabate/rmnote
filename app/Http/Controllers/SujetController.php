@@ -6,6 +6,7 @@ use App\Models\Sujet;
 use App\Http\Requests\StoreSujetRequest;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Http\Requests\UpdateSujetRequest;
+use App\Models\CalendrierEvaluation;
 use App\Models\Classe;
 use App\Models\EtablissementFiliere;
 use App\Models\Filiere;
@@ -14,9 +15,8 @@ use App\Models\TypeSujet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use App\Models\User;
-
-
-
+use Carbon\Carbon;
+use Carbon\CarbonInterval;
 
 class SujetController extends Controller
 {
@@ -130,9 +130,14 @@ class SujetController extends Controller
         }
 
         // Générer le code pour le sujet basé sur le nom de la matière
-        $latestSubject = Sujet::where('matiere_id', $matiere->id)->latest()->first();
-        $count = $latestSubject ? (int) substr($latestSubject->code, -2) + 1 : 1;
-        $code = strtoupper(substr($matiere->nommatiere, 0, 4)) . str_pad($count, 2, '0', STR_PAD_LEFT);
+        $lastSujetCode = Sujet::orderBy('code', 'desc')->first();
+        //$count = $latestSubject ? (int) substr($latestSubject->code, -2) + 1 : 1;
+        //$code = strtoupper(substr($matiere->nommatiere, 0, 4)) . str_pad($count, 2, '0', STR_PAD_LEFT);
+
+        $lastCodeNumber = $lastSujetCode ? (int) substr($lastSujetCode->code, 3) : 0;
+
+        // Générer le nouveau code
+        $newCode = 'S' . str_pad(++$lastCodeNumber, 4, '0', STR_PAD_LEFT);
 
         // Calculer le total des points des réponses
         $totalPoints = 0;
@@ -154,7 +159,7 @@ class SujetController extends Controller
 
             // Sauvegarder le sujet avec le statut par défaut
             $subject = Sujet::create([
-                'code' => $code, // Code généré automatiquement
+                'code' => $newCode, // Code généré automatiquement
                 'type_sujet_id' => $validated['type_sujet_id'],
                 'filiere_id' => $validated['filiere_id'],
                 'matiere_id' => $validated['matiere_id'],
@@ -166,6 +171,36 @@ class SujetController extends Controller
                 'user_id' => auth()->user()->id,
                 'etablissement_id' => auth()->user()->etablissement_id
             ]);
+
+
+            // Heure de début
+            $debut = Carbon::now();
+
+            // Récupérer la durée en heures depuis la validation
+            $hours = $validated['heure']; // Par exemple, `4` pour 4 heures
+
+            // Créer un intervalle de durée
+            $duree = CarbonInterval::hours($hours);
+
+            // Calculer l'heure de fin en ajoutant la durée au début
+            $fin = $debut->copy()->add($duree);
+
+            // Enregistrement dans la table CalendrierEvaluation
+            CalendrierEvaluation::create([
+                'matiere_id' => $validated['matiere_id'],
+                'type_sujet_id' => $validated['type_sujet_id'],
+                'filiere_id' => $validated['filiere_id'],
+                'classe_id' => $validated['classe_id'],
+                'date' => $debut->toDateString(),
+                'debut' => $debut->format('H:i'),
+                'fin' => $fin->format('H:i'), // Heure de fin calculée
+                'duree' => $duree->format('%H:%I'), // Durée au format `time`
+                'etablissement_id' => auth()->user()->etablissement_id,
+                'sujet_id' => $subject['id']
+            ]);
+
+
+
 
             // Sauvegarder les sections, questions et réponses
             foreach ($request->input('sections', []) as $sectionKey => $sectionData) {
@@ -493,8 +528,29 @@ class SujetController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Sujet $sujet)
+    public function destroy(Request $request)
     {
-        //
+        // Récupérer le sujet et mettre à jour son état
+        $sujet = Sujet::find($request->id);
+        if ($sujet) {
+            $sujet->is_deleted = 1;
+            $sujet->save();
+
+            // Marquer les événements liés dans CalendrierEvaluation comme barrés
+            $events = CalendrierEvaluation::where('sujet_id', $sujet->id)->get();
+            foreach ($events as $event) {
+                $event->is_deleted = 1;
+                $event->save();
+            }
+
+            if (auth()->user()->role_id == 2) {
+                return redirect()->route('sujet.professeur')->with('success', 'Sujet créé avec succès.');
+            } elseif (auth()->user()->role_id == 3) {
+                return redirect()->route('sujet.admin')->with('success', 'Sujet créé avec succès.');
+            }
+        }
+
+        return redirect()->back()->with('error', 'Sujet introuvable.');
     }
+
 }

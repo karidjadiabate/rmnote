@@ -10,7 +10,7 @@ class Sujet extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['code', 'type_sujet_id', 'filiere_id', 'matiere_id', 'classe_id', 'noteprincipale', 'heure', 'consigne', 'status', 'user_id', 'etablissement_id','image_section'];
+    protected $fillable = ['code', 'type_sujet_id', 'filiere_id', 'matiere_id', 'classe_id', 'noteprincipale', 'heure', 'consigne', 'status', 'user_id', 'etablissement_id','image_section','is_deleted'];
 
     public function sections()
     {

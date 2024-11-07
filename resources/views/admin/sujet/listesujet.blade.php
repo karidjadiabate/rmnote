@@ -160,6 +160,30 @@
     .fa-solid.fa-trash {
         color: #ffd100 !important;
     }
+
+    .barre {
+    position: relative;
+    }
+
+    .barre::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 0;
+        height: 1px;
+        background-color: rgb(11, 53, 120);
+        width: calc(100% - 28%); /* Ajustez cette largeur pour s'arrêter à "statut" */
+        transform: translateY(-50%);
+        z-index: 1;
+    }
+
+    .disabled-buttons a,
+        .disabled-buttons button {
+            pointer-events: none; /* Désactive les clics */
+            opacity: 0.5; /* Rend les boutons gris et atténués */
+        }
+
+
 </style>
 
 <body>
@@ -273,11 +297,7 @@
                 <table id="inscriptionTable" class="table">
                     <thead class="table-aaa">
                         <tr class="aa">
-                            {{-- <th>Identifiant</th> --}}
                             <th>Code</th>
-                            <!-- @if (intval(auth()->user()->role_id) === 3)
-<th>Professeur</th>
-@endif -->
                             <th>Matière</th>
                             <th>Filière</th>
                             <th>Classes</th>
@@ -288,34 +308,29 @@
                     </thead>&nbsp;&nbsp;
                     <tbody>
                         @foreach ($listesujets as $listesujet)
-                            <tr>
-                                {{-- <td data-label="Identifiant">{{ $listesujet->id }}</td> --}}
-                                <td data-label="Code">{{ $listesujet->code }}</td>
-                                <td data-label="Matière">{{ $listesujet->matiere->nommatiere }}</td>
-                                <td data-label="Filière">
-                                    {{ $listesujet->filiere->nomfiliere ?? $listesujet->filiere->etablissementFilieres->nomfilieretablissement }}
-                                </td>
-                                <td data-label="Classes">{{ $listesujet->classe->nomclasse }}</td>
-                                <td data-label="Date de création">
-                                    {{ \Carbon\Carbon::parse($listesujet->created_date)->format('d - m - Y') }}</td>
-
-                                {{--  --}}
-                                <td data-label="statut">
-                                    <span
-                                        style="background-color: {{ $listesujet->status === 'corrige' ? '#9FE4B6' : '#F9D465' }};
-                                           color: {{ $listesujet->status === 'corrige' ? '#024802' : '#6E5400' }};
-                                           padding: 0px 10px;
-                                           border-radius: 20px;">
-                                        @if ($listesujet->status === 'non-corrige')
-                                            Non Corrigé
-                                        @elseif($listesujet->status === 'corrige')
-                                            Corrigé
-                                        @endif
-                                    </span>
-                                </td>
+                        <tr class="{{ $listesujet->is_deleted ? 'barre' : '' }}">
+                            {{-- <td data-label="Identifiant">{{ $listesujet->id }}</td> --}}
+                            <td data-label="Code">{{ $listesujet->code }}</td>
+                            <td data-label="Matière">{{ $listesujet->matiere->nommatiere }}</td>
+                            <td data-label="Filière">
+                                {{ $listesujet->filiere->nomfiliere ?? $listesujet->filiere->etablissementFilieres->nomfilieretablissement }}
+                            </td>
+                            <td data-label="Classes">{{ $listesujet->classe->nomclasse }}</td>
+                            <td data-label="Date de création">
+                                {{ \Carbon\Carbon::parse($listesujet->created_date)->format('d - m - Y') }}
+                            </td>
+                            <td data-label="statut">
+                                <span
+                                    style="background-color: {{ $listesujet->status === 'corrige' ? '#9FE4B6' : '#F9D465' }};
+                                        color: {{ $listesujet->status === 'corrige' ? '#024802' : '#6E5400' }};
+                                        padding: 0px 10px;
+                                        border-radius: 20px;">
+                                    {{ $listesujet->status === 'non-corrige' ? 'Non Corrigé' : 'Corrigé' }}
+                                </span>
+                            </td>
                                 {{--  --}}
 
-                                <td data-label="Action" class="action-icons no-print">
+                                <td data-label="Action" class="action-icons no-print {{ $listesujet->is_deleted ? 'disabled-buttons' : '' }}">
                                     @if (auth()->user()->role_id == 3)
                                         <a href="{{ route('sujetadmin.details', ['id' => $listesujet->id]) }}"> <i
                                                 class="fas fa-eye"></i></a>
@@ -332,8 +347,11 @@
                                             class="fa-solid fa-list"></i></button>
                                     <!-- <button data-bs-toggle="modal" data-bs-target="#deleteTeacher"><i
                                             class="fa-solid fa-box-archive"></i></button> -->
-                                    <button data-bs-toggle="modal" data-bs-target="#deleteSujet"
-                                        id="suppression_sujet"><i class="fa-solid fa-trash"></i></button>
+                                            <button data-bs-toggle="modal" data-bs-target="#deleteSujet"
+                                            data-id="{{ $listesujet->id }}" data-code="{{ $listesujet->code }}" id="suppression_sujet">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+
                                 </td>
                             </tr>
                         @endforeach
@@ -503,18 +521,24 @@
     <!-- Footer -->
     @include('admin.include.footer')
     <!-- Modal de Suppression -->
-    <div class="modal fade" id="deleteSujet" tabindex="-1"aria-labelledby="deleteSujetLabel" aria-hidden="true">
+    <div class="modal fade" id="deleteSujet" tabindex="-1" aria-labelledby="deleteSujetLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content text-center">
                 <button type="button" class="custom-close-btn" data-bs-dismiss="modal" aria-label="Close"><i
                         class="fa-solid fa-xmark"></i></button>
-                <div class="modal-body text-center d-flex flex-column" id="">
+                <div class="modal-body text-center d-flex flex-column">
                     <i class="fa-solid fa-triangle-exclamation" id="fa-triangle-exclamation"></i>
-                    <span>Êtes vous sûres ?</span>
+                    <span>Êtes-vous sûr(e) ?</span>
                 </div>
                 <p>Voulez-vous supprimer l'évaluation <strong><span id="nom_affiche"></span></strong> ?</p>
                 <div class="d-flex justify-content-around">
-                    <form action="" method="POST">
+                    @if (auth()->user()->role_id == 3)
+                        <form action="{{ route('sujetadmin.destroy') }}" method="POST">
+                    @elseif (auth()->user()->role_id == 2)
+                        <form action="{{ route('sujetprofesseur.destroy') }}" method="POST">
+                    @endif
+                        @csrf
+                        <input type="hidden" name="id" id="sujet_id_for_deletion">
                         <button type="submit" class="btn btn-success marge">Oui, je confirme</button>
                     </form>
                     <button type="button" class="btn btn-secondaire" data-bs-dismiss="modal">Annuler</button>
@@ -522,6 +546,7 @@
             </div>
         </div>
     </div>
+
 
     {{--  --}}
     <!-- importer -->
@@ -635,6 +660,24 @@
             }
         });
     </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('#suppression_sujet').forEach(button => {
+            button.addEventListener('click', function () {
+                const sujetId = this.getAttribute('data-id'); // Récupère l'ID du sujet
+                const sujetCode = this.getAttribute('data-code'); // Récupère le code du sujet
+
+                // Remplit le champ caché du formulaire avec l'ID
+                document.getElementById('sujet_id_for_deletion').value = sujetId;
+
+                // Affiche le code du sujet dans le modal
+                document.getElementById('nom_affiche').textContent = sujetCode;
+            });
+        });
+    });
+</script>
+
 
 </body>
 

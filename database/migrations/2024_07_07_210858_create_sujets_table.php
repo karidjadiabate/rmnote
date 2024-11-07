@@ -30,6 +30,7 @@ return new class extends Migration
             $table->string('consigne');
             $table->time('heure');
             $table->enum('status', ['corrige', 'non-corrige']);
+            $table->boolean('is_deleted')->default(false);
             $table->timestamps();
         });
     }

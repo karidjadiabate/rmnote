@@ -115,6 +115,8 @@ Route::prefix('admin')->middleware(['auth', 'admin', 'checkFromDemandeInscriptio
     Route::get('/creersujet', [SujetController::class, 'create'])->name('sujetadmin.create');
     Route::post('/sujet', [SujetController::class, 'store'])->name('sujetadmin.store');
     Route::get('/details/{id}', [SujetController::class, 'details'])->name('sujetadmin.details');
+    Route::post('/sujet/destroy', [SujetController::class, 'destroy'])->name('sujetadmin.destroy');
+
     Route::get('/parametre', [ParametreController::class, 'index'])->name('parametre.admin');
     Route::post('/etablissement/{id}', [ParametreController::class, 'updateetablissement'])->name('updateetablissement');
     Route::get('/correction/{id}', [CorrectionController::class, 'index'])->name('correction.correction');
@@ -153,3 +155,4 @@ Route::post('password/change', [PasswordChangeController::class, 'changePassword
 
 Route::get('/recuperer-coefficient-ects/{matiere_id}', [SujetController::class, 'getCoefficientAndEcts'])->name('recuperer.coefficient.ects');
 Route::get('/nouvelle-page/{id}', [SujetController::class, 'voirPage'])->name('sujet.voir-page');
+Route::post('/sujet/destroy', [SujetController::class, 'destroy'])->name('sujetprofesseur.destroy');

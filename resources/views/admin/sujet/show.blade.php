@@ -11,13 +11,13 @@
             margin: 0 auto;
             padding: 0;
             width: 21cm;
-            height: 29.7cm; 
+            height: 29.7cm;
         }
         .header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-           /* border: 1px solid #cfd0e5; */ 
+           /* border: 1px solid #cfd0e5; */
            /* padding: 0 2mm 5mm 2mm;*/
             margin-bottom: 10px;
             flex-wrap: wrap;
@@ -67,19 +67,10 @@
             text-align: left;
             font-size: 13px;
         }
-        
-        .points:not(.points.instruction, .points.qt){
-            font-weight:normal;
-        }
-            
+
         .points{
             float:right;
         }
-        .points.instruction{
-            font-weight:bold;
-           border: 1px solid #8993A04D;
-           padding:5px;
-        }            
         .info .info-text {
             font-weight: bold;
         }
@@ -99,14 +90,9 @@
         }
         .exercise-content {
             display: flex;
-            align-items: start;
+            align-items: center;
             justify-content: space-between;
             flex-direction:column;
-        }
-        .exercise-image{
-            text-align: center;
-            width: 100%;
-            margin: 10px;
         }
         .question {
             display: flex;
@@ -122,11 +108,11 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 10px; 
+            gap: 10px;
             width: 100%;
         }
         .question-text {
-            flex: 1; 
+            flex: 1;
             font-size: 1rem;
             color: #333;
         }
@@ -134,7 +120,6 @@
             display: flex;
             justify-content: space-between;
             width: 100%;
-            margin-bottom: 30px;
         }
         .options-group {
             display: grid;
@@ -201,12 +186,12 @@
             height:100px;
         }
         .subject-wrapper {
-            min-height: calc(29.7cm - 100px); 
-            padding-bottom: 100px; 
+            min-height: calc(29.7cm - 100px);
+            padding-bottom: 100px;
         }
         .page{
             width: 21cm;
-            height: 29.7cm; 
+            height: 29.7cm;
             position:relative;
             border: 1px solid #cfd0e5;
             margin-bottom: 20px;
@@ -216,29 +201,29 @@
         }
         .page-footer {
             height: 100px;
-            background-color: white; 
+            background-color: white;
         }
-  
+
         @page {
         margin: 0;
         size: A4;
         }
-  
-        @media print {         
-            body { 
-                position: relative; 
+
+        @media print {
+            body {
+                position: relative;
                 margin: 0;
                 padding: 10mm;
                 height: 29.7cm;
                 width: 21cm;
-                } 
-                .subject-wrapper { 
+                }
+                .subject-wrapper {
                     height: calc(100% - 50px);
                 }
                 .footer-wrapper {
                     position: absolute;
                     bottom: 5mm;
-                    left: 0; 
+                    left: 0;
                     right: 0;
                     height: 50px;
                 }
@@ -248,7 +233,7 @@
                     margin: 0 auto;
                     box-sizing: border-box;
                     border: none;
-                } 
+                }
                 .top-space{
                     padding-top:10mm;
                 }
@@ -256,32 +241,29 @@
                     display: flex;
                     justify-content: space-between;
                     align-items: flex-end;
-                } 
+                }
                 .qr-code {
                     page-break-inside: avoid;
-                } 
+                }
                 .qr-code svg {
                     width: 75px;
                     height: 75px;
                 }
-                .page { 
+                .page {
                 page-break-after: always;
-                } 
-            .container{
-                  margin: 0 auto;
-            }     padding: 0;
+                }
+
         }
 
 
         .border-success{
-            border: 1px solid #38b292  !important;
-            outline: 0.5px solid #38b292;
+            border:2px solid #38b292 !important;
         }
         h5{
-            font-size: 2.35mm;
+            font-size: 2mm;
             text-align: center;
         }
-        .page-a4 {  
+        .page-a4 {
             width: 210mm;
             height: 297mm;
             background: rgb(255, 255, 255);
@@ -292,9 +274,7 @@
             padding: 3mm;
             box-sizing: border-box;
             padding-top: 15mm;
-            margin-bottom: 20mm;
-            
-        } 
+        }
         .name-title{
             display: flex;
             align-items: center;
@@ -342,13 +322,13 @@
             text-align: center;
             padding: 0 87.5mm;
         }
-        
+
         .img-logo{
             display: flex;
             align-items: center;
             flex-direction: column;
         }
-        
+
         .header-content {
             margin-right: 3mm;
             margin-left: 3mm;
@@ -357,11 +337,11 @@
             justify-content: space-around;
         }
         .content-striped{
-            margin-top: 34mm;
+            margin-top: 31mm;
             margin-bottom: 0mm;
             display: flex;
             flex-direction: column;
-            height: 278mm;
+            height: 260mm;
             width: 100%;
             max-width: 5mm;
             overflow: hidden;
@@ -369,37 +349,38 @@
         .bg-striped1 {
             width: 100%;
             max-width: 5mm;
-            margin-top: 2.5mm;
+            margin-top: 8mm;
         }
 
         .bg-striped2 {
             width: 100%;
             max-width: 5mm;
             margin-bottom:1mm;
-            margin-top: 2mm;
+            margin-top: .5 mm;
         }
 
         .tble-dark{
             width: 6mm;
         }
         .tr-dark1 {
-            background-color: #000; 
-            height: 3.1mm;
+            background-color: #000;
+            height: 2mm;
             margin-top: 1mm;
         }
         .tr-light1 {
             background-color: #fff;
-            color: #000; 
-            height: 1.29mm;
+            color: #000;
+            height: .7mm;
         }
         .tr-dark2 {
-            background-color: #000; 
-            height: 3.1mm;
+            background-color: #000;
+            height: 2mm;
         }
         .tr-light2 {
             background-color: #fff;
-            color: #000; 
-            height: 1.65mm;
+            color: #000;
+            height: 1mm;
+            height: 1.23mm;
         }
 
         .dark-bar{
@@ -410,22 +391,20 @@
         .page-content{
             width: 100%;
             max-width: 205mm;
-            /*margin-top: -15mm;*/
+            margin-top: -15mm;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
         .sqare-date{
             padding: 2mm 15mm;
-            border: 1px solid #38b292;
-            box-shadow: 0 0 0 0.5px #38b292;
+            border: 2px solid #38b292;
             margin-left: 2mm ;
         }
 
         .sqare-matiere{
-            padding: 0 30mm;
-            border: 1px solid #38b292;
-            box-shadow: 0 0 0 0.5px #38b292;
+            padding: 2mm 30mm;
+            border: 2px solid #38b292;
             margin-left: 2mm ;
         }
 
@@ -454,12 +433,11 @@
             justify-content: space-between;
         }
         .instruction-section{
-            border: 1px solid #38b292;
-            box-shadow: 0 0 0 0.5px #38b292;
+            border: 2px solid #38b292;
             margin-top:2mm;
             max-width: 55mm;
 
-        }   
+        }
         .qr-div {
             max-width: 250px;
             padding: 5% 10%;
@@ -471,12 +449,11 @@
             width: 75px;
             height: 75px;
         }
-        
+
         .qr-content{
-            border: 1px solid #38b292;
-            box-shadow: 0 0 0 0.5px #38b292;
+            border: 2px solid #38b292;
             margin-top:2mm;
-            max-width: 33mm; 
+            max-width: 33mm;
             text-align: center;
         }
         .question-section{
@@ -486,13 +463,13 @@
         }
         .number-candidate{
             width: 100%;
-            max-width: 118mm; 
+            max-width: 118mm;
         }
         .studentname td{
             padding: 2.9mm;
         }
         .numbercase td{
-            padding: 2mm 1.5mm; 
+            padding: 2mm 1.5mm;
         }
         .studentname tr , .numbercase tr{
             margin: 1mm;
@@ -525,7 +502,7 @@
             margin-right: 1mm;
         }
         .questions-a4{
-            border: 2px solid #38b292; 
+            border: 2px solid #38b292;
         }
         .studentname td , .numbercase td {
             border: 2px solid #38b292;
@@ -547,11 +524,9 @@
         }
         .circle-matricule{
             text-align: center;
-            border: 1px solid #38b292;
-            box-shadow: 0 0 0 0.5px #38b292;
-            width: 3.3mm;
-            height: 3.3mm;
-            margin-bottom: .039mm;
+            border: 2px solid #38b292;
+            width: 2.5mm;
+            height: 2.5mm;
             border-radius: 50%;
             background-color: #fff;
             color: #38b292;
@@ -562,19 +537,19 @@
         .border-bottom-success{
             width: 100%;
             border-bottom: 2px solid  #38b292;
-            margin-bottom: 1mm;            
+            margin-bottom: 1mm;
         }
         .infos-section{
             width: 100%;
-            max-width: 91mm;    
+            max-width: 91mm;
         }
 
         .note-section{
             max-width: 36mm;
         }
         .table-number{
-            max-width: 50mm; 
-            margin-top: 2mm; 
+            max-width: 50mm;
+            margin-top: 2mm;
         }
 
         .table-section {
@@ -591,8 +566,7 @@
         }
         .info-classe, .info-niveau,  .info-filiere, .info-number, .info-signature, .info-note, .note-obtained, .supervisor-signature{
             width: 100%;
-            border: 1px solid #38b292;
-            outline: 0.5px solid #38b292;
+            border: 2px solid #38b292;
 
         }
         .info-note {
@@ -600,23 +574,23 @@
             height: 28mm;
         }
         .info-signature {
-            margin-top: 4mm;
-            height: 29mm;
+            margin-top: 1mm;
+            height: 28.7mm;
         }
         .info-classe{
-            max-width: 25mm; 
+            max-width: 25mm;
         }
 
         .info-niveau{
-            max-width: 20mm; 
+            max-width: 20mm;
         }
 
         .info-filiere{
-            max-width: 35mm; 
+            max-width: 35mm;
         }
         .note-obtained, .supervisor-signature{
             margin-top: 2mm;
-            height: 30mm;
+            height: 25mm;
         }
         .questions-a4{
             width: 100%;
@@ -663,13 +637,12 @@
 </head>
 <body>
         @foreach($randomSubjects as $index => $randomSubject)
-        
             <div class="random-subject">
             <div class="subject-wrapper">
                 <div class="subject-content">
                 <div class="header">
-                    <div class="logo"><img src="{{ asset('images/romnote.png') }}" height="50" width="auto" alt=""></div>
-                        <div class="title"> 
+                    <div class="logo"><img src="{{ asset('storage/logo/' . auth()->user()->etablissement->logo) }}" height="50" width="auto" alt=""></div>
+                        <div class="title">
                             <div class="devoir"><span class="devoir-text">{{ $dataAtributes['typesujet'] }}</span></div>
                             <div class="devtitle">
                                 <div class="devoir"><span class="left-title">Matière :</span> {{ $dataAtributes['matiere'] }}</div>
@@ -685,17 +658,17 @@
                                                                     $totalMinutes = $hoursInMinutes + $minutes;
                                                                 @endphp
                                                                 {{ $totalMinutes }} min</span></div>
-                            <div>Coefficient : <span class="info-text">1</span></div>
-                            <div>ECT : <span class="info-text">1</span></div>
+                                                                <div>Coefficient : <span class="info-text">{{ $coefficient }}</span></div>
+                                                                <div>ECT : <span class="info-text">{{$ects}}</span></div>
                         </div>
                     </div>
 
                     <div class="main-title">
-                        {{ ($dataAtributes['consigne']) }}  <span class="points instruction">{{ $dataAtributes['noteprincipale'] }} pts</span><br>
+                        Répondre aux QCM sur la fiche ROMNote <span class="points">{{ $dataAtributes['noteprincipale'] }} pts</span>
                     </div>
                 @foreach($randomSubject->sections as $section)
                     <div class="exercise">
-                        <div class="exercise-title">EXERCICE {{ $loop->iteration }} : {{ $section->titre }} <span class="points  qt">{{$section->questions->sum(function($q) { return $q->reponses->sum('points'); })}} pts</span></div>
+                        <div class="exercise-title">EXERCICE {{ $loop->iteration }} : {{ $section->titre }} <span class="points">{{$section->questions->sum(function($q) { return $q->reponses->sum('points'); })}} pts</span></div>
                         <div class="exercise-content">
                             @if($section->soustitre)
                                 <div class="exercise-description">{{ $section->soustitre }}</div>
@@ -749,10 +722,10 @@
                             {!! $randomSubject->qrCode !!}
                             {{ $randomSubject->reference }}
                         </div>
-                    </div> 
+                    </div>
                 </div>
             </div>
-         
+
 
             <!--- Feuille de OMR-Sheet   --->
             <div class="container page-a4">
@@ -761,29 +734,29 @@
                     <div class="bg-striped1">
                         <table class="tble-dark">
                             <tbody class="tbody-dark1">
-                                
+
                             </tbody>
                         </table>
                     </div>
                     <div class="bg-striped2">
                         <table class="tble-dark">
                             <tbody class="tbody-dark2">
-                                
+
                             </tbody>
                         </table>
                     </div>
                 </div>
-                
+
                 <div class="sheet-section">
                     <div class="logo">
                         <div class="img-logo">
-                            <img src="{{ asset('images/romnote.png') }}" height="44" width="auto" class="" alt="logo" srcset="">
+                            <img src="{{ asset('images/pigier.png') }}" height="40" width="auto" class="" alt="logo" srcset="">
                             <div class="dev">Devoir</div>
                         </div>
                     </div>
                     <div class="sheet-info">
                         <div class=" border-success header-a4">
-                            <div class="header-content"><div class="header-text">Matière: </div> <div class="sqare-matiere">{{ $dataAtributes['matiere'] }}</div></div>
+                            <div class="header-content"><div class="header-text">Matière: </div> <div class="sqare-matiere"></div></div>
                             <div class="header-content"><span class="header-text">Date: </span> <span class="sqare-date"></span></div>
                         </div>
                     </div>
@@ -817,17 +790,17 @@
                                         <h5>CLASSE</h5>
                                     </div>
                                     <div class="table-responsive  name-arrow">
-                                        
+
                                         <table class="table">
                                             <tbody>
                                               <tr class="tablename">
-                                                <td>{{ $dataAtributes['classe'] }}</td>
+                                                <td>{{ $dataAtributes['matiere'] }}</td>
                                               </tr>
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
-    
+
                                 <div class="info-niveau">
                                     <div class="border-bottom-success name-title">
                                         <h5>NIVEAU</h5>
@@ -842,24 +815,24 @@
                                         </table>
                                     </div>
                                 </div>
-        
+
                                 <div class="info-filiere">
                                     <div class="border-bottom-success name-title">
-                                        <h5>FILIERE</h5>
+                                        <h5>{{ $dataAtributes['filiere'] }}</h5>
                                     </div>
                                     <div class="table-responsive name-arrow">
                                         <table class="table">
                                             <tbody>
                                               <tr class="tablename">
-                                                <td>{{ $dataAtributes['filiere'] }}</td>
+                                                <td>CF</td>
                                               </tr>
                                             </tbody>
                                         </table>
-                                    </div> 
+                                    </div>
                                 </div>
                             </div>
                         </div>
-    
+
                         <div class="table-section">
                             <div class="note-section">
                                 <div class="info-note">
@@ -867,11 +840,11 @@
                                         <h5>NOTE OBTENUE</h5>
                                     </div>
                                     <div class="table-responsive  name-arrow">
-                                        
+
                                         <table class="table">
                                             <tbody>
                                               <tr class="scoreobtained">
-     
+
                                               </tr>
                                             </tbody>
                                         </table>
@@ -882,11 +855,11 @@
                                         <h5>SIGNATURE DU CORRECTEUR</h5>
                                     </div>
                                     <div class="table-responsive  name-arrow">
-                                        
+
                                         <table class="table">
                                             <tbody>
                                               <tr class="proofreadersignature">
-    
+
                                             </tr>
                                             </tbody>
                                         </table>
@@ -925,22 +898,22 @@
                                     <h5>INSTRUCTIONS POUR LE MARQUAGE DE LA FEUILLE ROM</h5>
                                 </div>
                                 <div class="name-arrow  d-flex align-items-center justify-content-center px-5">
-    
+
                                     <table class="tr-matricule">
                                         <tbody>
-    
+
                                         <tr class="tablename">
                                             <td class="textindic">1.</td>
                                             <td class="textindic">Utiliser un stylo à bille noir/bleu pour cocher</td>
                                         </tr>
-    
+
                                         <tr class="tablename">
                                             <td class="textindic two">2.</td>
                                             <td class="textindic">Ne noicir qu'un ou plusieurs cercles pour indiquer la/les réponse </td>
                                         </tr>
                                         </tbody>
                                     </table>
-    
+
                                     <table class="tr-matricule">
                                         <tbody>
                                             <tr class="tablename">
@@ -948,9 +921,9 @@
                                                 <td class="textindic"><div class="circle-matricule"></div></td>
                                                 <td class="textindic"><div class="circle-matricule"></div></td>
                                                 <td class="textindic"><div class="circle-matricule bg-primary border-primary"></div></td>
-                                                <td class="textindic"><div class="circle-matricule"></div></td> 
+                                                <td class="textindic"><div class="circle-matricule"></div></td>
                                             </tr>
-    
+
                                             <tr class="tablename">
                                                 <td class="text-start"><strong>MAUVAISE MÉTHODE</strong></td>
                                                 <td class="textindic"><div class="circle-matricule text-primary h5">x</div></td>
@@ -960,10 +933,10 @@
                                             </tr>
                                         </tbody>
                                     </table>
-    
+
                                 </div>
                             </div>
-    
+
                             <div class="qr-content">
                                 <div class="qr-div">
                                 {!! $randomSubject->qrCode !!}
@@ -971,7 +944,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="note-obtained">
                             <div class=" name-title border-bottom-success" >
                                     <h5>SIGNATURE DU CANDIDAT</h5>
@@ -999,7 +972,7 @@
                                     <th colspan="5">Réponses</th>
                                 </tr>
                                 <tbody>
-                                    
+
                                 <tr class="">
                                     <td class="text-center">1</td>
                                     <td class="text-center"><div class="circle-matricule">A</div></td>
@@ -1143,7 +1116,7 @@
                                     <td class="text-center"><div class="circle-matricule">C</div></td>
                                     <td class="text-center"><div class="circle-matricule">D</div></td>
                                 </tr>
-                          
+
                                 </tbody>
                             </table>
 
@@ -1166,7 +1139,7 @@
                                         <td class="text-center"><div class="circle-matricule">C</div></td>
                                         <td class="text-center"><div class="circle-matricule">D</div></td>
                                     </tr>
-    
+
                                     <tr class="tablename">
                                         <td class="text-center">23</td>
                                         <td class="text-center"><div class="circle-matricule">A</div></td>
@@ -1174,7 +1147,7 @@
                                         <td class="text-center"><div class="circle-matricule">C</div></td>
                                         <td class="text-center"><div class="circle-matricule">D</div></td>
                                     </tr>
-    
+
                                     <tr class="tablename">
                                         <td class="text-center">24</td>
                                         <td class="text-center"><div class="circle-matricule">A</div></td>
@@ -1297,7 +1270,7 @@
                                     <td class="text-center"><div class="circle-matricule">D</div></td>
                                 </tr>
 
-                                
+
                                 </tbody>
                             </table>
 
@@ -1350,7 +1323,7 @@
                                             <td class="text-center"><div class="circle-matricule">C</div></td>
                                             <td class="text-center"><div class="circle-matricule">D</div></td>
                                         </tr>
-        
+
                                         <tr class="tablename">
                                             <td class="text-center">47</td>
                                             <td class="text-center"><div class="circle-matricule">A</div></td>
@@ -1358,7 +1331,7 @@
                                             <td class="text-center"><div class="circle-matricule">C</div></td>
                                             <td class="text-center"><div class="circle-matricule">D</div></td>
                                         </tr>
-        
+
                                         <tr class="tablename">
                                             <td class="text-center">48</td>
                                             <td class="text-center"><div class="circle-matricule">A</div></td>
@@ -1366,7 +1339,7 @@
                                             <td class="text-center"><div class="circle-matricule">C</div></td>
                                             <td class="text-center"><div class="circle-matricule">D</div></td>
                                         </tr>
-        
+
                                         <tr class="tablename">
                                             <td class="text-center">49</td>
                                             <td class="text-center"><div class="circle-matricule">A</div></td>
@@ -1374,7 +1347,7 @@
                                             <td class="text-center"><div class="circle-matricule">C</div></td>
                                             <td class="text-center"><div class="circle-matricule">D</div></td>
                                         </tr>
-        
+
                                         <tr class="tablename">
                                             <td class="text-center">50</td>
                                             <td class="text-center"><div class="circle-matricule">A</div></td>
@@ -1382,7 +1355,7 @@
                                             <td class="text-center"><div class="circle-matricule">C</div></td>
                                             <td class="text-center"><div class="circle-matricule">D</div></td>
                                         </tr>
-        
+
                                         <tr class="tablename">
                                             <td class="text-center">51</td>
                                             <td class="text-center"><div class="circle-matricule">A</div></td>
@@ -1390,7 +1363,7 @@
                                             <td class="text-center"><div class="circle-matricule">C</div></td>
                                             <td class="text-center"><div class="circle-matricule">D</div></td>
                                         </tr>
-        
+
                                     <tr class="tablename">
                                         <td class="text-center">52</td>
                                         <td class="text-center"><div class="circle-matricule">A</div></td>
@@ -1398,7 +1371,7 @@
                                         <td class="text-center"><div class="circle-matricule">C</div></td>
                                         <td class="text-center"><div class="circle-matricule">D</div></td>
                                     </tr>
-    
+
                                     <tr class="tablename">
                                         <td class="text-center">53</td>
                                         <td class="text-center"><div class="circle-matricule">A</div></td>
@@ -1406,7 +1379,7 @@
                                         <td class="text-center"><div class="circle-matricule">C</div></td>
                                         <td class="text-center"><div class="circle-matricule">D</div></td>
                                     </tr>
-    
+
                                     <tr class="tablename">
                                         <td class="text-center">54</td>
                                         <td class="text-center"><div class="circle-matricule">A</div></td>
@@ -1428,7 +1401,7 @@
                                         <td class="text-center"><div class="circle-matricule">C</div></td>
                                         <td class="text-center"><div class="circle-matricule">D</div></td>
                                     </tr>
-    
+
                                     <tr class="tablename">
                                         <td class="text-center">57</td>
                                         <td class="text-center"><div class="circle-matricule">A</div></td>
@@ -1551,7 +1524,7 @@
                                         <td class="text-center"><div class="circle-matricule">C</div></td>
                                         <td class="text-center"><div class="circle-matricule">D</div></td>
                                     </tr>
-                                 
+
                                     <tr class="tablename">
                                         <td class="text-center">73</td>
                                         <td class="text-center"><div class="circle-matricule">A</div></td>
@@ -1559,7 +1532,7 @@
                                         <td class="text-center"><div class="circle-matricule">C</div></td>
                                         <td class="text-center"><div class="circle-matricule">D</div></td>
                                     </tr>
-    
+
                                     <tr class="tablename">
                                         <td class="text-center">74</td>
                                         <td class="text-center"><div class="circle-matricule">A</div></td>
@@ -1581,7 +1554,7 @@
                                         <td class="text-center"><div class="circle-matricule">C</div></td>
                                         <td class="text-center"><div class="circle-matricule">D</div></td>
                                     </tr>
-    
+
                                 <tr class="tablename">
                                     <td class="text-center">77</td>
                                     <td class="text-center"><div class="circle-matricule">A</div></td>
@@ -1629,8 +1602,8 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        
-    
+
+
                                     <tr class="tablename">
                                         <td class="text-center">81</td>
                                         <td class="text-center"><div class="circle-matricule">A</div></td>
@@ -1701,7 +1674,7 @@
                                         <td class="text-center"><div class="circle-matricule">C</div></td>
                                         <td class="text-center"><div class="circle-matricule">D</div></td>
                                     </tr>
-        
+
                                     <tr class="tablename">
                                         <td class="text-center">91</td>
                                         <td class="text-center"><div class="circle-matricule">A</div></td>
@@ -1737,7 +1710,7 @@
                                         <td class="text-center"><div class="circle-matricule">C</div></td>
                                         <td class="text-center"><div class="circle-matricule">D</div></td>
                                     </tr>
-                                 
+
                                     <tr class="tablename">
                                         <td class="text-center">96</td>
                                         <td class="text-center"><div class="circle-matricule">A</div></td>
@@ -1745,7 +1718,7 @@
                                         <td class="text-center"><div class="circle-matricule">C</div></td>
                                         <td class="text-center"><div class="circle-matricule">D</div></td>
                                     </tr>
-    
+
                                     <tr class="tablename">
                                         <td class="text-center">98</td>
                                         <td class="text-center"><div class="circle-matricule">A</div></td>
@@ -1772,7 +1745,7 @@
                     </div>
                    <div class="content-footer">
                     <p class="footer-a4"><span class="romnote">ROMNote</span> - AKPANY, Software & Media Solution</p>
-                   </div> 
+                   </div>
                 </div>
 
                <!--<div class="bg-striped"></div>-->
@@ -1780,19 +1753,19 @@
                     <div class="bg-striped1">
                         <table class="tble-dark">
                             <tbody class="tbody-dark1">
-                                
+
                             </tbody>
                         </table>
                     </div>
                     <div class="bg-striped2">
                         <table class="tble-dark">
                             <tbody class="tbody-dark2">
-                                
+
                             </tbody>
                         </table>
                     </div>
                 </div>
-             </div> 
+             </div>
 
         </div>
         @endforeach
@@ -1800,18 +1773,18 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
 // Dimensions de la page A4
-const A4_HEIGHT_MM = 297; 
+const A4_HEIGHT_MM = 297;
 const A4_WIDTH_MM = 210;
-const CONTENT_MARGIN_MM = 20; 
+const CONTENT_MARGIN_MM = 20;
 const AVAILABLE_HEIGHT_MM = A4_HEIGHT_MM - (2 * CONTENT_MARGIN_MM);
-const MM_TO_PX_RATIO = 3.779527559;  
+const MM_TO_PX_RATIO = 3.779527559;
 
 function mmToPx(mm) {
     return mm * MM_TO_PX_RATIO;
 }
 
 function handleOverflow() {
-    const availableHeightPx = mmToPx(AVAILABLE_HEIGHT_MM);  
+    const availableHeightPx = mmToPx(AVAILABLE_HEIGHT_MM);
     const randomSubjects = document.querySelectorAll('.random-subject');
 
     randomSubjects.forEach((subject, subjectIndex) => {
@@ -1841,7 +1814,7 @@ function handleOverflow() {
             }
 
             currentPage.querySelector('.subject-content').appendChild(exercise);
-            
+
             currentPageHeight += exerciseHeight;
         });
 
@@ -1852,10 +1825,10 @@ function handleOverflow() {
 function createNewPage(subject, header, mainTitle, footer, pageNumber) {
     const page = document.createElement('div');
     page.className = 'page';
-    
+
     const subjectWrapper = document.createElement('div');
     subjectWrapper.className = 'subject-wrapper';
-    
+
     const subjectContent = document.createElement('div');
     subjectContent.className = 'subject-content';
     subjectContent.classList.add("top-space");
@@ -1915,8 +1888,8 @@ initializePageLayout();
 $(document).ready(function() {
             for (let i = 90; i >= 65; i--) {
                 let letter = String.fromCharCode(i);
-                let $tr = $('<tr class="tablename"></tr>'); 
-                
+                let $tr = $('<tr class="tablename"></tr>');
+
                 for (let j = 0; j < 14; j++) {
                     $tr.append(`<td><div class="circle-matricule">${letter}</div></td>`);
                 }
@@ -1926,7 +1899,7 @@ $(document).ready(function() {
             for (let i = 9; i >= 0; i--) {
                 let $tr = $('<tr class="tablename"></tr>');
                 let $tr1 = $('<tr class="tablename"></tr>');
-                
+
                 for (let j = 0; j < 14; j++) {
                     $tr.append(`<td><div class="circle-matricule">${i}</div></td>`);
                 }
@@ -1940,15 +1913,15 @@ $(document).ready(function() {
             }
 
             $(document).ready(function() {
-            for (var i = 0; i < 81; i++) {
-                var rowClass1 = (i % 2 === 0) ? 'tr-dark1' : 'tr-light1';
+            for (var i = 0; i < 151; i++) {
+                var rowClass1 = (i % 4 === 0) ? 'tr-dark1' : 'tr-light1';
                 $('.tbody-dark1').append('<tr class="' + rowClass1 + '"><td></td></tr>');
             }
-            for (var i = 0; i < 37; i++) {
-                var rowClass2 = (i % 2 === 0) ? 'tr-dark2' : 'tr-light2';
+            for (var i = 0; i < 61; i++) {
+                var rowClass2 = (i % 3 === 0) ? 'tr-dark2' : 'tr-light2';
                 $('.tbody-dark2').append('<tr class="' + rowClass2 + '"><td></td></tr>');
             }
-        }); 
+        });
         });
 </script>
 </body>
