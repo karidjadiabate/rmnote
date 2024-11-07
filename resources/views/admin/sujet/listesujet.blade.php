@@ -172,16 +172,60 @@
         left: 0;
         height: 1px;
         background-color: rgb(11, 53, 120);
-        width: calc(100% - 28%); /* Ajustez cette largeur pour s'arrêter à "statut" */
+        width: calc(100% - 22%); /* Ajustez cette largeur pour s'arrêter à "statut" */
         transform: translateY(-50%);
         z-index: 1;
     }
 
     .disabled-buttons a,
-        .disabled-buttons button {
-            pointer-events: none; /* Désactive les clics */
-            opacity: 0.5; /* Rend les boutons gris et atténués */
-        }
+    .disabled-buttons button {
+        pointer-events: none; /* Désactive les clics */
+        opacity: 1; /* Garde l'opacité à 1 pour que la couleur appliquée soit bien visible */
+        color: #B0B0B0 !important; /* Remplace la couleur de texte par du gris */
+        border-color: #E0E0E0 !important; /* Remplace la couleur de bordure par du gris */
+        fill: #B0B0B0 !important; /* Pour les icônes SVG ou toute couleur remplie */
+    }
+
+    /* Applique la couleur grise aux icônes dans les liens et boutons désactivés */
+    .disabled-buttons a i,
+    .disabled-buttons button i,
+    .disabled-buttons a .fa-solid,
+    .disabled-buttons button .fa-solid {
+        color: #B0B0B0 !important; /* Remplace la couleur des icônes par du gris */
+        fill: #B0B0B0 !important; /* Assure la couleur grise pour les icônes SVG */
+    }
+
+    /* Pour les effets de hover et d'active - désactiver */
+    .disabled-buttons a:hover,
+    .disabled-buttons button:hover,
+    .disabled-buttons a:active,
+    .disabled-buttons button:active {
+        color: #B0B0B0 !important; /* Garde le texte en gris même au hover */
+        background-color: #E0E0E0 !important; /* Garde le fond gris au hover */
+        border-color: #E0E0E0 !important; /* Garde la bordure grise au hover */
+    }
+
+
+    /* Disable only the editTeacher1 button when status is "Non Corrigé" */
+    .non-corrige-status .editTeacher1.disabled {
+        pointer-events: none;
+        opacity: 0.5; /* Optional dimming */
+    }
+
+    /* Appliquer un style pour les boutons désactivés */
+    button.disabled {
+        pointer-events: none; /* Désactive les clics */
+        opacity: 0.5; /* Rend le bouton visuellement atténué */
+        color: #B0B0B0 !important; /* Change la couleur de l'icône ou du texte en gris */
+    }
+
+    /* Style pour les icônes à l'intérieur des boutons désactivés */
+    button.disabled i {
+        color: #B0B0B0 !important; /* Change la couleur des icônes en gris */
+    }
+
+    /* Facultatif : applique une couleur de fond gris clair pour les boutons désactivés */
+
 
 
 </style>
@@ -328,25 +372,30 @@
                                     {{ $listesujet->status === 'non-corrige' ? 'Non Corrigé' : 'Corrigé' }}
                                 </span>
                             </td>
-                                {{--  --}}
 
-                                <td data-label="Action" class="action-icons no-print {{ $listesujet->is_deleted ? 'disabled-buttons' : '' }}">
-                                    @if (auth()->user()->role_id == 3)
+
+                            <td data-label="Action" class="action-icons no-print {{ $listesujet->is_deleted ? 'disabled-buttons' : ($listesujet->status === 'non-corrige' ? 'non-corrige-status' : '') }}">
+                                @if (auth()->user()->role_id == 3)
                                         <a href="{{ route('sujetadmin.details', ['id' => $listesujet->id]) }}"> <i
                                                 class="fas fa-eye"></i></a>
                                     @elseif (auth()->user()->role_id == 2)
                                         <a href="{{ route('sujetprofesseur.details', ['id' => $listesujet->id]) }}">
                                             <i class="fas fa-eye"></i></a>
                                     @endif
-                                    <button class="printSujet" data-idsujet="{{ $listesujet->id }}"> <i
-                                            style="color: #4A41C5;" class="fa-solid fa-print"></i></button>
-                                    <button data-bs-toggle="modal" data-bs-target="#impri">
+
+                                    <button class="printSujet {{ $listesujet->status === 'corrige' ? 'disabled' : '' }}" data-idsujet="{{ $listesujet->id }}">
+                                        <i style="color: #4A41C5;" class="fa-solid fa-print"></i>
+                                    </button>
+
+                                    <button data-bs-toggle="modal" data-bs-target="#impri" class="imprip {{ $listesujet->status === 'corrige' ? 'disabled' : '' }}" data-idsujet="{{ $listesujet->id }}">
                                         <i style="color:#38B293" class="fa-solid fa-calculator"></i>
                                     </button>
-                                    <button data-bs-toggle="modal" class="editTeacher1"> <i
-                                            class="fa-solid fa-list"></i></button>
-                                    <!-- <button data-bs-toggle="modal" data-bs-target="#deleteTeacher"><i
-                                            class="fa-solid fa-box-archive"></i></button> -->
+
+
+                                    <button data-bs-toggle="modal" class="editTeacher1 {{ $listesujet->status === 'non-corrige' ? 'disabled' : '' }}">
+                                        <i class="fa-solid fa-list"></i>
+                                    </button>
+
                                             <button data-bs-toggle="modal" data-bs-target="#deleteSujet"
                                             data-id="{{ $listesujet->id }}" data-code="{{ $listesujet->code }}" id="suppression_sujet">
                                         <i class="fa-solid fa-trash"></i>

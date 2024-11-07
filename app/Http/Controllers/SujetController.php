@@ -74,6 +74,7 @@ class SujetController extends Controller
             // Add professor's subjects to matieres
             $matieres = $matieres->merge($professeurMatiere);
 
+
         } elseif ($userRole === 3) {
             // If the user is an administrator, get all classes in the school
             $classes = Classe::where('etablissement_id', $ecoleId)->get();
@@ -83,6 +84,8 @@ class SujetController extends Controller
 
             // Get all subjects for the school
             $matieres = $fmatiere->listematierebyecole();
+
+
 
         } else {
             // For other user roles, don't display any classes
@@ -122,17 +125,8 @@ class SujetController extends Controller
         ]);
 
 
-        // Récupérer la matière associée
-        $matiere = Matiere::find($validated['matiere_id']);
-
-        if (!$matiere) {
-            return redirect()->back()->withErrors(['matiere_error' => 'La matière sélectionnée est invalide.']);
-        }
-
         // Générer le code pour le sujet basé sur le nom de la matière
         $lastSujetCode = Sujet::orderBy('code', 'desc')->first();
-        //$count = $latestSubject ? (int) substr($latestSubject->code, -2) + 1 : 1;
-        //$code = strtoupper(substr($matiere->nommatiere, 0, 4)) . str_pad($count, 2, '0', STR_PAD_LEFT);
 
         $lastCodeNumber = $lastSujetCode ? (int) substr($lastSujetCode->code, 3) : 0;
 
@@ -377,11 +371,11 @@ class SujetController extends Controller
 
         $etablissementMatieres = $matiere->etablissementMatieres;
 
-        $etablissementMatiere = $etablissementMatieres->firstWhere('id', $matiere->id);
+        //$etablissementMatiere = $etablissementMatieres->firstWhere('id', $matiere->id);
 
-        if ($etablissementMatiere) {
-            $coefficient = $etablissementMatiere->coefficient;
-            $ects = $etablissementMatiere->credit;
+        if ($etablissementMatieres) {
+            $coefficient = $matiere->etablissementMatieres[0]->coefficient;
+            $ects = $matiere->etablissementMatieres[0]->credit;
         }else{
             $coefficient = 0;
             $ects = 0;
@@ -420,7 +414,6 @@ class SujetController extends Controller
             'classe',
             'classe.filiere',
             'classe.filiere.niveau',
-            'filiere.etablissementFilieres',
             'etablissement',
             'matiere',
             'typeSujet',
@@ -451,11 +444,11 @@ class SujetController extends Controller
 
         $etablissementMatieres = $matiere->etablissementMatieres;
 
-        $etablissementMatiere = $etablissementMatieres->firstWhere('id', $matiere->id);
+        //$etablissementMatiere = $etablissementMatieres->firstWhere('id', $matiere->id);
 
-        if ($etablissementMatiere) {
-            $coefficient = $etablissementMatiere->coefficient;
-            $ects = $etablissementMatiere->credit;
+        if ($etablissementMatieres) {
+            $coefficient = $matiere->etablissementMatieres[0]->coefficient;
+            $ects = $matiere->etablissementMatieres[0]->credit;
         }else{
             $coefficient = 0;
             $ects = 0;
@@ -472,6 +465,7 @@ class SujetController extends Controller
         // Générer un QR code pour cette référence
         $qrCode = QrCode::size(100)->generate($reference);
         $dataAtributes['qrCode'] = $qrCode;
+
         return view('admin.sujet.details', compact('dataAtributes','coefficient','ects'));
     }
 
@@ -488,6 +482,8 @@ class SujetController extends Controller
         if ($etablissementMatiere) {
             $coefficient = $etablissementMatiere->coefficient;
             $ects = $etablissementMatiere->credit;
+
+
         } else {
             $coefficient = 0;
             $ects = 0;

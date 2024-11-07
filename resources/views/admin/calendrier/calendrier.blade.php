@@ -618,7 +618,8 @@ tr:first-child>td>.fc-day-grid-event {
                 editable: true,
                 events: calendrierEvents.map(event => {
                     if (event.is_deleted) {
-                        event.className = 'barre'; // Applique un style barré si l'événement est marqué
+                        event.className = 'barre';
+                        event.editable = false;
                     }
                     return event;
                 }),
@@ -685,6 +686,11 @@ tr:first-child>td>.fc-day-grid-event {
                 },
 
                 eventClick: function(event) {
+
+                    if (event.is_deleted) {
+                        return; // Si l'événement est barré, ne rien faire
+                    }
+
 
                     // Convertir la durée de l'événement en heures et minutes
                     let durationParts = event.duree.split(':'); // Par exemple "02:30"

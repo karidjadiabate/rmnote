@@ -11,9 +11,11 @@
     <link rel="stylesheet" href="{{ asset('frontend/dashboard/css/dash.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/dashboard/html/admin.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/dashboard/css/lists.css') }}">
+    <link rel="icon" href="{{ asset('assets/img/FaviconROMNOTE.png') }}" type="image/png">
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<style>
-    .content{
+    <style>
+        .content {
             font-family: Arial, sans-serif;
             max-width: 200mm;
             margin: 0 auto;
@@ -21,21 +23,29 @@
             font-size: 14px;
             font-weight: 500;
             line-height: 1.2;
-    }
-    /* Pour Chrome, Safari et Edge */
-    input[type="number"]::-webkit-inner-spin-button,
-    input[type="number"]::-webkit-outer-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
+        }
 
-    /* Pour Firefox */
-    input[type="number"] {
-        -moz-appearance: textfield;
-    }
+        /* Pour Chrome, Safari et Edge */
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
 
+        .fermons:before {
+            color: #fff !important;
+        }
 
-    .header {
+        /* Pour Firefox */
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+
+        #positions1 {
+            color: #4A41C5;
+        }
+
+        .header {
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -49,21 +59,17 @@
             font-weight: bold;
             font-size: 18px;
         }
+
         .title {
             font-weight: bold;
-            font-size: 14px;
+            font-size: 16px;
             margin-bottom: 2mm;
             background-color: rgb(244, 244, 243);
             border-bottom-left-radius: 5mm;
             border-bottom-right-radius: 5mm;
             display: flex;
             justify-content: center;
-            align-items: center;
             flex-direction: column;
-            width: 80%;
-            max-width: 400px;
-            margin: 0 auto;
-            padding: 10px;
         }
 
         .devoir {
@@ -72,29 +78,28 @@
             display: flex;
             justify-content: center;
         }
+
         .devoir-text {
             font-weight: bold;
             margin-top: 0;
             padding: 2mm 35mm;
             margin-bottom: 1mm;
             font-size: 14px !important;
-            text-transform: uppercase;
         }
 
         .devtitle {
-            width: 50%;
+            width: 100%;
             margin: 0 auto;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
+
         .left-title {
             font-weight: 300;
             font-size: 14px !important;
-            margin-right: 5px; /* pour espacer le texte du titre de la valeur */
-            padding-top: 1px;
-
         }
+
         .info {
             display: flex;
             flex-direction: column;
@@ -102,27 +107,38 @@
             font-size: 13px;
         }
 
-        .info .info-text{
+        .group {
+            position: relative;
+            left: 40%;
+        }
+
+        .info .info-text {
             font-weight: bold;
         }
+
         .main-title {
             text-align: center;
             margin-bottom: 10px;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+
         .exercise {
             margin-bottom: 45px;
         }
+
         .exercise-title {
             font-weight: bold;
             margin-bottom: 5px;
+            word-break: break-word;
         }
-        .exercisecootent{
+
+        .exercisecootent {
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
-        .questioncontent{
+
+        .questioncontent {
             text-align: left;
         }
 
@@ -143,20 +159,40 @@
             justify-content: space-between;
             gap: 10px;
             width: 100%;
+            word-break: break-word;
         }
+
+        .custom-placeholder {
+            background: #030D2D !important;
+            font-weight: lighter;
+        }
+
         .custom-placeholder::placeholder {
-            color: #fff!important; /* Couleur du placeholder modifiée */
+            color: #fff !important;
+            /* Couleur du placeholder modifiée */
             font-weight: lighter;
         }
+
         .custom-placeholders {
-            color: #fff!important; /* Couleur du placeholder modifiée */
-            background:#030D2D!important;
+            color: #fff !important;
+            /* Couleur du placeholder modifiée */
+            background: #030D2D !important;
             font-weight: lighter;
         }
+
+        .modal {
+            background: rgb(18 18 18 / 70%);
+            z-index: 99999;
+        }
+
         .question-text {
             flex: 1;
             font-size: 1rem;
             color: #333;
+        }
+
+        .btnas-ends:hover {
+            background: red;
         }
 
         .question-image {
@@ -167,32 +203,41 @@
             max-width: 75px;
             height: auto;
         }
-        .fa-moon{
-        color:#4A41C5;
+
+        .fa-moon {
+            color: #4A41C5;
         }
-        .fa-sun{
-            color:#4A41C5;
-            display:none;
+
+        .fa-sun {
+            color: #4A41C5;
+            display: none;
         }
+
         .options {
             display: flex;
             justify-content: space-between;
             width: 100%;
         }
+
         .options-group {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 10px;
             flex-grow: 1;
         }
+
         .option-content {
             display: flex;
             align-items: center;
+            word-break: break-word;
         }
+
         .option-text {
             margin-right: 10px;
-            font-size:14px !important;
+            font-size: 14px !important;
+            word-break: break-word;
         }
+
         .circle {
             display: inline-block;
             width: 20px;
@@ -204,27 +249,33 @@
             line-height: 20px;
             margin-right: 5px;
         }
-        .exercise-image{
-            text-align:center;
+
+        .exercise-image {
+            text-align: center;
         }
+
         .option-image {
             max-width: 200px;
             margin-left: 20px;
         }
+
         .option-image img {
             max-width: 100%;
             height: auto;
         }
+
         @media (max-width: 768px) {
             .options {
                 flex-direction: column;
             }
+
             .option-image {
                 margin: 10px auto;
             }
         }
-        span.option{
-            font-size:  14px !important;
+
+        span.option {
+            font-size: 14px !important;
         }
 
 
@@ -239,20 +290,27 @@
             height: 100px;
         }
 
+        .bg-1 {
+            background: #030D2D !important;
+            color: #fff !important;
+        }
+
         .points {
             float: right;
             font-weight: normal;
         }
 
-        .page-footer{
+        .page-footer {
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
-        .margin-l{
+
+        .margin-l {
             margin-right: 100px;
             margin-top: -65px;
         }
+
         .footer-sheet {
             margin-top: 20px;
             font-size: 12px;
@@ -271,21 +329,16 @@
             text-align: center;
         }
 
-        .page-footer {
-            position: absolute;
-            bottom: 0;
-            left: .5cm;
-            right: .5cm;
-            height:100px;
-            height: 100px;
-            background-color: white;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        li{
+        li {
             list-style: none;
         }
+
+        .sizes {
+            font-size: 16px;
+            padding: 12px 20px;
+            padding-top: 5px;
+        }
+
         .modal {
             display: none;
             position: fixed;
@@ -306,37 +359,60 @@
             width: 400px;
             max-width: 90%;
             text-align: center;
-            padding-top:0px;
+            padding-top: 0px;
+        }
+
+        .btn-red {
+            font-size: 16px !important;
+            padding: 12px 20px !important;
         }
 
         .btn-success {
-    background-color: #38B293;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 0px;
-    text-decoration: none;
-    }
-    .disabled {
+            background-color: #38B293;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 0px;
+            text-decoration: none;
+        }
+
+        .disabled {
             pointer-events: none;
             background: grey;
             text-decoration: none;
-            color:#fff;
+            color: #fff;
             border-radius: 0;
         }
-        .endnext{
-            position: absolute!important;
-            right: 20%!important;
+
+        .endnext {
+            position: absolute !important;
+            right: 20% !important;
         }
+
         input[name="noteprincipale"] {
-            width:254px!important;
-            height:68px!important;
+            width: 254px !important;
+            height: 68px !important;
         }
-        .enfant h2{
-            margin-top:20px!important;
+
+        .enfant h2 {
+            margin-top: 20px !important;
         }
-</style>
-    <title>Sujet</title>
+
+        .btn.width-24.disabled.valid-not {
+            margin-top: 0px;
+        }
+
+        .btn {
+            transition: background-color 1s ease;
+            /* Transition douce pour la couleur de fond */
+        }
+
+        .btnas-ends {
+            transition: background-color 1s ease;
+            /* Transition douce pour la couleur de fond */
+        }
+    </style>
+    <title>Registration Form</title>
 </head>
 
 <body>
@@ -349,18 +425,19 @@
                     <h2>Création de sujet</h2>
                 </div>
                 <div class="progressbar">
-                <div class="progress" id="progress"></div>
-                <div class="progress-step progress-step-active">Informations</div>
-                <div class="progress-step">Questions</div>
-                <div class="progress-step">Finalisation</div>
-            </div>
+                    <div class="progress" id="progress"></div>
+                    <div class="progress-step progress-step-active">Informations</div>
+                    <div class="progress-step">Questions</div>
+                    <div class="progress-step">Finalisation</div>
+                </div>
 
             </div>
             <div class="margin-l">
-                    <i class="fa-solid fa-moon"></i>
-                    <i class="fa-solid fa-sun"></i>
+                <i class="fa-solid fa-moon"></i>
+                <i class="fa-solid fa-sun"></i>
             </div>
-            <i class="fa-solid fa-circle-xmark fermeture" id="close-modal-btn" data-toggle="modal" data-target="#modalbtn"></i>
+            <i class="fa-solid fa-circle-xmark fermeture" id="close-modal-btn" data-toggle="modal"
+                data-target="#modalbtn"></i>
         </div>
         <!-- Progress bar -->
         <hr />
@@ -379,281 +456,510 @@
         </div>
     @endif
 
-
     @if (auth()->user()->role_id == 2)
-    <form action="{{ route('sujetprofesseur.store') }}" class="form" method="POST" enctype="multipart/form-data">
-@elseif (auth()->user()->role_id == 3)
-    <form action="{{ route('sujetadmin.store') }}" class="form" method="POST" enctype="multipart/form-data">
-@endif
-    @csrf
-    <div class="form-step form-step-active">
-        <div class="wo">
-            <div class="input-group select-group">
-                <label for="position" class="label">Type de sujet</label>
-                <select name="type_sujet_id" id="position" class="select-effect-1" required>
-                    <option value="" disabled selected hidden>
-                        Choisissez le type de sujet
-                    </option>
-                    @foreach ($typessujets as $typessujet)
-                        <option value="{{ $typessujet->id }}" data-typesujet="{{ $typessujet->libtypesujet }}">{{ $typessujet->libtypesujet }}</option>
-                    @endforeach
-                </select>
-                <span class="border"></span>
-                <div class="error-message" id="position-error" style="display: none; color: red;">Veuillez
-                    sélectionner un type de sujet.</div>
-            </div>
-            <div class="input-group select-group">
-                <label for="position" class="label">Matière</label>
-                <select name="matiere_id" id="positions" class="select-effect-1" required>
-                    <option value="" disabled selected hidden>
-                        Sélectionner la matière
-                    </option>
-
-                    @if (auth()->user()->role_id == 3)
-                    @foreach ($matieres as $matiere)
-                        <option value="{{ $matiere->id }}" data-matiere="{{ $matiere->nommatiere }}">{{ $matiere->nommatiere }}</option>
-                    @endforeach
-                    @elseif(auth()->user()->role_id == 2)
-                        @foreach ($professeurMatiere as $matiere)
-                            <option value="{{ $matiere->id }}" data-matiere ="{{ $matiere->nommatiere }}">{{ $matiere->nommatiere }}</option>
-                        @endforeach
-                    @endif
-                </select>
-                <span class="border"></span>
-                <div class="error-message" id="positions-error" style="display: none; color: red;">Veuillez
-                    sélectionner une matière.</div>
-            </div>
-            <div class="input-group select-group">
-                <label for="position" class="label">Filière</label>
-                <select name="filiere_id" id="positions1" class="select-effect-1" required>
-                    <option value="" disabled selected hidden>
-                        Sélectionnez la Filière
-                    </option>
-                    @foreach ($filieres as $filiere)
-                        <option value="{{ $filiere->id }}" data-filiere="{{ $filiere->filiere->nomfiliere ?? $filiere->nomfilieretablissement }}">{{ $filiere->filiere->nomfiliere ?? $filiere->nomfilieretablissement }}</option>
-                    @endforeach
-                </select>
-                <span class="border"></span>
-                <div class="error-message" id="positions1-error" style="display: none; color: red;">Veuillez
-                    sélectionner une filière.</div>
-            </div>
-            <div class="input-group select-group">
-                <label for="position" class="label">Classe</label>
-                <select name="classe_id" id="positions2" class="select-effect-1" required>
-                    <option value="" disabled selected hidden>
-                        Sélectionnez la classe
-                    </option>
-                    @foreach ($classes as $classe)
-                        <option value="{{ $classe->id }}" data-classe="{{ $classe->nomclasse }}">{{ $classe->nomclasse }}</option>
-                    @endforeach
-                </select>
-                <span class="border"></span>
-                <div class="error-message" id="positions2-error" style="display: none; color: red;">Veuillez
-                    sélectionner une classe.</div>
-            </div>
-            <div class="input-group time-group">
-                <label for="time" class="label">Durée</label>
-                <input type="text" name="heure" id="time" class="time-effect-1"
-                    placeholder="hh:mm" onfocus="this.type='time'" onblur="this.type='time'" required />
-                <span class="border"></span>
-            </div>
-            <div class="input-group ">
-                <label for="consigne" class="label">Consigne</label>
-                <input type="text" name="consigne" id="consigne" class="time-effect-1"
-                    placeholder="Entrez une consigne..."  required />
-                <span class="border"></span>
-                <div class="error-message" id="positions5-error" style="display: none; color: red;">Veuillez
-                    rempli les consignes.</div>
-            </div><br>
-            <div class="next-step">
-            <a href="#" class="btn btn-next width-24 ml-auto disabled" id="suivants">Suivant</a>
-        </div>
-        </div>
-
-
-    </div>
-
-    <div class="form-step">
-        <div class="note-container">
-            <span>Note:</span>
-            <input type="number" name="noteprincipale" class="note-value"
-                placeholder="Entrez le nombre total de points *" pattern="\d*" title="Veuillez entrer uniquement des chiffres."/>
-            <a class="enfant_suivant width-24 disabled">Valider</a>
-            <div class="error-message" id="error-message">Le champ ne peut pas être vide.</div>
-            <div class="btns-group avancer">
-                <a href="#" class="btn-prev">Précédent</a>
-                <a href="#" class="btn width-24 disabled valid-not" id="">Suivant</a>
-            </div>
-        </div>
-
-        <div class="frm" style="display: none">
-
-            <div class="sa">
-                <div class="btnas-ends">
-                    <i class="fa-solid fa-x delete-questionnaires"></i>
-                </div>
-                <div class="input-group">
-                    <input type="text" name="sections[0][titre]" id="phone"
-                        placeholder="Sous titre 1" required />
-                </div>
-                <div class="input-group input-with-icon">
-                    <input type="text" name="sections[0][soustitre]" id="preview"
-                        placeholder="Libellé du sous titre" required />
-                    <label for="file-input" class="icon-label"><i class="fa-regular fa-image"></i></label>
-                    <input type="file" id="file-input" class="file-input" data-preview="image-preview"
-                        data-result="preview" name="sections[0][soustitre][image]" style="display: none" />
-                    <img id="image-preview" alt="Aperçu de l'image" />
-
-                </div>
-            </div>
-
-            <div class="section-container">
-                <div class="sectio-container">
-                    <div class="btnas-end">
-                        <!-- <i class="fa-solid fa-x delete-section"></i> -->
+        <form action="{{ route('sujetprofesseur.store') }}" class="form" method="POST" enctype="multipart/form-data">
+            @csrf
+            <div class="form-step form-step-active">
+                <div class="wo">
+                    <div class="input-group select-group">
+                        <label for="position" class="label">Type de sujet</label>
+                        <select name="type_sujet_id" id="position" class="select-effect-1" required>
+                            <option value="" disabled selected hidden>
+                                Choisissez le type de sujet
+                            </option>
+                            @foreach ($typessujets as $typessujet)
+                                <option value="{{ $typessujet->id }}" data-typesujet="{{ $typessujet->libtypesujet }}">
+                                    {{ $typessujet->libtypesujet }}</option>
+                            @endforeach
+                        </select>
+                        <span class="border"></span>
+                        <div class="error-message" id="position-error" style="display: none; color: red;">Veuillez
+                            sélectionner un type de sujet.</div>
                     </div>
-                    <div class="sa-1">
-                        <div class="questionnaire-container">
-                            <div class="input-group" data-question-index="0">
-                                <div class="questionnaire">
-                                    <div class="input-group">
-                                        <div class="display-1">
-                                            <div class="textarea">
-                                                <textarea name="sections[0][questions][0][libquestion]" id="previews" required placeholder="Question"></textarea>
-                                            </div>
-                                            <div class="file-inputa">
-                                                <div class="eme">
-                                                    <label for="fileinputs"><i
-                                                            class="fa-regular fa-image"></i></label>
-                                                    <input type="file" id="fileinputs" class="file-input"
-                                                        data-preview="imagepreviews" data-result="previews"
-                                                        name="sections[0][questions][0][image]" style="display: none" />
-                                                    <img id="imagepreviews" alt="Aperçu de l'image" />
+                    <div class="input-group select-group">
+                        <label for="position" class="label">Matière</label>
+                        <select name="matiere_id" id="positions" class="select-effect-1" required>
+                            <option value="" disabled selected hidden>
+                                Sélectionner la matière
+                            </option>
+                            @if (auth()->user()->role_id == 2)
+                                @foreach ($professeurMatiere as $matiere)
+                                    <option value="{{ $matiere->id }}" data-matiere ="{{ $matiere->nommatiere }}">
+                                        {{ $matiere->nommatiere }}</option>
+                                @endforeach
+                            @endif
+                        </select>
+                        <span class="border"></span>
+                        <div class="error-message" id="positions-error" style="display: none; color: red;">Veuillez
+                            sélectionner une matière.</div>
+                    </div>
+                    <div class="input-group select-group">
+                        <label for="position" class="label">Classe</label>
+                        <select name="classe_id" id="positions2" class="select-effect-1 psi13" required>
+                            <option value="" disabled selected hidden>
+                                Sélectionnez la classe
+                            </option>
+                            @foreach ($classes as $classe)
+                                <option value="{{ $classe->id }}"
+                                    data-filiere="{{ json_encode($filiereClasses[$classe->nomclasse], JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) }}">
+                                    {{ $classe->nomclasse }}</option>
+                            @endforeach
+                        </select>
+                        <span class="border"></span>
+                        <div class="error-message" id="positions2-error" style="display: none; color: red;">Veuillez
+                            sélectionner une classe.</div>
+                    </div>
+                    <div class="input-group">
+                        <label for="position" class="label">Filière</label>
+                        <input type="text" name="filiere_id" id="positions1" class="select-effect-1 fil13" required
+                            readonly title="Vous ne pouvez pas modofier ce champs" />
+                        <span class="border"></span>
+                    </div>
 
+                    <div class="input-group time-group">
+                        <label for="time" class="label">Durée</label>
+                        <input type="text" name="heure" id="time" class="time-effect-1"
+                            placeholder="hh:mm" onfocus="this.type='time'" onblur="this.type='time'" required />
+                        <span class="border"></span>
+                    </div>
+                    <div class="input-group ">
+                        <label for="consigne" class="label">Consigne</label>
+                        <input type="text" name="consigne" id="consigne" class="time-effect-1"
+                            placeholder="Entrez une consigne..." required />
+                        <span class="border"></span>
+                        <div class="error-message" id="positions5-error" style="display: none; color: red;">Veuillez
+                            rempli les consignes.</div>
+                    </div><br>
+                    <div class="next-step">
+                        <a href="#" class="btn btn-next width-24 ml-auto disabled" id="suivants">Suivant</a>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="form-step">
+                <div class="note-container">
+                    <span>Note:</span>
+                    <input type="number" name="noteprincipale" class="note-value"
+                        placeholder="Entrez le nombre total de points *" pattern="\d*"
+                        title="Veuillez entrer uniquement des chiffres." />
+                    <a class="enfant_suivant width-24 disabled btn">Valider</a>
+                    <div class="error-message" id="error-message">Le champ ne peut pas être vide.</div>
+                    <div class="btns-group avancer">
+                        <a href="#" class="btn-prev">Précédent</a>
+                        <a href="#" class="btn width-24 disabled valid-not" id="">Suivant</a>
+                    </div>
+                </div>
+
+                <div class="frm" style="display: none">
+
+                    <div class="sa sas">
+                        <!-- <div class="btnas-endss">
+                            <i class="fa-solid fa-x delete-questionnaires"></i>
+                        </div> -->
+                        <div class="input-group">
+                            <input type="text" name="sections[0][titre]" id="phone"
+                                placeholder="Sous titre 1" required />
+                        </div>
+                        <div class="input-group input-with-icon">
+                            <input type="text" name="sections[0][soustitre]" id="preview"
+                                placeholder="Libellé du sous titre" required />
+                            <label for="file-input" class="icon-label"><i class="fa-regular fa-image"></i></label>
+                            <input type="file" id="file-input" class="file-input" data-preview="image-preview"
+                                data-result="preview" name="sections[0][soustitre][image]" style="display: none" />
+                            <img id="image-preview" alt="Aperçu de l'image" />
+
+
+                        </div>
+                    </div>
+
+                    <div class="section-container">
+                        <div class="sectio-container">
+                            <div class="btnas-end">
+                                <!-- <i class="fa-solid fa-x delete-section"></i> -->
+                            </div>
+                            <div class="sa-1">
+                                <div class="questionnaire-container">
+                                    <div class="input-group" data-question-index="0">
+                                        <div class="questionnaire">
+                                            <div class="input-group">
+                                                <div class="display-1">
+                                                    <div class="textarea">
+                                                        <textarea name="sections[0][questions][0][libquestion]" id="previews" required placeholder="Question"
+                                                            oninput="autoResize(this);"></textarea>
+                                                    </div>
+                                                    <div class="file-inputa">
+                                                        <div class="eme">
+                                                            <label for="fileinputs"><i
+                                                                    class="fa-regular fa-image"></i></label>
+                                                            <input type="file" id="fileinputs" class="file-input"
+                                                                data-preview="imagepreviews" data-result="previews"
+                                                                name="sections[0][questions][0][image]"
+                                                                style="display: none" />
+                                                            <img id="imagepreviews" alt="Aperçu de l'image" />
+
+                                                        </div>
+                                                        <div>
+                                                            <!-- <i
+                                                                class="fa-solid fa-xmark deletes delete-questionnairess0"></i> -->
+                                                        </div>
+                                                        <!-- <i class="fa-solid fa-x  delete-section"></i> -->
+                                                    </div>
                                                 </div>
-                                                <div>
-                                                    <i
-                                                        class="fa-solid fa-xmark deletes delete-questionnaire"></i>
-                                                </div>
-                                                <!-- <i class="fa-solid fa-x  delete-section"></i> -->
+                                            </div>
+                                            <div class="input-group">
+                                                <ol class="circle-list">
+                                                    <li>
+                                                        <input type="text" class="heckbox-reponce" id="checkbox1"
+                                                            name="sections[0][questions][0][reponses][0][libreponse]"
+                                                            required placeholder="reponse 1" />
+                                                        <input type="file" id="imagine" class="file-input"
+                                                            data-preview="imaginations"
+                                                            name="sections[0][questions][0][reponses][0][image]"
+                                                            style="display: none" />
+                                                        <img id="imaginations" class="img" alt="" />
+                                                        <select name="sections[0][questions][0][reponses][0][result]"
+                                                            id="mySelect" class="Select">
+                                                            <option value="" disabled selected hidden>
+                                                                resultat
+                                                            </option>
+                                                            <option value="bonne_reponse" class="green"
+                                                                data-target="1">
+                                                                Bonne réponse
+                                                            </option>
+                                                            <option value="mauvaise_reponse" class="yellow"
+                                                                data-target="2">
+                                                                Mauvaise réponse
+                                                            </option>
+                                                            <option value="mauvaise_reponse-" class="red"
+                                                                data-target="3">
+                                                                Mauvaise réponse(-)
+                                                            </option>
+                                                        </select>
+                                                        <input type="number" id="point" class="point"
+                                                            name="sections[0][questions][0][reponses][0][points]"
+                                                            placeholder="" />
+                                                        <i class="fa-regular fa-trash-can delete delete-btn"></i>
+                                                    </li>
+                                                </ol>
+                                                <a class="add-response" href="#"><input type="radio" />
+                                                    <p>
+                                                        Ajouter une autre proposition de réponse ou
+                                                        <span>ajouter '' Autre ''</span>
+                                                    </p>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="input-group">
-                                        <ol class="circle-list">
-                                            <li>
-                                                <input type="text" class="heckbox-reponce" id="checkbox1"
-                                                    name="sections[0][questions][0][reponses][0][libreponse]"
-                                                    required placeholder="reponse 1" />
-                                                <input type="file" id="imagine" class="file-input"
-                                                    data-preview="imaginations" name="sections[0][questions][0][reponses][0][image]"
-                                                    style="display: none" />
-                                                <img id="imaginations" class="img" alt="" />
-                                                <select name="sections[0][questions][0][reponses][0][result]"
-                                                    id="mySelect" class="Select">
-                                                    <option value="" disabled selected hidden>
-                                                        resultat
-                                                    </option>
-                                                    <option value="bonne_reponse" class="green"
-                                                        data-target="1">
-                                                        Bonne réponse
-                                                    </option>
-                                                    <option value="mauvaise_reponse" class="yellow"
-                                                        data-target="2">
-                                                        Mauvaise réponse
-                                                    </option>
-                                                    <option value="mauvaise_reponse-" class="red"
-                                                        data-target="3">
-                                                        Mauvaise réponse(-)
-                                                    </option>
-                                                </select>
-                                                <input type="number" id="point" class="point"
-                                                    name="sections[0][questions][0][reponses][0][points]"
-                                                    placeholder="" />
-                                                <i class="fa-regular fa-trash-can delete delete-btn"></i>
-                                            </li>
-                                        </ol>
-                                        <a class="add-response" href="#"><input type="radio" />
-                                            <p>
-                                                Ajouter une autre proposition de réponse ou
-                                                <span>ajouter '' Autre ''</span>
-                                            </p>
-                                        </a>
-                                    </div>
                                 </div>
+                                <a href="#" class="Ajouter-question"><i
+                                        class="fa-solid fa-circle-plus"></i>Ajouter une
+                                    question</a>
                             </div>
                         </div>
-                        <a href="#" class="Ajouter-question"><i
-                                class="fa-solid fa-circle-plus"></i>Ajouter une
-                            question</a>
+                    </div>
+
+                    <div class="btns-end">
+                        <a href="#" class="Ajouter-section"> <i class="fa-solid fa-circle-plus"></i>Ajouter une
+                            section</a>
+                    </div>
+
+                    <div class="btns-group ">
+                        <a href="#" class="btn-prev group">Précédent</a>
+                        <a href="#" class="btn btn-next width-24 endnext endnexts1 disabled">Suivant</a>
                     </div>
                 </div>
             </div>
 
-            <div class="btns-end">
-                <a href="#" class="Ajouter-section"> <i class="fa-solid fa-circle-plus"></i>Ajouter une
-                    section</a>
+            <div class="form-step">
+                <div class="content contenuepage" id="contenuepage"><!-- Contenu de la page --></div>
+                <div class="btns-group">
+                    <a href="#" class="btn-prev">Précédent</a>
+                    <button type="submit" class="btn">Terminé</button>
+                </div>
             </div>
 
-            <div class="btns-group">
-                <a href="#" class="btn-prev">Précédent</a>
-                <a href="#" class="btn btn-next width-24 endnext endnexts1 disabled">Suivant</a>
+        </form>
+    @elseif(auth()->user()->role_id == 3)
+        <form action="{{ route('sujetadmin.store') }}" class="form" method="POST" enctype="multipart/form-data">
+            @csrf
+            <div class="form-step form-step-active">
+                <div class="wo">
+                    <div class="input-group select-group">
+                        <label for="position" class="label">Type de sujet</label>
+                        <select name="type_sujet_id" id="position" class="select-effect-1" required>
+                            <option value="" disabled selected hidden>
+                                Choisissez le type de sujet
+                            </option>
+                            @foreach ($typessujets as $typessujet)
+                                <option value="{{ $typessujet->id }}"
+                                    data-typesujet="{{ $typessujet->libtypesujet }}">{{ $typessujet->libtypesujet }}
+                                </option>
+                            @endforeach
+                        </select>
+                        <span class="border"></span>
+                        <div class="error-message" id="position-error" style="display: none; color: red;">Veuillez
+                            sélectionner un type de sujet.</div>
+                    </div>
+                    <div class="input-group select-group">
+                        <label for="position" class="label">Matière</label>
+                        <select name="matiere_id" id="positions" class="select-effect-1" required>
+                            <option value="" disabled selected hidden>
+                                Sélectionner la matière
+                            </option>
+                            @if (auth()->user()->role_id == 3)
+                                @foreach ($matieres as $matiere)
+                                    <option value="{{ $matiere->id }}" data-matiere="{{ $matiere->nommatiere }}">
+                                        {{ $matiere->nommatiere }}</option>
+                                @endforeach
+                            @elseif(auth()->user()->role_id == 2)
+                                @foreach ($professeurMatiere as $matiere)
+                                    <option value="{{ $matiere->id }}" data-matiere ="{{ $matiere->nommatiere }}">
+                                        {{ $matiere->nommatiere }}</option>
+                                @endforeach
+                            @endif
+                        </select>
+                        <span class="border"></span>
+                        <div class="error-message" id="positions-error" style="display: none; color: red;">Veuillez
+                            sélectionner une matière.</div>
+                    </div>
+                    <div class="input-group select-group">
+                        <label for="position" class="label">Filière</label>
+                        <select name="filiere_id" id="positions1" class="select-effect-1" required>
+                            <option value="" disabled selected hidden>
+                                Sélectionnez la Filière
+                            </option>
+                            @foreach ($filieres as $filiere)
+                                <option value="{{ $filiere->id }}"
+                                    data-filiere="{{ $filiere->filiere->nomfiliere ?? $filiere->nomfilieretablissement }}">
+                                    {{ $filiere->filiere->nomfiliere ?? $filiere->nomfilieretablissement }}</option>
+                            @endforeach
+                        </select>
+                        <span class="border"></span>
+                        <div class="error-message" id="positions1-error" style="display: none; color: red;">Veuillez
+                            sélectionner une filière.</div>
+                    </div>
+                    <div class="input-group select-group">
+                        <label for="position" class="label">Classe</label>
+                        <select name="classe_id" id="positions2" class="select-effect-1" required>
+                            <option value="" disabled selected hidden>
+                                Sélectionnez la classe
+                            </option>
+                            @foreach ($classes as $classe)
+                                <option value="{{ $classe->id }}" data-classe="{{ $classe->nomclasse }}">
+                                    {{ $classe->nomclasse }}</option>
+                            @endforeach
+                        </select>
+                        <span class="border"></span>
+                        <div class="error-message" id="positions2-error" style="display: none; color: red;">Veuillez
+                            sélectionner une classe.</div>
+                    </div>
+                    <div class="input-group time-group">
+                        <label for="time" class="label">Durée</label>
+                        <input type="text" name="heure" id="time" class="time-effect-1"
+                            placeholder="hh:mm" onfocus="this.type='time'" onblur="this.type='time'" required />
+                        <span class="border"></span>
+                    </div>
+                    <div class="input-group ">
+                        <label for="consigne" class="label">Consigne</label>
+                        <input type="text" name="consigne" id="consigne" class="time-effect-1"
+                            placeholder="Entrez une consigne..." required />
+                        <span class="border"></span>
+                        <div class="error-message" id="positions5-error" style="display: none; color: red;">Veuillez
+                            rempli les consignes.</div>
+                    </div><br>
+                    <div class="next-step">
+                        <a href="#" class="btn btn-next width-24 ml-auto disabled" id="suivants">Suivant</a>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="form-step">
+                <div class="note-container">
+                    <span>Note:</span>
+                    <input type="number" name="noteprincipale" class="note-value"
+                        placeholder="Entrez le nombre total de points *" pattern="\d*"
+                        title="Veuillez entrer uniquement des chiffres." />
+                    <a class="enfant_suivant width-24 disabled btn ">Valider</a>
+                    <div class="error-message" id="error-message">Le champ ne peut pas être vide.</div>
+                    <div class="btns-group avancer">
+                        <a href="#" class="btn-prev">Précédent</a>
+                        <a href="#" class="btn width-24 disabled valid-not" id="">Suivant</a>
+                    </div>
+                </div>
+
+                <div class="frm" style="display: none">
+
+                    <div class="sa sas">
+                        <!-- <div class="btnas-endss">
+                            <i class="fa-solid fa-x delete-questionnaires"></i>
+                        </div> -->
+                        <div class="input-group">
+                            <input type="text" name="sections[0][titre]" id="phone"
+                                placeholder="Sous titre 1" required />
+                        </div>
+                        <div class="input-group input-with-icon">
+                            <input type="text" name="sections[0][soustitre]" id="preview"
+                                placeholder="Libellé du sous titre" required />
+                            <label for="file-input" class="icon-label"><i class="fa-regular fa-image"></i></label>
+                            <input type="file" id="file-input" class="file-input" data-preview="image-preview"
+                                data-result="preview" name="sections[0][soustitre][image]" style="display: none" />
+                            <img id="image-preview" alt="Aperçu de l'image" />
+
+                        </div>
+                    </div>
+
+                    <div class="section-container">
+                        <div class="sectio-container">
+                            <div class="btnas-end">
+                                <!-- <i class="fa-solid fa-x delete-section"></i> -->
+                            </div>
+                            <div class="sa-1">
+                                <div class="questionnaire-container">
+                                    <div class="input-group" data-question-index="0">
+                                        <div class="questionnaire">
+                                            <div class="input-group">
+                                                <div class="display-1">
+                                                    <div class="textarea">
+                                                        <textarea name="sections[0][questions][0][libquestion]" id="previews" required placeholder="Question"
+                                                            oninput="autoResize(this);"></textarea>
+                                                    </div>
+                                                    <div class="file-inputa">
+                                                        <div class="eme">
+                                                            <label for="fileinputs"><i
+                                                                    class="fa-regular fa-image"></i></label>
+                                                            <input type="file" id="fileinputs" class="file-input"
+                                                                data-preview="imagepreviews" data-result="previews"
+                                                                name="sections[0][questions][0][image]"
+                                                                style="display: none" />
+                                                            <img id="imagepreviews" alt="Aperçu de l'image" />
+
+                                                        </div>
+                                                        <div>
+                                                            <!-- <i
+                                                                class="fa-solid fa-xmark deletes delete-questionnaire1"></i> -->
+                                                        </div>
+                                                        <!-- <i class="fa-solid fa-x  delete-section"></i> -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="input-group">
+                                                <ol class="circle-list">
+                                                    <li>
+                                                        <input type="text" class="heckbox-reponce" id="checkbox1"
+                                                            name="sections[0][questions][0][reponses][0][libreponse]"
+                                                            required placeholder="reponse 1" />
+                                                        <input type="file" id="imagine" class="file-input"
+                                                            data-preview="imaginations"
+                                                            name="sections[0][questions][0][reponses][0][image]"
+                                                            style="display: none" />
+                                                        <img id="imaginations" class="img" alt="" />
+                                                        <select name="sections[0][questions][0][reponses][0][result]"
+                                                            id="mySelect" class="Select">
+                                                            <option value="" disabled selected hidden>
+                                                                resultat
+                                                            </option>
+                                                            <option value="bonne_reponse" class="green"
+                                                                data-target="1">
+                                                                Bonne réponse
+                                                            </option>
+                                                            <option value="mauvaise_reponse" class="yellow"
+                                                                data-target="2">
+                                                                Mauvaise réponse
+                                                            </option>
+                                                            <option value="mauvaise_reponse-" class="red"
+                                                                data-target="3">
+                                                                Mauvaise réponse(-)
+                                                            </option>
+                                                        </select>
+                                                        <input type="number" id="point" class="point"
+                                                            name="sections[0][questions][0][reponses][0][points]"
+                                                            placeholder="" />
+                                                        <i class="fa-regular fa-trash-can delete delete-btn"></i>
+                                                    </li>
+                                                </ol>
+                                                <a class="add-response" href="#"><input type="radio" />
+                                                    <p>
+                                                        Ajouter une autre proposition de réponse ou
+                                                        <span>ajouter '' Autre ''</span>
+                                                    </p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="#" class="Ajouter-question"><i
+                                        class="fa-solid fa-circle-plus"></i>Ajouter une
+                                    question</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="btns-end">
+                        <a href="#" class="Ajouter-section"> <i class="fa-solid fa-circle-plus"></i>Ajouter une
+                            section</a>
+                    </div>
+
+                    <div class="btns-group">
+                        <a href="#" class="btn-prev group">Précédent</a>
+                        <a href="#" class="btn btn-next width-24 endnext endnexts1 disabled">Suivant</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-step">
+                <div class="content contenuepage"><!-- Contenu de la page --></div>
+                <div class="btns-group">
+                    <a href="#" class="btn-prev">Précédent</a>
+                    <button type="submit" class="btn">Terminé</button>
+                </div>
+            </div>
+
+        </form>
+
+
+        <!-- Modal -->
+
+        <div id="modalbtn" class="modal fade">
+            <div class="modal-content">
+                <button type="button" class="custom-close-btn" data-bs-dismiss="modal" aria-label="Close"
+                    id="fermetures1">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                <h3>Quitter la page</h3>
+                <p>Voulez-vous vraiment quitter la page ??</p>
+                <div id="cool">
+                    <!-- Correction ici : 'href' au lieu de 'herf' -->
+                    <a href="/admin/sujet" class="btn btn-success">Oui</a>
+                    <input type="reset" value="Non" class="btn-secondaire sizes" id="btn-red">
+                </div>
             </div>
         </div>
-    </div>
-
-    <div class="form-step">
-        <div class="content"><!-- Contenu de la page --></div>
-        <div class="btns-group">
-            <a href="#" class="btn-prev">Précédent</a>
-            <button type="submit" class="btn">Terminé</button>
-        </div>
-    </div>
-
-</form>
 
 
 
-
-
-    <!-- Modal -->
-
-    <div id="modalbtn" class="modal">
-        <div class="modal-content">
-            <button type="button" class="custom-close-btn" data-bs-dismiss="modal" aria-label="Close" id="fermetures1">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            <h3>Quitter la page</h3>
-            <p>Voulez-vous vraiment quitter la page ??</p>
-            <div id="cool">
-                <!-- Correction ici : 'href' au lieu de 'herf' -->
-                <a href="/admin/sujet" class="btn btn-success">Oui</a>
-                <input type="reset" value="Non" class="btn-secondaire" id="btn-red">
-            </div>
-        </div>
-    </div>
-
-
-
+    @endif
 
 
     <script>
-
         function validateSection(sectionElement) {
             // Vérification du titre et du sous-titre
             const titreInput = sectionElement.querySelector('input[name$="[titre]"]');
             const sousTitreInput = sectionElement.querySelector('input[name$="[soustitre]"]');
-            console.log(titreInput);
-            console.log(sousTitreInput);
+            // console.log(titreInput);
+            // console.log(sousTitreInput);
             if (!titreInput || !sousTitreInput || !titreInput.value.trim() || !sousTitreInput.value.trim()) {
-                console.log("Titre ou sous-titre manquant");
+                // console.log("Titre ou sous-titre manquant");
                 return false;
             }
 
             const questions = sectionElement.querySelectorAll('.questionnaire');
 
             if (questions.length === 0) {
-                console.log("Aucune question trouvée");
+                // console.log("Aucune question trouvée");
                 return true;
             }
 
@@ -661,7 +967,7 @@
                 const reponses = question.querySelectorAll('.circle-list li');
 
                 if (reponses.length === 0) {
-                    console.log("Aucune réponse trouvée pour une question");
+                    // console.log("Aucune réponse trouvée pour une question");
                     return false;
                 }
 
@@ -672,7 +978,7 @@
                     const fileInput = reponse.querySelector('input[type="file"]');
 
                     if (!libreponseInput || !resultSelect || !pointsInput || !fileInput) {
-                        console.log("Champs manquants dans une réponse");
+                        // console.log("Champs manquants dans une réponse");
                         return false;
                     }
 
@@ -681,7 +987,7 @@
                     const points = pointsInput.value.trim();
 
                     if ((!libreponse && !fileInput.files.length) || !result || !points) {
-                        console.log("Champs requis non remplis dans une réponse");
+                        // console.log("Champs requis non remplis dans une réponse");
                         return false;
                     }
                 }
@@ -722,6 +1028,12 @@
                 response: 0,
                 image: 0,
                 file: 0,
+                cool: 0,
+                cool1: 0,
+                cool2: 0,
+                cool3: 0,
+                cool4: 0,
+                cool5: 0,
             };
 
             function handleSelectChanges(event) {
@@ -734,7 +1046,7 @@
                 if (selectedOption) {
                     if (selectedOption.className) {
                         selectElement.classList.add(selectedOption.className);
-                            inputElement.value = 0;
+                        inputElement.value = 0;
                     }
 
                     if (inputElement) {
@@ -797,32 +1109,34 @@
                         if (existingResponses.length >= 4) {
                             errormsg.style.display = "block";
                             errormsg.textContent = "Vous ne pouvez pas ajouter plus de 4 réponses.";
-                            return;  // Empêche l'ajout d'une nouvelle réponse
+                            return; // Empêche l'ajout d'une nouvelle réponse
                         }
 
                         if (!validateSection(sectionContainer)) {
                             errormsg.style.display = "block";
-                            errormsg.textContent = "Veuillez remplir tous les champs requis avant d'ajouter une nouvelle réponse.";
+                            errormsg.textContent =
+                                "Veuillez remplir tous les champs requis avant d'ajouter une nouvelle réponse.";
                             return;
                         }
 
                         const list = sectionElement.querySelector(".circle-list");
                         const newItem = document.createElement("li");
-                        const questionIndex = $(this).closest('.input-group').parents().eq(1).data('question-index');
+                        const questionIndex = $(this).closest('.input-group').parents().eq(1).data(
+                            'question-index');
                         const responseIndex = list.children.length;
 
                         newItem.innerHTML = `
-                            <input type="text" class="heckbox-reponce" name="sections[${counters.section - 1}][questions][${questionIndex}][reponses][${responseIndex}][libreponse]" placeholder="réponse ${responseIndex + 1}" required />
-                            <input type="file" id="imagine${counters.file++}" class="file-input" data-preview="revange${counters.image++}" name="sections[${counters.section - 1}][questions][${questionIndex}][reponses][${responseIndex}][image]" style="display: none" />
-                            <img id="revange${counters.image++}" class="img" alt="" />
-                            <select name="sections[${counters.section - 1}][questions][${questionIndex}][reponses][${responseIndex}][result]" id="responseselect${counters.section}${++counters.response}" class="Select">
-                                <option value="" disabled selected hidden>résultat</option>
-                                <option value="bonne_reponse" class="green" data-target="1">Bonne réponse</option>
-                                <option value="mauvaise_reponse" class="yellow" data-target="2">Mauvaise réponse</option>
-                                <option value="mauvaise_reponse-" class="red" data-target="3">Mauvaise réponse(-)</option>
-                            </select>
-                            <input type="number" class="point" name="sections[${counters.section - 1}][questions][${questionIndex}][reponses][${responseIndex}][points]" placeholder="" />
-                            <i class="fa-regular fa-trash-can delete delete-btn"></i>`;
+                <input type="text" class="heckbox-reponce" name="sections[${counters.section - 1}][questions][${questionIndex}][reponses][${responseIndex}][libreponse]" placeholder="réponse ${responseIndex + 1}" required />
+                <input type="file" id="imagine${counters.file++}" class="file-input" data-preview="revange${counters.image++}" name="sections[${counters.section - 1}][questions][${questionIndex}][reponses][${responseIndex}][image]" style="display: none" />
+                <img id="revange${counters.image++}" class="img" alt="" />
+                <select name="sections[${counters.section - 1}][questions][${questionIndex}][reponses][${responseIndex}][result]" id="responseselect${counters.section}${++counters.response}" class="Select">
+                    <option value="" disabled selected hidden>résultat</option>
+                    <option value="bonne_reponse" class="green" data-target="1">Bonne réponse</option>
+                    <option value="mauvaise_reponse" class="yellow" data-target="2">Mauvaise réponse</option>
+                    <option value="mauvaise_reponse-" class="red" data-target="3">Mauvaise réponse(-)</option>
+                </select>
+                <input type="number" class="point" name="sections[${counters.section - 1}][questions][${questionIndex}][reponses][${responseIndex}][points]" placeholder="" />
+                <i class="fa-regular fa-trash-can delete delete-btn"></i>`;
 
                         list.appendChild(newItem);
                         attachDeleteEvent(newItem);
@@ -843,17 +1157,18 @@
 
             function attachAddQuestionEvent(sectionElement) {
                 const addQuestionButton = sectionElement.querySelector(".Ajouter-question");
-                console.log(addQuestionButton);
+                // console.log(addQuestionButton);
                 if (addQuestionButton) {
                     addQuestionButton.addEventListener("click", function(event) {
                         event.preventDefault();
                         const sectionContainer = event.currentTarget.closest('.form');
                         var errormsg = document.querySelector('.msg-error');
-                        errormsg.textContent ="";
-                        errormsg.style.display ="none";
+                        errormsg.textContent = "";
+                        errormsg.style.display = "none";
                         if (!validateSection(sectionContainer)) {
-                            errormsg.style.display ="block";
-                            errormsg.textContent ="Veuillez remplir tous les champs requis avant d'ajouter une nouvelle question.";
+                            errormsg.style.display = "block";
+                            errormsg.textContent =
+                                "Veuillez remplir tous les champs requis avant d'ajouter une nouvelle question.";
                             return;
                         }
                         const questionIndex = sectionElement.querySelectorAll('.questionnaire').length;
@@ -872,13 +1187,13 @@
                         <div class="input-group">
                             <div class="display-1">
                                 <div class="textarea">
-                                    <textarea name="sections[${counters.section - 1}][questions][${questionIndex}][libquestion]" id="previews${counters.file++}" required placeholder="Question"></textarea>
+                                    <textarea name="sections[${counters.section - 1}][questions][${questionIndex}][libquestion]" id="previews${counters.cool5++}" required placeholder="Question" oninput="autoResize(this);"></textarea>
                                 </div>
                                 <div class="file-inputa">
                                     <div class="eme">
-                                        <label for="fileinputs${counters.file++}"><i class="fa-regular fa-image"></i></label>
-                                        <input type="file" id="fileinputs${counters.file++}" data-preview="imagepreviews${counters.image++}" data-result="previews${counters.file++}" class="file-input" name="sections[${counters.section - 1}][questions][${questionIndex}][image]" style="display: none;">
-                                        <img id="imagepreviews${counters.image++}" alt="Aperçu de l'image" />
+                                        <label for="fileinputs${counters.cool++}"><i class="fa-regular fa-image"></i></label>
+                                        <input type="file" id="fileinputs${counters.cool1++}" data-preview="imagepreviews${counters.cool2++}" data-result="previews${counters.cool3++}" class="file-input" name="sections[${counters.section - 1}][questions][${questionIndex}][image]" style="display: none;">
+                                        <img id="imagepreviews${counters.cool4++}" alt="Aperçu de l'image" />
                                     </div>
                                 </div>
                                 <div>
@@ -905,8 +1220,8 @@
                             <a class="add-response" href="#"><input type="radio"><p>Ajouter une autre proposition de réponse ou <span>ajouter '' Autre ''</span></p></a>
                         </div>
                     </div>`;
-                    const spacer = document.createElement("div");
-                    spacer.className = "question-separator";
+                        const spacer = document.createElement("div");
+                        spacer.className = "question-separator";
 
                         questionnaireContainer.appendChild(spacer);
                         questionnaireContainer.appendChild(newQuestionnaire);
@@ -926,18 +1241,29 @@
                             const inputGroup = questionnaire.closest(".input-group");
 
                             if (inputGroup) {
+                                const nextElement = inputGroup.nextElementSibling;
                                 const previousElement = inputGroup.previousElementSibling;
 
-                                if (previousElement && previousElement.classList.contains(
+                                // Si l'élément suivant a la classe "question-separator"
+                                if (nextElement && nextElement.classList.contains(
+                                        "question-separator")) {
+                                    nextElement.remove();
+                                }
+                                // Sinon, si l'élément précédent a la classe "question-separator"
+                                else if (previousElement && previousElement.classList.contains(
                                         "question-separator")) {
                                     previousElement.remove();
                                 }
+
+                                // Supprimer le questionnaire et l'inputGroup
                                 questionnaire.remove();
                                 inputGroup.remove();
                             }
+
                         }
                     });
                 });
+
             }
 
 
@@ -951,17 +1277,53 @@
                 }
             }
 
+            // Sélection du conteneur principal
+            const parentContainer = document.querySelector(".btnas-ends");
+
+            if (parentContainer) {
+                parentContainer.addEventListener("click", function(event) {
+                    if (event.target.classList.contains("delete-questionnaires")) {
+                        const grandParent = event.target.closest(".sa");
+
+                        if (grandParent) {
+                            const sibling = grandParent.nextElementSibling;
+
+                            grandParent.remove();
+
+                            if (sibling && sibling.classList.contains("sectio-container")) {
+                                sibling.remove();
+                            }
+                        }
+                    }
+                });
+
+                // Ajout de la fonctionnalité de suppression de toutes les sections
+                parentContainer.addEventListener("click", function(event) {
+                    if (event.target.classList.contains("btnas-ends")) {
+                        const sectionsContainer = document.querySelector(".section-container");
+                        if (sectionsContainer) {
+                            sectionsContainer.innerHTML = ""; // Supprime tous les enfants
+                        }
+                    }
+                });
+            }
+
+
+            // Gestionnaire d'événements pour ajouter une nouvelle section
             document.querySelector(".Ajouter-section")?.addEventListener("click", function(event) {
                 event.preventDefault();
                 const sectionContainer = event.currentTarget.closest('.form');
                 var errormsg = document.querySelector('.msg-error');
-                errormsg.textContent ="";
-                errormsg.style.display ="none";
+                errormsg.textContent = "";
+                errormsg.style.display = "none";
+
                 if (!validateSection(sectionContainer)) {
-                    errormsg.style.display ="block"
-                    errormsg.textContent ="Veuillez remplir tous les champs requis avant d'ajouter une nouvelle section.";
+                    errormsg.style.display = "block";
+                    errormsg.textContent =
+                        "Veuillez remplir tous les champs requis avant d'ajouter une nouvelle section.";
                     return;
                 }
+
                 const sectionsContainer = document.querySelector(".section-container");
                 if (sectionsContainer) {
                     counters.section++;
@@ -969,126 +1331,148 @@
                     const newSections = document.createElement("div");
                     newSections.className = "sa";
                     newSections.innerHTML = `
-                <div class="btnas-ends">
-                    <i class="fa-solid fa-x delete-questionnaires"></i>
-                </div>
-                <div class="input-group">
-                    <input type="text" name="sections[${counters.section - 1}][titre]" id="phone" placeholder="Sous titre ${counters.section}" required />
-                </div>
-                <div class="input-group input-with-icon">
-                    <input type="text" name="sections[${counters.section - 1}][soustitre]" id="preview${counters.file++}" placeholder="Libellé du sous titre" required />
-                    <label for="file-input${counters.file++}" class="icon-label"><i class="fa-regular fa-image"></i></label>
-                    <input type="file" class="file-input" id="file-input${counters.file++}" data-preview="image-preview${counters.image++}" data-result="preview${counters.file++}" name="sections[${counters.section - 1}][image]" style="display: none" />
-                    <img id="image-preview${counters.image++}" alt="Aperçu de l'image" />
-                </div>`;
+            <div class="btnas-ends">
+                <i class="fa-solid fa-x delete-questionnaires"></i>
+            </div>
+            <div class="input-group">
+                <input type="text" name="sections[${counters.section - 1}][titre]" id="phone" placeholder="Sous titre ${counters.section}" required />
+            </div>
+            <div class="input-group input-with-icon">
+                <input type="text" name="sections[${counters.section - 1}][soustitre]" id="preview${counters.file++}" placeholder="Libellé du sous titre" required />
+                <label for="file-input${counters.cool++}" class="icon-label"><i class="fa-regular fa-image"></i></label>
+                <input type="file" class="file-input" id="file-input${counters.cool1++}" data-preview="image-preview${counters.cool2++}" data-result="preview${counters.cool3++}" name="sections[${counters.section - 1}][image]" style="display: none" />
+                <img id="image-preview${counters.cool4++}" alt="Aperçu de l'image" />
+            </div>`;
+
                     const newSection = document.createElement("div");
                     newSection.className = "sectio-container";
                     newSection.setAttribute('data-section-index', counters.section - 1);
                     newSection.innerHTML = `
-                <div class="btnas-end"></div>
-                <div class="sa-1">
-                    <div class="questionnaire-container">
-                        <div class="input-group" data-question-index="0">
-                            <div class="questionnaire">
-                                <div class="input-group">
-                                    <div class="display-1">
-                                        <div class="textarea">
-                                            <textarea name="sections[${counters.section - 1}][questions][0][libquestion]" id="previewz${counters.file++}" required placeholder="Question"></textarea>
-                                        </div>
-                                        <div class="file-inputa">
-                                            <div class="eme">
-                                                <label for="fileinputs${counters.file++}"><i class="fa-regular fa-image"></i></label>
-                                                <input type="file" id="fileinputs${counters.file++}" data-preview="imagepreviews${counters.image++}" data-result="previewz${counters.file++}" class="file-input" name="sections[${counters.section - 1}][questions][image]" style="display: none;">
-                                                <img id="imagepreviews${counters.image++}" alt="Aperçu de l'image" />
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <i class="fa-solid fa-xmark deletes delete-questionnaire"></i>
+            <div class="sa-1">
+                <div class="questionnaire-container">
+                    <div class="input-group" data-question-index="0">
+                        <div class="questionnaire">
+                            <div class="input-group">
+                                <div class="display-1">
+                                    <div class="textarea">
+                                        <textarea name="sections[${counters.section - 1}][questions][0][libquestion]" id="previewz${counters.cool5++}" required placeholder="Question" oninput="autoResize(this);"></textarea>
+                                    </div>
+                                    <div class="file-inputa">
+                                        <div class="eme">
+                                            <label for="fileinputs${counters.cool++}"><i class="fa-regular fa-image"></i></label>
+                                            <input type="file" id="fileinputs${counters.cool1++}" data-preview="imagepreviews${counters.cool2++}" data-result="previewz${counters.cool3++}" class="file-input" name="sections[${counters.section - 1}][questions][image]" style="display: none;">
+                                            <img id="imagepreviews${counters.cool4++}" alt="Aperçu de l'image" />
                                         </div>
                                     </div>
                                 </div>
-                                <div class="input-group">
-                                    <ol class="circle-list">
-                                        <li>
-                                            <input type="text" class="heckbox-reponce" name="sections[${counters.section - 1}][questions][0][reponses][0][libreponse]" placeholder="reponse 1" required />
-                                            <input type="file" id="imagine${counters.file++}" class="file-input" data-preview="cool${counters.image++}" name="sections[${counters.section - 1}][questions][0][reponses][0][image]" style="display: none" />
-                                            <img id="cool${counters.image++}" class="img" alt="" />
-                                            <select name="sections[${counters.section - 1}][questions][0][reponses][0][result]" id="responseselect${counters.section}${++counters.response}" class="Select">
-                                                <option value="" disabled selected hidden>resultat</option>
-                                                <option value="bonne_reponse" class="green" data-target="1">Bonne réponse</option>
-                                                <option value="mauvaise_reponse" class="yellow" data-target="2">Mauvaise réponse</option>
-                                                <option value="mauvaise_reponse-" class="red" data-target="3">Mauvaise réponse(-)</option>
-                                            </select>
-                                            <input type="number" class="point" name="sections[${counters.section - 1}][questions][0][reponses][0][points]" placeholder="" />
-                                            <i class="fa-regular fa-trash-can delete delete-btn"></i>
-                                        </li>
-                                    </ol>
-                                    <a class="add-response" href="#"><input type="radio"><p>Ajouter une autre proposition de réponse ou <span>ajouter '' Autre ''</span></p></a>
-                                </div>
+                            </div>
+                            <div class="input-group">
+                                <ol class="circle-list">
+                                    <li>
+                                        <input type="text" class="heckbox-reponce" name="sections[${counters.section - 1}][questions][0][reponses][0][libreponse]" placeholder="reponse 1" required />
+                                        <input type="file" id="imagine${counters.file++}" class="file-input" data-preview="cool${counters.image++}" name="sections[${counters.section - 1}][questions][0][reponses][0][image]" style="display: none" />
+                                        <img id="cool${counters.image++}" class="img" alt="" />
+                                        <select name="sections[${counters.section - 1}][questions][0][reponses][0][result]" id="responseselect${counters.section}${++counters.response}" class="Select">
+                                            <option value="" disabled selected hidden>resultat</option>
+                                            <option value="bonne_reponse" class="green" data-target="1">Bonne réponse</option>
+                                            <option value="mauvaise_reponse" class="yellow" data-target="2">Mauvaise réponse</option>
+                                            <option value="mauvaise_reponse-" class="red" data-target="3">Mauvaise réponse(-)</option>
+                                        </select>
+                                        <input type="number" class="point" name="sections[${counters.section - 1}][questions][0][reponses][0][points]" placeholder="" />
+                                        <i class="fa-regular fa-trash-can delete delete-btn"></i>
+                                    </li>
+                                </ol>
+                                <a class="add-response" href="#"><input type="radio"><p>Ajouter une autre proposition de réponse ou <span>ajouter '' Autre ''</span></p></a>
                             </div>
                         </div>
                     </div>
-                    <a href="#" class="Ajouter-question"> <i class="fa-solid fa-circle-plus"></i>Ajouter une question</a>
-                </div>`;
+                </div>
+                <a href="#" class="Ajouter-question"> <i class="fa-solid fa-circle-plus"></i>Ajouter une question</a>
+            </div>`;
+
                     sectionsContainer.appendChild(newSections);
                     attachAllEvents(newSections);
                     sectionsContainer.appendChild(newSection);
                     attachAllEvents(newSection);
+
+                    // Gestionnaire d'événements pour la suppression de la section
+                    newSections.querySelector('.btnas-ends').addEventListener('click', function() {
+                        const parentSa = newSections.closest(
+                            '.sa'); // Trouver l'élément parent avec la classe 'sa'
+
+                        // Supprime tous les éléments ayant la classe "sectio-container" qui suivent l'élément parent 'sa'
+                        let nextSection = parentSa.nextElementSibling;
+                        while (nextSection) {
+                            if (nextSection.classList.contains('sectio-container')) {
+                                nextSection.remove();
+                            } else {
+                                break; // Sortir si un élément ne correspond pas
+                            }
+                            nextSection = parentSa.nextElementSibling; // Mettre à jour nextSection
+                        }
+
+                        newSections.remove(); // Supprime la section
+                    });
                 }
             });
+
+
+
 
             // Correct Validation Handling
             let isModified = false;
 
             document.querySelector(".valid-not")?.addEventListener("click", function(event) {
-    var input = document.querySelector('.note-value');
-    var errorMessage = document.getElementById('error-message');
+                var input = document.querySelector('.note-value');
+                var errorMessage = document.getElementById('error-message');
 
-    // Vérifie si le champ est vide
-    if (input.value.trim() === '') {
-        event.preventDefault();
-        errorMessage.style.display = 'block';
-        input.focus();
-    } else {
-        errorMessage.style.display = 'none';
-        const noteValue = input.value;
-        const frm = document.querySelector(".frm");
+                // Vérifie si le champ est vide
+                if (input.value.trim() === '') {
+                    event.preventDefault();
+                    errorMessage.style.display = 'block';
+                    input.focus();
+                } else {
+                    errorMessage.style.display = 'none';
+                    const noteValue = input.value;
+                    const frm = document.querySelector(".frm");
 
-        if (frm) {
-            frm.style.display = "block";
-        }
+                    if (frm) {
+                        frm.style.display = "block";
+                    }
 
-        // Supprimer l'élément avec la classe "avancer"
-        const elementToRemoves = document.querySelector(".avancer");
-        if (elementToRemoves) {
-            elementToRemoves.remove();
-        }
+                    // Supprimer l'élément avec la classe "avancer"
+                    const elementToRemoves = document.querySelector(".avancer");
+                    if (elementToRemoves) {
+                        elementToRemoves.remove();
+                    }
 
-        // Supprimer les classes "enfant_suivant" et "width-24" de l'élément <a>
-        const elementToModify = document.querySelector("a.enfant_suivant.width-24");
-        if (elementToModify) {
-            elementToModify.classList.remove("enfant_suivant", "width-24"); // Retire les deux classes
-            elementToModify.classList.add("edit-button"); // Ajoute la classe "edit-button"
-            elementToModify.id = 'edit-buttons'; // Ajoute l'ID
-            elementToModify.innerHTML = '<i class="fa-solid fa-pen-to-square" id="square"></i>'; // Change le contenu
-        }
+                    // Supprimer les classes "enfant_suivant" et "width-24" de l'élément <a>
+                    const elementToModify = document.querySelector("a.enfant_suivant.width-24");
+                    if (elementToModify) {
+                        elementToModify.classList.remove("enfant_suivant",
+                            "width-24"); // Retire les deux classes
+                        elementToModify.classList.add("edit-button"); // Ajoute la classe "edit-button"
+                        elementToModify.id = 'edit-buttons'; // Ajoute l'ID
+                        elementToModify.innerHTML =
+                            '<i class="fa-solid fa-pen-to-square" id="square"></i>'; // Change le contenu
+                    }
 
-        const frmNoteInput = document.querySelector(".frm .note-value");
-        if (frmNoteInput) {
-            frmNoteInput.value = noteValue;
-        }
+                    const frmNoteInput = document.querySelector(".frm .note-value");
+                    if (frmNoteInput) {
+                        frmNoteInput.value = noteValue;
+                    }
 
-        // Ajoute un écouteur d'événement pour gérer la modification
-        document.getElementById('edit-buttons')?.addEventListener("click", function() {
-            const frmNoteInputs = document.querySelector(".note-value");
-            frmNoteInputs.disabled = false;
-            frmNoteInputs.focus();
+                    // Ajoute un écouteur d'événement pour gérer la modification
+                    document.getElementById('edit-buttons')?.addEventListener("click", function() {
+                        const frmNoteInputs = document.querySelector(".note-value");
+                        frmNoteInputs.disabled = false;
+                        frmNoteInputs.focus();
 
-            // Marque le champ comme modifié
-            isModified = true;
-        });
-    }
-});
+                        // Marque le champ comme modifié
+                        isModified = true;
+                    });
+                }
+            });
 
 
             // Ajoutez un gestionnaire de soumission du formulaire
@@ -1107,18 +1491,15 @@
             document.querySelectorAll(".sectio-container").forEach(attachAllEvents);
         });
 
-
-
-        $(document).ready(function () {
+        $(document).ready(function() {
             let formData = new FormData();
             var dataAtributes = {};
             var structuredData = null;
             var fileReadPromises = [];
 
-
             var structuredData = null;
 
-$(".btn-next").click(function (e) {
+            $(".btn-next").click(function (e) {
     e.preventDefault();
 
     // Initialisation
@@ -1299,71 +1680,85 @@ $(".btn-next").click(function (e) {
     });
 });
 
-// Fonction de structuration des données
-function structureData(formData) {
-    var structuredData = {
-        sections: []
-    };
-    var sectionIndex = 0;
-
-    // Vérification des sections
-    while (formData.get(`sections[${sectionIndex}][titre]`) !== null) {
-        var sectionData = {
-            titre: formData.get(`sections[${sectionIndex}][titre]`) || null,
-            soustitre: formData.get(`sections[${sectionIndex}][soustitre]`) || null,
-            image: formData.get(`sections[${sectionIndex}][soustitre][image]`) || null,
-            questions: []
-        };
-
-        var questionIndex = 0;
-        while (formData.get(`sections[${sectionIndex}][questions][${questionIndex}][libquestion]`) !== null) {
-            var questionData = {
-                libquestion: formData.get(`sections[${sectionIndex}][questions][${questionIndex}][libquestion]`) || null,
-                image: formData.get(`sections[${sectionIndex}][questions][${questionIndex}][image]`) || null,  // Ajout de l'image de la question
-                reponses: []
-            };
-
-            var responseIndex = 0;
-            while (formData.get(`sections[${sectionIndex}][questions][${questionIndex}][reponses][${responseIndex}][libreponse]`) !== null) {
-                var responseData = {
-                    libreponse: formData.get(`sections[${sectionIndex}][questions][${questionIndex}][reponses][${responseIndex}][libreponse]`) || null,
-                    result: formData.get(`sections[${sectionIndex}][questions][${questionIndex}][reponses][${responseIndex}][result]`) || null,
-                    points: formData.get(`sections[${sectionIndex}][questions][${questionIndex}][reponses][${responseIndex}][points]`) || null,
-                    //image: formData.get(`sections[${sectionIndex}][questions][${questionIndex}][reponses][${responseIndex}][image]`) || null  // Ajout de l'image de la réponse
+            // Fonction de structuration des données
+            function structureData(formData) {
+                var structuredData = {
+                    sections: []
                 };
+                var sectionIndex = 0;
 
-                questionData.reponses.push(responseData);
-                responseIndex++;
+                // Vérification des sections
+                while (formData.get(`sections[${sectionIndex}][titre]`) !== null) {
+                    var sectionData = {
+                        titre: formData.get(`sections[${sectionIndex}][titre]`) || null,
+                        soustitre: formData.get(`sections[${sectionIndex}][soustitre]`) || null,
+                        image: formData.get(`sections[${sectionIndex}][soustitre][image]`) || null,
+                        questions: []
+                    };
+
+                    var questionIndex = 0;
+                    while (formData.get(`sections[${sectionIndex}][questions][${questionIndex}][libquestion]`) !==
+                        null) {
+                        var questionData = {
+                            libquestion: formData.get(
+                                    `sections[${sectionIndex}][questions][${questionIndex}][libquestion]`) ||
+                                null,
+                            image: formData.get(
+                                    `sections[${sectionIndex}][questions][${questionIndex}][image]`) ||
+                                null, // Ajout de l'image de la question
+                            reponses: []
+                        };
+
+                        var responseIndex = 0;
+                        while (formData.get(
+                                `sections[${sectionIndex}][questions][${questionIndex}][reponses][${responseIndex}][libreponse]`
+                            ) !== null) {
+                            var responseData = {
+                                libreponse: formData.get(
+                                    `sections[${sectionIndex}][questions][${questionIndex}][reponses][${responseIndex}][libreponse]`
+                                ) || null,
+                                result: formData.get(
+                                    `sections[${sectionIndex}][questions][${questionIndex}][reponses][${responseIndex}][result]`
+                                ) || null,
+                                points: formData.get(
+                                    `sections[${sectionIndex}][questions][${questionIndex}][reponses][${responseIndex}][points]`
+                                ) || null,
+                                //image: formData.get(`sections[${sectionIndex}][questions][${questionIndex}][reponses][${responseIndex}][image]`) || null  // Ajout de l'image de la réponse
+                            };
+
+                            questionData.reponses.push(responseData);
+                            responseIndex++;
+                        }
+
+                        sectionData.questions.push(questionData);
+                        questionIndex++;
+                    }
+
+                    structuredData.sections.push(sectionData);
+                    sectionIndex++;
+                }
+
+                return structuredData;
             }
-
-            sectionData.questions.push(questionData);
-            questionIndex++;
-        }
-
-        structuredData.sections.push(sectionData);
-        sectionIndex++;
-    }
-
-    return structuredData;
-}
 
             function calculatePoints(questions) {
                 return questions.reduce((total, question) => total + calculateQuestionPoints(question.reponses), 0);
             }
 
             function calculateQuestionPoints(reponses) {
-                return reponses.reduce((total, response) => response.result === 'bonne_reponse' ? total + (parseInt(response.points) || 0) : total, 0);
+                return reponses.reduce((total, response) => response.result === 'bonne_reponse' ? total + (parseInt(
+                    response.points) || 0) : total, 0);
             }
 
             // Gérer le clic sur "Précédent"
-            $(".btn-prev").click(function (e) {
+            $(".btn-prev").click(function(e) {
                 e.preventDefault();
 
                 var currentStep = $(this).closest(".form-step");
                 var prevStep = currentStep.prev(".form-step");
 
 
-                prevStep.find('input, select, textarea, file').each(function () {
+                prevStep.find('input, select, textarea, file').each(function() {
                     var inputName = $(this).attr('name');
                     if (formData[inputName]) {
                         $(this).val(formData[inputName]);
@@ -1372,152 +1767,149 @@ function structureData(formData) {
             });
 
 
-        $(".valid-not").click(function (e) {
-            e.preventDefault();
+            $(".valid-not").click(function(e) {
+                e.preventDefault();
 
-            var currentStep = $(this).closest(".form-step");
+                var currentStep = $(this).closest(".form-step");
 
-            var noteValue = currentStep.find("input[name='noteprincipale']").val();
+                var noteValue = currentStep.find("input[name='noteprincipale']").val();
 
-            if (noteValue) {
-                formData["noteprincipale"] = noteValue;
-            } else {
-                console.error("Erreur : noteprincipale est vide.");
-            }
+                if (noteValue) {
+                    formData["noteprincipale"] = noteValue;
+                } else {
+                    // console.error("Erreur : noteprincipale est vide.");
+                }
 
-            currentStep.next(".form-step").find('input, select, textarea, file').each(function () {
-                var inputName = $(this).attr('name');
-                if (formData.get(inputName)) {
-                    $(this).val(formDatas.get(inputName));
+                currentStep.next(".form-step").find('input, select, textarea, file').each(function() {
+                    var inputName = $(this).attr('name');
+                    if (formData.get(inputName)) {
+                        $(this).val(formDatas.get(inputName));
+                    }
+                });
+            });
+
+            // Champs de fichier de type input
+            $(".file-input").on("change", function(e) {
+                var previewId = $(this).data("preview");
+                var file = e.target.files[0];
+                if (file) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        $("#" + previewId).attr("src", e.target.result);
+                    };
+                    reader.readAsDataURL(file);
                 }
             });
         });
+        // modal de retour
+        const closeModalBtn = document.getElementById("close-modal-btn");
+        const modal = document.getElementById("modalbtn");
+        const fermerBtn = document.getElementById("fermetures1");
+        const nonBtn = document.getElementById("btn-red");
 
-    // Champs de fichier de type input
-    $(".file-input").on("change", function (e) {
-        var previewId = $(this).data("preview");
-        var file = e.target.files[0];
-        if (file) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                $("#" + previewId).attr("src", e.target.result);
-            };
-            reader.readAsDataURL(file);
-        }
-    });
-});
-// modal de retour
- const closeModalBtn = document.getElementById("close-modal-btn");
-    const modal = document.getElementById("modalbtn");
-    const fermerBtn = document.getElementById("fermetures1");
-    const nonBtn = document.getElementById("btn-red");
-
-    closeModalBtn.addEventListener("click", () => {
-        modal.style.display = "flex";
-    });
-    fermerBtn.addEventListener("click", () => {
-        modal.style.display = "none";
-    });
-
-    nonBtn.addEventListener("click", () => {
-        modal.style.display = "none";
-    });
-    window.addEventListener("click", (event) => {
-        if (event.target == modal) {
+        closeModalBtn.addEventListener("click", () => {
+            modal.style.display = "flex";
+        });
+        fermerBtn.addEventListener("click", () => {
             modal.style.display = "none";
-        }
-    });
-    </script>
-<script>
-    function checkSelects() {
-        const selects = document.querySelectorAll('.wo select');
-        const inputselect = document.getElementById('time');
-        const inputselect1 = document.getElementById('consigne');
-        let allFilled = true;
-
-        selects.forEach(select => {
-            if (select.value === "") {
-                allFilled = false;
-            }
         });
 
-        if (inputselect.value === "") {
-            allFilled = false;
+        nonBtn.addEventListener("click", () => {
+            modal.style.display = "none";
+        });
+        window.addEventListener("click", (event) => {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        });
+    </script>
+    <script>
+        function checkSelects() {
+            const selects = document.querySelectorAll('.wo select');
+            const inputselect = document.getElementById('time');
+            const inputselect1 = document.getElementById('consigne');
+            let allFilled = true;
+
+            selects.forEach(select => {
+                if (select.value === "") {
+                    allFilled = false;
+                }
+            });
+
+            if (inputselect.value === "") {
+                allFilled = false;
+            }
+            if (inputselect1.value === "") {
+                allFilled = false;
+            }
+
+            const suivantButton = document.getElementById('suivants');
+            if (allFilled) {
+                suivantButton.classList.remove('disabled');
+                suivantButton.style.backgroundColor = "#38b293";
+            } else {
+                suivantButton.classList.add('disabled');
+                suivantButton.style.backgroundColor = "grey";
+
+            }
         }
-        if (inputselect1.value === "") {
-            allFilled = false;
-        }
 
-        const suivantButton = document.getElementById('suivants');
-        if (allFilled) {
-            suivantButton.classList.remove('disabled');
-            suivantButton.style.backgroundColor="#38b293";
-        } else {
-            suivantButton.classList.add('disabled');
-            suivantButton.style.backgroundColor="grey";
+        document.querySelectorAll('.wo select').forEach(select => {
+            select.addEventListener('change', checkSelects);
+        });
 
-        }
-    }
-
-    document.querySelectorAll('.wo select').forEach(select => {
-        select.addEventListener('change', checkSelects);
-    });
-
-    document.getElementById('time').addEventListener('input', checkSelects);
-    document.getElementById('consigne').addEventListener('input', checkSelects);
-
-
-        </script>
+        document.getElementById('time').addEventListener('input', checkSelects);
+        document.getElementById('consigne').addEventListener('input', checkSelects);
+    </script>
 
     <script>
-    function checkSelectContainer() {
-        const notecontainer = document.querySelector('.note-container input');
-        const suivantButton2 = document.querySelector('.valid-not');
-        const suivantButton1 = document.querySelector('.enfant_suivant');
+        function checkSelectContainer() {
+            const notecontainer = document.querySelector('.note-container input');
+            const suivantButton2 = document.querySelector('.valid-not');
+            const suivantButton1 = document.querySelector('.enfant_suivant');
 
-        // Vérifier si l'input est rempli
-        if (notecontainer && notecontainer.value !== "") {
-            suivantButton1.classList.remove('disabled');
-            suivantButton1.style.backgroundColor = "#003cc8";
-            suivantButton1.addEventListener('click',function(){
-                suivantButton2.classList.remove('disabled');
-                suivantButton2.style.backgroundColor = "#003cc8";
+            // Vérifier si l'input est rempli
+            if (notecontainer && notecontainer.value !== "") {
+                suivantButton1.classList.remove('disabled');
+                suivantButton1.style.backgroundColor = "#003cc8";
+                suivantButton1.addEventListener('click', function() {
+                    suivantButton2.classList.remove('disabled');
+                    suivantButton2.style.backgroundColor = "#003cc8";
 
-            })
-        } else {
-            suivantButton1.classList.add('disabled');
-            suivantButton2.classList.add('disabled');
-            suivantButton1.style.backgroundColor = "grey";
-            suivantButton2.style.backgroundColor = "grey";
+                })
+            } else {
+                suivantButton1.classList.add('disabled');
+                suivantButton2.classList.add('disabled');
+                suivantButton1.style.backgroundColor = "grey";
+                suivantButton2.style.backgroundColor = "grey";
+            }
         }
-    }
 
-    const input = document.querySelector('.note-container input');
-    if (input) {
-        input.addEventListener('input', checkSelectContainer);
-    }
-            </script>
-
-            <script>
-                function alignLastAjouterQuestion() {
-        const ajouterQuestionLinks = document.querySelectorAll('.Ajouter-question');
-        const dernierAjouterQuestion = ajouterQuestionLinks[ajouterQuestionLinks.length - 1];
-        const ajouterSection = document.querySelector('.ajouter-section');
-
-        if (dernierAjouterQuestion && ajouterSection) {
-            const sectionRect = ajouterSection.getBoundingClientRect();
-
-            dernierAjouterQuestion.style.position = 'absolute';
-            dernierAjouterQuestion.style.left = `${sectionRect.left}px`;
-            dernierAjouterQuestion.style.top = `${sectionRect.top}px`;
+        const input = document.querySelector('.note-container input');
+        if (input) {
+            input.addEventListener('input', checkSelectContainer);
         }
-    }
-
-    alignLastAjouterQuestion();
-
-            </script>
+    </script>
 
     <script>
+        function alignLastAjouterQuestion() {
+            const ajouterQuestionLinks = document.querySelectorAll('.Ajouter-question');
+            const dernierAjouterQuestion = ajouterQuestionLinks[ajouterQuestionLinks.length - 1];
+            const ajouterSection = document.querySelector('.ajouter-section');
+
+            if (dernierAjouterQuestion && ajouterSection) {
+                const sectionRect = ajouterSection.getBoundingClientRect();
+
+                dernierAjouterQuestion.style.position = 'absolute';
+                dernierAjouterQuestion.style.left = `${sectionRect.left}px`;
+                dernierAjouterQuestion.style.top = `${sectionRect.top}px`;
+            }
+        }
+
+        alignLastAjouterQuestion();
+    </script>
+
+    <!-- <script>
         function toggleAjouterSection() {
             const inputs = document.querySelectorAll('.form input[type="text"]');
             const ajouterSectionLink = document.querySelector('.ajouter-section');
@@ -1543,419 +1935,2026 @@ function structureData(formData) {
         });
 
         toggleAjouterSection();
+    </script> -->
+    <script>
+        const parentContainers = document.querySelectorAll(".btnas-ends");
+
+        // Vérifiez si la NodeList n'est pas vide
+        if (parentContainers.length > 0) {
+            parentContainers.forEach(parentContainer => {
+                parentContainer.addEventListener("click", function(event) {
+                    if (event.target.classList.contains("delete-questionnaires")) {
+                        const grandParent = event.target.closest(".sa");
+
+                        if (grandParent) {
+                            const sibling = grandParent.nextElementSibling;
+
+                            grandParent.remove();
+
+                            if (sibling && sibling.classList.contains("sectio-container")) {
+                                sibling.remove();
+                            }
+                        }
+                    }
+                });
+            });
+        }
     </script>
     <script>
-const parentContainer = document.querySelector(".parent-container"); // Remplace par le bon sélecteur de conteneur
+        document.addEventListener('DOMContentLoaded', () => {
+            // Sélectionner les icônes
+            const sunIcon = document.querySelector('.fa-sun');
+            const moonIcon = document.querySelector('.fa-moon');
+            const navigation = document.querySelectorAll('.navbar.navbar-expand-lg');
+            const navigationControl = document.querySelectorAll('.form-control.search-input');
+            const navigationControler = document.querySelectorAll('.input-group-text');
+            const information = document.querySelectorAll('h1.welcome');
+            const information01 = document.querySelectorAll('.container.text-center.mt-4');
+            const information02 = document.querySelectorAll('.container.text-center.printableArea.principal');
+            const information03 = document.querySelectorAll('.card');
+            const information04 = document.querySelectorAll('.d-flex.flex-column.p-3.mb-4.perfo');
+            const information05 = document.querySelectorAll('.col-md-12.position-relative.perfo.p-2.mb-2');
+            const information06 = document.querySelectorAll('#myChart');
+            const information07 = document.querySelectorAll(
+                '.col-12.col-md-12.tablest.d-flex.justify-content-center.flex-column');
+            const information08 = document.querySelectorAll('.container.printableArea.principal');
+            const information09 = document.querySelectorAll('.pagination-info');
+            const information10 = document.querySelectorAll('#nbr');
+            const information11 = document.querySelectorAll('.table-responsive');
+            const information12 = document.querySelectorAll('#teacherTable');
+            const information13 = document.querySelectorAll('.mt-auto');
+            const information14 = document.querySelectorAll('.containers.principal');
+            const information15 = document.querySelectorAll('body');
+            const information16 = document.querySelectorAll('.fc');
+            const information17 = document.querySelectorAll('#calendar');
+            const information19 = document.querySelectorAll('.text-start.text-title');
+            const information18 = document.querySelectorAll('#searchInput');
+            const information20 = document.querySelectorAll('.containers.principal > h2');
+            const information21 = document.querySelectorAll('#apparence_accessibilite');
+            const information22 = document.querySelectorAll('.titre');
+            const information23 = document.querySelectorAll('.stack');
+            const information24 = document.querySelectorAll('.stacks > label');
+            const information25 = document.querySelectorAll('input[type="checkbox"]');
+            const information26 = document.querySelectorAll('input[type="text"]');
+            const information27 = document.querySelectorAll('textarea');
+            const information28 = document.querySelectorAll('#svg');
+            const information29 = document.querySelectorAll('.profile-and-form');
+            const information30 = document.querySelectorAll('.account-container');
+            const information31 = document.querySelectorAll('input[type="password"]');
+            const information32 = document.querySelectorAll('input[type="email"]');
+            const information33 = document.querySelectorAll('select');
+            const information34 = document.querySelectorAll('.account-title');
+            const information35 = document.querySelectorAll('.form-group > label');
+            const information36 = document.querySelectorAll('.account-form > h2');
+            const information37 = document.querySelectorAll('th');
+            const information38 = document.querySelectorAll('td');
+            const information39 = document.querySelectorAll('.btn.btn-custom.btn-exporter.dropdown-toggle');
+            const information40 = document.querySelectorAll('.btn-ajouter');
+            const information41 = document.querySelectorAll('.btn-importer');
+            const information42 = document.querySelectorAll('.btn-imprimer');
+            const information43 = document.querySelectorAll('.fc td, .fc th');
+            const information44 = document.querySelectorAll('td');
+            const information45 = document.querySelectorAll('.fc-unthemed .fc-ltr');
+            const information46 = document.querySelectorAll('.heade');
+            const information47 = document.querySelectorAll('.enfant h2');
+            const information48 = document.querySelectorAll('.form label');
+            const information49 = document.querySelectorAll('.form input');
+            const information50 = document.querySelectorAll('input[type="number"]');
+            const information51 = document.querySelectorAll('.sectio-container');
 
-if (parentContainer) {
-    parentContainer.addEventListener("click", function(event) {
-        if (event.target.classList.contains("delete-questionnaires")) {
-            const grandParent = event.target.closest(".sa");
+            const information52 = document.querySelectorAll('.sa');
+            const information53 = document.querySelectorAll('.file-input');
+            const information54 = document.querySelectorAll('input[type="file"]');
+            const information55 = document.querySelectorAll('.input-group');
+            const information56 = document.querySelectorAll('.sectio-container');
+            const information57 = document.querySelectorAll('.question-separator');
+            const fermetureIcon = document.querySelector('.fa-circle-xmark');
+            const information60 = document.querySelectorAll('#modalbtn > .modal-content');
+            const information61 = document.querySelectorAll('.custom-close-btn');
+            const information62 = document.querySelectorAll('#modalbtn > .modal-content > h3');
+            const information63 = document.querySelectorAll('#modalbtn > .modal-content > p');
+            const information64 = document.querySelectorAll('.contenuepage');
 
-            if (grandParent) {
-                const sibling = grandParent.nextElementSibling; // Frère direct
 
-                grandParent.remove();
 
-                if (sibling && sibling.classList.contains("section-container")) {
-                    sibling.remove();
+
+            // Vérifier l'état enregistré dans localStorage
+            const isDarkMode = localStorage.getItem('isDarkMode') === 'true';
+
+            // Fonction pour appliquer les styles en fonction du mode
+            const applyStyles = (darkMode) => {
+                if (darkMode) {
+                    sunIcon.style.display = 'none';
+                    moonIcon.style.display = 'flex';
+                    sunIcon.style.color = '#fff';
+                    moonIcon.style.color = '';
+                    fermetureIcon.classList.remove('fermons');
+
+                    navigation.forEach(nav => nav.style.background = "");
+                    navigationControl.forEach(control => control.style.background = "");
+                    navigationControler.forEach(control => control.style.background = "");
+                    information.forEach(info => info.style.color = "");
+                    information01.forEach(info => {
+                        info.style.background = "";
+                        info.classList.add('mt-4');
+                    });
+                    information02.forEach(info => info.style.background = "");
+                    information03.forEach(card => card.style.background = "");
+                    information04.forEach(container => container.style.background = "");
+                    information05.forEach(container => container.style.background = "");
+                    information06.forEach(container => container.style.background = "");
+                    information07.forEach(container => container.style.background = "");
+                    information08.forEach(container => container.style.background = "");
+                    information09.forEach(container => container.style.color = "");
+                    information10.forEach(container => container.style.color = "");
+                    information11.forEach(container => container.style.background = "");
+                    information12.forEach(container => container.style.background = "");
+                    information12.forEach(container => container.style.color = "");
+                    // information13.forEach(container => container.classList.add('mt-auto'));
+                    information14.forEach(container => {
+                        container.style.background = "";
+                        container.style.color = "";
+
+                    });
+                    information15.forEach(container => {
+                        container.style.background = "";
+                        container.style.color = "";
+                    });
+                    information16.forEach(container => container.style.background = "");
+                    // information17.forEach(container => container.style.background = "");
+                    information18.forEach(container => {
+                        container.style.background = "";
+                        container.style.color = "";
+                        container.classList.remove('custom-placeholder');
+
+                    });
+                    information19.forEach(container => {
+                        container.style.color = "";
+
+                    });
+                    information20.forEach(container => container.style.color = "");
+                    information21.forEach(container => container.style.color = "");
+                    information22.forEach(container => container.style.color = "");
+                    information23.forEach(container => container.style.color = "");
+                    information24.forEach(container => container.style.color = "");
+                    information25.forEach(container => container.style.borderColor = "");
+                    information26.forEach(container => {
+                        container.style.background = "";
+                        container.style.color = "";
+                        container.classList.remove('custom-placeholder');
+                        container.classList.remove('custom-placeholders');
+
+                    });
+                    information27.forEach(container => {
+                        container.style.background = "";
+                        container.style.color = "";
+                        container.classList.remove('custom-placeholder');
+
+                    });
+                    information29.forEach(container => {
+                        container.style.background = "";
+                        container.style.color = "";
+                    });
+                    information30.forEach(container => {
+                        container.style.background = "";
+                        container.style.color = "";
+                    });
+                    information31.forEach(container => {
+                        container.style.background = "";
+                        container.style.color = "";
+                        container.classList.remove('custom-placeholder');
+
+                    });
+                    information32.forEach(container => {
+                        container.style.background = "";
+                        container.style.color = "";
+                    });
+                    information33.forEach(container => {
+                        container.style.background = "";
+                        container.style.color = "";
+                    });
+                    information34.forEach(container => container.style.color = "");
+                    information35.forEach(container => container.style.color = "");
+                    information36.forEach(container => container.style.color = "");
+                    information37.forEach(container => {
+                        container.style.color = "";
+                        container.style.background = "";
+
+                    });
+                    information38.forEach(container => {
+                        container.style.color = "";
+                        container.style.background = "";
+
+                    });
+                    information39.forEach(container => container.style.background = "");
+                    information39.forEach(container => {
+                        container.classList.remove('hover-class');
+                    });
+                    information40.forEach(container => container.style.background = "");
+                    information41.forEach(container => container.style.background = "");
+                    information42.forEach(container => container.style.background = "");
+                    information39.forEach(container => {
+                        // Supprimez la classe qui gère le hover
+                        container.classList.remove('hover-class');
+                    });
+                    information43.forEach(container => container.style.background = "");
+                    information44.forEach(container => container.style.background = "");
+                    information45.forEach(container => container.style.background = "");
+                    information46.forEach(container => container.style.background = "");
+                    information47.forEach(container => container.style.color = "");
+                    information48.forEach(container => container.style.color = "");
+                    information49.forEach(container => {
+                        container.style.background = "";
+                        container.style.color = "";
+                        container.classList.remove('custom-placeholder');
+
+                    });
+                    information50.forEach(container => {
+                        container.style.color = "";
+                        container.classList.remove('custom-placeholder');
+                        container.setAttribute('style', 'background:;');
+
+
+                    });
+                    information51.forEach(container => {
+                        container.style.background = "";
+                        container.style.color = "";
+                        container.classList.remove('custom-placeholder');
+
+                    });
+                    information52.forEach(container => {
+                        container.setAttribute('style', 'background:;');
+                        container.style.color = "";
+                        container.classList.remove('custom-placeholders');
+
+                    });
+                    information53.forEach(container => container.style.display = "");
+
+                    // information19.forEach(container => container.style.background = "");
+                    information54.forEach(container => container.setAttribute('style',
+                        'display:none!important;'));
+                    information55.forEach(container => container.setAttribute('style', 'background:;'));
+                    information56.forEach(container => container.setAttribute('style', 'background:;'));
+                    information57.forEach(container => container.setAttribute('style', 'background:;'));
+                    information60.forEach(container => {
+                        container.classList.remove('bg-1');
+                    });
+                    information61.forEach(container => {
+                        container.classList.remove('bg-1');
+                    });
+                    information62.forEach(container => {
+                        container.classList.remove('bg-1');
+                    });
+                    information63.forEach(container => {
+                        container.classList.remove('bg-1');
+                    });
+                    information64.forEach(container => {
+                        container.style.background = "";
+                        container.style.color = "";
+                        container.style.marginBottom = "";
+
+
+                    });
+
+
+                } else {
+                    sunIcon.style.display = 'flex';
+                    moonIcon.style.display = 'none';
+                    sunIcon.style.color = '#fff';
+                    moonIcon.style.color = '';
+                    fermetureIcon.classList.add('fermons');
+
+                    navigation.forEach(nav => nav.style.background = "#030D2D");
+                    navigationControl.forEach(control => control.style.background = "#030D2D");
+                    navigationControler.forEach(control => control.style.background = "#030D2D");
+                    information.forEach(info => info.style.color = "#fff");
+                    information01.forEach(info => {
+                        info.style.background = "#020917";
+                        info.classList.remove('mt-4');
+                    });
+                    information02.forEach(info => info.style.background = "#020917");
+                    information03.forEach(card => card.style.background = "#030D2D");
+                    information04.forEach(container => container.style.background = "#030D2D");
+                    information05.forEach(container => container.style.background = "#030D2D");
+                    information06.forEach(container => container.style.background = "#030D2D");
+                    information07.forEach(container => container.style.background = "#030D2D");
+                    information08.forEach(container => container.style.background = "#020917");
+                    information09.forEach(container => container.style.color = "#fff");
+                    information10.forEach(container => container.style.color = "#fff");
+                    information11.forEach(container => container.style.background = "#020917");
+                    information12.forEach(container => container.style.background = "#030D2D");
+                    information12.forEach(container => container.style.color = "#fff");
+                    // information13.forEach(container => container.classList.remove('mt-auto'));
+                    information14.forEach(container => {
+                        container.style.background = "#020917";
+                        container.style.color = "#fff";
+                    });
+                    information15.forEach(container => {
+                        container.style.background = "#020917";
+                        container.style.color = "#fff";
+                    });
+                    information16.forEach(container => container.style.background = "#030D2D");
+                    // information17.forEach(container => container.style.background = "#030D2D");
+                    information18.forEach(container => {
+                        container.style.background = "#030D2D";
+                        container.style.color = "#fff";
+                        container.classList.add('custom-placeholder');
+
+                    });
+                    information19.forEach(container => {
+                        container.style.color = "#fff";
+
+                    });
+                    information20.forEach(container => container.style.color = "#fff");
+                    information21.forEach(container => container.style.color = "#fff");
+                    information22.forEach(container => container.style.color = "#fff");
+                    information23.forEach(container => container.style.color = "#fff");
+                    information24.forEach(container => container.style.color = "#fff");
+                    information25.forEach(container => container.style.borderColor = "#fff");
+                    information26.forEach(container => {
+                        container.style.background = "#030D2D";
+                        container.style.color = "#fff";
+                        container.classList.add('custom-placeholder');
+                        container.classList.add('custom-placeholders');
+
+                    });
+                    information27.forEach(container => {
+                        container.style.background = "#030D2D";
+                        container.style.color = "#fff";
+                        container.classList.add('custom-placeholder');
+
+                    });
+                    information29.forEach(container => {
+                        container.style.background = "#020917";
+                        container.style.color = "#fff";
+                    });
+                    information30.forEach(container => {
+                        container.style.background = "#020917";
+                        container.style.color = "#fff";
+                    });
+                    information31.forEach(container => {
+                        container.style.background = "#030D2D";
+                        container.style.color = "#fff";
+                        container.classList.add('custom-placeholder');
+
+                    });
+                    information32.forEach(container => {
+                        container.style.background = "#030D2D";
+                        container.style.color = "#fff";
+                    });
+                    information33.forEach(container => {
+                        container.style.background = "#030D2D";
+                        container.style.color = "#fff";
+                    });
+                    information34.forEach(container => container.style.color = "#fff");
+                    information35.forEach(container => container.style.color = "#fff");
+                    information36.forEach(container => container.style.color = "#fff");
+                    information37.forEach(container => {
+                        container.style.color = "#fff";
+                        container.style.background = "#030D2D";
+
+                    });
+                    information38.forEach(container => {
+                        container.style.color = "#fff";
+                        container.style.background = "#030D2D";
+
+                    });
+                    information39.forEach(container => container.setAttribute('style',
+                        'background:#0C3B0C!important;'));
+                    information39.forEach(container => {
+                        container.classList.remove('hover-class');
+                    });
+                    information40.forEach(container => container.style.background = "#0C3B0C");
+                    information41.forEach(container => container.style.background = "#0C3B0C");
+                    information42.forEach(container => container.style.background = "#0C3B0C");
+
+                    information43.forEach(container => container.setAttribute('style',
+                        'background:#030D2D!important;color:#fff!important;'));
+                    information44.forEach(container => container.setAttribute('style',
+                        'background:#030D2D!important;color:#fff!important;'));
+                    information45.forEach(container => container.setAttribute('style',
+                        'background:#030D2D!important;color:#fff!important;'));
+                    information46.forEach(container => container.setAttribute('style',
+                        'background:#020917!important;color:#fff!important;'));
+                    information47.forEach(container => container.setAttribute('style',
+                        'color:#fff!important;'));
+                    information48.forEach(container => container.setAttribute('style',
+                        'color:#fff!important;'));
+                    information49.forEach(container => {
+                        container.setAttribute('style', 'background:#030D2D!important;');
+                        container.setAttribute('style', 'color:#fff!important;');
+                        container.classList.add('custom-placeholder');
+
+                    });
+                    information50.forEach(container => {
+                        container.setAttribute('style', 'color:#4A41C5!important;');
+                        container.setAttribute('style', 'background:#030D2D!important;');
+                        container.classList.add('custom-placeholder');
+
+                    });
+                    information51.forEach(container => {
+                        container.setAttribute('style', 'background:#020917!important;');
+                        container.setAttribute('style', 'color:#fff!important;');
+                        container.classList.add('custom-placeholder');
+
+                    });
+                    information52.forEach(container => {
+                        container.setAttribute('style', 'background:#030D2D!important;');
+                        container.setAttribute('style', 'color:#fff!important;');
+                        container.classList.add('custom-placeholders');
+
+                    });
+
+                    // information19.forEach(container => container.setAttribute('style','background:#030D2D!important;'))
+                    information53.forEach(container => container.setAttribute('style',
+                        'display:none!important;'));
+                    information54.forEach(container => container.setAttribute('style',
+                        'display:none!important;'));
+                    information55.forEach(container => container.setAttribute('style',
+                        'background:#030D2D!important;'));
+                    information56.forEach(container => container.setAttribute('style',
+                        'background:#030D2D!important;'));
+                    information57.forEach(container => container.setAttribute('style',
+                        'background:#020917!important;'));
+
+                    information60.forEach(container => {
+                        container.classList.add('bg-1');
+                    });
+                    information61.forEach(container => {
+                        container.classList.add('bg-1');
+                    });
+                    information62.forEach(container => {
+                        container.classList.add('bg-1');
+                    });
+                    information63.forEach(container => {
+                        container.classList.add('bg-1');
+                    });
+                    information64.forEach(container => {
+                        container.style.background = "#fff";
+                        container.style.color = "#000";
+                        container.style.marginBottom = "10px";
+                    });
+
+                }
+            };
+
+            // Appliquer les styles en fonction de l'état enregistré
+            applyStyles(isDarkMode);
+
+            // Fonction pour gérer le clic sur l'icône de lune
+            moonIcon.addEventListener('click', () => {
+                applyStyles(false); // Revenir au mode clair
+                localStorage.setItem('isDarkMode', 'false'); // Enregistrer l'état clair
+            });
+
+            // Fonction pour gérer le clic sur l'icône de soleil
+            sunIcon.addEventListener('click', () => {
+                applyStyles(true); // Appliquer le mode sombre
+                localStorage.setItem('isDarkMode', 'true'); // Enregistrer l'état sombre
+            });
+            document.addEventListener('click', function(event) {
+                if (event.target.classList.contains('add-response')) {
+                    // Gérer le clic sur le bouton d'ajout de réponse
+                    applyStyles(isDarkMode); // Appliquer les styles du mode actuel
+                }
+            });
+
+            document.addEventListener('click', function(event) {
+                if (event.target.classList.contains('Ajouter-question')) {
+                    // Gérer le clic sur le bouton d'ajout de réponse
+                    applyStyles(isDarkMode); // Appliquer les styles du mode actuel
+                }
+            });
+            document.addEventListener('click', function(event) {
+                if (event.target.classList.contains('Ajouter-section')) {
+                    // Gérer le clic sur le bouton d'ajout de réponse
+                    applyStyles(isDarkMode); // Appliquer les styles du mode actuel
+                }
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const ajouterQuestionBtn2 = document.querySelectorAll('.Ajouter-question');
+
+            ajouterQuestionBtn2.forEach(btn => {
+                btn.addEventListener('click', function() {
+
+                    const sunIcon = document.querySelector('.fa-sun');
+                    const moonIcon = document.querySelector('.fa-moon');
+                    const navigation = document.querySelectorAll('.navbar.navbar-expand-lg');
+                    const navigationControl = document.querySelectorAll(
+                        '.form-control.search-input');
+                    const navigationControler = document.querySelectorAll('.input-group-text');
+                    const information = document.querySelectorAll('h1.welcome');
+                    const information01 = document.querySelectorAll('.container.text-center.mt-4');
+                    const information02 = document.querySelectorAll(
+                        '.container.text-center.printableArea.principal');
+                    const information03 = document.querySelectorAll('.card');
+                    const information04 = document.querySelectorAll(
+                        '.d-flex.flex-column.p-3.mb-4.perfo');
+                    const information05 = document.querySelectorAll(
+                        '.col-md-12.position-relative.perfo.p-2.mb-2');
+                    const information06 = document.querySelectorAll('#myChart');
+                    const information07 = document.querySelectorAll(
+                        '.col-12.col-md-12.tablest.d-flex.justify-content-center.flex-column');
+                    const information08 = document.querySelectorAll(
+                        '.container.printableArea.principal');
+                    const information09 = document.querySelectorAll('.pagination-info');
+                    const information10 = document.querySelectorAll('#nbr');
+                    const information11 = document.querySelectorAll('.table-responsive');
+                    const information12 = document.querySelectorAll('#teacherTable');
+                    const information13 = document.querySelectorAll('.mt-auto');
+                    const information14 = document.querySelectorAll('.containers.principal');
+                    const information15 = document.querySelectorAll('body');
+                    const information16 = document.querySelectorAll('.fc');
+                    const information17 = document.querySelectorAll('#calendar');
+                    const information19 = document.querySelectorAll('.text-start.text-title');
+                    const information18 = document.querySelectorAll('#searchInput');
+                    const information20 = document.querySelectorAll('.containers.principal > h2');
+                    const information21 = document.querySelectorAll('#apparence_accessibilite');
+                    const information22 = document.querySelectorAll('.titre');
+                    const information23 = document.querySelectorAll('.stack');
+                    const information24 = document.querySelectorAll('.stacks > label');
+                    const information25 = document.querySelectorAll('input[type="checkbox"]');
+                    const information26 = document.querySelectorAll('input[type="text"]');
+                    const information27 = document.querySelectorAll('textarea');
+                    const information28 = document.querySelectorAll('#svg');
+                    const information29 = document.querySelectorAll('.profile-and-form');
+                    const information30 = document.querySelectorAll('.account-container');
+                    const information31 = document.querySelectorAll('input[type="password"]');
+                    const information32 = document.querySelectorAll('input[type="email"]');
+                    const information33 = document.querySelectorAll('select');
+                    const information34 = document.querySelectorAll('.account-title');
+                    const information35 = document.querySelectorAll('.form-group > label');
+                    const information36 = document.querySelectorAll('.account-form > h2');
+                    const information37 = document.querySelectorAll('th');
+                    const information38 = document.querySelectorAll('td');
+                    const information39 = document.querySelectorAll(
+                        '.btn.btn-custom.btn-exporter.dropdown-toggle');
+                    const information40 = document.querySelectorAll('.btn-ajouter');
+                    const information41 = document.querySelectorAll('.btn-importer');
+                    const information42 = document.querySelectorAll('.btn-imprimer');
+                    const information43 = document.querySelectorAll('.fc td, .fc th');
+                    const information44 = document.querySelectorAll('td');
+                    const information45 = document.querySelectorAll('.fc-unthemed .fc-ltr');
+                    const information46 = document.querySelectorAll('.heade');
+                    const information47 = document.querySelectorAll('.enfant h2');
+                    const information48 = document.querySelectorAll('.form label');
+                    const information49 = document.querySelectorAll('.form input');
+                    const information50 = document.querySelectorAll('input[type="number"]');
+                    const information51 = document.querySelectorAll('.sectio-container');
+
+                    const information52 = document.querySelectorAll('.sa');
+                    const information53 = document.querySelectorAll('.file-input');
+                    const information54 = document.querySelectorAll('input[type="file"]');
+                    const information55 = document.querySelectorAll('.input-group');
+                    const information56 = document.querySelectorAll('.sectio-container');
+                    const information57 = document.querySelectorAll('.question-separator');
+
+                    // Vérifier l'état enregistré dans localStorage
+                    const isDarkMode = localStorage.getItem('isDarkMode') === 'true';
+
+                    // Fonction pour appliquer les styles en fonction du mode
+                    const applyStyles = (darkMode) => {
+                        if (darkMode) {
+                            sunIcon.style.display = 'none';
+                            moonIcon.style.display = 'flex';
+
+                            navigation.forEach(nav => nav.style.background = "");
+                            navigationControl.forEach(control => control.style.background = "");
+                            navigationControler.forEach(control => control.style.background =
+                                "");
+                            information.forEach(info => info.style.color = "");
+                            information01.forEach(info => {
+                                info.style.background = "";
+                                info.classList.add('mt-4');
+                            });
+                            information02.forEach(info => info.style.background = "");
+                            information03.forEach(card => card.style.background = "");
+                            information04.forEach(container => container.style.background = "");
+                            information05.forEach(container => container.style.background = "");
+                            information06.forEach(container => container.style.background = "");
+                            information07.forEach(container => container.style.background = "");
+                            information08.forEach(container => container.style.background = "");
+                            information09.forEach(container => container.style.color = "");
+                            information10.forEach(container => container.style.color = "");
+                            information11.forEach(container => container.style.background = "");
+                            information12.forEach(container => container.style.background = "");
+                            information12.forEach(container => container.style.color = "");
+                            // information13.forEach(container => container.classList.add('mt-auto'));
+                            information14.forEach(container => {
+                                container.style.background = "";
+                                container.style.color = "";
+
+                            });
+                            information15.forEach(container => {
+                                container.style.background = "";
+                                container.style.color = "";
+                            });
+                            information16.forEach(container => container.style.background = "");
+                            // information17.forEach(container => container.style.background = "");
+                            information18.forEach(container => {
+                                container.style.background = "";
+                                container.style.color = "";
+                                container.classList.remove('custom-placeholder');
+
+                            });
+                            information19.forEach(container => {
+                                container.style.color = "";
+
+                            });
+                            information20.forEach(container => container.style.color = "");
+                            information21.forEach(container => container.style.color = "");
+                            information22.forEach(container => container.style.color = "");
+                            information23.forEach(container => container.style.color = "");
+                            information24.forEach(container => container.style.color = "");
+                            information25.forEach(container => container.style.borderColor =
+                                "");
+                            information26.forEach(container => {
+                                container.style.background = "";
+                                container.style.color = "";
+                                container.classList.remove('custom-placeholder');
+                                container.classList.remove('custom-placeholders');
+
+                            });
+                            information27.forEach(container => {
+                                container.style.background = "";
+                                container.style.color = "";
+                                container.classList.remove('custom-placeholder');
+
+                            });
+                            information29.forEach(container => {
+                                container.style.background = "";
+                                container.style.color = "";
+                            });
+                            information30.forEach(container => {
+                                container.style.background = "";
+                                container.style.color = "";
+                            });
+                            information31.forEach(container => {
+                                container.style.background = "";
+                                container.style.color = "";
+                                container.classList.remove('custom-placeholder');
+
+                            });
+                            information32.forEach(container => {
+                                container.style.background = "";
+                                container.style.color = "";
+                            });
+                            information33.forEach(container => {
+                                container.style.background = "";
+                                container.style.color = "";
+                            });
+                            information34.forEach(container => container.style.color = "");
+                            information35.forEach(container => container.style.color = "");
+                            information36.forEach(container => container.style.color = "");
+                            information37.forEach(container => {
+                                container.style.color = "";
+                                container.style.background = "";
+
+                            });
+                            information38.forEach(container => {
+                                container.style.color = "";
+                                container.style.background = "";
+
+                            });
+                            information39.forEach(container => container.style.background = "");
+                            information39.forEach(container => {
+                                container.classList.remove('hover-class');
+                            });
+                            information40.forEach(container => container.style.background = "");
+                            information41.forEach(container => container.style.background = "");
+                            information42.forEach(container => container.style.background = "");
+                            information39.forEach(container => {
+                                // Supprimez la classe qui gère le hover
+                                container.classList.remove('hover-class');
+                            });
+                            information43.forEach(container => container.style.background = "");
+                            information44.forEach(container => container.style.background = "");
+                            information45.forEach(container => container.style.background = "");
+                            information46.forEach(container => container.style.background = "");
+                            information47.forEach(container => container.style.color = "");
+                            information48.forEach(container => container.style.color = "");
+                            information49.forEach(container => {
+                                container.style.background = "";
+                                container.style.color = "";
+                                container.classList.remove('custom-placeholder');
+
+                            });
+                            information50.forEach(container => {
+                                container.style.color = "";
+                                container.classList.remove('custom-placeholder');
+                                container.setAttribute('style', 'background:;');
+
+
+                            });
+                            information51.forEach(container => {
+                                container.style.background = "";
+                                container.style.color = "";
+                                container.classList.remove('custom-placeholder');
+
+                            });
+                            information52.forEach(container => {
+                                container.setAttribute('style', 'background:;');
+                                container.style.color = "";
+                                container.classList.remove('custom-placeholders');
+
+                            });
+                            information53.forEach(container => container.style.display = "");
+
+                            // information19.forEach(container => container.style.background = "");
+                            information54.forEach(container => container.setAttribute('style',
+                                'display:none!important;'));
+                            information55.forEach(container => container.setAttribute('style',
+                                'background:;'));
+                            information56.forEach(container => container.setAttribute('style',
+                                'background:;'));
+                            information57.forEach(container => container.setAttribute('style',
+                                'background:;'));
+
+
+                        } else {
+                            sunIcon.style.display = 'flex';
+                            moonIcon.style.display = 'none';
+
+
+                            navigation.forEach(nav => nav.style.background = "#030D2D");
+                            navigationControl.forEach(control => control.style.background =
+                                "#030D2D");
+                            navigationControler.forEach(control => control.style.background =
+                                "#030D2D");
+                            information.forEach(info => info.style.color = "#fff");
+                            information01.forEach(info => {
+                                info.style.background = "#020917";
+                                info.classList.remove('mt-4');
+                            });
+                            information02.forEach(info => info.style.background = "#020917");
+                            information03.forEach(card => card.style.background = "#030D2D");
+                            information04.forEach(container => container.style.background =
+                                "#030D2D");
+                            information05.forEach(container => container.style.background =
+                                "#030D2D");
+                            information06.forEach(container => container.style.background =
+                                "#030D2D");
+                            information07.forEach(container => container.style.background =
+                                "#030D2D");
+                            information08.forEach(container => container.style.background =
+                                "#020917");
+                            information09.forEach(container => container.style.color = "#fff");
+                            information10.forEach(container => container.style.color = "#fff");
+                            information11.forEach(container => container.style.background =
+                                "#020917");
+                            information12.forEach(container => container.style.background =
+                                "#030D2D");
+                            information12.forEach(container => container.style.color = "#fff");
+                            // information13.forEach(container => container.classList.remove('mt-auto'));
+                            information14.forEach(container => {
+                                container.style.background = "#020917";
+                                container.style.color = "#fff";
+                            });
+                            information15.forEach(container => {
+                                container.style.background = "#020917";
+                                container.style.color = "#fff";
+                            });
+                            information16.forEach(container => container.style.background =
+                                "#030D2D");
+                            // information17.forEach(container => container.style.background = "#030D2D");
+                            information18.forEach(container => {
+                                container.style.background = "#030D2D";
+                                container.style.color = "#fff";
+                                container.classList.add('custom-placeholder');
+
+                            });
+                            information19.forEach(container => {
+                                container.style.color = "#fff";
+
+                            });
+                            information20.forEach(container => container.style.color = "#fff");
+                            information21.forEach(container => container.style.color = "#fff");
+                            information22.forEach(container => container.style.color = "#fff");
+                            information23.forEach(container => container.style.color = "#fff");
+                            information24.forEach(container => container.style.color = "#fff");
+                            information25.forEach(container => container.style.borderColor =
+                                "#fff");
+                            information26.forEach(container => {
+                                container.style.background = "#030D2D";
+                                container.style.color = "#fff";
+                                container.classList.add('custom-placeholder');
+                                container.classList.add('custom-placeholders');
+
+                            });
+                            information27.forEach(container => {
+                                container.style.background = "#030D2D";
+                                container.style.color = "#fff";
+                                container.classList.add('custom-placeholder');
+
+                            });
+                            information29.forEach(container => {
+                                container.style.background = "#020917";
+                                container.style.color = "#fff";
+                            });
+                            information30.forEach(container => {
+                                container.style.background = "#020917";
+                                container.style.color = "#fff";
+                            });
+                            information31.forEach(container => {
+                                container.style.background = "#030D2D";
+                                container.style.color = "#fff";
+                                container.classList.add('custom-placeholder');
+
+                            });
+                            information32.forEach(container => {
+                                container.style.background = "#030D2D";
+                                container.style.color = "#fff";
+                            });
+                            information33.forEach(container => {
+                                container.style.background = "#030D2D";
+                                container.style.color = "#fff";
+                            });
+                            information34.forEach(container => container.style.color = "#fff");
+                            information35.forEach(container => container.style.color = "#fff");
+                            information36.forEach(container => container.style.color = "#fff");
+                            information37.forEach(container => {
+                                container.style.color = "#fff";
+                                container.style.background = "#030D2D";
+
+                            });
+                            information38.forEach(container => {
+                                container.style.color = "#fff";
+                                container.style.background = "#030D2D";
+
+                            });
+                            information39.forEach(container => container.setAttribute('style',
+                                'background:#0C3B0C!important;'));
+                            information39.forEach(container => {
+                                container.classList.remove('hover-class');
+                            });
+                            information40.forEach(container => container.style.background =
+                                "#0C3B0C");
+                            information41.forEach(container => container.style.background =
+                                "#0C3B0C");
+                            information42.forEach(container => container.style.background =
+                                "#0C3B0C");
+
+                            information43.forEach(container => container.setAttribute('style',
+                                'background:#030D2D!important;color:#fff!important;'));
+                            information44.forEach(container => container.setAttribute('style',
+                                'background:#030D2D!important;color:#fff!important;'));
+                            information45.forEach(container => container.setAttribute('style',
+                                'background:#030D2D!important;color:#fff!important;'));
+                            information46.forEach(container => container.setAttribute('style',
+                                'background:#020917!important;color:#fff!important;'));
+                            information47.forEach(container => container.setAttribute('style',
+                                'color:#fff!important;'));
+                            information48.forEach(container => container.setAttribute('style',
+                                'color:#fff!important;'));
+                            information49.forEach(container => {
+                                container.setAttribute('style',
+                                    'background:#030D2D!important;');
+                                container.setAttribute('style',
+                                    'color:#fff!important;');
+                                container.classList.add('custom-placeholder');
+
+                            });
+                            information50.forEach(container => {
+                                container.setAttribute('style',
+                                    'color:#4A41C5!important;');
+                                container.setAttribute('style',
+                                    'background:#030D2D!important;');
+                                container.classList.add('custom-placeholder');
+
+                            });
+                            information51.forEach(container => {
+                                container.setAttribute('style',
+                                    'background:#020917!important;');
+                                container.setAttribute('style',
+                                    'color:#fff!important;');
+                                container.classList.add('custom-placeholder');
+
+                            });
+                            information52.forEach(container => {
+                                container.setAttribute('style',
+                                    'background:#030D2D!important;');
+                                container.setAttribute('style',
+                                    'color:#fff!important;');
+                                container.classList.add('custom-placeholders');
+
+                            });
+
+                            // information19.forEach(container => container.setAttribute('style','background:#030D2D!important;'))
+                            information53.forEach(container => container.setAttribute('style',
+                                'display:none!important;'));
+                            information54.forEach(container => container.setAttribute('style',
+                                'display:none!important;'));
+                            information55.forEach(container => container.setAttribute('style',
+                                'background:#030D2D!important;'));
+                            information56.forEach(container => container.setAttribute('style',
+                                'background:#030D2D!important;'));
+                            information57.forEach(container => container.setAttribute('style',
+                                'background:#020917!important;'));
+
+
+                        }
+                    };
+
+                    // Appliquer les styles en fonction de l'état enregistré
+                    applyStyles(isDarkMode);
+                    document.addEventListener('click', function(event) {
+                        if (event.target.classList.contains('add-response')) {
+                            // Gérer le clic sur le bouton d'ajout de réponse
+                            applyStyles(isDarkMode); // Appliquer les styles du mode actuel
+                        }
+                    });
+
+                    document.addEventListener('click', function(event) {
+                        if (event.target.classList.contains('Ajouter-question')) {
+                            // Gérer le clic sur le bouton d'ajout de réponse
+                            applyStyles(isDarkMode); // Appliquer les styles du mode actuel
+                        }
+                    });
+                    document.addEventListener('click', function(event) {
+                        if (event.target.classList.contains('Ajouter-section')) {
+                            // Gérer le clic sur le bouton d'ajout de réponse
+                            applyStyles(isDarkMode); // Appliquer les styles du mode actuel
+                        }
+                    });
+
+
+                    // Fonction pour gérer le clic sur l'icône de lune
+                    moonIcon.addEventListener('click', () => {
+                        applyStyles(false); // Revenir au mode clair
+                        localStorage.setItem('isDarkMode',
+                            'false'); // Enregistrer l'état clair
+                    });
+
+                    // Fonction pour gérer le clic sur l'icône de soleil
+                    sunIcon.addEventListener('click', () => {
+                        applyStyles(true); // Appliquer le mode sombre
+                        localStorage.setItem('isDarkMode',
+                            'true'); // Enregistrer l'état sombre
+                    });
+                    // Écouteur d'événement pour ajouter une nouvelle question
+                    ajouterQuestionBtn2.forEach(btn => {
+                        btn.addEventListener('click', function() {
+                            // Appliquer les styles au nouvel input en fonction du mode
+                            applyStyles(isDarkMode);
+                        });
+                    });
+                });
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const ajouterQuestionBtn1 = document.querySelectorAll('.add-response');
+
+            ajouterQuestionBtn1.forEach(btn => {
+                btn.addEventListener('click', function() {
+
+                    const sunIcon = document.querySelector('.fa-sun');
+                    const moonIcon = document.querySelector('.fa-moon');
+                    const navigation = document.querySelectorAll('.navbar.navbar-expand-lg');
+                    const navigationControl = document.querySelectorAll(
+                        '.form-control.search-input');
+                    const navigationControler = document.querySelectorAll('.input-group-text');
+                    const information = document.querySelectorAll('h1.welcome');
+                    const information01 = document.querySelectorAll('.container.text-center.mt-4');
+                    const information02 = document.querySelectorAll(
+                        '.container.text-center.printableArea.principal');
+                    const information03 = document.querySelectorAll('.card');
+                    const information04 = document.querySelectorAll(
+                        '.d-flex.flex-column.p-3.mb-4.perfo');
+                    const information05 = document.querySelectorAll(
+                        '.col-md-12.position-relative.perfo.p-2.mb-2');
+                    const information06 = document.querySelectorAll('#myChart');
+                    const information07 = document.querySelectorAll(
+                        '.col-12.col-md-12.tablest.d-flex.justify-content-center.flex-column');
+                    const information08 = document.querySelectorAll(
+                        '.container.printableArea.principal');
+                    const information09 = document.querySelectorAll('.pagination-info');
+                    const information10 = document.querySelectorAll('#nbr');
+                    const information11 = document.querySelectorAll('.table-responsive');
+                    const information12 = document.querySelectorAll('#teacherTable');
+                    const information13 = document.querySelectorAll('.mt-auto');
+                    const information14 = document.querySelectorAll('.containers.principal');
+                    const information15 = document.querySelectorAll('body');
+                    const information16 = document.querySelectorAll('.fc');
+                    const information17 = document.querySelectorAll('#calendar');
+                    const information19 = document.querySelectorAll('.text-start.text-title');
+                    const information18 = document.querySelectorAll('#searchInput');
+                    const information20 = document.querySelectorAll('.containers.principal > h2');
+                    const information21 = document.querySelectorAll('#apparence_accessibilite');
+                    const information22 = document.querySelectorAll('.titre');
+                    const information23 = document.querySelectorAll('.stack');
+                    const information24 = document.querySelectorAll('.stacks > label');
+                    const information25 = document.querySelectorAll('input[type="checkbox"]');
+                    const information26 = document.querySelectorAll('input[type="text"]');
+                    const information27 = document.querySelectorAll('textarea');
+                    const information28 = document.querySelectorAll('#svg');
+                    const information29 = document.querySelectorAll('.profile-and-form');
+                    const information30 = document.querySelectorAll('.account-container');
+                    const information31 = document.querySelectorAll('input[type="password"]');
+                    const information32 = document.querySelectorAll('input[type="email"]');
+                    const information33 = document.querySelectorAll('select');
+                    const information34 = document.querySelectorAll('.account-title');
+                    const information35 = document.querySelectorAll('.form-group > label');
+                    const information36 = document.querySelectorAll('.account-form > h2');
+                    const information37 = document.querySelectorAll('th');
+                    const information38 = document.querySelectorAll('td');
+                    const information39 = document.querySelectorAll(
+                        '.btn.btn-custom.btn-exporter.dropdown-toggle');
+                    const information40 = document.querySelectorAll('.btn-ajouter');
+                    const information41 = document.querySelectorAll('.btn-importer');
+                    const information42 = document.querySelectorAll('.btn-imprimer');
+                    const information43 = document.querySelectorAll('.fc td, .fc th');
+                    const information44 = document.querySelectorAll('td');
+                    const information45 = document.querySelectorAll('.fc-unthemed .fc-ltr');
+                    const information46 = document.querySelectorAll('.heade');
+                    const information47 = document.querySelectorAll('.enfant h2');
+                    const information48 = document.querySelectorAll('.form label');
+                    const information49 = document.querySelectorAll('.form input');
+                    const information50 = document.querySelectorAll('input[type="number"]');
+                    const information51 = document.querySelectorAll('.sectio-container');
+
+                    const information52 = document.querySelectorAll('.sa');
+                    const information53 = document.querySelectorAll('.file-input');
+                    const information54 = document.querySelectorAll('input[type="file"]');
+                    const information55 = document.querySelectorAll('.input-group');
+                    const information56 = document.querySelectorAll('.sectio-container');
+                    const information57 = document.querySelectorAll('.question-separator');
+
+                    // Vérifier l'état enregistré dans localStorage
+                    const isDarkMode = localStorage.getItem('isDarkMode') === 'true';
+
+                    // Fonction pour appliquer les styles en fonction du mode
+                    const applyStyles = (darkMode) => {
+                        if (darkMode) {
+                            sunIcon.style.display = 'none';
+                            moonIcon.style.display = 'flex';
+
+                            navigation.forEach(nav => nav.style.background = "");
+                            navigationControl.forEach(control => control.style.background = "");
+                            navigationControler.forEach(control => control.style.background =
+                                "");
+                            information.forEach(info => info.style.color = "");
+                            information01.forEach(info => {
+                                info.style.background = "";
+                                info.classList.add('mt-4');
+                            });
+                            information02.forEach(info => info.style.background = "");
+                            information03.forEach(card => card.style.background = "");
+                            information04.forEach(container => container.style.background = "");
+                            information05.forEach(container => container.style.background = "");
+                            information06.forEach(container => container.style.background = "");
+                            information07.forEach(container => container.style.background = "");
+                            information08.forEach(container => container.style.background = "");
+                            information09.forEach(container => container.style.color = "");
+                            information10.forEach(container => container.style.color = "");
+                            information11.forEach(container => container.style.background = "");
+                            information12.forEach(container => container.style.background = "");
+                            information12.forEach(container => container.style.color = "");
+                            // information13.forEach(container => container.classList.add('mt-auto'));
+                            information14.forEach(container => {
+                                container.style.background = "";
+                                container.style.color = "";
+
+                            });
+                            information15.forEach(container => {
+                                container.style.background = "";
+                                container.style.color = "";
+                            });
+                            information16.forEach(container => container.style.background = "");
+                            // information17.forEach(container => container.style.background = "");
+                            information18.forEach(container => {
+                                container.style.background = "";
+                                container.style.color = "";
+                                container.classList.remove('custom-placeholder');
+
+                            });
+                            information19.forEach(container => {
+                                container.style.color = "";
+
+                            });
+                            information20.forEach(container => container.style.color = "");
+                            information21.forEach(container => container.style.color = "");
+                            information22.forEach(container => container.style.color = "");
+                            information23.forEach(container => container.style.color = "");
+                            information24.forEach(container => container.style.color = "");
+                            information25.forEach(container => container.style.borderColor =
+                                "");
+                            information26.forEach(container => {
+                                container.style.background = "";
+                                container.style.color = "";
+                                container.classList.remove('custom-placeholder');
+                                container.classList.remove('custom-placeholders');
+
+                            });
+                            information27.forEach(container => {
+                                container.style.background = "";
+                                container.style.color = "";
+                                container.classList.remove('custom-placeholder');
+
+                            });
+                            information29.forEach(container => {
+                                container.style.background = "";
+                                container.style.color = "";
+                            });
+                            information30.forEach(container => {
+                                container.style.background = "";
+                                container.style.color = "";
+                            });
+                            information31.forEach(container => {
+                                container.style.background = "";
+                                container.style.color = "";
+                                container.classList.remove('custom-placeholder');
+
+                            });
+                            information32.forEach(container => {
+                                container.style.background = "";
+                                container.style.color = "";
+                            });
+                            information33.forEach(container => {
+                                container.style.background = "";
+                                container.style.color = "";
+                            });
+                            information34.forEach(container => container.style.color = "");
+                            information35.forEach(container => container.style.color = "");
+                            information36.forEach(container => container.style.color = "");
+                            information37.forEach(container => {
+                                container.style.color = "";
+                                container.style.background = "";
+
+                            });
+                            information38.forEach(container => {
+                                container.style.color = "";
+                                container.style.background = "";
+
+                            });
+                            information39.forEach(container => container.style.background = "");
+                            information39.forEach(container => {
+                                container.classList.remove('hover-class');
+                            });
+                            information40.forEach(container => container.style.background = "");
+                            information41.forEach(container => container.style.background = "");
+                            information42.forEach(container => container.style.background = "");
+                            information39.forEach(container => {
+                                // Supprimez la classe qui gère le hover
+                                container.classList.remove('hover-class');
+                            });
+                            information43.forEach(container => container.style.background = "");
+                            information44.forEach(container => container.style.background = "");
+                            information45.forEach(container => container.style.background = "");
+                            information46.forEach(container => container.style.background = "");
+                            information47.forEach(container => container.style.color = "");
+                            information48.forEach(container => container.style.color = "");
+                            information49.forEach(container => {
+                                container.style.background = "";
+                                container.style.color = "";
+                                container.classList.remove('custom-placeholder');
+
+                            });
+                            information50.forEach(container => {
+                                container.style.color = "";
+                                container.classList.remove('custom-placeholder');
+                                container.setAttribute('style', 'background:;');
+
+
+                            });
+                            information51.forEach(container => {
+                                container.style.background = "";
+                                container.style.color = "";
+                                container.classList.remove('custom-placeholder');
+
+                            });
+                            information52.forEach(container => {
+                                container.setAttribute('style', 'background:;');
+                                container.style.color = "";
+                                container.classList.remove('custom-placeholders');
+
+                            });
+                            information53.forEach(container => container.style.display = "");
+
+                            // information19.forEach(container => container.style.background = "");
+                            information54.forEach(container => container.setAttribute('style',
+                                'display:none!important;'));
+                            information55.forEach(container => container.setAttribute('style',
+                                'background:;'));
+                            information56.forEach(container => container.setAttribute('style',
+                                'background:;'));
+                            information57.forEach(container => container.setAttribute('style',
+                                'background:;'));
+
+
+                        } else {
+                            sunIcon.style.display = 'flex';
+                            moonIcon.style.display = 'none';
+
+
+                            navigation.forEach(nav => nav.style.background = "#030D2D");
+                            navigationControl.forEach(control => control.style.background =
+                                "#030D2D");
+                            navigationControler.forEach(control => control.style.background =
+                                "#030D2D");
+                            information.forEach(info => info.style.color = "#fff");
+                            information01.forEach(info => {
+                                info.style.background = "#020917";
+                                info.classList.remove('mt-4');
+                            });
+                            information02.forEach(info => info.style.background = "#020917");
+                            information03.forEach(card => card.style.background = "#030D2D");
+                            information04.forEach(container => container.style.background =
+                                "#030D2D");
+                            information05.forEach(container => container.style.background =
+                                "#030D2D");
+                            information06.forEach(container => container.style.background =
+                                "#030D2D");
+                            information07.forEach(container => container.style.background =
+                                "#030D2D");
+                            information08.forEach(container => container.style.background =
+                                "#020917");
+                            information09.forEach(container => container.style.color = "#fff");
+                            information10.forEach(container => container.style.color = "#fff");
+                            information11.forEach(container => container.style.background =
+                                "#020917");
+                            information12.forEach(container => container.style.background =
+                                "#030D2D");
+                            information12.forEach(container => container.style.color = "#fff");
+                            // information13.forEach(container => container.classList.remove('mt-auto'));
+                            information14.forEach(container => {
+                                container.style.background = "#020917";
+                                container.style.color = "#fff";
+                            });
+                            information15.forEach(container => {
+                                container.style.background = "#020917";
+                                container.style.color = "#fff";
+                            });
+                            information16.forEach(container => container.style.background =
+                                "#030D2D");
+                            // information17.forEach(container => container.style.background = "#030D2D");
+                            information18.forEach(container => {
+                                container.style.background = "#030D2D";
+                                container.style.color = "#fff";
+                                container.classList.add('custom-placeholder');
+
+                            });
+                            information19.forEach(container => {
+                                container.style.color = "#fff";
+
+                            });
+                            information20.forEach(container => container.style.color = "#fff");
+                            information21.forEach(container => container.style.color = "#fff");
+                            information22.forEach(container => container.style.color = "#fff");
+                            information23.forEach(container => container.style.color = "#fff");
+                            information24.forEach(container => container.style.color = "#fff");
+                            information25.forEach(container => container.style.borderColor =
+                                "#fff");
+                            information26.forEach(container => {
+                                container.style.background = "#030D2D";
+                                container.style.color = "#fff";
+                                container.classList.add('custom-placeholder');
+                                container.classList.add('custom-placeholders');
+
+                            });
+                            information27.forEach(container => {
+                                container.style.background = "#030D2D";
+                                container.style.color = "#fff";
+                                container.classList.add('custom-placeholder');
+
+                            });
+                            information29.forEach(container => {
+                                container.style.background = "#020917";
+                                container.style.color = "#fff";
+                            });
+                            information30.forEach(container => {
+                                container.style.background = "#020917";
+                                container.style.color = "#fff";
+                            });
+                            information31.forEach(container => {
+                                container.style.background = "#030D2D";
+                                container.style.color = "#fff";
+                                container.classList.add('custom-placeholder');
+
+                            });
+                            information32.forEach(container => {
+                                container.style.background = "#030D2D";
+                                container.style.color = "#fff";
+                            });
+                            information33.forEach(container => {
+                                container.style.background = "#030D2D";
+                                container.style.color = "#fff";
+                            });
+                            information34.forEach(container => container.style.color = "#fff");
+                            information35.forEach(container => container.style.color = "#fff");
+                            information36.forEach(container => container.style.color = "#fff");
+                            information37.forEach(container => {
+                                container.style.color = "#fff";
+                                container.style.background = "#030D2D";
+
+                            });
+                            information38.forEach(container => {
+                                container.style.color = "#fff";
+                                container.style.background = "#030D2D";
+
+                            });
+                            information39.forEach(container => container.setAttribute('style',
+                                'background:#0C3B0C!important;'));
+                            information39.forEach(container => {
+                                container.classList.remove('hover-class');
+                            });
+                            information40.forEach(container => container.style.background =
+                                "#0C3B0C");
+                            information41.forEach(container => container.style.background =
+                                "#0C3B0C");
+                            information42.forEach(container => container.style.background =
+                                "#0C3B0C");
+
+                            information43.forEach(container => container.setAttribute('style',
+                                'background:#030D2D!important;color:#fff!important;'));
+                            information44.forEach(container => container.setAttribute('style',
+                                'background:#030D2D!important;color:#fff!important;'));
+                            information45.forEach(container => container.setAttribute('style',
+                                'background:#030D2D!important;color:#fff!important;'));
+                            information46.forEach(container => container.setAttribute('style',
+                                'background:#020917!important;color:#fff!important;'));
+                            information47.forEach(container => container.setAttribute('style',
+                                'color:#fff!important;'));
+                            information48.forEach(container => container.setAttribute('style',
+                                'color:#fff!important;'));
+                            information49.forEach(container => {
+                                container.setAttribute('style',
+                                    'background:#030D2D!important;');
+                                container.setAttribute('style',
+                                    'color:#fff!important;');
+                                container.classList.add('custom-placeholder');
+
+                            });
+                            information50.forEach(container => {
+                                container.setAttribute('style',
+                                    'color:#4A41C5!important;');
+                                container.setAttribute('style',
+                                    'background:#030D2D!important;');
+                                container.classList.add('custom-placeholder');
+
+                            });
+                            information51.forEach(container => {
+                                container.setAttribute('style',
+                                    'background:#020917!important;');
+                                container.setAttribute('style',
+                                    'color:#fff!important;');
+                                container.classList.add('custom-placeholder');
+
+                            });
+                            information52.forEach(container => {
+                                container.setAttribute('style',
+                                    'background:#030D2D!important;');
+                                container.setAttribute('style',
+                                    'color:#fff!important;');
+                                container.classList.add('custom-placeholders');
+
+                            });
+
+                            // information19.forEach(container => container.setAttribute('style','background:#030D2D!important;'))
+                            information53.forEach(container => container.setAttribute('style',
+                                'display:none!important;'));
+                            information54.forEach(container => container.setAttribute('style',
+                                'display:none!important;'));
+                            information55.forEach(container => container.setAttribute('style',
+                                'background:#030D2D!important;'));
+                            information56.forEach(container => container.setAttribute('style',
+                                'background:#030D2D!important;'));
+                            information57.forEach(container => container.setAttribute('style',
+                                'background:#020917!important;'));
+
+
+                        }
+                    };
+
+                    // Appliquer les styles en fonction de l'état enregistré
+                    applyStyles(isDarkMode);
+
+                    // Fonction pour gérer le clic sur l'icône de lune
+                    moonIcon.addEventListener('click', () => {
+                        applyStyles(false); // Revenir au mode clair
+                        localStorage.setItem('isDarkMode',
+                            'false'); // Enregistrer l'état clair
+                    });
+
+                    // Fonction pour gérer le clic sur l'icône de soleil
+                    sunIcon.addEventListener('click', () => {
+                        applyStyles(true); // Appliquer le mode sombre
+                        localStorage.setItem('isDarkMode',
+                            'true'); // Enregistrer l'état sombre
+                    });
+                    // Écouteur d'événement pour ajouter une nouvelle question
+                    ajouterQuestionBtn1.forEach(btn => {
+                        btn.addEventListener('click', function() {
+                            // Appliquer les styles au nouvel input en fonction du mode
+                            applyStyles(
+                                isDarkMode); // Applique les styles du mode actuel
+                        });
+                    });
+
+                });
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const ajouterQuestionBtn3 = document.querySelector('.Ajouter-section');
+            ajouterQuestionBtn3.addEventListener('click', function() {
+
+                const sunIcon = document.querySelector('.fa-sun');
+                const moonIcon = document.querySelector('.fa-moon');
+                const navigation = document.querySelectorAll('.navbar.navbar-expand-lg');
+                const navigationControl = document.querySelectorAll('.form-control.search-input');
+                const navigationControler = document.querySelectorAll('.input-group-text');
+                const information = document.querySelectorAll('h1.welcome');
+                const information01 = document.querySelectorAll('.container.text-center.mt-4');
+                const information02 = document.querySelectorAll(
+                    '.container.text-center.printableArea.principal');
+                const information03 = document.querySelectorAll('.card');
+                const information04 = document.querySelectorAll('.d-flex.flex-column.p-3.mb-4.perfo');
+                const information05 = document.querySelectorAll(
+                    '.col-md-12.position-relative.perfo.p-2.mb-2');
+                const information06 = document.querySelectorAll('#myChart');
+                const information07 = document.querySelectorAll(
+                    '.col-12.col-md-12.tablest.d-flex.justify-content-center.flex-column');
+                const information08 = document.querySelectorAll('.container.printableArea.principal');
+                const information09 = document.querySelectorAll('.pagination-info');
+                const information10 = document.querySelectorAll('#nbr');
+                const information11 = document.querySelectorAll('.table-responsive');
+                const information12 = document.querySelectorAll('#teacherTable');
+                const information13 = document.querySelectorAll('.mt-auto');
+                const information14 = document.querySelectorAll('.containers.principal');
+                const information15 = document.querySelectorAll('body');
+                const information16 = document.querySelectorAll('.fc');
+                const information17 = document.querySelectorAll('#calendar');
+                const information19 = document.querySelectorAll('.text-start.text-title');
+                const information18 = document.querySelectorAll('#searchInput');
+                const information20 = document.querySelectorAll('.containers.principal > h2');
+                const information21 = document.querySelectorAll('#apparence_accessibilite');
+                const information22 = document.querySelectorAll('.titre');
+                const information23 = document.querySelectorAll('.stack');
+                const information24 = document.querySelectorAll('.stacks > label');
+                const information25 = document.querySelectorAll('input[type="checkbox"]');
+                const information26 = document.querySelectorAll('input[type="text"]');
+                const information27 = document.querySelectorAll('textarea');
+                const information28 = document.querySelectorAll('#svg');
+                const information29 = document.querySelectorAll('.profile-and-form');
+                const information30 = document.querySelectorAll('.account-container');
+                const information31 = document.querySelectorAll('input[type="password"]');
+                const information32 = document.querySelectorAll('input[type="email"]');
+                const information33 = document.querySelectorAll('select');
+                const information34 = document.querySelectorAll('.account-title');
+                const information35 = document.querySelectorAll('.form-group > label');
+                const information36 = document.querySelectorAll('.account-form > h2');
+                const information37 = document.querySelectorAll('th');
+                const information38 = document.querySelectorAll('td');
+                const information39 = document.querySelectorAll(
+                    '.btn.btn-custom.btn-exporter.dropdown-toggle');
+                const information40 = document.querySelectorAll('.btn-ajouter');
+                const information41 = document.querySelectorAll('.btn-importer');
+                const information42 = document.querySelectorAll('.btn-imprimer');
+                const information43 = document.querySelectorAll('.fc td, .fc th');
+                const information44 = document.querySelectorAll('td');
+                const information45 = document.querySelectorAll('.fc-unthemed .fc-ltr');
+                const information46 = document.querySelectorAll('.heade');
+                const information47 = document.querySelectorAll('.enfant h2');
+                const information48 = document.querySelectorAll('.form label');
+                const information49 = document.querySelectorAll('.form input');
+                const information50 = document.querySelectorAll('input[type="number"]');
+                const information51 = document.querySelectorAll('.sectio-container');
+
+                const information52 = document.querySelectorAll('.sa');
+                const information53 = document.querySelectorAll('.file-input');
+                const information54 = document.querySelectorAll('input[type="file"]');
+                const information55 = document.querySelectorAll('.input-group');
+                const information56 = document.querySelectorAll('.sectio-container');
+                const information57 = document.querySelectorAll('.question-separator');
+
+                // Vérifier l'état enregistré dans localStorage
+                const isDarkMode = localStorage.getItem('isDarkMode') === 'true';
+
+                // Fonction pour appliquer les styles en fonction du mode
+                const applyStyles = (darkMode) => {
+                    if (darkMode) {
+                        sunIcon.style.display = 'none';
+                        moonIcon.style.display = 'flex';
+
+                        navigation.forEach(nav => nav.style.background = "");
+                        navigationControl.forEach(control => control.style.background = "");
+                        navigationControler.forEach(control => control.style.background = "");
+                        information.forEach(info => info.style.color = "");
+                        information01.forEach(info => {
+                            info.style.background = "";
+                            info.classList.add('mt-4');
+                        });
+                        information02.forEach(info => info.style.background = "");
+                        information03.forEach(card => card.style.background = "");
+                        information04.forEach(container => container.style.background = "");
+                        information05.forEach(container => container.style.background = "");
+                        information06.forEach(container => container.style.background = "");
+                        information07.forEach(container => container.style.background = "");
+                        information08.forEach(container => container.style.background = "");
+                        information09.forEach(container => container.style.color = "");
+                        information10.forEach(container => container.style.color = "");
+                        information11.forEach(container => container.style.background = "");
+                        information12.forEach(container => container.style.background = "");
+                        information12.forEach(container => container.style.color = "");
+                        // information13.forEach(container => container.classList.add('mt-auto'));
+                        information14.forEach(container => {
+                            container.style.background = "";
+                            container.style.color = "";
+
+                        });
+                        information15.forEach(container => {
+                            container.style.background = "";
+                            container.style.color = "";
+                        });
+                        information16.forEach(container => container.style.background = "");
+                        // information17.forEach(container => container.style.background = "");
+                        information18.forEach(container => {
+                            container.style.background = "";
+                            container.style.color = "";
+                            container.classList.remove('custom-placeholder');
+
+                        });
+                        information19.forEach(container => {
+                            container.style.color = "";
+
+                        });
+                        information20.forEach(container => container.style.color = "");
+                        information21.forEach(container => container.style.color = "");
+                        information22.forEach(container => container.style.color = "");
+                        information23.forEach(container => container.style.color = "");
+                        information24.forEach(container => container.style.color = "");
+                        information25.forEach(container => container.style.borderColor = "");
+                        information26.forEach(container => {
+                            container.style.background = "";
+                            container.style.color = "";
+                            container.classList.remove('custom-placeholder');
+                            container.classList.remove('custom-placeholders');
+
+                        });
+                        information27.forEach(container => {
+                            container.style.background = "";
+                            container.style.color = "";
+                            container.classList.remove('custom-placeholder');
+
+                        });
+                        information29.forEach(container => {
+                            container.style.background = "";
+                            container.style.color = "";
+                        });
+                        information30.forEach(container => {
+                            container.style.background = "";
+                            container.style.color = "";
+                        });
+                        information31.forEach(container => {
+                            container.style.background = "";
+                            container.style.color = "";
+                            container.classList.remove('custom-placeholder');
+
+                        });
+                        information32.forEach(container => {
+                            container.style.background = "";
+                            container.style.color = "";
+                        });
+                        information33.forEach(container => {
+                            container.style.background = "";
+                            container.style.color = "";
+                        });
+                        information34.forEach(container => container.style.color = "");
+                        information35.forEach(container => container.style.color = "");
+                        information36.forEach(container => container.style.color = "");
+                        information37.forEach(container => {
+                            container.style.color = "";
+                            container.style.background = "";
+
+                        });
+                        information38.forEach(container => {
+                            container.style.color = "";
+                            container.style.background = "";
+
+                        });
+                        information39.forEach(container => container.style.background = "");
+                        information39.forEach(container => {
+                            container.classList.remove('hover-class');
+                        });
+                        information40.forEach(container => container.style.background = "");
+                        information41.forEach(container => container.style.background = "");
+                        information42.forEach(container => container.style.background = "");
+                        information39.forEach(container => {
+                            // Supprimez la classe qui gère le hover
+                            container.classList.remove('hover-class');
+                        });
+                        information43.forEach(container => container.style.background = "");
+                        information44.forEach(container => container.style.background = "");
+                        information45.forEach(container => container.style.background = "");
+                        information46.forEach(container => container.style.background = "");
+                        information47.forEach(container => container.style.color = "");
+                        information48.forEach(container => container.style.color = "");
+                        information49.forEach(container => {
+                            container.style.background = "";
+                            container.style.color = "";
+                            container.classList.remove('custom-placeholder');
+
+                        });
+                        information50.forEach(container => {
+                            container.style.color = "";
+                            container.classList.remove('custom-placeholder');
+                            container.setAttribute('style', 'background:;');
+
+
+                        });
+                        information51.forEach(container => {
+                            container.style.background = "";
+                            container.style.color = "";
+                            container.classList.remove('custom-placeholder');
+
+                        });
+                        information52.forEach(container => {
+                            container.setAttribute('style', 'background:;');
+                            container.style.color = "";
+                            container.classList.remove('custom-placeholders');
+
+                        });
+                        information53.forEach(container => container.style.display = "");
+
+                        // information19.forEach(container => container.style.background = "");
+                        information54.forEach(container => container.setAttribute('style',
+                            'display:none!important;'));
+                        information55.forEach(container => container.setAttribute('style',
+                            'background:;'));
+                        information56.forEach(container => container.setAttribute('style',
+                            'background:;'));
+                        information57.forEach(container => container.setAttribute('style',
+                            'background:;'));
+
+
+                    } else {
+                        sunIcon.style.display = 'flex';
+                        moonIcon.style.display = 'none';
+
+
+                        navigation.forEach(nav => nav.style.background = "#030D2D");
+                        navigationControl.forEach(control => control.style.background = "#030D2D");
+                        navigationControler.forEach(control => control.style.background = "#030D2D");
+                        information.forEach(info => info.style.color = "#fff");
+                        information01.forEach(info => {
+                            info.style.background = "#020917";
+                            info.classList.remove('mt-4');
+                        });
+                        information02.forEach(info => info.style.background = "#020917");
+                        information03.forEach(card => card.style.background = "#030D2D");
+                        information04.forEach(container => container.style.background = "#030D2D");
+                        information05.forEach(container => container.style.background = "#030D2D");
+                        information06.forEach(container => container.style.background = "#030D2D");
+                        information07.forEach(container => container.style.background = "#030D2D");
+                        information08.forEach(container => container.style.background = "#020917");
+                        information09.forEach(container => container.style.color = "#fff");
+                        information10.forEach(container => container.style.color = "#fff");
+                        information11.forEach(container => container.style.background = "#020917");
+                        information12.forEach(container => container.style.background = "#030D2D");
+                        information12.forEach(container => container.style.color = "#fff");
+                        // information13.forEach(container => container.classList.remove('mt-auto'));
+                        information14.forEach(container => {
+                            container.style.background = "#020917";
+                            container.style.color = "#fff";
+                        });
+                        information15.forEach(container => {
+                            container.style.background = "#020917";
+                            container.style.color = "#fff";
+                        });
+                        information16.forEach(container => container.style.background = "#030D2D");
+                        // information17.forEach(container => container.style.background = "#030D2D");
+                        information18.forEach(container => {
+                            container.style.background = "#030D2D";
+                            container.style.color = "#fff";
+                            container.classList.add('custom-placeholder');
+
+                        });
+                        information19.forEach(container => {
+                            container.style.color = "#fff";
+
+                        });
+                        information20.forEach(container => container.style.color = "#fff");
+                        information21.forEach(container => container.style.color = "#fff");
+                        information22.forEach(container => container.style.color = "#fff");
+                        information23.forEach(container => container.style.color = "#fff");
+                        information24.forEach(container => container.style.color = "#fff");
+                        information25.forEach(container => container.style.borderColor = "#fff");
+                        information26.forEach(container => {
+                            container.style.background = "#030D2D";
+                            container.style.color = "#fff";
+                            container.classList.add('custom-placeholder');
+                            container.classList.add('custom-placeholders');
+
+                        });
+                        information27.forEach(container => {
+                            container.style.background = "#030D2D";
+                            container.style.color = "#fff";
+                            container.classList.add('custom-placeholder');
+
+                        });
+                        information29.forEach(container => {
+                            container.style.background = "#020917";
+                            container.style.color = "#fff";
+                        });
+                        information30.forEach(container => {
+                            container.style.background = "#020917";
+                            container.style.color = "#fff";
+                        });
+                        information31.forEach(container => {
+                            container.style.background = "#030D2D";
+                            container.style.color = "#fff";
+                            container.classList.add('custom-placeholder');
+
+                        });
+                        information32.forEach(container => {
+                            container.style.background = "#030D2D";
+                            container.style.color = "#fff";
+                        });
+                        information33.forEach(container => {
+                            container.style.background = "#030D2D";
+                            container.style.color = "#fff";
+                        });
+                        information34.forEach(container => container.style.color = "#fff");
+                        information35.forEach(container => container.style.color = "#fff");
+                        information36.forEach(container => container.style.color = "#fff");
+                        information37.forEach(container => {
+                            container.style.color = "#fff";
+                            container.style.background = "#030D2D";
+
+                        });
+                        information38.forEach(container => {
+                            container.style.color = "#fff";
+                            container.style.background = "#030D2D";
+
+                        });
+                        information39.forEach(container => container.setAttribute('style',
+                            'background:#0C3B0C!important;'));
+                        information39.forEach(container => {
+                            container.classList.remove('hover-class');
+                        });
+                        information40.forEach(container => container.style.background = "#0C3B0C");
+                        information41.forEach(container => container.style.background = "#0C3B0C");
+                        information42.forEach(container => container.style.background = "#0C3B0C");
+
+                        information43.forEach(container => container.setAttribute('style',
+                            'background:#030D2D!important;color:#fff!important;'));
+                        information44.forEach(container => container.setAttribute('style',
+                            'background:#030D2D!important;color:#fff!important;'));
+                        information45.forEach(container => container.setAttribute('style',
+                            'background:#030D2D!important;color:#fff!important;'));
+                        information46.forEach(container => container.setAttribute('style',
+                            'background:#020917!important;color:#fff!important;'));
+                        information47.forEach(container => container.setAttribute('style',
+                            'color:#fff!important;'));
+                        information48.forEach(container => container.setAttribute('style',
+                            'color:#fff!important;'));
+                        information49.forEach(container => {
+                            container.setAttribute('style', 'background:#030D2D!important;');
+                            container.setAttribute('style', 'color:#fff!important;');
+                            container.classList.add('custom-placeholder');
+
+                        });
+                        information50.forEach(container => {
+                            container.setAttribute('style', 'color:#4A41C5!important;');
+                            container.setAttribute('style', 'background:#030D2D!important;');
+                            container.classList.add('custom-placeholder');
+
+                        });
+                        information51.forEach(container => {
+                            container.setAttribute('style', 'background:#020917!important;');
+                            container.setAttribute('style', 'color:#fff!important;');
+                            container.classList.add('custom-placeholder');
+
+                        });
+                        information52.forEach(container => {
+                            container.setAttribute('style', 'background:#030D2D!important;');
+                            container.setAttribute('style', 'color:#fff!important;');
+                            container.classList.add('custom-placeholders');
+
+                        });
+
+                        // information19.forEach(container => container.setAttribute('style','background:#030D2D!important;'))
+                        information53.forEach(container => container.setAttribute('style',
+                            'display:none!important;'));
+                        information54.forEach(container => container.setAttribute('style',
+                            'display:none!important;'));
+                        information55.forEach(container => container.setAttribute('style',
+                            'background:#030D2D!important;'));
+                        information56.forEach(container => container.setAttribute('style',
+                            'background:#030D2D!important;'));
+                        information57.forEach(container => container.setAttribute('style',
+                            'background:#020917!important;'));
+
+
+
+                    }
+                };
+
+                // Appliquer les styles en fonction de l'état enregistré
+                applyStyles(isDarkMode);
+
+                // Fonction pour gérer le clic sur l'icône de lune
+                moonIcon.addEventListener('click', () => {
+                    applyStyles(false); // Revenir au mode clair
+                    localStorage.setItem('isDarkMode', 'false'); // Enregistrer l'état clair
+                });
+
+                // Fonction pour gérer le clic sur l'icône de soleil
+                sunIcon.addEventListener('click', () => {
+                    applyStyles(true); // Appliquer le mode sombre
+                    localStorage.setItem('isDarkMode', 'true'); // Enregistrer l'état sombre
+                });
+                // Écouteur d'événement pour ajouter une nouvelle question
+                ajouterQuestionBtn3.addEventListener('click', function() {
+                    // Appliquer les styles au nouvel input en fonction du mode
+                    applyStyles(isDarkMode); // Applique les styles du mode actuel
+                });
+            });
+        });
+    </script>
+    <!-- <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const uploadButton = document.querySelectorAll('.fa-regular.fa-image');
+            const fileInput = document.getElementById('fileInput');
+
+            uploadButton.addEventListener('click', function() {
+                fileInput.click(); // Simule un clic sur l'input de type file
+            });
+
+            fileInput.addEventListener('change', function() {
+                const file = fileInput.files[0]; // Récupère le fichier sélectionné
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        // Affiche l'image (ou traite-la comme nécessaire)
+                        const img = document.createElement('img');
+                        img.src = e.target.result;
+                        img.style.maxWidth = '200px'; // Ajuste la taille si nécessaire
+                        document.body.appendChild(img); // Ajoute l'image au corps de la page
+                    };
+                    reader.readAsDataURL(file); // Convertit le fichier en URL de données
+                }
+            });
+        });
+    </script> -->
+    <!-- <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const fileInput = document.getElementById('fileinputs0');
+            const label = document.querySelector('label[for="fileinputs0"]');
+            const imgPreview = document.getElementById('imagepreview0');
+
+            // Lorsque le label est cliqué, simuler un clic sur l'input
+            label.addEventListener('click', function() {
+                fileInput.click();
+            });
+
+            fileInput.addEventListener('change', function() {
+                const file = fileInput.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        // Mettre à jour l'image de prévisualisation
+                        imgPreview.src = e.target.result;
+                        imgPreview.style.display = 'block'; // Affiche l'image
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        });
+    </script> -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            function previewImage(inputElement, previewElementId, textareaId) {
+                const file = inputElement.files[0];
+                const previewElement = document.getElementById(previewElementId);
+                const inputStyle = inputElement.style;
+                const textareaElement = document.getElementById(textareaId);
+
+                // Create the "close" button if not already present
+                let closeButton = previewElement.nextElementSibling;
+                if (!closeButton) {
+                    closeButton = document.createElement('span');
+                    closeButton.innerHTML = '&times;';
+                    closeButton.className = 'close-button';
+                    closeButton.style.position = 'absolute';
+                    closeButton.style.top = '10%';
+                    closeButton.style.left = '5%';
+                    closeButton.style.transform = 'translate(-45%,-45%)';
+                    closeButton.style.backgroundColor = '#4A41C5';
+                    closeButton.style.color = '#fff';
+                    closeButton.style.borderRadius = '50%';
+                    closeButton.style.fontSize = '18px';
+                    closeButton.style.cursor = 'pointer';
+                    closeButton.style.width = '20px';
+                    closeButton.style.height = '20px';
+                    closeButton.style.display = 'none';
+                    closeButton.style.textAlign = 'center';
+                    closeButton.style.lineHeight = '20px';
+                    previewElement.parentElement.appendChild(closeButton);
+                }
+
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        previewElement.src = event.target.result;
+                        previewElement.style.display = 'block';
+                        closeButton.style.display = 'block';
+
+                        const img = new Image();
+                        img.onload = function() {
+                            const padding = img.width + 20;
+                            inputStyle.paddingLeft = padding + 'px';
+                            inputStyle.backgroundColor = '#f0f0f0';
+                            textareaElement.style.paddingLeft = padding + 'px';
+                            textareaElement.style.backgroundColor = '#f0f0f0';
+                        };
+                        img.src = event.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    resetPreview(previewElement, textareaElement, inputElement, closeButton);
                 }
             }
-        }
-    });
-}
 
+            function resetPreview(previewElement, textareaElement, inputElement, closeButton) {
+                previewElement.src = '';
+                previewElement.style.display = 'none';
+                closeButton.style.display = 'none';
+
+                // Reset the styles
+                inputElement.style.paddingLeft = '';
+                inputElement.style.backgroundColor = '';
+                textareaElement.style.paddingLeft = '';
+                textareaElement.style.backgroundColor = '';
+            }
+
+            document.body.addEventListener('change', function(event) {
+                if (event.target.classList.contains('file-input')) {
+                    const previewId = event.target.getAttribute('data-preview');
+                    const textareaId = event.target.getAttribute('data-textarea');
+                    previewImage(event.target, previewId, textareaId);
+                }
+            });
+
+            document.body.addEventListener('click', function(event) {
+                if (event.target.classList.contains('close-button')) {
+                    const inputElement = event.target.parentElement.querySelector('.file-input');
+                    const previewElement = event.target.previousElementSibling;
+                    const textareaId = inputElement.getAttribute('data-textarea');
+                    const textareaElement = document.getElementById(textareaId);
+                    resetPreview(previewElement, textareaElement, inputElement, event.target);
+                }
+            });
+        });
     </script>
-   <script>
-document.addEventListener('DOMContentLoaded', () => {
-    // Sélectionner les icônes
-    const sunIcon = document.querySelector('.fa-sun');
-    const moonIcon = document.querySelector('.fa-moon');
-    const navigation = document.querySelectorAll('.navbar.navbar-expand-lg');
-    const navigationControl = document.querySelectorAll('.form-control.search-input');
-    const navigationControler = document.querySelectorAll('.input-group-text');
-    const information = document.querySelectorAll('h1.welcome');
-    const information01 = document.querySelectorAll('.container.text-center.mt-4');
-    const information02 = document.querySelectorAll('.container.text-center.printableArea.principal');
-    const information03 = document.querySelectorAll('.card');
-    const information04 = document.querySelectorAll('.d-flex.flex-column.p-3.mb-4.perfo');
-    const information05 = document.querySelectorAll('.col-md-12.position-relative.perfo.p-2.mb-2');
-    const information06 = document.querySelectorAll('#myChart');
-    const information07 = document.querySelectorAll('.col-12.col-md-12.tablest.d-flex.justify-content-center.flex-column');
-    const information08 = document.querySelectorAll('.container.printableArea.principal');
-    const information09 = document.querySelectorAll('.pagination-info');
-    const information10 = document.querySelectorAll('#nbr');
-    const information11 = document.querySelectorAll('.table-responsive');
-    const information12 = document.querySelectorAll('#teacherTable');
-    const information13 = document.querySelectorAll('.mt-auto');
-    const information14 = document.querySelectorAll('.containers.principal');
-    const information15 = document.querySelectorAll('body');
-    const information16 = document.querySelectorAll('.fc');
-    const information17 = document.querySelectorAll('#calendar');
-    const information19 = document.querySelectorAll('.text-start.text-title');
-    const information18 = document.querySelectorAll('#searchInput');
-    const information20 = document.querySelectorAll('.containers.principal > h2');
-    const information21 = document.querySelectorAll('#apparence_accessibilite');
-    const information22 = document.querySelectorAll('.titre');
-    const information23 = document.querySelectorAll('.stack');
-    const information24 = document.querySelectorAll('.stacks > label');
-    const information25 = document.querySelectorAll('input[type="checkbox"]');
-    const information26 = document.querySelectorAll('input[type="text"]');
-    const information27 = document.querySelectorAll('textarea');
-    const information28 = document.querySelectorAll('#svg');
-    const information29 = document.querySelectorAll('.profile-and-form');
-    const information30 = document.querySelectorAll('.account-container');
-    const information31 = document.querySelectorAll('input[type="password"]');
-    const information32 = document.querySelectorAll('input[type="email"]');
-    const information33 = document.querySelectorAll('select');
-    const information34 = document.querySelectorAll('.account-title');
-    const information35 = document.querySelectorAll('.form-group > label');
-    const information36 = document.querySelectorAll('.account-form > h2');
-    const information37 = document.querySelectorAll('th');
-    const information38 = document.querySelectorAll('td');
-    const information39 = document.querySelectorAll('.btn.btn-custom.btn-exporter.dropdown-toggle');
-    const information40 = document.querySelectorAll('.btn-ajouter');
-    const information41 = document.querySelectorAll('.btn-importer');
-    const information42 = document.querySelectorAll('.btn-imprimer');
-    const information43 = document.querySelectorAll('.fc td, .fc th');
-    const information44 = document.querySelectorAll('td');
-    const information45 = document.querySelectorAll('.fc-unthemed .fc-ltr');
-    const information46 = document.querySelectorAll('.heade');
-    const information47 = document.querySelectorAll('.enfant h2');
-    const information48 = document.querySelectorAll('.form label');
-    const information49 = document.querySelectorAll('.form input');
-    const information50 = document.querySelectorAll('input[type="number"]');
-    const information51 = document.querySelectorAll('.sectio-container');
 
-    const information52 = document.querySelectorAll('.sa');
-    const information53 = document.querySelectorAll('.file-input');
-    const information54 = document.querySelectorAll('input[type="file"]');
-    const information55 = document.querySelectorAll('.input-group');
-    const information56 = document.querySelectorAll('.sectio-container');
-    const information57 = document.querySelectorAll('.question-separator');
+    <!-- <script>
+        document.querySelectorAll('.btnas-ends').forEach(button => {
+            button.addEventListener('click', function() {
+                const parentElement = this.parentElement; // L'élément parent
+                if (parentElement.classList.contains('sa')) {
+                    console.log('10')
+                    parentElement.remove(); // Supprime l'élément parent
+                }
+            });
+        });
+    </script> -->
+    <script>
+        document.querySelector('.psi13').addEventListener('change', function() {
+            const selectedOption = this.options[this.selectedIndex];
+            const filiereClass = JSON.parse(selectedOption.getAttribute('data-filiere'));
 
-    // Vérifier l'état enregistré dans localStorage
-    const isDarkMode = localStorage.getItem('isDarkMode') === 'true';
+            // Réinitialiser le sélecteur de filières
+            /*const filiereSelect =
+            filiereSelect.innerHTML = '<option value="" disabled selected hidden>Sélectionnez la Filière</option>';*/
 
-    // Fonction pour appliquer les styles en fonction du mode
-    const applyStyles = (darkMode) => {
-        if (darkMode) {
-            sunIcon.style.display = 'none';
-            moonIcon.style.display = 'flex';
+            // Vérifier si la filière existe
+            if (filiereClass) {
+                const option = document.querySelector('.fil13');
+                option.value = filiereClass;
+            }
+        });
 
-            navigation.forEach(nav => nav.style.background = "");
-            navigationControl.forEach(control => control.style.background = "");
-            navigationControler.forEach(control => control.style.background = "");
-            information.forEach(info => info.style.color = "");
-            information01.forEach(info => {
-                info.style.background = "";
-                info.classList.add('mt-4');
-            });
-            information02.forEach(info => info.style.background = "");
-            information03.forEach(card => card.style.background = "");
-            information04.forEach(container => container.style.background = "");
-            information05.forEach(container => container.style.background = "");
-            information06.forEach(container => container.style.background = "");
-            information07.forEach(container => container.style.background = "");
-            information08.forEach(container => container.style.background = "");
-            information09.forEach(container => container.style.color = "");
-            information10.forEach(container => container.style.color = "");
-            information11.forEach(container => container.style.background = "");
-            information12.forEach(container => container.style.background = "");
-            information12.forEach(container => container.style.color = "");
-            // information13.forEach(container => container.classList.add('mt-auto'));
-            information14.forEach(container =>{
-                container.style.background = "";
-                container.style.color = "";
-
-            });
-            information15.forEach(container => {
-                container.style.background = "";
-                container.style.color = "";
-            });
-            information16.forEach(container => container.style.background = "");
-            // information17.forEach(container => container.style.background = "");
-            information18.forEach(container => {
-                container.style.background = "";
-                container.style.color = "";
-                container.classList.remove('custom-placeholder');
-
-            });
-            information19.forEach(container => {
-                container.style.color = "";
-
-            });
-            information20.forEach(container => container.style.color = "");
-            information21.forEach(container => container.style.color = "");
-            information22.forEach(container => container.style.color = "");
-            information23.forEach(container => container.style.color = "");
-            information24.forEach(container => container.style.color = "");
-            information25.forEach(container => container.style.borderColor = "");
-            information26.forEach(container => {
-                container.style.background = "";
-                container.style.color = "";
-                container.classList.remove('custom-placeholder');
-                container.classList.remove('custom-placeholders');
-
-            });
-            information27.forEach(container => {
-                container.style.background = "";
-                container.style.color = "";
-                container.classList.remove('custom-placeholder');
-
-            });
-            information29.forEach(container => {
-                container.style.background = "";
-                container.style.color="";
-            });
-            information30.forEach(container => {
-                container.style.background = "";
-                container.style.color="";
-            });
-            information31.forEach(container => {
-                container.style.background = "";
-                container.style.color="";
-                container.classList.remove('custom-placeholder');
-
-            });
-            information32.forEach(container => {
-                container.style.background = "";
-                container.style.color="";
-            });
-            information33.forEach(container => {
-                container.style.background = "";
-                container.style.color="";
-            });
-            information34.forEach(container => container.style.color = "");
-            information35.forEach(container => container.style.color = "");
-            information36.forEach(container => container.style.color = "");
-            information37.forEach(container => {
-                container.style.color = "";
-                container.style.background = "";
-
-            });
-            information38.forEach(container => {
-                container.style.color = "";
-                container.style.background = "";
-
-            });
-            information39.forEach(container => container.style.background = "");
-            information39.forEach(container => {
-                container.classList.remove('hover-class');
-            });
-            information40.forEach(container => container.style.background = "");
-            information41.forEach(container => container.style.background = "");
-            information42.forEach(container => container.style.background = "");
-            information39.forEach(container => {
-    // Supprimez la classe qui gère le hover
-    container.classList.remove('hover-class');
-});
-information43.forEach(container => container.style.background = "");
-information44.forEach(container => container.style.background = "");
-information45.forEach(container => container.style.background = "");
-information46.forEach(container => container.style.background = "");
-information47.forEach(container => container.style.color = "");
-information48.forEach(container => container.style.color = "");
-information49.forEach(container => {
-                container.style.background = "";
-                container.style.color = "";
-                container.classList.remove('custom-placeholder');
-
-            });
-            information50.forEach(container => {
-                container.style.color = "";
-                container.classList.remove('custom-placeholder');
-
-            });
-            information51.forEach(container => {
-                container.style.background = "";
-                container.style.color = "";
-                container.classList.remove('custom-placeholder');
-
-            });
-            information52.forEach(container => {
-                container.setAttribute('style','background:;');
-                container.style.color = "";
-                container.classList.remove('custom-placeholders');
-
-            });
-            information53.forEach(container => container.style.display = "");
-
-            // information19.forEach(container => container.style.background = "");
-            information54.forEach(container => container.setAttribute('style','display:none!important;'));
-            information55.forEach(container => container.setAttribute('style','background:;'));
-            information56.forEach(container => container.setAttribute('style','background:;'));
-            information57.forEach(container => container.setAttribute('style','background:;'));
-
-
-            } else {
-            sunIcon.style.display = 'flex';
-            moonIcon.style.display = 'none';
-
-
-            navigation.forEach(nav => nav.style.background = "#030D2D");
-            navigationControl.forEach(control => control.style.background = "#030D2D");
-            navigationControler.forEach(control => control.style.background = "#030D2D");
-            information.forEach(info => info.style.color = "#fff");
-            information01.forEach(info => {
-                info.style.background = "#020917";
-                info.classList.remove('mt-4');
-            });
-            information02.forEach(info => info.style.background = "#020917");
-            information03.forEach(card => card.style.background = "#030D2D");
-            information04.forEach(container => container.style.background = "#030D2D");
-            information05.forEach(container => container.style.background = "#030D2D");
-            information06.forEach(container => container.style.background = "#030D2D");
-            information07.forEach(container => container.style.background = "#030D2D");
-            information08.forEach(container => container.style.background = "#020917");
-            information09.forEach(container => container.style.color = "#fff");
-            information10.forEach(container => container.style.color = "#fff");
-            information11.forEach(container => container.style.background = "#020917");
-            information12.forEach(container => container.style.background = "#030D2D");
-            information12.forEach(container => container.style.color = "#fff");
-            // information13.forEach(container => container.classList.remove('mt-auto'));
-            information14.forEach(container =>{
-                container.style.background = "#020917";
-                container.style.color = "#fff";
-            });
-            information15.forEach(container =>{
-                container.style.background = "#020917";
-                container.style.color = "#fff";
-            });
-            information16.forEach(container => container.style.background = "#030D2D");
-            // information17.forEach(container => container.style.background = "#030D2D");
-            information18.forEach(container => {
-                container.style.background = "#030D2D";
-                container.style.color = "#fff";
-                container.classList.add('custom-placeholder');
-
-            });
-            information19.forEach(container => {
-                container.style.color = "#fff";
-
-            });
-            information20.forEach(container => container.style.color = "#fff");
-            information21.forEach(container => container.style.color = "#fff");
-            information22.forEach(container => container.style.color = "#fff");
-            information23.forEach(container => container.style.color = "#fff");
-            information24.forEach(container => container.style.color = "#fff");
-            information25.forEach(container => container.style.borderColor = "#fff");
-            information26.forEach(container => {
-                container.style.background = "#030D2D";
-                container.style.color = "#fff";
-                container.classList.add('custom-placeholder');
-                container.classList.add('custom-placeholders');
-
-            });
-            information27.forEach(container => {
-                container.style.background = "#030D2D";
-                container.style.color = "#fff";
-                container.classList.add('custom-placeholder');
-
-            });
-            information29.forEach(container => {
-                container.style.background = "#020917";
-                container.style.color="#fff";
-            });
-            information30.forEach(container => {
-                container.style.background = "#020917";
-                container.style.color="#fff";
-            });
-            information31.forEach(container => {
-                container.style.background = "#030D2D";
-                container.style.color="#fff";
-                container.classList.add('custom-placeholder');
-
-            });
-            information32.forEach(container => {
-                container.style.background = "#030D2D";
-                container.style.color="#fff";
-            });
-            information33.forEach(container => {
-                container.style.background = "#030D2D";
-                container.style.color="#fff";
-            });
-            information34.forEach(container => container.style.color = "#fff");
-            information35.forEach(container => container.style.color = "#fff");
-            information36.forEach(container => container.style.color = "#fff");
-            information37.forEach(container => {
-                container.style.color = "#fff";
-                container.style.background = "#030D2D";
-
-            });
-            information38.forEach(container => {
-                container.style.color = "#fff";
-                container.style.background = "#030D2D";
-
-            });
-            information39.forEach(container => container.setAttribute('style','background:#0C3B0C!important;'));
-            information39.forEach(container => {
-    container.classList.remove('hover-class');
-});
-            information40.forEach(container => container.style.background = "#0C3B0C");
-            information41.forEach(container => container.style.background = "#0C3B0C");
-            information42.forEach(container => container.style.background = "#0C3B0C");
-
-            information43.forEach(container => container.setAttribute('style','background:#030D2D!important;color:#fff!important;'));
-            information44.forEach(container => container.setAttribute('style','background:#030D2D!important;color:#fff!important;'));
-            information45.forEach(container => container.setAttribute('style','background:#030D2D!important;color:#fff!important;'));
-            information46.forEach(container => container.setAttribute('style','background:#020917!important;color:#fff!important;'));
-            information47.forEach(container => container.setAttribute('style','color:#fff!important;'));
-            information48.forEach(container => container.setAttribute('style','color:#fff!important;'));
-            information49.forEach(container => {
-                container.setAttribute('style','background:#030D2D!important;');
-                container.setAttribute('style','color:#fff!important;');
-                container.classList.add('custom-placeholder');
-
-            });
-            information50.forEach(container => {
-                container.setAttribute('style','color:#4A41C5!important;');
-                container.classList.add('custom-placeholder');
-
-            });
-            information51.forEach(container => {
-                container.setAttribute('style','background:#020917!important;');
-                container.setAttribute('style','color:#fff!important;');
-                container.classList.add('custom-placeholder');
-
-            });
-            information52.forEach(container => {
-                container.setAttribute('style','background:#030D2D!important;');
-                container.setAttribute('style','color:#fff!important;');
-                container.classList.add('custom-placeholders');
-
-            });
-
-            // information19.forEach(container => container.setAttribute('style','background:#030D2D!important;'))
-            information53.forEach(container => container.setAttribute('style','display:none!important;'));
-            information54.forEach(container => container.setAttribute('style','display:none!important;'));
-            information55.forEach(container => container.setAttribute('style','background:#030D2D!important;'));
-            information56.forEach(container => container.setAttribute('style','background:#030D2D!important;'));
-            information57.forEach(container => container.setAttribute('style','background:#020917!important;'));
-
-
-
+        function autoResize(textarea) {
+            // Réinitialiser la hauteur pour obtenir la hauteur correcte
+            textarea.style.height = 'auto';
+            // Définir la nouvelle hauteur en fonction du contenu
+            textarea.style.height = (textarea.scrollHeight) + 'px';
         }
-    };
-
-    // Appliquer les styles en fonction de l'état enregistré
-    applyStyles(isDarkMode);
-
-    // Fonction pour gérer le clic sur l'icône de lune
-    moonIcon.addEventListener('click', () => {
-        applyStyles(false); // Revenir au mode clair
-        localStorage.setItem('isDarkMode', 'false'); // Enregistrer l'état clair
-    });
-
-    // Fonction pour gérer le clic sur l'icône de soleil
-    sunIcon.addEventListener('click', () => {
-        applyStyles(true); // Appliquer le mode sombre
-        localStorage.setItem('isDarkMode', 'true'); // Enregistrer l'état sombre
-    });
-});
-
-
-</script>
+    </script>
+    <script>
+        document.querySelectorAll('.btnas-ends').forEach(button => {
+            button.addEventListener('click', function() {
+                this.parentElement.remove();
+            });
+        });
+    </script>
 
 </body>
 

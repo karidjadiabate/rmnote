@@ -30,7 +30,7 @@ class Matiere extends Model
         $listematiere = DB::table('etablissement_matiere AS em')
             ->join('matieres AS m', 'm.id', '=', 'em.matiere_id')
             ->where('etablissement_id', '=', $ecoleId)
-            ->select('em.id', 'nommatiere')
+            ->select('m.id', 'nommatiere')
             ->get();
 
         return  $listematiere;

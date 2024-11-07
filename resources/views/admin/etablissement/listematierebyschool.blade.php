@@ -553,19 +553,81 @@
 
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Définir la configuration pour ce fichier
-            setTableConfig({
-                'Nom-Matière': 1,
+      document.addEventListener('DOMContentLoaded', function() {
+    const tableBody = document.querySelector('#matiereTable tbody');
+    const searchInput = document.querySelector('#searchInput');
+    const rowsPerPageSelect = document.querySelector('#rowsPerPageSelect');
+    const prevButton = document.querySelector('.pagination-buttons .prev');
+    const nextButton = document.querySelector('.pagination-buttons .next');
+    const currentPageDisplay = document.querySelector('.pagination-buttons .active');
+    const totalPagesDisplay = document.querySelector('#nbr');
 
+    let currentPage = 1;
+    let rowsPerPage = parseInt(rowsPerPageSelect.value);
+
+    // Initialiser les données du tableau pour pagination
+    const allRows = Array.from(tableBody.querySelectorAll('tr'));
+    let filteredRows = allRows;
+
+    // Fonction de mise à jour de l'affichage du tableau
+    function updateTable() {
+        const start = (currentPage - 1) * rowsPerPage;
+        const end = start + rowsPerPage;
+        tableBody.innerHTML = '';
+
+        const rowsToDisplay = filteredRows.slice(start, end);
+        rowsToDisplay.forEach(row => tableBody.appendChild(row));
+
+        // Mise à jour de l'affichage de la pagination
+        const totalPages = Math.ceil(filteredRows.length / rowsPerPage);
+        currentPageDisplay.textContent = currentPage;
+        totalPagesDisplay.textContent = `sur ${totalPages}`;
+
+        prevButton.disabled = currentPage <= 1;
+        nextButton.disabled = currentPage >= totalPages;
+    }
+
+    // Fonction pour filtrer les résultats
+    function filterRows() {
+        const query = searchInput.value.toLowerCase().trim();
+        filteredRows = allRows.filter(row => {
+            return Array.from(row.querySelectorAll('td')).some(td => {
+                return td.textContent.toLowerCase().includes(query);
             });
-
-            // Définir l'ID du tableau pour les fonctions de recherche et de pagination
-            setTableId('#matiereTable');
-            // Appel des fonctions de recherche et de pagination
-            searchTable('#matiereTable tbody', 'searchInput', 'noResults');
-            paginateTable('#matiereTable');
         });
+        currentPage = 1; // Réinitialise à la première page après la recherche
+        updateTable();
+    }
+
+    // Pagination : Écouteurs pour Précédent et Suivant
+    prevButton.addEventListener('click', function() {
+        if (currentPage > 1) {
+            currentPage--;
+            updateTable();
+        }
+    });
+
+    nextButton.addEventListener('click', function() {
+        const totalPages = Math.ceil(filteredRows.length / rowsPerPage);
+        if (currentPage < totalPages) {
+            currentPage++;
+            updateTable();
+        }
+    });
+
+    // Mise à jour du nombre de lignes par page
+    rowsPerPageSelect.addEventListener('change', function() {
+        rowsPerPage = parseInt(this.value);
+        currentPage = 1; // Retour à la première page
+        updateTable();
+    });
+
+    // Écouteur de recherche
+    searchInput.addEventListener('input', filterRows);
+
+    // Chargement initial
+
+
     </script>
 
     <!-- Bootstrap JS -->
