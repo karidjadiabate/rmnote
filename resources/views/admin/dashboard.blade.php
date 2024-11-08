@@ -84,7 +84,7 @@
     <div class="container text-center mt-4">
         <!-- les  cartes-->
         <div class="container">
-            @if (intval(auth()->user()->role_id) === 3)
+            @if (auth()->user()->role_id == 3)
                 <div class="row text-start">
                     <div class="col-md-3 col-12 mb-4">
                         <div class="card">
@@ -144,7 +144,7 @@
                         </div>
                     </div>
                 </div>
-            @elseif (intval(auth()->user()->role_id) === 4)
+            @elseif (auth()->user()->role_id == 4)
                 <div class="row text-start">
                     <div class="col-md-3 col-12 mb-4">
                         <div class="card">
@@ -208,7 +208,7 @@
         </div>
         <!--  -->
 
-        @if (intval(auth()->user()->role_id) === 3)
+        @if (auth()->user()->role_id == 3)
             <div class="container">
                 <div class="row ">
                     <!-- Première section -->

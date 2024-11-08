@@ -1500,185 +1500,185 @@
             var structuredData = null;
 
             $(".btn-next").click(function (e) {
-    e.preventDefault();
+            e.preventDefault();
 
-    // Initialisation
-    var formData = new FormData();
-    var fileReadPromises = [];
-    var dataAtributes = {};
-    var button = $(this);
-    var coefficient;
-    var ects;
-    var matiereId = $('#positions').val();
+            // Initialisation
+            var formData = new FormData();
+            var fileReadPromises = [];
+            var dataAtributes = {};
+            var button = $(this);
+            var coefficient;
+            var ects;
+            var matiereId = $('#positions').val();
 
 
-    // Collecte des données
-    $('.form-step').find('input, select, textarea').each(function() {
-        var inputName = $(this).attr('name');
-        var inputValue = $(this).val();
+            // Collecte des données
+            $('.form-step').find('input, select, textarea').each(function() {
+                var inputName = $(this).attr('name');
+                var inputValue = $(this).val();
 
-         // Ajouter la durée dans FormData
-        if (inputName === 'heure') {
-            formData.append(inputName, inputValue);
-        }
+                // Ajouter la durée dans FormData
+                if (inputName === 'heure') {
+                    formData.append(inputName, inputValue);
+                }
 
-        // Vérifier si l'input est de type 'file'
-        if ($(this).attr('type') === 'file' && this.files.length > 0) {
-            $.each(this.files, function(i, file) {
-                var reader = new FileReader();
-                // Créer une promesse pour chaque fichier
-                var promise = new Promise(function(resolve) {
-                    reader.onload = function(e) {
-                        formData.append(inputName, e.target.result);
-                        resolve();
-                    };
-                    reader.readAsDataURL(file);
-                });
-                fileReadPromises.push(promise);
-            });
-        } else {
-            // Ajouter la valeur normale dans FormData
-            if (inputValue) {
-                formData.append(inputName, inputValue);
-            }
-        }
-
-        // Si c'est un select, récupérer les attributs supplémentaires
-        if ($(this).is('select')) {
-            var option = $(this).find(':selected');
-            var optionData = option.data();
-            $.each(optionData, function(key, value) {
-                dataAtributes[key] = value;
-            });
-        }
-    });
-    console.log(dataAtributes);
-
-    Promise.all(fileReadPromises).then(function() {
-        if (button.hasClass('endnext')) {
-
-            $.ajax({
-                url: '{{ route('recuperer.coefficient.ects', ':id') }}'.replace(':id', matiereId),
-                method: 'GET',
-                success: function(response) {
-                    if (response.coefficient !== undefined) {
-                        dataAtributes.coefficient = response.coefficient;
-                    } else {
-                        dataAtributes.coefficient = 0;
+                // Vérifier si l'input est de type 'file'
+                if ($(this).attr('type') === 'file' && this.files.length > 0) {
+                    $.each(this.files, function(i, file) {
+                        var reader = new FileReader();
+                        // Créer une promesse pour chaque fichier
+                        var promise = new Promise(function(resolve) {
+                            reader.onload = function(e) {
+                                formData.append(inputName, e.target.result);
+                                resolve();
+                            };
+                            reader.readAsDataURL(file);
+                        });
+                        fileReadPromises.push(promise);
+                    });
+                } else {
+                    // Ajouter la valeur normale dans FormData
+                    if (inputValue) {
+                        formData.append(inputName, inputValue);
                     }
+                }
 
-                    if (response.ects !== undefined) {
-                        dataAtributes.ects = parseFloat(response.ects);
-                    } else {
-                        dataAtributes.ects = 0;
-                    }
-
-            structuredData = structureData(formData);
-
-            var counter = 1;
-                var count_qustn = 1;
-                const contentHtml = `
-                    <div class="header">
-                        <div class="logo"><img src="{{ asset('images/pigier.png') }}" class="img-sheet" height="50" width="auto" alt=""></div>
-                        <div class="title">
-                            <div class="devoir"><span class="devoir-text">${dataAtributes.typesujet}</span></div>
-                            <div class="devtitle">
-                                <div class="devoir"><span class="left-title">Matière :</span> ${dataAtributes.matiere.toUpperCase()}</div>
-                                <div class="devoir"><span class="left-title">Filière :</span> ${dataAtributes.filiere.toUpperCase()}</div>
-
-                            </div>
-                        </div>
-                        <div class="info">
-                            <div>Classe :<span class="info-text"> ${dataAtributes.classe}</span></div>
-                            <div>Durée : <span class="info-text">${formData.get('heure')}</span></div>
-                            <div>Coefficient : <span class="info-text">${dataAtributes.coefficient}</span></div>
-                            <div>ECTS : <span class="info-text">${dataAtributes.ects}</span></div>
-                        </div>
-                    </div>
-
-                    <div class="main-title">
-                        Répondre aux QCM sur la fiche ROMNote <span class="points">${formData.get('noteprincipale')} pts</span>
-                    </div>
-
-                    <div class="exercises">
-
-                        ${structuredData.sections.map(section => `
-
-                            <div class="exercise">
-                                <div class="exercise-title">EXERCICE ${counter++} : ${section.titre} <span class="points">${calculatePoints(section.questions)} pts</span></div>
-                                <div class="exercise-content">
-                                ${section.soustitre ? `
-                                    <div class="exercise-description">${section.soustitre}</div>
-                                    ` : ''}
-                                    ${section.image ? `
-                                    <div class="exercise-image">
-                                        <img src="${section.image}"  height="100" width="auto" alt="Image de l'exercice" class="img-sheet"/>
-                                    </div>
-                                    ` : ''}
-                                </div>
-                                ${section.questions.map(question => `
-                                    <div class="question">
-                                        <div class="question-content">
-                                        ${question.libquestion ? `
-                                            <span class="question-text">${count_qustn++} - ${question.libquestion}</span>
-                                            ` : ''}
-                                            ${question.image ? `
-                                            <div class="question-image">
-                                                <img src="${question.image}" alt="Image de la question" class ="img-sheet" />
-                                            </div>
-                                            ` : ''}
-                                            <span class="points">(${calculateQuestionPoints(question.reponses)} pts)</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="options">
-                                        <div class="options-group">
-                                            ${question.reponses.map((response, responseIndex) => `
-                                                <div class="option-content">
-                                                    <span class="option-text"><span class="circle">${String.fromCharCode(65 + responseIndex)}</span> ${response.libreponse}</span>
-                                                </div>
-                                            `).join('')}
-                                        </div>
-                                        ${question.reponses.some(r => r.image) ? `
-                                            <div class="option-image">
-                                                <img src="${question.reponses.image}" alt="Image de la réponse" />
-                                            </div>
-                                        ` : ''}
-                                    </div>
-
-                                `).join('')}
-                            </div>
-                        `).join('')}
-                    </div>
-
-                    <div class="page-footer">
-                        <div class="footer-sheet">
-                            <div class="footer-logo">
-                                Pigier Côte d'Ivoire l'Université des Métiers
-                            </div>
-                            <div class="page-number">
-                                Page 1 sur 1
-                            </div>
-                        </div>
-                        <div class="qr-code">
-                            <img src="qr.png" height="75" width="auto" alt="">
-                        </div>
-                    </div>
-                `;
-
-                // Insérer le HTML dynamique
-                $('.content').html(contentHtml);
-            },
-                error: function(error) {
-                    console.error("Erreur lors de la récupération des données : ", error);
+                // Si c'est un select, récupérer les attributs supplémentaires
+                if ($(this).is('select')) {
+                    var option = $(this).find(':selected');
+                    var optionData = option.data();
+                    $.each(optionData, function(key, value) {
+                        dataAtributes[key] = value;
+                    });
                 }
             });
+            console.log(dataAtributes);
 
-    }
-    }).catch(function(error) {
-        console.error("Erreur lors de la lecture des fichiers : ", error);
-    });
-});
+            Promise.all(fileReadPromises).then(function() {
+                if (button.hasClass('endnext')) {
+
+                    $.ajax({
+                        url: '{{ route('recuperer.coefficient.ects', ':id') }}'.replace(':id', matiereId),
+                        method: 'GET',
+                        success: function(response) {
+                            if (response.coefficient !== undefined) {
+                                dataAtributes.coefficient = response.coefficient;
+                            } else {
+                                dataAtributes.coefficient = 0;
+                            }
+
+                            if (response.ects !== undefined) {
+                                dataAtributes.ects = parseFloat(response.ects);
+                            } else {
+                                dataAtributes.ects = 0;
+                            }
+
+                    structuredData = structureData(formData);
+
+                    var counter = 1;
+                        var count_qustn = 1;
+                        const contentHtml = `
+                            <div class="header">
+                                <div class="logo"><img src="{{ asset('images/pigier.png') }}" class="img-sheet" height="50" width="auto" alt=""></div>
+                                <div class="title">
+                                    <div class="devoir"><span class="devoir-text">${dataAtributes.typesujet}</span></div>
+                                    <div class="devtitle">
+                                        <div class="devoir"><span class="left-title">Matière :</span> ${dataAtributes.matiere.toUpperCase()}</div>
+                                        <div class="devoir"><span class="left-title">Filière :</span> ${dataAtributes.filiere.toUpperCase()}</div>
+
+                                    </div>
+                                </div>
+                                <div class="info">
+                                    <div>Classe :<span class="info-text"> ${dataAtributes.classe}</span></div>
+                                    <div>Durée : <span class="info-text">${formData.get('heure')}</span></div>
+                                    <div>Coefficient : <span class="info-text">${dataAtributes.coefficient}</span></div>
+                                    <div>ECTS : <span class="info-text">${dataAtributes.ects}</span></div>
+                                </div>
+                            </div>
+
+                            <div class="main-title">
+                                Répondre aux QCM sur la fiche ROMNote <span class="points">${formData.get('noteprincipale')} pts</span>
+                            </div>
+
+                            <div class="exercises">
+
+                                ${structuredData.sections.map(section => `
+
+                                    <div class="exercise">
+                                        <div class="exercise-title">EXERCICE ${counter++} : ${section.titre} <span class="points">${calculatePoints(section.questions)} pts</span></div>
+                                        <div class="exercise-content">
+                                        ${section.soustitre ? `
+                                            <div class="exercise-description">${section.soustitre}</div>
+                                            ` : ''}
+                                            ${section.image ? `
+                                            <div class="exercise-image">
+                                                <img src="${section.image}"  height="100" width="auto" alt="Image de l'exercice" class="img-sheet"/>
+                                            </div>
+                                            ` : ''}
+                                        </div>
+                                        ${section.questions.map(question => `
+                                            <div class="question">
+                                                <div class="question-content">
+                                                ${question.libquestion ? `
+                                                    <span class="question-text">${count_qustn++} - ${question.libquestion}</span>
+                                                    ` : ''}
+                                                    ${question.image ? `
+                                                    <div class="question-image">
+                                                        <img src="${question.image}" alt="Image de la question" class ="img-sheet" />
+                                                    </div>
+                                                    ` : ''}
+                                                    <span class="points">(${calculateQuestionPoints(question.reponses)} pts)</span>
+                                                </div>
+                                            </div>
+
+                                            <div class="options">
+                                                <div class="options-group">
+                                                    ${question.reponses.map((response, responseIndex) => `
+                                                        <div class="option-content">
+                                                            <span class="option-text"><span class="circle">${String.fromCharCode(65 + responseIndex)}</span> ${response.libreponse}</span>
+                                                        </div>
+                                                    `).join('')}
+                                                </div>
+                                                ${question.reponses.some(r => r.image) ? `
+                                                    <div class="option-image">
+                                                        <img src="${question.reponses.image}" alt="Image de la réponse" />
+                                                    </div>
+                                                ` : ''}
+                                            </div>
+
+                                        `).join('')}
+                                    </div>
+                                `).join('')}
+                            </div>
+
+                            <div class="page-footer">
+                                <div class="footer-sheet">
+                                    <div class="footer-logo">
+                                        Pigier Côte d'Ivoire l'Université des Métiers
+                                    </div>
+                                    <div class="page-number">
+                                        Page 1 sur 1
+                                    </div>
+                                </div>
+                                <div class="qr-code">
+                                    <img src="qr.png" height="75" width="auto" alt="">
+                                </div>
+                            </div>
+                        `;
+
+                        // Insérer le HTML dynamique
+                        $('.content').html(contentHtml);
+                    },
+                        error: function(error) {
+                            console.error("Erreur lors de la récupération des données : ", error);
+                        }
+                    });
+
+            }
+            }).catch(function(error) {
+                console.error("Erreur lors de la lecture des fichiers : ", error);
+            });
+        });
 
             // Fonction de structuration des données
             function structureData(formData) {
@@ -3829,89 +3829,68 @@
         });
     </script> -->
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            function previewImage(inputElement, previewElementId, textareaId) {
-                const file = inputElement.files[0];
-                const previewElement = document.getElementById(previewElementId);
-                const inputStyle = inputElement.style;
-                const textareaElement = document.getElementById(textareaId);
+        document.body.addEventListener('change', function(event) {
+    if (event.target && event.target.classList.contains('file-input')) {
+        const file = event.target.files[0];
+        const previewId = event.target.getAttribute('data-preview');
+        const imagePreview = document.getElementById(previewId);
+        const resultTextareaId = event.target.getAttribute('data-result');
+        const resultTextarea = document.getElementById(resultTextareaId);
 
-                // Create the "close" button if not already present
-                let closeButton = previewElement.nextElementSibling;
-                if (!closeButton) {
-                    closeButton = document.createElement('span');
-                    closeButton.innerHTML = '&times;';
-                    closeButton.className = 'close-button';
-                    closeButton.style.position = 'absolute';
-                    closeButton.style.top = '10%';
-                    closeButton.style.left = '5%';
-                    closeButton.style.transform = 'translate(-45%,-45%)';
-                    closeButton.style.backgroundColor = '#4A41C5';
-                    closeButton.style.color = '#fff';
-                    closeButton.style.borderRadius = '50%';
-                    closeButton.style.fontSize = '18px';
-                    closeButton.style.cursor = 'pointer';
-                    closeButton.style.width = '20px';
-                    closeButton.style.height = '20px';
-                    closeButton.style.display = 'none';
-                    closeButton.style.textAlign = 'center';
-                    closeButton.style.lineHeight = '20px';
-                    previewElement.parentElement.appendChild(closeButton);
-                }
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                imagePreview.src = e.target.result;
+                imagePreview.style.display = 'block';
+                resultTextarea.style.paddingLeft = '95px';
+                displayCloseButton(imagePreview);
+            };
+            reader.readAsDataURL(file);
+        } else {
+            resetPreview(imagePreview, resultTextarea, event.target);
+        }
+    }
+});
 
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function(event) {
-                        previewElement.src = event.target.result;
-                        previewElement.style.display = 'block';
-                        closeButton.style.display = 'block';
-
-                        const img = new Image();
-                        img.onload = function() {
-                            const padding = img.width + 20;
-                            inputStyle.paddingLeft = padding + 'px';
-                            inputStyle.backgroundColor = '#f0f0f0';
-                            textareaElement.style.paddingLeft = padding + 'px';
-                            textareaElement.style.backgroundColor = '#f0f0f0';
-                        };
-                        img.src = event.target.result;
-                    };
-                    reader.readAsDataURL(file);
-                } else {
-                    resetPreview(previewElement, textareaElement, inputElement, closeButton);
-                }
-            }
-
-            function resetPreview(previewElement, textareaElement, inputElement, closeButton) {
-                previewElement.src = '';
-                previewElement.style.display = 'none';
-                closeButton.style.display = 'none';
-
-                // Reset the styles
-                inputElement.style.paddingLeft = '';
-                inputElement.style.backgroundColor = '';
-                textareaElement.style.paddingLeft = '';
-                textareaElement.style.backgroundColor = '';
-            }
-
-            document.body.addEventListener('change', function(event) {
-                if (event.target.classList.contains('file-input')) {
-                    const previewId = event.target.getAttribute('data-preview');
-                    const textareaId = event.target.getAttribute('data-textarea');
-                    previewImage(event.target, previewId, textareaId);
-                }
-            });
-
-            document.body.addEventListener('click', function(event) {
-                if (event.target.classList.contains('close-button')) {
-                    const inputElement = event.target.parentElement.querySelector('.file-input');
-                    const previewElement = event.target.previousElementSibling;
-                    const textareaId = inputElement.getAttribute('data-textarea');
-                    const textareaElement = document.getElementById(textareaId);
-                    resetPreview(previewElement, textareaElement, inputElement, event.target);
-                }
-            });
+function displayCloseButton(previewElement) {
+    // Crée un bouton de fermeture pour supprimer l'image de la prévisualisation
+    let closeButton = previewElement.nextElementSibling;
+    if (!closeButton) {
+        closeButton = document.createElement('span');
+        closeButton.innerHTML = '&times;';
+        closeButton.className = 'close-button';
+        closeButton.style = `
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #4A41C5;
+            color: #fff;
+            border-radius: 50%;
+            font-size: 18px;
+            cursor: pointer;
+            text-align: center;
+            width: 20px;
+            height: 20px;
+            display: block;
+            line-height: 20px;
+        `;
+        closeButton.addEventListener('click', function() {
+            resetPreview(previewElement);
         });
+        previewElement.parentElement.appendChild(closeButton);
+    }
+    closeButton.style.display = 'block';
+}
+
+function resetPreview(previewElement) {
+    previewElement.src = '';
+    previewElement.style.display = 'none';
+    const fileInput = previewElement.parentElement.querySelector('.file-input');
+    if (fileInput) fileInput.value = '';
+    const closeButton = previewElement.nextElementSibling;
+    if (closeButton) closeButton.style.display = 'none';
+}
+
     </script>
 
     <!-- <script>

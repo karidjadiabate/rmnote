@@ -17,6 +17,7 @@ use Illuminate\Support\Collection;
 use App\Models\User;
 use Carbon\Carbon;
 use Carbon\CarbonInterval;
+use Illuminate\Support\Facades\Storage;
 
 class SujetController extends Controller
 {
@@ -102,9 +103,6 @@ class SujetController extends Controller
      */
     public function store(Request $request)
     {
-
-        /* dd($request->all()); */
-        // Validation des données du sujet
         $validated = $request->validate([
             'type_sujet_id' => 'required',
             'filiere_id' => 'required',
@@ -145,11 +143,6 @@ class SujetController extends Controller
                 }
             }
         }
-
-        // Vérifier si le total des points correspond à la note principale
-        /* if ($totalPoints > $validated['noteprincipale']) {
-            return redirect()->back()->withErrors(['points_error' => 'Le total des points des réponses ne doit pas dépasser la note principale du sujet.']);
-        } */
 
             // Sauvegarder le sujet avec le statut par défaut
             $subject = Sujet::create([
@@ -203,9 +196,9 @@ class SujetController extends Controller
                     $sectionImage = null;
                     if (isset($files[$sectionKey]['soustitre']['image'])) {
                         $extension = $files[$sectionKey]['soustitre']['image']->getClientOriginalExtension();
-                        $newSectionImageName = time() . '_' . 'soustitre.' . $extension;
-                        $files[$sectionKey]['soustitre']['image']->move(public_path('images'), $newSectionImageName);
-                        $sectionImage = 'images/' . $newSectionImageName;
+                        $newSectionImageName = time() . '_soustitre.' . $extension;
+                        $path = $files[$sectionKey]['soustitre']['image']->storeAs('public/images', $newSectionImageName);
+                        $sectionImage = $newSectionImageName; // Seulement le nom du fichier
                     }
 
                     // Sauvegarder la section avec l'image si elle existe
@@ -222,9 +215,9 @@ class SujetController extends Controller
                             $questionImage = null;
                             if (isset($files[$sectionKey]['questions'][$questionKey]['image'])) {
                                 $extension = $files[$sectionKey]['questions'][$questionKey]['image']->getClientOriginalExtension();
-                                $newQuestionImageName = time() . '_' . 'question.' . $extension;
-                                $files[$sectionKey]['questions'][$questionKey]['image']->move(public_path('images'), $newQuestionImageName);
-                                $questionImage = 'images/' . $newQuestionImageName;
+                                $newQuestionImageName = time() . '_question.' . $extension;
+                                $path = $files[$sectionKey]['questions'][$questionKey]['image']->storeAs('public/images', $newQuestionImageName);
+                                $questionImage = $newQuestionImageName; // Seulement le nom du fichier
                             }
                             // Sauvegarder la question avec l'image si elle existe
                             $question = $section->questions()->create([

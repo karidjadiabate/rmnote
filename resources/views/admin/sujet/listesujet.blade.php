@@ -172,7 +172,7 @@
         left: 0;
         height: 1px;
         background-color: rgb(11, 53, 120);
-        width: calc(100% - 22%); /* Ajustez cette largeur pour s'arrêter à "statut" */
+        width: calc(100% - 24%); /* Ajustez cette largeur pour s'arrêter à "statut" */
         transform: translateY(-50%);
         z-index: 1;
     }
