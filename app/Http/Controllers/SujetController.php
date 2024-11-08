@@ -50,51 +50,70 @@ class SujetController extends Controller
     public function create()
     {
         $user = auth()->user();
-        $userRole = $user->role_id;
-        $ecoleId = $user->etablissement_id;
+
+        $userRole = intval($user->role_id);
+
+        $ecoleId = auth()->user()->etablissement_id;
+
         $typessujets = TypeSujet::all();
+
         $filiere = new Filiere();
-        $fmatiere = new Matiere();
 
         $filieres = EtablissementFiliere::with('filiere')->where('active', 1)->where('etablissement_id', $ecoleId)->get();
 
-        // Initialize $matieres as a Collection
-        $matieres = collect();
-
         if ($userRole === 2) {
-            // If the user is a professor, get the classes they teach in their school
+            // Si l'utilisateur est un professeur, récupérer les classes qu'il enseigne dans son école
             $selectedClasses = json_decode($user->selected_classes);
             $classes = Classe::whereIn('id', $selectedClasses)->get();
-
-            // Convert 'matiere_id' to an array
+            // Convertissez la chaîne 'matiere_id' en tableau
             $matiereIds = explode(',', $user->matiere_id);
-
-            // Retrieve the subjects taught by the professor
+            // Utilisez ce tableau pour récupérer les matières
             $professeurMatiere = Matiere::findMany($matiereIds);
 
-            // Add professor's subjects to matieres
-            $matieres = $matieres->merge($professeurMatiere);
-
-
         } elseif ($userRole === 3) {
-            // If the user is an administrator, get all classes in the school
+            // Si l'utilisateur est un administrateur, récupérer toutes les classes de l'école
+            $fclasse = new Classe();
+
+            $fmatiere = new Matiere();
+
             $classes = Classe::where('etablissement_id', $ecoleId)->get();
+            $filiereClasses = [];
 
-            // Initialize professeurMatiere to null for other roles
-            $professeurMatiere = null;
 
-            // Get all subjects for the school
+            $filiereClasses = [];
+
+            foreach ($classes as $clss) {
+                $filiereClass = EtablissementFiliere::where('id', $clss['etablissement_filiere_id'])->first();
+                if ($filiereClass) {
+                    // Stocke l'ID et le nom de la filière dans le tableau associatif
+                    $filiereClasses[$clss['nomclasse']] = [
+                        'id' => $filiereClass->id,
+                        'nom' => $filiereClass->nomfilieretablissement
+                    ];
+                }
+            }
+
+
+
+            $professeurMatiere = null; // Initialiser à null pour les autres rôles
+
             $matieres = $fmatiere->listematierebyecole();
 
-
-
         } else {
-            // For other user roles, don't display any classes
+            // Pour les autres rôles d'utilisateurs, ne pas afficher de classes
             $classes = collect();
             $professeurMatiere = null;
         }
 
-        return view('admin.sujet.creersujet', compact('typessujets', 'matieres', 'professeurMatiere', 'classes', 'filieres'));
+        $cycleIds = [];
+
+        // Obtenir toutes les matières pour l'administrateur, sinon inclure la matière du professeur (si disponible)
+        $matieres = ($userRole === 3) ? $matieres = $fmatiere->listematierebyecole() : Matiere::whereIn('cycle_id', $cycleIds)->get();
+
+        if ($professeurMatiere) {
+            $matieres->push($professeurMatiere);
+        }
+        return view('admin.sujet.creersujet',compact('typessujets','matieres','professeurMatiere','classes','filieres', 'filiereClasses'));
     }
 
 
