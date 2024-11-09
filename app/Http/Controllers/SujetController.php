@@ -17,6 +17,7 @@ use Illuminate\Support\Collection;
 use App\Models\User;
 use Carbon\Carbon;
 use Carbon\CarbonInterval;
+use Illuminate\Support\Facades\Storage;
 
 class SujetController extends Controller
 {
@@ -49,48 +50,70 @@ class SujetController extends Controller
     public function create()
     {
         $user = auth()->user();
-        $userRole = $user->role_id;
-        $ecoleId = $user->etablissement_id;
+
+        $userRole = intval($user->role_id);
+
+        $ecoleId = auth()->user()->etablissement_id;
+
         $typessujets = TypeSujet::all();
+
         $filiere = new Filiere();
-        $fmatiere = new Matiere();
 
         $filieres = EtablissementFiliere::with('filiere')->where('active', 1)->where('etablissement_id', $ecoleId)->get();
 
-        // Initialize $matieres as a Collection
-        $matieres = collect();
-
         if ($userRole === 2) {
-            // If the user is a professor, get the classes they teach in their school
+            // Si l'utilisateur est un professeur, récupérer les classes qu'il enseigne dans son école
             $selectedClasses = json_decode($user->selected_classes);
             $classes = Classe::whereIn('id', $selectedClasses)->get();
-
-            // Convert 'matiere_id' to an array
+            // Convertissez la chaîne 'matiere_id' en tableau
             $matiereIds = explode(',', $user->matiere_id);
-
-            // Retrieve the subjects taught by the professor
+            // Utilisez ce tableau pour récupérer les matières
             $professeurMatiere = Matiere::findMany($matiereIds);
 
-            // Add professor's subjects to matieres
-            $matieres = $matieres->merge($professeurMatiere);
-
         } elseif ($userRole === 3) {
-            // If the user is an administrator, get all classes in the school
+            // Si l'utilisateur est un administrateur, récupérer toutes les classes de l'école
+            $fclasse = new Classe();
+
+            $fmatiere = new Matiere();
+
             $classes = Classe::where('etablissement_id', $ecoleId)->get();
+            $filiereClasses = [];
 
-            // Initialize professeurMatiere to null for other roles
-            $professeurMatiere = null;
 
-            // Get all subjects for the school
+            $filiereClasses = [];
+
+            foreach ($classes as $clss) {
+                $filiereClass = EtablissementFiliere::where('id', $clss['etablissement_filiere_id'])->first();
+                if ($filiereClass) {
+                    // Stocke l'ID et le nom de la filière dans le tableau associatif
+                    $filiereClasses[$clss['nomclasse']] = [
+                        'id' => $filiereClass->id,
+                        'nom' => $filiereClass->nomfilieretablissement
+                    ];
+                }
+            }
+
+
+
+            $professeurMatiere = null; // Initialiser à null pour les autres rôles
+
             $matieres = $fmatiere->listematierebyecole();
 
         } else {
-            // For other user roles, don't display any classes
+            // Pour les autres rôles d'utilisateurs, ne pas afficher de classes
             $classes = collect();
             $professeurMatiere = null;
         }
 
-        return view('admin.sujet.creersujet', compact('typessujets', 'matieres', 'professeurMatiere', 'classes', 'filieres'));
+        $cycleIds = [];
+
+        // Obtenir toutes les matières pour l'administrateur, sinon inclure la matière du professeur (si disponible)
+        $matieres = ($userRole === 3) ? $matieres = $fmatiere->listematierebyecole() : Matiere::whereIn('cycle_id', $cycleIds)->get();
+
+        if ($professeurMatiere) {
+            $matieres->push($professeurMatiere);
+        }
+        return view('admin.sujet.creersujet',compact('typessujets','matieres','professeurMatiere','classes','filieres', 'filiereClasses'));
     }
 
 
@@ -99,9 +122,6 @@ class SujetController extends Controller
      */
     public function store(Request $request)
     {
-
-        /* dd($request->all()); */
-        // Validation des données du sujet
         $validated = $request->validate([
             'type_sujet_id' => 'required',
             'filiere_id' => 'required',
@@ -122,17 +142,8 @@ class SujetController extends Controller
         ]);
 
 
-        // Récupérer la matière associée
-        $matiere = Matiere::find($validated['matiere_id']);
-
-        if (!$matiere) {
-            return redirect()->back()->withErrors(['matiere_error' => 'La matière sélectionnée est invalide.']);
-        }
-
         // Générer le code pour le sujet basé sur le nom de la matière
         $lastSujetCode = Sujet::orderBy('code', 'desc')->first();
-        //$count = $latestSubject ? (int) substr($latestSubject->code, -2) + 1 : 1;
-        //$code = strtoupper(substr($matiere->nommatiere, 0, 4)) . str_pad($count, 2, '0', STR_PAD_LEFT);
 
         $lastCodeNumber = $lastSujetCode ? (int) substr($lastSujetCode->code, 3) : 0;
 
@@ -151,11 +162,6 @@ class SujetController extends Controller
                 }
             }
         }
-
-        // Vérifier si le total des points correspond à la note principale
-        /* if ($totalPoints > $validated['noteprincipale']) {
-            return redirect()->back()->withErrors(['points_error' => 'Le total des points des réponses ne doit pas dépasser la note principale du sujet.']);
-        } */
 
             // Sauvegarder le sujet avec le statut par défaut
             $subject = Sujet::create([
@@ -209,9 +215,9 @@ class SujetController extends Controller
                     $sectionImage = null;
                     if (isset($files[$sectionKey]['soustitre']['image'])) {
                         $extension = $files[$sectionKey]['soustitre']['image']->getClientOriginalExtension();
-                        $newSectionImageName = time() . '_' . 'soustitre.' . $extension;
-                        $files[$sectionKey]['soustitre']['image']->move(public_path('images'), $newSectionImageName);
-                        $sectionImage = 'images/' . $newSectionImageName;
+                        $newSectionImageName = time() . '_soustitre.' . $extension;
+                        $path = $files[$sectionKey]['soustitre']['image']->storeAs('public/images', $newSectionImageName);
+                        $sectionImage = $newSectionImageName; // Seulement le nom du fichier
                     }
 
                     // Sauvegarder la section avec l'image si elle existe
@@ -228,9 +234,9 @@ class SujetController extends Controller
                             $questionImage = null;
                             if (isset($files[$sectionKey]['questions'][$questionKey]['image'])) {
                                 $extension = $files[$sectionKey]['questions'][$questionKey]['image']->getClientOriginalExtension();
-                                $newQuestionImageName = time() . '_' . 'question.' . $extension;
-                                $files[$sectionKey]['questions'][$questionKey]['image']->move(public_path('images'), $newQuestionImageName);
-                                $questionImage = 'images/' . $newQuestionImageName;
+                                $newQuestionImageName = time() . '_question.' . $extension;
+                                $path = $files[$sectionKey]['questions'][$questionKey]['image']->storeAs('public/images', $newQuestionImageName);
+                                $questionImage = $newQuestionImageName; // Seulement le nom du fichier
                             }
                             // Sauvegarder la question avec l'image si elle existe
                             $question = $section->questions()->create([
@@ -377,11 +383,11 @@ class SujetController extends Controller
 
         $etablissementMatieres = $matiere->etablissementMatieres;
 
-        $etablissementMatiere = $etablissementMatieres->firstWhere('id', $matiere->id);
+        //$etablissementMatiere = $etablissementMatieres->firstWhere('id', $matiere->id);
 
-        if ($etablissementMatiere) {
-            $coefficient = $etablissementMatiere->coefficient;
-            $ects = $etablissementMatiere->credit;
+        if ($etablissementMatieres) {
+            $coefficient = $matiere->etablissementMatieres[0]->coefficient;
+            $ects = $matiere->etablissementMatieres[0]->credit;
         }else{
             $coefficient = 0;
             $ects = 0;
@@ -420,7 +426,6 @@ class SujetController extends Controller
             'classe',
             'classe.filiere',
             'classe.filiere.niveau',
-            'filiere.etablissementFilieres',
             'etablissement',
             'matiere',
             'typeSujet',
@@ -451,11 +456,11 @@ class SujetController extends Controller
 
         $etablissementMatieres = $matiere->etablissementMatieres;
 
-        $etablissementMatiere = $etablissementMatieres->firstWhere('id', $matiere->id);
+        //$etablissementMatiere = $etablissementMatieres->firstWhere('id', $matiere->id);
 
-        if ($etablissementMatiere) {
-            $coefficient = $etablissementMatiere->coefficient;
-            $ects = $etablissementMatiere->credit;
+        if ($etablissementMatieres) {
+            $coefficient = $matiere->etablissementMatieres[0]->coefficient;
+            $ects = $matiere->etablissementMatieres[0]->credit;
         }else{
             $coefficient = 0;
             $ects = 0;
@@ -472,6 +477,7 @@ class SujetController extends Controller
         // Générer un QR code pour cette référence
         $qrCode = QrCode::size(100)->generate($reference);
         $dataAtributes['qrCode'] = $qrCode;
+
         return view('admin.sujet.details', compact('dataAtributes','coefficient','ects'));
     }
 
@@ -488,6 +494,8 @@ class SujetController extends Controller
         if ($etablissementMatiere) {
             $coefficient = $etablissementMatiere->coefficient;
             $ects = $etablissementMatiere->credit;
+
+
         } else {
             $coefficient = 0;
             $ects = 0;

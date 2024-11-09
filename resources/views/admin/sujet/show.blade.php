@@ -651,13 +651,22 @@
                         </div>
                         <div class="info">
                             <div>Classe :<span class="info-text">{{ $dataAtributes['classe'] }}</span></div>
-                            <div>Durée : <span class="info-text"> @php
-                                                                    $timeParts = explode(':', $dataAtributes['heure']);
-                                                                    $hoursInMinutes = $timeParts[0] * 60;
-                                                                    $minutes = $timeParts[1];
-                                                                    $totalMinutes = $hoursInMinutes + $minutes;
-                                                                @endphp
-                                                                {{ $totalMinutes }} min</span></div>
+                            <div>Durée :
+                                <span class="info-text">
+                                    @php
+                                        $timeParts = explode(':', $dataAtributes['heure']);
+                                        $hours = $timeParts[0];  // Récupère les heures
+                                        $minutes = $timeParts[1];  // Récupère les minutes
+                                    @endphp
+                                    @if ($hours > 0)
+                                        {{ $hours }}h
+                                    @endif
+                                    @if ($minutes > 0 || $hours == 0)
+                                        {{ $minutes }}min
+                                    @endif
+                                </span>
+                            </div>
+
                                                                 <div>Coefficient : <span class="info-text">{{ $coefficient }}</span></div>
                                                                 <div>ECT : <span class="info-text">{{$ects}}</span></div>
                         </div>

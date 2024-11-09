@@ -780,11 +780,10 @@
 
                                 class="profile-img" id="user-image">
                                 @else
-                                    <img src="{{ Avatar::create(auth()->user()->etablissement->nometablissement)->toBase64() }}" alt="User"
+                                    <img src="" alt="User"
                                     class="profile-img" id="user-image">
                                 @endif
                             </div>
-
 
                         </div>
                         <div class="buttons">
@@ -815,7 +814,7 @@
                             <div id="error1"></div>
                         </div>
                         <div class="champs">
-                            <label for="">Description</label>
+                            <label for="">Copyrigth de l'établissement</label>
                             <textarea id="input_textarea" name="description" placeholder="Entrez une description">{{auth()->user()->etablissement->description}}</textarea>
                             <div id="error2"></div>
                         </div>

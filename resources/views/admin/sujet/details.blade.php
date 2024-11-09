@@ -386,8 +386,7 @@
                                     @endif
                                     @if ($section->image_section)
                                         <div class="exercise-image">
-                                            <img src="{{ asset($section->image_section) }}" height="100"
-                                                width="auto" alt="Image de l'exercice" class="img-sheet" />
+                                            <img src="{{ Storage::url('images/' . $section->image_section) }}" height="100" width="auto" alt="Image de l'exercice" class="img-sheet" />
                                         </div>
                                     @endif
                                 </div>
@@ -405,11 +404,10 @@
                                                 pts)</span>
                                         </div>
                                         @if ($question->image_question)
-                                            <div class="exercise-image">
-                                                <img src="{{ asset($question->image_question) }}" height="100"
-                                                    width="auto" alt="Image de l'exercice" class="img-sheet" />
-                                            </div>
-                                        @endif
+                                        <div class="exercise-image">
+                                            <img src="{{ Storage::url('images/' . $question->image_question) }}" height="100" width="auto" alt="Image de l'exercice" class="img-sheet" />
+                                        </div>
+                                    @endif
                                     </div>
 
                                     <div class="options">
