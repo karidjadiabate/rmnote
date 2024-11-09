@@ -3737,56 +3737,8 @@
             });
         });
     </script>
-    <!-- <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const uploadButton = document.querySelectorAll('.fa-regular.fa-image');
-            const fileInput = document.getElementById('fileInput');
 
-            uploadButton.addEventListener('click', function() {
-                fileInput.click(); // Simule un clic sur l'input de type file
-            });
 
-            fileInput.addEventListener('change', function() {
-                const file = fileInput.files[0]; // Récupère le fichier sélectionné
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        // Affiche l'image (ou traite-la comme nécessaire)
-                        const img = document.createElement('img');
-                        img.src = e.target.result;
-                        img.style.maxWidth = '200px'; // Ajuste la taille si nécessaire
-                        document.body.appendChild(img); // Ajoute l'image au corps de la page
-                    };
-                    reader.readAsDataURL(file); // Convertit le fichier en URL de données
-                }
-            });
-        });
-    </script> -->
-    <!-- <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const fileInput = document.getElementById('fileinputs0');
-            const label = document.querySelector('label[for="fileinputs0"]');
-            const imgPreview = document.getElementById('imagepreview0');
-
-            // Lorsque le label est cliqué, simuler un clic sur l'input
-            label.addEventListener('click', function() {
-                fileInput.click();
-            });
-
-            fileInput.addEventListener('change', function() {
-                const file = fileInput.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        // Mettre à jour l'image de prévisualisation
-                        imgPreview.src = e.target.result;
-                        imgPreview.style.display = 'block'; // Affiche l'image
-                    };
-                    reader.readAsDataURL(file);
-                }
-            });
-        });
-    </script> -->
     <script>
         document.body.addEventListener('change', function(event) {
     if (event.target && event.target.classList.contains('file-input')) {
